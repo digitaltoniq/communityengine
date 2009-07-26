@@ -1,29 +1,31 @@
 - @meta = { :description => :popular_posts_on.l+" #{AppConfig.community_name}",:keywords => "#{AppConfig.meta_keywords}", :robots => AppConfig.robots_meta_list_content}
 - @section = 'popular'
 
-.yui-b
-  -box do 
-    - if logged_in?
-      %h3.signup= :get_popular.l
-      %ul.list.checks
-        %li=link_to :write_a_blog_post.l, new_user_post_path({:user_id => current_user})
-    - else
-      %h3.signup= :want_to_be_popular.l 
-      %ul.list.checks
-        %li
-          %a{:href=>signup_url, :title=>:sign_up_for_a_.l+" #{AppConfig.community_name} "+:account.l}=:sign_up_for_an_account.l
-          %br
-            %small
-              =:have_an_account.l
-              %a{:href=>login_url, :title=>:log_in_to_your.l+" #{AppConfig.community_name} "+:account.l}
-                &raquo;
-                =:log_in.l
+-#
+  DJS
+  .yui-b
+    -box do
+      - if logged_in?
+        %h3.signup= :get_popular.l
+        %ul.list.checks
+          %li=link_to :write_a_blog_post.l, new_user_post_path({:user_id => current_user})
+      - else
+        %h3.signup= :want_to_be_popular.l
+        %ul.list.checks
+          %li
+            %a{:href=>signup_url, :title=>:sign_up_for_a_.l+" #{AppConfig.community_name} "+:account.l}=:sign_up_for_an_account.l
+            %br
+              %small
+                =:have_an_account.l
+                %a{:href=>login_url, :title=>:log_in_to_your.l+" #{AppConfig.community_name} "+:account.l}
+                  &raquo;
+                  =:log_in.l
 
-  -box :class => "alt" do 
-    %h3= :this_month_best.l 
-    %ul.list.page    
-      - @monthly_popular_posts.each do |post|
-        =render :partial => 'posts/sidebar_post', :locals => {:post => post}
+    -box :class => "alt" do
+      %h3= :this_month_best.l
+      %ul.list.page
+        - @monthly_popular_posts.each do |post|
+          =render :partial => 'posts/sidebar_post', :locals => {:post => post}
 
 #yui-main
   .yui-b

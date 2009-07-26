@@ -44,12 +44,14 @@
         = text_field_tag 'tag_list', @post.tag_list, {:autocomplete => "off", :size => 35}
         .auto_complete#tag_list_auto_complete
           = auto_complete_field 'tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
-        
-        %label
-          %a{:href=> "#", :onclick => "$('poll-ui').toggle(); return false;"}
-            = "#{image_tag 'icons/poll.png', :plugin => 'community_engine' } " + :add_a_poll.l
-          %em=:optional.l
-        #poll-ui{:style => 'display:none'}=render :partial => 'polls/new'
+
+        -#
+          DJS
+          %label
+            %a{:href=> "#", :onclick => "$('poll-ui').toggle(); return false;"}
+              = "#{image_tag 'icons/poll.png', :plugin => 'community_engine' } " + :add_a_poll.l
+            %em=:optional.l
+          #poll-ui{:style => 'display:none'}=render :partial => 'polls/new'
 
         %label
           =:save_post_as.l

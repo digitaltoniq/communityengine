@@ -20,20 +20,22 @@
 
   #yui-main
     -box :class => "yui-b" do
-      %h3=:e_mail_notification.l
+      -#
+        DJS
+        %h3=:e_mail_notification.l
 
-      %fieldset
-        %label 
-          = check_box :user, :notify_friend_requests        
-          =:notify_of_friend_requests.l :site => AppConfig.community_name
-          
-        %label
-          = check_box :user, :notify_comments         
-          = :notify_of_comments.l :site => AppConfig.community_name
-          
-        %label
-          = check_box :user, :notify_community_news
-          =:notify_email_updates.l :site => AppConfig.community_name
+        %fieldset
+          %label
+            = check_box :user, :notify_friend_requests
+            =:notify_of_friend_requests.l :site => AppConfig.community_name
+
+          %label
+            = check_box :user, :notify_comments
+            = :notify_of_comments.l :site => AppConfig.community_name
+
+          %label
+            = check_box :user, :notify_community_news
+            =:notify_email_updates.l :site => AppConfig.community_name
           
 
       %h3=:profile_privacy.l
@@ -51,8 +53,10 @@
             = "#{AppConfig.community_name}."
       %p= submit_tag :save_changes.l  
 
-      %p
-        =link_to :deactivate_link.l, deactivate_user_path(@user), :method => :put, :confirm => :deactivate_confirmation.l
-        %br
-        %label
-          %em= :deactivate_tip.l            
+      -#
+        DJS
+        %p
+          =link_to :deactivate_link.l, deactivate_user_path(@user), :method => :put, :confirm => :deactivate_confirmation.l
+          %br
+          %label
+            %em= :deactivate_tip.l            
