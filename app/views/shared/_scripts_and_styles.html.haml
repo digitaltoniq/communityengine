@@ -19,6 +19,8 @@
 = stylesheet_link_tag 'screen', :plugin => :community_engine
 = stylesheet_link_tag 'print', :plugin => :community_engine, :media => 'print'
 
+-# DJS
+= stylesheet_link_tag 'theme/screen'
 
 - if current_page?({:controller => 'posts', :action => 'show' })
   = javascript_include_tag 'lightbox', :plugin => "community_engine"

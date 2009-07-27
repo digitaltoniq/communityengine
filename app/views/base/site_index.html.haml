@@ -17,7 +17,9 @@
       - Category.find(:all).each do |c|
         %li= link_to c.name, category_path(c)
       %li= link_to :whats_popular.l, popular_url, {:class => 'popular'}
-      %li= link_to :find_an_expert.l, skills_path, {:class => 'users'}
+      -#
+        DJS
+        %li= link_to :find_an_expert.l, skills_path, {:class => 'users'}
 
   -box :class => "alt" do 
     %h3
@@ -28,12 +30,13 @@
         =render :partial => 'posts/sidebar_post', :locals => {:post => post}
     %h6.all
       %a{:href=>popular_url}= :see_all.l
-
-  -box :class => "alt" do 
-    %h3
-      =:featured_writer.l
-    -@featured_writers.each do |user|
-      =render :partial => "users/sidebar_user", :locals => {:user => user}
+  -#
+    DJS
+    -box :class => "alt" do
+      %h3
+        =:featured_writer.l
+      -@featured_writers.each do |user|
+        =render :partial => "users/sidebar_user", :locals => {:user => user}
 
   -box :class => "alt" do 
     %h3= :active_users.l
