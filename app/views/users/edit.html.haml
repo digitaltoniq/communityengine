@@ -5,7 +5,9 @@
   
   = error_messages_for :user
 
-  %p= submit_tag :save_changes.l  
+  -# DJS
+    %p= submit_tag :save_changes.l
+      
   .yui-b
     -box :id => "profile_details" do
       %h3=:profile_photo.l
@@ -58,28 +60,29 @@
 
       /- if @user.vendor?
       -# DJS = render :partial => 'offerings/chooser'
-      
-      -box do 
-        %h3= :tags.l
-        #user_tags
-          = text_field_tag 'tag_list', @user.tag_list, {:autocomplete => "off"}
-          #tag_list_auto_complete.auto_complete
-          = auto_complete_field 'tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
-          
-          %label
-            %em
-              =:you_could_tag_yourself.l
-              - if @user.vendor?
-                =:custom_friendly_local.l
-              - else
-                = AppConfig.meta_keywords.split(",")[0..3].join(", ")
-              %br
-              =:tags_are_comma_separated_keywords_that_describe_you.l
-              %br
-              =:you_can_browse_all_content_and_users_on.l
-              = AppConfig.community_name
-              =:by_looking_at_the.l
-              = link_to :tags_page.l, tags_path
+      -#
+        DJS
+        -box do
+          %h3= :tags.l
+          #user_tags
+            = text_field_tag 'tag_list', @user.tag_list, {:autocomplete => "off"}
+            #tag_list_auto_complete.auto_complete
+            = auto_complete_field 'tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+
+            %label
+              %em
+                =:you_could_tag_yourself.l
+                - if @user.vendor?
+                  =:custom_friendly_local.l
+                - else
+                  = AppConfig.meta_keywords.split(",")[0..3].join(", ")
+                %br
+                =:tags_are_comma_separated_keywords_that_describe_you.l
+                %br
+                =:you_can_browse_all_content_and_users_on.l
+                = AppConfig.community_name
+                =:by_looking_at_the.l
+                = link_to :tags_page.l, tags_path
 
       %p
         = submit_tag :save_changes.l
