@@ -98,6 +98,11 @@ resources :activities
 resources :static_pages, :as => 'pages'
 connect 'view_page/:url', :controller => 'static_pages', :action => 'show_web'
 
+# DJS
+resources :companies, :nested_member_path => '/:company_id', :member => {
+    :signup_completed => :get
+}
+
 resources :users, :member_path => '/:id', :nested_member_path => '/:user_id', :member => { 
     :dashboard => :get,
     :assume => :get,

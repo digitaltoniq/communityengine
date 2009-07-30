@@ -1,0 +1,53 @@
+- if current_user && current_user.admin?
+  -box :class => "first_alt alt" do 
+    %h3
+      =:admin_controls.l
+    = link_to( "&raquo; #{:assume_company_id.l}", assume_company_path(@company) )
+    %br/
+    = link_to( "&raquo; #{:delete_this_company.l}", company_path(@company), {:method => :delete, :confirm => :are_you_sure_you_want_to_permanently_delete_this_company.l} )
+    %br/
+    = link_to( "&raquo; #{:toggle.l} #{:featured_writer.l}", toggle_featured_company_path(@company), {:method => :put} )
+    %br/
+    = link_to( "&raquo; #{:assign_role.l}: #{@company.moderator? ? :member.l : :moderator.l}", toggle_moderator_company_path(@company), {:method => :put} )
+
+-box :class => 'hentry', :id => 'profile_details' do
+  %h3
+    = link_to @company.name, company_path(@company)
+    -# DJS = " <small>(#{:featured_writer.l})</small>" if @company.featured_writer?
+
+  .centered
+    - if @is_current_company
+      - if @company.logo
+        -# DJS = @company.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
+        -# DJS = @company.featured_writer ? "<div class='right_corner'><div class='featured_writer'></div></div>" : ''
+        -# DJS : TODO = link_to :profile_photo_crop.l, crop_profile_photo_company_path(@company)
+      - else 
+        =:no_profile_photo.l
+        = link_to :click_here_to_upload_one.l, edit_company_path(@company)
+      %br        
+    = image_tag( @company.logo_photo_url(), :class => "polaroid")    
+
+  -#
+    DJS
+    - if current_company and current_company.can_request_friendship_with(@company)
+      = add_friend_link(@company)
+
+    %h3=:my_details.l
+    .vcard.author
+      %ul
+        %li.update
+          %a{:href=>"#{company_path(@company)}", :rel=>"bookmark"}
+            %abbr.published{:title=>"#{@company.created_at}"}
+              = :member_since.l + @company.created_at.strftime(": %m/%d/%y")
+        %li.view
+          =:profile_views.l
+          = "(#{@company.view_count})"
+        - if @company.offerings.any?
+          %li.skills= :my_skills.l+": #{@company.offerings.collect{|o| link_to o.skill.name, skill_url(o.skill) }.join(', ')}"
+        - if @company.tags.any?
+          %li.tags= :my_tags.l+": #{@company.tags.collect{|t| link_to t.name, tag_url(t) }.join(", ")}"
+        - if @company.metro_area
+          %li.geo= link_to( @company.full_location, companys_path(:metro_area_id => @company.metro_area_id, :state_id => @company.state_id, :country_id => @company.country_id ) )
+        - if current_company
+          %li.compose= link_to(:send_me_a_message.l, new_company_message_path(current_company, :to=>@company))
+    .clear

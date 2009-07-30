@@ -1,0 +1,117 @@
+-#
+  DJS
+  - @meta = { :description => "#{@company.name}'s profile on #{AppConfig.community_name}.", :keywords => "#{@company.name}, #{@company.tags.join(", ") unless @company.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+  - @section = @company.eql?(current_company) ? 'my_company' : 'companies'
+
+- @sidebar_left = true
+
+-#
+  DJS
+  - if @is_current_user and @user.vendor? and (@user.offerings.empty? or @user.description.nil? )
+    %p
+      ? Hey, you're a
+      = AppConfig.community_name
+      Pro! You should
+      = link_to :update_your_profile.l, edit_user_path(@user)
+      \! Add your skills, contact info and Web site.
+
+
+.yui-b
+  -box do
+    = render :partial => 'profile_company_info_sidebar', :locals => {:company => @company}
+
+  - if @company.description
+    -box :id => "about_me" do
+      %h3
+        =:about_me.l
+      %p= @company.description
+
+  -#
+    DJS
+    -box :class => 'alt', :id => 'friends' do
+      %h3
+        =:my_friends.l
+        = link_to "(#{@friend_count})", accepted_company_friendships_path(@company) if @friend_count > 5
+      = link_to "&raquo; #{:invite_a_friend.l :site => AppConfig.community_name}", invite_company_path(@company) if @is_current_company
+      %br
+      = link_to "&raquo; #{:view_all_my_friend_requests.l} (#{@pending_friendships_count})", pending_company_friendships_path(@company) if @is_current_company
+      %br
+      %br
+      - @accepted_friendships.each do |company|
+        =render :partial => "companys/sidebar_company", :locals => {:company => company}
+      -if @accepted_friendships.size > 4
+        %h6.all
+          =link_to :see_all.l, accepted_company_friendships_path(@company)
+
+    - unless @company_comments.empty?
+      -box :class => 'yui-g alt', :id => 'photo_comments' do
+        %h3=:my_recent_comments.l
+        - @company_comments.each do |comment|
+          %dl.vcard
+            %dt.photo
+              - if comment.recipient
+                = link_to image_tag(comment.recipient.avatar_photo_url(:thumb), :alt => "#{comment.recipient.login}", :width => '50', :height => '50'), commentable_url(comment)
+            %dd.fn
+              - if comment.commentable.eql?(comment.recipient)
+                %strong= :to.l + ": #{link_to comment.recipient.login, commentable_url(comment)}"
+              - else
+                %br
+                %strong= :on_commentable.l + ": #{link_to comment.commentable_name, commentable_url(comment)} (#{comment.commentable_type})"
+            %dd
+              %p= "\"#{truncate_words( comment.comment, 10, '...')}\""
+
+
+    - unless @photo_comments.empty?
+      -box :class => 'yui-g alt', :id => 'photo_comments' do
+        %h3=:photo_comments.l
+        - @photo_comments.each do |comment|
+          %dl.vcard
+            %dt.photo
+              = link_to(image_tag(comment.commentable.public_filename(:thumb), :width => '50', :height => '50'), company_photo_path(@company, comment.commentable))
+            %dd.fn= "#{comment.companyname}" + " " + :says.l + ":"
+            %dd
+              = truncate_words(comment.comment, 10)
+              %br
+              = link_to "&raquo; " + :view_comment.l, company_photo_path(@company, comment.commentable) + "#comment_#{comment.id}"
+
+#yui-main
+  .yui-b
+    -#
+      DJS
+      - if @photos.empty? and @recent_posts.empty?
+        -box :class => "alt first_alt" do
+          %h3= :small_profile.l :company => @company.login
+
+      - unless @photos.empty?
+        -box :id => "photos" do
+          %h3=:photos.l
+          - @photos.each do |photo|
+            = link_to image_tag( photo.public_filename(:thumb), :class => "polaroid"), company_photo_path(@company, photo)
+
+          %h6.all.right= link_to :view_all_my_photos.l, company_photos_path(@company)
+          = "#{link_to(:add_a_photo.l, new_company_photo_path(@company))}" if @is_current_company
+    -#
+      DJS
+      - unless @recent_posts.empty?
+        -box :id => "posts" do
+          %h3=:recent_blog_posts.l
+          = render :partial => 'posts/post', :collection => @recent_posts
+          %h6.right.all= link_to :view_my_blog.l, company_posts_path(@company)
+
+      - unless @clippings.empty?
+        -box :id => "clippings" do
+          %h3=:clippings.l
+          - @clippings.each do |clipping|
+            %a{"href"=>"#{h company_clipping_url(@company, clipping)}"}
+              %img.clipping.polaroid{"src"=>"#{h clipping.image_uri(:thumb)}", :width => '100', :height => '100'}
+          %h6.all.right= link_to :view_all_my_clippings.l, company_clippings_path(@company)
+
+    -#
+      DJS
+      -box :class => 'hfeed comments', :id => 'comments' do
+        %h3=:profile_comments.l
+        %h2=:add_your_comment.l
+        %p= render :partial => 'comments/comment_form', :locals => {:commentable => @company}
+        %a#newest_comment
+        = render :partial => 'comments/comment', :collection => @comments
+        %span#more_comments_links= more_company_comments_links

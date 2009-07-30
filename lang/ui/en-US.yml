@@ -1485,3 +1485,11 @@ en:
   back_to_static_pages: "Back to static pages"
   #en: static_page_content: "Content"
   static_page_content: "Content"
+
+  # DigitalToniq
+  #en: company: Company
+  company: Company
+  #en: companies: Companies
+  companies: Companies
+  #en: company_name: Company name
+  company_name: Company name

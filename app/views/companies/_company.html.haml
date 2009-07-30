@@ -1,0 +1,34 @@
+.hentry.yui-gf.row
+  .vcard.author
+    .yui-u.first.centered
+      = link_to image_tag( company.logo_photo_url(:thumb), :class => "polaroid" ), company_path(company)
+    .yui-g
+      .yui-u.first
+        %h2= link_to company.name, company_path(company)
+
+        %ul
+          -#
+            - if company.metro_area
+              %li.geo= :from2.l + " #{company.location}<br/>"
+          %li.update
+            %abbr.published{:title=>"#{company.created_at}"}
+              =:joined.l + " #{time_ago_in_words company.created_at}"
+
+          -#
+            DJS
+            - if current_user and current_user.can_request_friendship_with(user)
+              %li.addfriend= add_friend_link(user)
+
+        = "<p>" + company.tags[0...6].collect{|t| link_to( t.name, tag_url(t), :class => "tag") if t }.join(" ") + "</p>" unless company.tags.empty?
+
+      .yui-u{"style"=>"overflow:hidden"}
+        - if @search && @search['description']
+          = truncate_words_with_highlight company.description, @search['description']
+        - else
+          = truncate_words company.description, 18, '...'
+
+        -#
+          DJS
+          - if current_user && current_user.admin?
+            %br
+            = link_to( :assume_id.l, assume_user_path(user) )

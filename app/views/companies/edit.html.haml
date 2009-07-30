@@ -1,0 +1,96 @@
+- form_tag company_url(@company), :method => 'put', :multipart =>true, :class => 'MainForm' do
+
+  -#
+    DJS
+    -box :class => "alt first_alt" do
+      %h3=:you_are_editing_your_profile.l
+      = link_to "&raquo; " + :edit_your_account_settings_instead.l, edit_account_company_path(@company)
+  
+  = error_messages_for :company
+
+  -# DJS
+    %p= submit_tag :save_changes.l
+      
+  .yui-b
+    -box :id => "profile_details" do
+      %h3=:profile_photo.l
+      -#
+        DJS
+        = @company.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
+        
+      = image_tag( @company.logo_photo_url(), :class => "polaroid" )
+      %label
+        =:choose_a_photo_for_your_profile.l
+      = file_field :logo, :uploaded_data, :size => "20"
+
+      -#
+        DJS - TODO
+        %h3= :location.l
+        = render :partial => 'shared/location_chooser', :locals => {:selected_country => @company.country_id, :selected_state => @company.state_id, :selected_metro_area => @company.metro_area_id, :states => @states, :metro_areas => @metro_areas}
+
+      %label
+        =:zippostal_code.l
+      = text_field :company, :zip, :style=>"width:90px"
+
+      -#
+        DJS
+        %h3=:birthday_gender.l
+        %fieldset
+          %legend
+            =:gender.l
+          %label
+            = radio_button :company, :gender, User::MALE
+            =:male.l
+          %label
+            = radio_button :company, :gender, User::FEMALE
+            =:female.l
+
+        %label
+          =:birthday.l
+          \:
+        = date_select :company, :birthday, {:start_year => 1926, :end_year => Time.now.year - 1}
+      
+  #yui-main
+    .yui-b
+      -box do 
+        %h3=:about_me.l
+        = text_area :company, :description, :class => "rich_text_editor", :style => "width:100%"
+
+      -#
+        DJS
+        -box :class => "alt" do
+          =:tips.l
+          = render :partial => 'shared/bio_help'
+          =:feel_free_to_embed_images_or_videos.l + "("
+          %a{"href"=>"/faq#images_and_flash", "target"=>"new"}
+            =:how_do_i_do_that.l
+          )
+
+      /- if @company.vendor?
+      -# DJS = render :partial => 'offerings/chooser'
+      -#
+        DJS
+        -box do
+          %h3= :tags.l
+          #company_tags
+            = text_field_tag 'tag_list', @company.tag_list, {:autocomplete => "off"}
+            #tag_list_auto_complete.auto_complete
+            = auto_complete_field 'tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+
+            %label
+              %em
+                =:you_could_tag_yourself.l
+                - if @company.vendor?
+                  =:custom_friendly_local.l
+                - else
+                  = AppConfig.meta_keywords.split(",")[0..3].join(", ")
+                %br
+                =:tags_are_comma_separated_keywords_that_describe_you.l
+                %br
+                =:you_can_browse_all_content_and_companies_on.l
+                = AppConfig.community_name
+                =:by_looking_at_the.l
+                = link_to :tags_page.l, tags_path
+
+      %p
+        = submit_tag :save_changes.l
