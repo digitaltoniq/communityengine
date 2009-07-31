@@ -8,7 +8,7 @@ class Representative < ActiveRecord::Base
   # callbacks
   before_save :generate_full_name_slug
   
-  delegate :avatar_photo_url, :to => :user
+  delegate :avatar_photo_url, :posts, :to => :user
 
   def full_name
     "#{first_name} #{last_name}"

@@ -99,15 +99,16 @@ resources :static_pages, :as => 'pages'
 connect 'view_page/:url', :controller => 'static_pages', :action => 'show_web'
 
 # DJS
-# TODO REMOVE :member_path => 'companies/:id', :nested_member_path => '/:company_id',
-resources :companies, :member => {
+
+resources :companies, :member_path => '/:id', :nested_member_path => '/:company_id', :member => {
     :signup_completed => :get
 } do |company|
-
+  company.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
   company.resources :representatives
+  company.resources :conversations, :collection => { :comments => :get }
 end
-
-resources :users, :member_path => '/:id', :nested_member_path => '/:user_id', :member => { 
+ 
+resources :users, :member => {
     :dashboard => :get,
     :assume => :get,
     :toggle_moderator => :put,

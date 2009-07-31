@@ -28,15 +28,19 @@ class CompaniesController < BaseController
 =end
   
   def show
+    @company = Company.find(params[:id])
+
     #@friend_count               = @company.accepted_friendships.count
     #@accepted_friendships       = @company.accepted_friendships.find(:all, :limit => 5).collect{|f| f.friend }
     #@pending_friendships_count  = @company.pending_friendships.count()
     #
-    #@comments       = @user.comments.find(:all, :limit => 10, :order => 'created_at DESC')
+    @post_comments       = @company.post_comments.find(:all, :limit => 10, :order => 'created_at DESC')
     #@photo_comments = Comment.find_photo_comments_for(@user)
     #@users_comments = Comment.find_comments_by_user(@user, :limit => 5)
     #
-    #@recent_posts   = @user.posts.find(:all, :limit => 2, :order => "published_at DESC")
+
+    @recent_posts   = @company.posts.find(:all, :limit => 2, :order => "published_at DESC")
+
     #@clippings      = @user.clippings.find(:all, :limit => 5)
     #@photos         = @user.photos.find(:all, :limit => 5)
     #@comment        = Comment.new(params[:comment])
@@ -44,7 +48,7 @@ class CompaniesController < BaseController
     #@my_activity = Activity.recent.by_users([@user.id]).find(:all, :limit => 10)
     #
     #update_view_count(@user) unless current_user && current_user.eql?(@user)
-    @company = Company.find(params[:id])
+
   end
   
   def new

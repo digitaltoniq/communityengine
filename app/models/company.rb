@@ -27,7 +27,16 @@ class Company < ActiveRecord::Base
   #named scopes
   named_scope :recent, :order => 'companies.created_at DESC'
 
+  def posts
+    Post.scoped :joins => "left join representatives on representatives.user_id = posts.user_id",
+                :conditions => ["representatives.company_id = ?", id]
+  end
 
+  def post_comments
+    Comment.scoped :joins => "left join posts on comments.commentable_id = posts.id left join representatives on representatives.user_id = posts.user_id",
+                :conditions => ["representatives.company_id = ?", id]
+  end 
+  
   def logo_photo_url(size = nil)
     if logo
       logo.public_filename(size)
