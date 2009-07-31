@@ -99,9 +99,13 @@ resources :static_pages, :as => 'pages'
 connect 'view_page/:url', :controller => 'static_pages', :action => 'show_web'
 
 # DJS
-resources :companies, :nested_member_path => '/:company_id', :member => {
+# TODO REMOVE :member_path => 'companies/:id', :nested_member_path => '/:company_id',
+resources :companies, :member => {
     :signup_completed => :get
-}
+} do |company|
+
+  company.resources :representatives
+end
 
 resources :users, :member_path => '/:id', :nested_member_path => '/:user_id', :member => { 
     :dashboard => :get,

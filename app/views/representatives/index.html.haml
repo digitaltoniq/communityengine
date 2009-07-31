@@ -1,0 +1,16 @@
+-# DJS .yui-b= render :partial => 'users/profile_user_info_sidebar'
+
+#yui-main
+  .yui-b
+    -box :id => "representatives" do
+      %h3
+        = @representative_count
+        =:active_representatives.l
+        -#
+          DJS TODO
+          = link_to "(#{@pending_friendships_count} "+:pending.l+")", pending_user_friendships_path(@user) if  (@pending_friendships_count > 0)
+      .pagination=paginating_links @representatives if @representatives.page_count > 1
+
+      .clear
+      .representative_list= render :partial => "representatives/representative", :collection => @representatives
+

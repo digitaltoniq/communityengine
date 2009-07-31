@@ -14,6 +14,10 @@ class Company < ActiveRecord::Base
   # TODO validates_exclusion_of    :name, :in => AppConfig.reserved_company_names
   validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :name_slug
+
+
+  #associations
+  has_many    :representatives, :dependent => :destroy
   
   belongs_to  :logo, :class_name => "Logo", :foreign_key => "logo_id"
   belongs_to  :metro_area
