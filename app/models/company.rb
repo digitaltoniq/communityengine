@@ -59,6 +59,15 @@ class Company < ActiveRecord::Base
     self.name_slug = self.name.gsub(/[^a-z0-9]+/i, '-')
   end
 
+  def representative_for_user(user)
+     representatives.find(:first, :conditions => ["user_id = ?", user.id])
+  end
+
+  def company_admin?(user)
+    r = representative_for_user(user)
+    r && r.admin?
+  end
+
   ## Class Methods
 
   # override activerecord's find to allow us to find by name or id transparently

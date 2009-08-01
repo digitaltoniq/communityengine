@@ -1,13 +1,17 @@
 class Representative < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :company 
+  attr_protected :representative_role_id
+
+  # callbacks
+  before_save :generate_full_name_slug
 
   #validation
   # TODO (unique in context of company) validates_uniqueness_of :generate_full_name_slug  -
 
-  # callbacks
-  before_save :generate_full_name_slug
-  
+  #associations
+  has_enumerated :representative_role
+  belongs_to :user
+  belongs_to :company
+
   delegate :avatar_photo_url, :posts, :to => :user
 
   def full_name
@@ -33,6 +37,20 @@ class Representative < ActiveRecord::Base
     else
       super
     end
+  end
+
+  # TODO: These need to be protected? They were in CE
+
+  def admin?
+    representative_role && representative_role.eql?(RepresentativeRole[:admin])
+  end
+
+  def poster?
+    representative_role && representative_role.eql?(RepresentativeRole[:poster])
+  end
+
+  def representative?
+    !representative_role || representative_role.eql?(RepresentativeRole[:representative])
   end
 
 end

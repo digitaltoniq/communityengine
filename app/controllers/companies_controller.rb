@@ -4,7 +4,14 @@ class CompaniesController < BaseController
   uses_tiny_mce(:options => AppConfig.default_mce_options.merge({:editor_selector => "rich_text_editor"}),
     :only => [:new, :create, :update, :edit, :welcome_about])
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
-  
+
+  before_filter :admin_required, :only => [:destroy]
+
+  before_filter :admin_or_company_admin_required, :only => [:edit, :update, :change_company_logo, :upload_company_logo,
+                                              #:welcome_photo, :welcome_about, :welcome_invite, :deactivate,
+                                              # :crop_profile_photo
+                                              ]
+
   def index
     # cond, @search, @metro_areas, @states = Company.paginated_users_conditions_with_search(params)
 
@@ -162,7 +169,14 @@ class CompaniesController < BaseController
 
 
   protected
-    # TODO:remove
+  
+    def admin_or_company_admin_required
+      company = Company.find(params[:id])  # TODO: user before filter?
+      company && current_user && (current_user.admin? || company.company_admin?(current_user)) ? true : access_denied
+    end
+  
+=begin
+     # TODO
     def setup_metro_areas_for_cloud
       @metro_areas_for_cloud = MetroArea.find(:all, :conditions => "users_count > 0", :order => "users_count DESC", :limit => 100)
       @metro_areas_for_cloud = @metro_areas_for_cloud.sort_by{|m| m.name}
@@ -181,4 +195,5 @@ class CompaniesController < BaseController
     def admin_or_current_user_required
       current_user && (current_user.admin? || @is_current_user) ? true : access_denied
     end
+=end
 end
