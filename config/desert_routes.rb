@@ -98,16 +98,6 @@ resources :activities
 resources :static_pages, :as => 'pages'
 connect 'view_page/:url', :controller => 'static_pages', :action => 'show_web'
 
-# DJS
-
-resources :companies, :member_path => '/:id', :nested_member_path => '/:company_id', :member => {
-    :signup_completed => :get
-} do |company|
-  company.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
-  company.resources :representatives
-  company.resources :conversations, :collection => { :comments => :get }
-end
- 
 resources :users, :member => {
     :dashboard => :get,
     :assume => :get,
@@ -149,6 +139,17 @@ resources :users, :member => {
 end
 resources :votes
 resources :invitations
+
+# DJS
+
+resources :companies, :member_path => '/:id', :nested_member_path => '/:company_id', :member => {
+    :signup_completed => :get
+} do |company|
+  company.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
+  company.resources :representatives
+  company.resources :conversations, :collection => { :comments => :get }
+end
+
 
 users_posts_in_category '/users/:user_id/posts/category/:category_name', :controller => 'posts', :action => 'index', :category_name => :category_name
 
