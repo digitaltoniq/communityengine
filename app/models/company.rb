@@ -18,6 +18,8 @@ class Company < ActiveRecord::Base
 
   #associations
   has_many    :representatives, :dependent => :destroy
+  has_many    :followings, :as => :followed
+  has_many    :followers, :through => :followings, :source => :user  # TODO NEED?
   
   belongs_to  :logo, :class_name => "Logo", :foreign_key => "logo_id"
   belongs_to  :metro_area

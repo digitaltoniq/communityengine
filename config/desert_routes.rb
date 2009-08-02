@@ -136,6 +136,9 @@ resources :users, :member => {
   user.resources :albums, :path_prefix => ':user_id/photo_manager', :member => {:add_photos => :get, :photos_added => :post}, :collection => {:paginate_photos => :get}  do |album| 
     album.resources :photos, :collection => {:swfupload => :post, :slideshow => :get}
   end
+
+  # DJS
+  user.resources :followings, :only => [:index], :collection => { :companies => :get, :posts => :get } 
 end
 resources :votes
 resources :invitations
@@ -148,6 +151,7 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
   company.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
   company.resources :representatives
   company.resources :conversations, :collection => { :comments => :get }
+  company.resources :followers
 end
 
 

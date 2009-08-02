@@ -74,6 +74,8 @@ class User < ActiveRecord::Base
     has_many    :comments_as_recipient, :class_name => "Comment", :foreign_key => "recipient_id", :order => "created_at desc", :dependent => :destroy
     has_many    :clippings, :order => "created_at desc", :dependent => :destroy
     has_many    :favorites, :order => "created_at desc", :dependent => :destroy
+
+    has_many    :followings, :order => "created_at desc", :dependent => :destroy  # DJS
     
   #named scopes
   named_scope :recent, :order => 'users.created_at DESC'
@@ -83,7 +85,6 @@ class User < ActiveRecord::Base
   named_scope :tagged_with, lambda {|tag_name|
     {:conditions => ["tags.name = ?", tag_name], :include => :tags}
   }
-  
 
   ## Class Methods
 

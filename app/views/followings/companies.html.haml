@@ -1,0 +1,13 @@
+-# DJS TODO .yui-b= render :partial => 'users/profile_user_info_sidebar'
+
+#yui-main
+  .yui-b
+    -box :id => "followed_companies" do
+      %h3
+        = @company_followings_count
+        =:followed_companies.l
+      .pagination=paginating_links @company_followings if @company_followings.page_count > 1
+
+      .clear
+      .user_list= render :partial => "followings/following", :collection => @company_followings
+
