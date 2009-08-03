@@ -4,10 +4,12 @@
   .yui-b
     -box :id => "followed_companies" do
       %h3
-        = @company_followings_count
+        = @company_followings.total_entries
         =:followed_companies.l
-      .pagination=paginating_links @company_followings if @company_followings.page_count > 1
+      .pagination=will_paginate @company_followings
 
       .clear
-      .user_list= render :partial => "followings/following", :collection => @company_followings
+      .company_list
+        - @company_followings.each do |following|
+          =render :partial => "companies/company", :locals => { :company => following.followed }
 

@@ -2,22 +2,22 @@
   .yui-b
     -box :id => "followed_companies", :class => "company_list" do
       %h3
-        = @company_followings_count
+        = @followings.for_companies.count
         =:followed_companies.l
       %br
-      - @company_followings.each do |following|
-        =render :partial => "companies/company", :locals => {:company => following.followed}
-      -if @company_followings.size > 4
+      - @followings.for_companies.limited.each do |following|
+        =render :partial => "companies/company", :locals => { :company => following.followed }
+      -if @followings.for_companies.count > 4
         %h6.all
           =link_to :see_all.l, companies_user_followings_path(@user)
 
     -box :id => "followed_posts", :class => "post_list" do
       %h3
-        = @post_followings_count
+        = @followings.for_posts.count
         =:followed_posts.l
       %br
-      - @post_followings.each do |following|
-        =render :partial => "companies/company", :locals => {:company => following.followed}
-      -if @post_followings.size > 4
+      - @followings.for_posts.limited.each do |following|
+        =render :partial => "posts/post", :locals => { :post => following.followed }
+      -if @followings.for_posts.count > 4
         %h6.all
           =link_to :see_all.l, posts_user_followings_path(@user)

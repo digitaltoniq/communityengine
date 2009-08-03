@@ -5,13 +5,10 @@ class FollowersController < BaseController
 
   def index
     @followed = Company.find(params[:company_id])    # TODO: determine followed type based on context
+    @followings = Following.by_company(@followed).paginate(paging_params)
 
-    @following_count = @followed.followings.count
-    @followings = @followed.followings.find :all, :page => {:size => 12, :current => params[:page], :count => @followed_count}
-
-    respond_to do |format|
-      format.html
-    end
+    #@following_count = @followed.followings.count
+    #@followings = @followed.followings.find :all, :page => {:size => 12, :current => params[:page], :count => @followed_count}
   end
 
 end

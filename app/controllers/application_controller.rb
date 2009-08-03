@@ -1,5 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+
+  def paging_params
+    { :page => (params[:page] || 1) }
+  end
   
   # helper_method :commentable_url
   # 
