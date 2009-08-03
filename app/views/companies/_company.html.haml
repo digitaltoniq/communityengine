@@ -7,9 +7,8 @@
         %h2= link_to company.name, company_path(company)
 
         %ul
-          -#
-            - if company.metro_area
-              %li.geo= :from2.l + " #{company.location}<br/>"
+          - if company.metro_area
+            %li.geo= :from2.l + " #{company.location}<br/>"
           %li.update
             %abbr.published{:title=>"#{company.created_at}"}
               =:joined.l + " #{time_ago_in_words company.created_at}"

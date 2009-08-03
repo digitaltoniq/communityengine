@@ -32,22 +32,26 @@
     - if current_company and current_company.can_request_friendship_with(@company)
       = add_friend_link(@company)
 
-    %h3=:my_details.l
-    .vcard.author
-      %ul
-        %li.update
-          %a{:href=>"#{company_path(@company)}", :rel=>"bookmark"}
-            %abbr.published{:title=>"#{@company.created_at}"}
-              = :member_since.l + @company.created_at.strftime(": %m/%d/%y")
-        %li.view
-          =:profile_views.l
-          = "(#{@company.view_count})"
+  %h3=:my_details.l
+  .vcard.author
+    %ul
+      %li.update
+        %a{:href=>"#{company_path(@company)}", :rel=>"bookmark"}
+          %abbr.published{:title=>"#{@company.created_at}"}
+            = :member_since.l + @company.created_at.strftime(": %m/%d/%y")
+      %li.view
+        =:profile_views.l
+        = "(#{@company.view_count})"
+      -#
+        DJS
         - if @company.offerings.any?
           %li.skills= :my_skills.l+": #{@company.offerings.collect{|o| link_to o.skill.name, skill_url(o.skill) }.join(', ')}"
         - if @company.tags.any?
           %li.tags= :my_tags.l+": #{@company.tags.collect{|t| link_to t.name, tag_url(t) }.join(", ")}"
-        - if @company.metro_area
-          %li.geo= link_to( @company.full_location, companys_path(:metro_area_id => @company.metro_area_id, :state_id => @company.state_id, :country_id => @company.country_id ) )
+      - if @company.metro_area
+        %li.geo= link_to( @company.full_location, companies_path(:metro_area_id => @company.metro_area_id, :state_id => @company.state_id, :country_id => @company.country_id ) )
+      -#
+        DJS
         - if current_company
           %li.compose= link_to(:send_me_a_message.l, new_company_message_path(current_company, :to=>@company))
-    .clear
+  .clear

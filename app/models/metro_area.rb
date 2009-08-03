@@ -1,5 +1,6 @@
 class MetroArea < ActiveRecord::Base
   has_many :users
+  has_many :companies
   belongs_to :state
   belongs_to :country
 

@@ -29,6 +29,21 @@ class Company < ActiveRecord::Base
   #named scopes
   named_scope :recent, :order => 'companies.created_at DESC'
 
+  ## Class Methods
+
+  # override activerecord's find to allow us to find by name or id transparently
+  def self.find(*args)
+    if args.is_a?(Array) and args.first.is_a?(String) and (args.first.index(/[a-zA-Z\-_]+/) or args.first.to_i.eql?(0) )
+      find_by_name_slug(args)
+    else
+      super
+    end
+  end
+
+  ## End Class Methods  
+
+  ## Instance Methods
+
   def posts
     Post.scoped :joins => "left join representatives on representatives.user_id = posts.user_id",
                 :conditions => ["representatives.company_id = ?", id]
@@ -70,15 +85,11 @@ class Company < ActiveRecord::Base
     r && r.admin?
   end
 
-  ## Class Methods
-
-  # override activerecord's find to allow us to find by name or id transparently
-  def self.find(*args)
-    if args.is_a?(Array) and args.first.is_a?(String) and (args.first.index(/[a-zA-Z\-_]+/) or args.first.to_i.eql?(0) )
-      find_by_name_slug(args)
-    else
-      super
-    end
+  def location
+    metro_area && metro_area.name || ""
   end
 
+  def full_location
+    "#{metro_area.name if self.metro_area}#{" , #{self.country.name}" if self.country}"
+  end
 end
