@@ -13,7 +13,7 @@ a:hover {
 }
 
 #NavBar {
-    background: #ABA8A3 url(/images/nav_bg.png) repeat-x scroll 0 0;
+    background: #ABA8A3 url(/images/theme/nav_bg.png) repeat-x scroll 0 0;
     color: #FFF;
     border: none;
     border-top: 1px solid #597fa9;
@@ -48,7 +48,7 @@ a:hover {
 #CommunityFooter p {
     float: right;
     padding: 0px 168px 0px 0px;
-    background: url(/images/candme-footer-logo.png) no-repeat right center;
+    background: url(/images/theme/candme-footer-logo.png) no-repeat right center;
     color: #aaa;
     margin-right: 5px;
 }
@@ -134,7 +134,7 @@ dl.vcard dd.member, dl.vcard dd.post, dl.vcard dd.rss {
 }
 
 #hd h1 a {
-    background: transparent url(/images/header-logo.png) no-repeat scroll 0 3px;
+    background: transparent url(/images/theme/header-logo.png) no-repeat scroll 0 3px;
     color: transparent;
     width: 400px;
 }
