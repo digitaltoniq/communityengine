@@ -1,2 +1,17 @@
 .DS_Store
+.idea
+
+log/*.log
+tmp/**/*
+
+# handled by symbolic links
+public/plugin_assets
+vendor
+
+public/plugin_assets
+public/photos
+public/logos
+
+
+
 
