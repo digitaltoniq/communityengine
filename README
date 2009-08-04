@@ -1,0 +1,14 @@
+h1. Dev setup
+
+* git clone git@github.com:digitaltoniq/candme.git
+* cd candme
+* git submodule update -i
+
+h1. Rake tasks
+
+* rake db:revert (to clean out and start with a fresh db)
+* rake data:demo (to clean out and start with a fresh db AND populate db with demo data)
+
+h1. Cap tasks
+
+* cap staging data:demo (to KILL staging db and populate staging env with demo data)

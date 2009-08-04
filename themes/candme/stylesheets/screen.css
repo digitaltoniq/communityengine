@@ -1,0 +1,201 @@
+html {
+    background-color: #e6e6e6;
+    background: #08101A url(http://iphoneonrails.com/images/body_bg.jpg) repeat-x fixed center top;
+}
+
+a {
+    text-decoration: none;
+    color: #007dbb;
+}
+
+a:hover {
+    color: #56bef2;
+}
+
+#NavBar {
+    background: #ABA8A3 url(/images/nav_bg.png) repeat-x scroll 0 0;
+    color: #FFF;
+    border: none;
+    border-top: 1px solid #597fa9;
+}
+
+.box h3 {
+    border-bottom: 1px solid #FFDB7F;
+    color: #888;
+    font-size: 135%;
+}
+
+.alt {
+    background: #FFFFD9 none repeat scroll 0 0;
+    border: 1px solid #FFDB7F;
+}
+
+.alt h3 {
+    background: #efb537 none repeat scroll 0 0;
+    border: medium none;
+    color: #fffbf4;
+    padding: 5px 10px;
+}
+
+#doc2 {
+    background-color: #FFF;
+}
+
+#bd {
+    margin: 0px 20px 0px 20px;
+}
+
+#CommunityFooter p {
+    float: right;
+    padding: 0px 168px 0px 0px;
+    background: url(/images/candme-footer-logo.png) no-repeat right center;
+    color: #aaa;
+    margin-right: 5px;
+}
+
+#CommunityFooter {
+    background: #fff;
+    padding: 10px 0px 10px 10px;
+    border-top: 1px solid #BBBBBB;
+}
+
+#doc2, #CommunityFooter {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+}
+
+#hd {
+    border-top: 0 solid #3399CC;
+    margin-top: 10px;
+}
+
+#hd h1 a {
+    font-weight: normal;
+    color: #666;
+    margin: 17px 0 11px 10px;
+}
+
+#hd h1 a:hover {
+    text-decoration: none;
+}
+
+#NavBar ul li a {
+    padding: 8px 10px;
+    color: #FFF;
+    font-size: 100%;
+    text-transform: none;
+}
+
+#NavBar ul li#active a, #NavBar ul li.current a {
+    color: #4c6e93;
+}
+
+#hd h2 {
+    margin-top: 17px;
+}
+
+/* User Menu Dropdown*/
+#user-menu {
+    padding-right: 15px;
+    background: url(/plugin_assets/community_engine/images/icons/bullet_arrow_down_50.png) no-repeat right;
+}
+
+#user-menu:hover {
+    background: url(/plugin_assets/community_engine/images/icons/bullet_arrow_down.png) no-repeat right;
+}
+
+.hentry .vcard ul li {
+    border-bottom: 1px solid #ddd;
+    padding: 3px 0 7px 20px;
+}
+
+.hentry {
+    margin: 0 0 1em;
+    padding-bottom: 10px;
+}
+
+.hfeed .hentry {
+    border-bottom:1px solid #FFDB7F;
+}
+
+.hentry h4 {
+    color: #888;
+    font-size: 125%;
+}
+
+dl.vcard dd.member, dl.vcard dd.post, dl.vcard dd.rss {
+    border-top: 1px solid #FFDB7F;
+    margin-right: 5px;
+}
+
+.list li {
+    border-bottom: 1px solid #FFDB7F;
+}
+
+#hd h1 a {
+    background: transparent url(/images/header-logo.png) no-repeat scroll 0 3px;
+    color: transparent;
+    width: 400px;
+}
+
+#hd h2 {
+    margin-right: 16px;
+}
+
+div.user_list .row, div.company_list .row {
+    border-bottom: 1px solid #FFDB7F;
+    padding: 12px 0px;
+    margin: 0;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.entry-content h6 a {
+    font-size: 100%;
+    font-weight: bold;
+    padding: 5px 2px 2px 0px;
+    text-transform: none;
+    background-image: none;
+}
+
+.entry-content h6 {
+    border: none;
+    text-align: left;
+    margin-top: 5px;
+}
+
+h6.all {
+    margin: 15px 0 0 197px;
+}
+
+.right {
+    float: left;
+}
+
+img.polaroid {
+    border: 1px solid #DDDDDD;
+    padding: 3px;
+}
+
+.MainForm p input, .MainForm p button {
+    border: 4px solid #EFA300;
+    background: #EFB537 none repeat scroll 0 0;
+    font-size: 100%;
+}
+
+.MainForm p input:hover {
+    background:#EFA300 none repeat scroll 0 0;
+}
+
+/* COMPANY LIST */
+
+div.company_list div.vcard {
+    width: 100%;
+}
+
+div.company_list div.vcard ul {
+    margin-left: 0;
+    font-size: 85%;
+}

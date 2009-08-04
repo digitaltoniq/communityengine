@@ -1,0 +1,13 @@
+common: &common
+  adapter: mysql
+  username: root
+  password:
+  host: localhost
+
+development:
+  database: candme_dev
+  <<: *common
+
+test:
+  database: candme_test
+  <<: *common
