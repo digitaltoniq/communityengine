@@ -3,7 +3,8 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environme
 require 'test_help'
 require 'action_view/test_case'
 require 'pp'
-ActiveSupport::TestCase.fixture_path = (RAILS_ROOT + "/vendor/plugins/community_engine/test/fixtures/")
+# CE-ORIG ActiveSupport::TestCase.fixture_path = (RAILS_ROOT + "/vendor/plugins/community_engine/test/fixtures/")
+ActiveSupport::TestCase.fixture_path = (RAILS_ROOT + "/test/fixtures/") # DJS
 ActionController::IntegrationTest.fixture_path = ActiveSupport::TestCase.fixture_path
 
 

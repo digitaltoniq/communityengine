@@ -12,7 +12,8 @@ module Ziya::Charts
     
     HELPERS_DIR = "#{File.dirname(__FILE__)}/../helpers"    
     
-    HELPERS_DIR = "#{RAILS_ROOT}/vendor/plugins/community_engine/plugins/ziya/lib/ziya/helpers" if defined? RAILS_ROOT
+    # CE-ORIG HELPERS_DIR = "#{RAILS_ROOT}/vendor/plugins/community_engine/plugins/ziya/lib/ziya/helpers" if defined? RAILS_ROOT
+    HELPERS_DIR = "#{RAILS_ROOT}/vendor/plugins/ziya/lib/ziya/helpers" if defined? RAILS_ROOT  # DJS
     # hacked by BBORN to work with community_engine
     # HELPERS_DIR = "#{RAILS_ROOT}/vendor/plugins/ziya/lib/ziya/helpers" if defined? RAILS_ROOT
     

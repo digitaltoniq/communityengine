@@ -1,6 +1,10 @@
+require(File.join(File.dirname(__FILE__), 'config', 'boot'))  # added DJS
+
 require 'rake'
 require 'rake/testtask'
 require 'rake/rdoctask'
+
+require 'tasks/rails' # added DJS
 
 desc 'Default: run unit tests.'
 task :default => :test
