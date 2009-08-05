@@ -17,18 +17,20 @@ Rails::Initializer.run do |config|
 
   config.gem 'aws-s3', :lib => 'aws/s3'
   config.gem 'haml'
-  config.gem 'htmlentities', :lib => 'htmlentities'
-  config.gem 'hpricot', :lib => 'hpricot'
-  config.gem 'rmagick', :lib => 'RMagick'
-  config.gem 'desert', :lib => 'desert'
+  config.gem 'htmlentities'
+  config.gem 'desert'
   config.gem 'calendar_date_select'
-  
+  config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
+
+  # These must be compiled natively and can't be vendored
+  config.gem 'rmagick', :lib => 'RMagick'
+  config.gem 'hpricot'
+
   config.gem "faker"
   config.gem "thoughtbot-factory_girl", :lib    => "factory_girl", :source => "http://gems.github.com"
   config.gem 'flickr-fu', :lib => 'flickr_fu'
   config.gem 'xml-magic', :lib => 'xml_magic'
 
-  config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
 
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
