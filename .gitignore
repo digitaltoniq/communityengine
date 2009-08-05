@@ -1,17 +1,18 @@
 .DS_Store
-.idea
+.idea/
+.idea/**
 
 log/*.log
-tmp/**/*
+tmp/**
 
 # handled by symbolic links
 public/plugin_assets
 vendor
 
-public/plugin_assets
+# Temp files - should be moved to shared/...
 public/photos
 public/logos
 
-
+config/database.yml
 
 
