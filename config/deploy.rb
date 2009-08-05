@@ -4,7 +4,7 @@ require "eycap/recipes"
 
 set :keep_releases, 5
 set :application,   'CompaniesAndMe'
-set :repository,    'git@github.com:digitaltoniq/candme.git'
+set :repository,    'git@github.com:digitaltoniq/communityengine.git'
 set :deploy_to,     "/data/#{application}"
 set :deploy_via,    :export
 set :monit_group,   "#{application}"
