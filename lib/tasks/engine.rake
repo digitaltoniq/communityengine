@@ -1,6 +1,6 @@
 namespace :engine do
 
-  desc 'Make this engine ready to run as an app, including any gem dependencies'
+  desc 'Make this engine ready to run as an app'
   task :appify => [:links, :files]
 
   desc 'Do all the linking necessary to get this engine into a Rails app structure'
