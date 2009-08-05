@@ -30,12 +30,13 @@ namespace :candme do
   task :setup_nginx_auth, :roles => :web, :except => { :no_release => true } do
 
     if requires_auth?
-      
+
       # Make sure nginx knows of our users
       # TODO: Could pull out users/passwords into yml file...
       USERS_FILE = "#{NGINX_DIR}/#{application}.users"
+      run "echo '' > #{USERS_FILE}"
       {"digitaltoniq" => "clubsoda"}.each do |name, password|
-        run "htpasswd -b #{USERS_FILE} #{name} #{password}"
+        run "htpasswd -nb #{name} #{password} > #{USERS_FILE}"
       end
 
       # Protect everything
