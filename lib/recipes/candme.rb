@@ -1,20 +1,20 @@
 # Hook into cap deployment lifecycle to get our app specific configs
-after 'deploy:setup', 'candme:config_nginx'
- 
+after 'deploy:setup', 'candme:setup'
+
 namespace :candme do
-  
+
   NGINX_DIR = "/etc/nginx/servers"
   NGINX_CONF = "#{application}.conf"
   NGINX_CONF_PATH = "#{NGINX_DIR}/#{NGINX_CONF}"
-  
+
   desc "Setup the target env to serve the C&Me app.  Is not destructive."
   task :setup do
     setup_nginx_proxying
     setup_nginx_auth
   end
-  
+
   task :setup_nginx_proxying, :roles => :web, :except => { :no_release => true } do
-    
+
     # Let Rails handle the stylesheets requests so it can route to themes
     run <<-RUN
       cd #{NGINX_DIR} && \
@@ -26,16 +26,16 @@ namespace :candme do
       fi
     RUN
   end
-  
+
   task :setup_nginx_auth, :roles => :web, :except => { :no_release => true } do
-    
+
     # Make sure nginx knows of our users
     # TODO: Could pull out users/passwords into yml file...
     USERS_FILE = "#{NGINX_DIR}/#{application}.users"
     {"digitaltoniq" => "clubsoda"}.each do |name, password|
       run "htpasswd -b #{USERS_FILE} #{name} #{password}"
     end
-    
+
     # Protect everything
     ZONE = "DigitalToniq Staging Environment"
     KEEP_FILE = "keep.#{NGINX_CONF}"
