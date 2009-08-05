@@ -1,8 +1,10 @@
 h1. Dev setup
 
-* git clone git@github.com:digitaltoniq/candme.git
+* git clone git@github.com:digitaltoniq/communityengine.git
 * cd candme
-* git submodule update -i
+* git checkout -b edge-as-app
+* git pull origin edge-as-app
+* rake engine:appify
 
 h1. Rake tasks
 
