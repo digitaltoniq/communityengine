@@ -8,7 +8,7 @@ tmp/**
 
 # handled by symbolic links
 public/plugin_assets
-vendor
+vendor/plugins
 
 # Temp files - should be moved to shared/...
 public/photos
