@@ -29,22 +29,34 @@ namespace :candme do
 
   task :setup_nginx_auth, :roles => :web, :except => { :no_release => true } do
 
-    # Make sure nginx knows of our users
-    # TODO: Could pull out users/passwords into yml file...
-    USERS_FILE = "#{NGINX_DIR}/#{application}.users"
-    {"digitaltoniq" => "clubsoda"}.each do |name, password|
-      run "htpasswd -b #{USERS_FILE} #{name} #{password}"
-    end
+    if requires_auth?
+      
+      # Make sure nginx knows of our users
+      # TODO: Could pull out users/passwords into yml file...
+      USERS_FILE = "#{NGINX_DIR}/#{application}.users"
+      {"digitaltoniq" => "clubsoda"}.each do |name, password|
+        run "htpasswd -b #{USERS_FILE} #{name} #{password}"
+      end
 
-    # Protect everything
-    ZONE = "DigitalToniq Staging Environment"
-    KEEP_FILE = "keep.#{NGINX_CONF}"
-    run <<-RUN
-      cd #{NGINX_DIR} && \
-      if [ 0 == `grep -c auth_basic #{KEEP_FILE}` ] ; then
-        sed -i '4i  auth_basic "#{ZONE}";\n' keep.#{NGINX_CONF};
-        sed -i '5i  auth_basic_user_file "#{USERS_FILE}";' keep.#{NGINX_CONF};
-      fi
-    RUN
+      # Protect everything
+      ZONE = "DigitalToniq Staging Environment"
+      KEEP_FILE = "keep.#{NGINX_CONF}"
+      run <<-RUN
+        cd #{NGINX_DIR} && \
+        if [ 0 == `grep -c auth_basic #{KEEP_FILE}` ] ; then
+          sed -i '4i  auth_basic "#{ZONE}";\n' keep.#{NGINX_CONF};
+          sed -i '5i  auth_basic_user_file "#{USERS_FILE}";' keep.#{NGINX_CONF};
+        fi
+      RUN
+    end
   end
+end
+
+
+# TODO: Hard coded, better way to add this env-specific dependency?
+# Could add variable to staging/client block in deploy.rb to make less env.-specific,
+# but that would pollute deploy.rb which I'm trying to keep as close to EY's original
+# as possible
+def requires_auth?
+  rails_env == 'staging'
 end
