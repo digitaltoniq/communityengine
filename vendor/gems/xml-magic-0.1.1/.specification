@@ -1,0 +1,61 @@
+--- !ruby/object:Gem::Specification 
+name: xml-magic
+version: !ruby/object:Gem::Version 
+  version: 0.1.1
+platform: ruby
+authors: 
+- Anthony Crumley
+- Ben Wyrosdick
+autorequire: 
+bindir: bin
+cert_chain: []
+
+date: 2008-03-15 00:00:00 -04:00
+default_executable: 
+dependencies: []
+
+description: xml-magic makes accessing xml objects more like any other ruby object
+email: anthony@commonthread.com
+executables: []
+
+extensions: []
+
+extra_rdoc_files: []
+
+files: 
+- README
+- CHANGELOG
+- LICENSE
+- demo.rb
+- lib/xml_magic.rb
+- lib/common_thread/xml/xml_magic.rb
+- test/test_helper.rb
+- test/test_xml_magic.rb
+has_rdoc: true
+homepage: http://rubyforge.org/projects/xml-magic/
+post_install_message: 
+rdoc_options: []
+
+require_paths: 
+- lib
+required_ruby_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+required_rubygems_version: !ruby/object:Gem::Requirement 
+  requirements: 
+  - - ">="
+    - !ruby/object:Gem::Version 
+      version: "0"
+  version: 
+requirements: []
+
+rubyforge_project: xml-magic
+rubygems_version: 1.3.1
+signing_key: 
+specification_version: 2
+summary: xml-magic makes accessing xml objects more like any other ruby object
+test_files: []
+
