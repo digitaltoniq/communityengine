@@ -1,5 +1,6 @@
 ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
+# C_ORIG require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
+require File.expand_path(File.dirname(__FILE__) + "/../config/environment") # DJS
 require 'test_help'
 require 'action_view/test_case'
 require 'pp'
