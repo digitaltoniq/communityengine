@@ -12,9 +12,6 @@ config/database.yml
 public/plugin_assets
 vendor/plugins
 
-# handled by engine tasks
-app/helpers/application_helper.rb
-
 # Temp files - should be moved to shared/...
 public/photos
 public/logos
