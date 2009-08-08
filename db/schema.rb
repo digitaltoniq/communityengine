@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090801214622) do
+ActiveRecord::Schema.define(:version => 20090807231721) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -116,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20090801214622) do
     t.boolean  "profile_public"
     t.string   "zip"
     t.string   "name_slug"
+    t.string   "domains"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -321,6 +322,14 @@ ActiveRecord::Schema.define(:version => 20090801214622) do
   add_index "posts", ["published_as"], :name => "index_posts_on_published_as"
   add_index "posts", ["published_at"], :name => "index_posts_on_published_at"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
+
+  create_table "representative_invitations", :force => true do |t|
+    t.string   "email_addresses"
+    t.string   "message"
+    t.integer  "representative_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "representative_roles", :force => true do |t|
     t.string   "name"

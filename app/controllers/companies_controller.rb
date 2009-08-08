@@ -89,7 +89,7 @@ class CompaniesController < BaseController
   def update
     @company = Company.find(params[:id])
     @company.attributes      = params[:company]
-    @metro_areas, @states = setup_locations_for(@company)
+    # @metro_areas, @states = setup_locations_for(@company)
 
     unless params[:metro_area_id].blank?
       @company.metro_area  = MetroArea.find(params[:metro_area_id])

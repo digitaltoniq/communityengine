@@ -1,4 +1,4 @@
-class Company < ActiveRecord::Base 
+class Company < ActiveRecord::Base
   acts_as_taggable
   acts_as_commentable
   has_private_messages
@@ -14,7 +14,12 @@ class Company < ActiveRecord::Base
   # TODO validates_exclusion_of    :name, :in => AppConfig.reserved_company_names
   validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :name_slug
-
+ 
+  validates_each :domains do |record, attr, domain_csv|
+    domain_csv.validate(/((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i) do |domains, invalid_domains|
+      record.errors.add(:domains, " included invalid domains: #{invalid_domains.join(", ")}")
+    end
+  end
 
   #associations
   has_many    :representatives, :dependent => :destroy
@@ -39,7 +44,7 @@ class Company < ActiveRecord::Base
       super
     end
   end
-
+                               
   ## End Class Methods  
 
   ## Instance Methods

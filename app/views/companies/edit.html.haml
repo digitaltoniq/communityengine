@@ -56,6 +56,11 @@
         %h3=:about_me.l
         = text_area :company, :description, :class => "rich_text_editor", :style => "width:100%"
 
+        %label{"for"=>"domains"}
+          =:enter_company_domains.l
+          %em= :comma_separated.l
+        = text_area :company, :domains , :rows => "5"
+
       -#
         DJS
         -box :class => "alt" do

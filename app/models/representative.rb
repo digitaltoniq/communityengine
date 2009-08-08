@@ -11,6 +11,7 @@ class Representative < ActiveRecord::Base
   has_enumerated :representative_role
   belongs_to :user
   belongs_to :company
+  has_many   :representative_invitations
 
   delegate :avatar_photo_url, :this_months_posts, :last_months_posts, :location, :full_location,
            :recent, :active, :tagged_with,
