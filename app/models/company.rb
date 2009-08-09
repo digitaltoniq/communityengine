@@ -1,11 +1,9 @@
 class Company < ActiveRecord::Base
+  acts_as_slugable :source_column => :name
   acts_as_taggable
   acts_as_commentable
   has_private_messages
   tracks_unlinked_activities [:logged_in, :invited_friends, :updated_profile, :joined_the_site]
-
-  #callbacks
-  before_save   :generate_name_slug
 
   # validation
   validates_length_of       :name,      :within => 1..100
@@ -13,7 +11,7 @@ class Company < ActiveRecord::Base
   # TODO validates_format_of       :name,      :with => /^[\sA-Za-z0-9_-]+$/
   # TODO validates_exclusion_of    :name, :in => AppConfig.reserved_company_names
   validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
-  validates_uniqueness_of   :name_slug
+  validates_uniqueness_of   :url_slug
  
   validates_each :domains do |record, attr, domain_csv|
     domain_csv.validate(/((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i) do |domains, invalid_domains|
@@ -37,9 +35,10 @@ class Company < ActiveRecord::Base
   ## Class Methods
 
   # override activerecord's find to allow us to find by name or id transparently
+  # TODO: factor this out, needed for anything slugged
   def self.find(*args)
     if args.is_a?(Array) and args.first.is_a?(String) and (args.first.index(/[a-zA-Z\-_]+/) or args.first.to_i.eql?(0) )
-      find_by_name_slug(args)
+      find_by_url_slug(args)
     else
       super
     end
@@ -73,12 +72,7 @@ class Company < ActiveRecord::Base
   end
 
   def to_param
-    name_slug
-  end
-
-   # before filter
-  def generate_name_slug
-    self.name_slug = self.name.gsub(/[^a-z0-9]+/i, '-')
+    url_slug || id
   end
 
   def representative_for_user(user)

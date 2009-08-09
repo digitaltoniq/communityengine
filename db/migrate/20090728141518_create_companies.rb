@@ -8,7 +8,7 @@
       t.integer :state_id, :country_id, :metro_area_id
       t.boolean :profile_public
       t.string  :zip
-      t.string  :name_slug
+      t.string  :url_slug
       t.string  :domains
       t.timestamps
     end

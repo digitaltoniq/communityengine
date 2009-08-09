@@ -1,11 +1,9 @@
 class Representative < ActiveRecord::Base
+  acts_as_slugable :source_column => :full_name, :scope => :company
+  
   attr_protected :representative_role_id
 
-  # callbacks
-  before_save :generate_full_name_slug
-
   #validation
-  # TODO (unique in context of company) validates_uniqueness_of :generate_full_name_slug  -
 
   #associations
   has_enumerated :representative_role
@@ -23,7 +21,7 @@ class Representative < ActiveRecord::Base
   # override activerecord's find to allow us to find by name or id transparently
   def self.find(*args)
     if args.is_a?(Array) and args.first.is_a?(String) and (args.first.index(/[a-zA-Z\-_]+/) or args.first.to_i.eql?(0) )
-      find_by_full_name_slug(args)
+      find_by_url_slug(args)
     else
       super
     end
@@ -36,12 +34,7 @@ class Representative < ActiveRecord::Base
   end
 
   def to_param
-    full_name_slug || id
-  end
-
-  # before filter
-  def generate_full_name_slug
-    self.full_name_slug = self.full_name.gsub(/[^a-z0-9]+/i, '-')
+    url_slug || id
   end
 
   # TODO: These need to be protected? They were in CE
@@ -57,5 +50,4 @@ class Representative < ActiveRecord::Base
   def representative?
     !representative_role || representative_role.eql?(RepresentativeRole[:representative])
   end
-
 end
