@@ -48,6 +48,10 @@ class Company < ActiveRecord::Base
 
   ## Instance Methods
 
+  def accepts_email?(email)
+    domains.include? email.split('@').last
+  end
+
   def posts
     Post.scoped :joins => "left join representatives on representatives.user_id = posts.user_id",
                 :conditions => ["representatives.company_id = ?", id]
