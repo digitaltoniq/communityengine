@@ -1,1 +1,1 @@
-require 'acts_as_sluggable_hacks'
+require 'acts_as_slugable_hacks'
