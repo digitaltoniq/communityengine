@@ -1495,3 +1495,21 @@ en:
   company_name: Company name
   #en: active_representatives: Active Representatives
   active_representatives: Active Representatives
+  # en: delete_this_company: "Delete this company"
+  delete_this_company: "Delete this company"
+  # en: recent_company_post_comments: "Recent post comments"
+  recent_company_post_comments: "Recent conversation comments"
+  # en: enter_company_domains: "Company domains"
+  enter_company_domains: "Company domains"
+  # en: followed_companies: "Followed companies"
+  followed_companies: "Followed companies"
+  # en: followed_posts: "Followed post"
+  followed_posts: "Followed conversations"
+  # en: recent_company_blog_posts: "Recent conversations"
+  recent_company_blog_posts: "Recent conversations"
+  # en: about_company: "About Company"
+  about_company: "About the company"
+  # en: company_details: "Company details"
+  company_details: "Company details"
+  # en: view_company_blog: "View company conversastions"
+  view_company_blog: "View company conversastions"

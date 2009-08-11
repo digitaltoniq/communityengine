@@ -5,7 +5,7 @@ class CompaniesController < BaseController
     :only => [:new, :create, :update, :edit, :welcome_about])
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
 
-  before_filter :admin_required, :only => [:destroy]
+  before_filter :admin_required, :only => [:new, :destroy]
 
   before_filter :admin_or_company_admin_required, :only => [:edit, :update, :change_company_logo, :upload_company_logo,
                                               #:welcome_photo, :welcome_about, :welcome_invite, :deactivate,
@@ -13,7 +13,7 @@ class CompaniesController < BaseController
                                               ]
 
   def index
-    # cond, @search, @metro_areas, @states = Company.paginated_users_conditions_with_search(params)
+    # cond, @search, @metro_areas, @states = Company.paginated_users_conditions_with_search(params)  # TODO discuss apprach
 
     @companies = Company.recent.find(:all,
       # :conditions => cond.to_sql,
@@ -23,16 +23,14 @@ class CompaniesController < BaseController
 
     @tags = Company.tag_counts :limit => 10
 
-    #setup_metro_areas_for_cloud
+    # setup_metro_areas_for_cloud  # TODO: discuss -- why have sidebar here?
   end
 
-=begin 
   def dashboard
-    @user = current_user
-    @network_activity = @user.network_activity
-    @recommended_posts = @user.recommended_posts
-  end 
-=end
+    @company = Company.find(params[:id])
+    #@network_activity = @company.network_activity
+    #@recommended_posts = @company.recommended_posts
+  end
   
   def show
     @company = Company.find(params[:id])
@@ -60,36 +58,32 @@ class CompaniesController < BaseController
   
   def new
     @company         = Company.new(params[:company])
-    #@inviter_id   = params[:id]
-    #@inviter_code = params[:code]
-
     render :action => 'new', :layout => 'beta' and return if AppConfig.closed_beta_mode    
   end
 
   def create
-    @company       = Company.new(params[:company])
+    @company = Company.new(params[:company])
 
    if @company.save
-      #create_friendship_with_inviter(@user, params)
-      #flash[:notice] = :email_signup_thanks.l_with_args(:email => @user.email)
-      # redirect_to signup_completed_company_path(@company)
-      # run_later {UserNotifier.deliver_signup_notification(@user)}
+     flash[:notice] = :company_signup_thanks.l_with_args(:email => @user.email)
+     run_later {UserNotifier.deliver_signup_notification(@user)}
+     # redirect_to signup_completed_company_path(@company)
      redirect_to company_path(@company)
     else
       render :action => 'new'
     end
   end
     
-  def edit 
-    # @metro_areas, @states = setup_locations_for(@company)
+  def edit
     @company = Company.find(params[:id])
-    @logo                 = Logo.new
+    @metro_areas, @states = setup_locations_for(@company)
+    @logo = Logo.new
   end
   
   def update
     @company = Company.find(params[:id])
-    @company.attributes      = params[:company]
-    # @metro_areas, @states = setup_locations_for(@company)
+    @company.attributes = params[:company]
+    @metro_areas, @states = setup_locations_for(@company)
 
     unless params[:metro_area_id].blank?
       @company.metro_area  = MetroArea.find(params[:metro_area_id])
@@ -171,14 +165,12 @@ class CompaniesController < BaseController
   protected
   
     def admin_or_company_admin_required
-      company = Company.find(params[:id])  # TODO: user before filter?
+      company = Company.find(params[:id]) 
       company && current_user && (current_user.admin? || company.company_admin?(current_user)) ? true : access_denied
     end
-  
-=begin
-     # TODO
+
     def setup_metro_areas_for_cloud
-      @metro_areas_for_cloud = MetroArea.find(:all, :conditions => "users_count > 0", :order => "users_count DESC", :limit => 100)
+      @metro_areas_for_cloud = MetroArea.find(:all, :conditions => "companies_count > 0", :order => "companies_count DESC", :limit => 100)
       @metro_areas_for_cloud = @metro_areas_for_cloud.sort_by{|m| m.name}
     end
 
@@ -191,9 +183,4 @@ class CompaniesController < BaseController
 
       return metro_areas, states
     end
-
-    def admin_or_current_user_required
-      current_user && (current_user.admin? || @is_current_user) ? true : access_denied
-    end
-=end
 end

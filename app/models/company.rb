@@ -10,11 +10,12 @@ class Company < ActiveRecord::Base
   validates_uniqueness_of   :name,      :case_sensitive => false
   # TODO validates_format_of       :name,      :with => /^[\sA-Za-z0-9_-]+$/
   # TODO validates_exclusion_of    :name, :in => AppConfig.reserved_company_names
-  validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
+  # validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :url_slug
+  # validates_presence_of     :domains
  
   validates_each :domains do |record, attr, domain_csv|
-    domain_csv.validate(/((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i) do |domains, invalid_domains|
+    domain_csv && domain_csv.validate(/((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i) do |domains, invalid_domains|
       record.errors.add(:domains, " included invalid domains: #{invalid_domains.join(", ")}")
     end
   end

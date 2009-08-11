@@ -64,11 +64,9 @@ namespace :data do
     
     task :users => [:environment, :prevent_production, :factories] do
       ['ryan@digitaltoniq.com', 'dsnider@digitaltoniq.com', 'ryanmickle@gmail.com'].each do |f|
-        Factory(:user, :email => f, :login => f.split('@').first)
+        Factory(:user, :email => f, :login => f.split('@').first, :role => Role[:admin])
         User.delete_all("avatar_id IS NULL") # RWD Factory girl circular dependency bug?
       end
-      User.find_by_login('dsnider').role = Role[:admin]
-      User.find_by_login('ryan').role = Role[:admin]
     end
   end
 end

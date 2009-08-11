@@ -1,0 +1,48 @@
+.yui-b
+  -box do 
+    %h3=:dashboard.l
+    .yui-g
+      .yui-u.first
+        = image_tag 'icons/accept.png', :plugin => 'community_engine'            
+        =:view_my.l
+        %ul
+          %li=link_to :profile.l, polymorphic_path(@company)
+          -# DJS %li=link_to :blog.l, user_posts_path(@user)
+          -#
+            DJS
+            %li=link_to :photo_manager.l, user_photo_manager_index_path(@user)
+            %li=link_to :clippings.l, user_clippings_path(@user)
+            %li=link_to :friends.l, accepted_user_friendships_path(@user)
+            %li=link_to :inbox.l, user_messages_path(@user)
+      .yui-u
+        = image_tag 'icons/wrench.png', :plugin => 'community_engine'      
+        =:manage_my.l
+        %ul
+          %li=link_to :profile.l, edit_company_path(@company)
+          -# DJS %li=link_to :account_settings.l, edit_account_company_path(@company)
+          -# DJS TODO %li=link_to :blog_posts.l, manage_company_posts_path(@company)
+          -#
+            DJS TODO
+            -if current_representative.admin?
+              %li=link_to :admin_dashboard.l, admin_dashboard_path
+               
+  
+  -box :class => "alt" do 
+    %h3=:stats.l
+    %ul
+      -# DJS REMOVE %li=:you_last_logged_in_on.l+" #{@company.last_login_at && @company.last_login_at.strftime("%m/%d/%y")}"
+      %li= @company.created_at.strftime(:member_since.l+": %m/%d/%y")
+      -unless @company.posts.empty?
+        %li=:you_have_written.l+" #{@company.posts.count} "+:blog_posts.l+"."
+      -#
+        DJS
+        -unless @company.photos.empty?
+          %li=:you_have_uploaded.l+" #{@company.photos.count} "+:photos.l+"."
+        -unless @company.clippings.empty?
+          %li=:you_have_created.l+" #{@company.clippings.count} "+:clippings.l+"."
+      -unless @company.comments.empty?
+        %li=:you_have_left.l+" #{@company.posts.count} "+:comments.l+"."
+      -#
+        DJS
+        -unless @company.accepted_friendships.empty?
+          %li=:you_have.l+" #{pluralize @company.accepted_friendships.count, :friend.l}."

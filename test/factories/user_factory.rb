@@ -8,4 +8,5 @@ Factory.define :user do |u|
   u.activated_at { (rand(1) + 200).days.ago }
   u.description { Faker::Lorem.sentences(rand(3) + 3).join(' ') }
   u.association :avatar
+  u.association :role
 end

@@ -146,7 +146,7 @@ resources :invitations
 # DJS
 
 resources :companies, :member_path => '/:id', :nested_member_path => '/:company_id', :member => {
-    :signup_completed => :get
+    :dashboard => :get
 } do |company|
   company.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
   company.resources :representatives, :member => {} do |representative|
