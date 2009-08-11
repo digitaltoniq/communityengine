@@ -149,7 +149,7 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :dashboard => :get
 } do |company|
   company.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
-  company.resources :representatives, :member => {} do |representative|
+  company.resources :representatives, :member_path => '/:company_id/:id', :member => {} do |representative|
     representative.resources :representative_invitations
   end
   company.resources :conversations, :collection => { :comments => :get }

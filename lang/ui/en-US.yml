@@ -1513,3 +1513,9 @@ en:
   company_details: "Company details"
   # en: view_company_blog: "View company conversastions"
   view_company_blog: "View company conversastions"
+  # en: listing_representative_invitations: "Listing representative invitations"
+  listing_representative_invitations: "Listing representative invitations"
+  # en: new_representative_invitation: "New representative invitation"
+  new_representative_invitation: "New representative invitation"  
+
+
