@@ -161,6 +161,54 @@ class CompaniesController < BaseController
     render :action => 'signup_completed', :layout => 'beta' if AppConfig.closed_beta_mode
   end
 
+  # TODO: refactor post_controller index to handle company
+  def posts
+    @company = Company.find(params[:id])
+    @category = Category.find_by_name(params[:category_name]) if params[:category_name]
+    cond = Caboose::EZ::Condition.new
+    if @category
+      cond.append ['category_id = ?', @category.id]
+    end
+
+    @posts = @company.posts.recent.find :all, :conditions => cond.to_sql, :page => {:size => 10, :current => params[:page]}
+
+    # @is_current_company = @company.eql?(current_company)
+
+    @popular_posts = @company.posts.find(:all, :limit => 10, :order => "view_count DESC")
+
+    @rss_title = "#{AppConfig.community_name}: #{@company.name}'s posts"
+    @rss_url = company_posts_path(@company, :format => :rss)
+
+    respond_to do |format|
+      format.html # index.rhtml
+      format.rss do
+        render_rss_feed_for(@posts,
+                            { :feed => {:title => @rss_title, :link => url_for(:controller => 'posts', :action => 'index', :company_id => @company) },
+                              :item => {:title => :title,
+                                        :description => :post,
+                                        :link => Proc.new {|post| company_post_url(post.company, post)},
+                                        :pub_date => :published_at} })
+      end
+    end
+  end
+
+  def post_comments
+    @company = Company.find(params[:id])
+    @comments = @company.post_comments.recent.find(:all, :page => {:size => 10, :current => params[:page]})  # TODO: will paginate
+    @title = @company.name
+    @back_url = company_path(@company)
+    
+    respond_to do |format|
+      format.html do
+        render :action => 'post_comments' and return
+      end
+      format.rss do
+        @rss_title = "#{AppConfig.community_name}: #{@commentable.class.to_s.underscore.capitalize} Comments - #{@title}"
+        @rss_url = comment_rss_link
+        render_comments_rss_feed_for(@comments, @title) and return
+      end
+    end
+  end
 
   protected
   
