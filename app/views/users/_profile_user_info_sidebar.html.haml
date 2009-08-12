@@ -12,7 +12,7 @@
 
 -box :class => 'hentry', :id => 'profile_details' do
   %h3
-    = link_to @user.login, user_path(@user)
+    = link_to display_name(@user), user_path(@user)
     = " <small>(#{:featured_writer.l})</small>" if @user.featured_writer?
 
   .centered

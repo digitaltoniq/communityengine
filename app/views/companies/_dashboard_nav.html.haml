@@ -6,7 +6,7 @@
         = image_tag 'icons/accept.png', :plugin => 'community_engine'            
         =:view_my.l
         %ul
-          %li=link_to :profile.l, polymorphic_path(@company)
+          %li=link_to :profile.l, company_path(@company)
           -# DJS %li=link_to :blog.l, user_posts_path(@user)
           -#
             DJS

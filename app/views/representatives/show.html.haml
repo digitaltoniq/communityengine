@@ -30,7 +30,7 @@
       = @representative.representative_role.name.capitalize
     %p  
       %b User login:
-      = display_name(@representative.user)
+      = @representative.user.login
   -#
     DJS
     -box :class => 'alt', :id => 'friends' do
