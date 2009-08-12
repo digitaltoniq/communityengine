@@ -368,5 +368,23 @@ module BaseHelper
     user.gender ? (user.male? ? :his.l : :her.l)  : :their.l    
   end
   
+  # DigitalToniq
 
+  # The following automatically routes user paths to representative paths if user is wrapped by representative
+  def user_post_path(user, post)
+    r = Representative.find_by_user_id(user.id)
+    r ? company_representative_post_path(r.company, r, post) : super
+  end
+
+  def user_path(user)
+    r = Representative.find_by_user_id(user.id)
+    r ? company_representative_path(r.company, r) : super
+  end
+
+  def user_posts_path(user, *args)
+    r = Representative.find_by_user_id(user.id)
+    r ? company_representative_posts_path(r.company, r, *args) : super
+  end
+  # End user paths
+  
 end
