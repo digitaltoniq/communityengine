@@ -1519,4 +1519,10 @@ en:
   new_representative_invitation: "New representative invitation"  
   #en: view_my_blog: View my blog
   view_my_blog: View my conversations
+  #en: recent_blog_posts: Recent Blog Posts
+  recent_blog_posts: Recent Conversations
+  #en: recent_posts: Recent Posts
+  recent_posts: Recent Conversations
+  #en: recommended_posts: Recommended Posts
+  recommended_posts: Recommended Conversations  
 
