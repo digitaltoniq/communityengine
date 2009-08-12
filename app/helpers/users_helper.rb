@@ -6,7 +6,7 @@ module UsersHelper
   def random_greeting(user)
     greetings = ['Hello', 'Hola', 'Hi ', 'Yo', 'Welcome back,', 'Greetings',
         'Wassup', 'Aloha', 'Halloo']
-    "#{greetings.sort_by {rand}.first} #{user.login}!"
+    "#{greetings.sort_by {rand}.first} #{display_name(user)}!"
   end
     
 end

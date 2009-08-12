@@ -28,7 +28,7 @@
               %td
                 .left
                   -if comment.user
-                    = link_to h(comment.user.login), user_path(comment.user)
+                    = link_to h(display_name(comment.user)), user_path(comment.user)
                     %br
                     %small= comment.user.email
                   -else

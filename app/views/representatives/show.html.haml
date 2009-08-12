@@ -1,4 +1,4 @@
--# DJS - @meta = { :description => "#{@user.login}'s profile on #{AppConfig.community_name}.", :keywords => "#{@user.login}, #{@user.tags.join(", ") unless @user.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+-# DJS - @meta = { :description => "#{display_name(@user)}'s profile on #{AppConfig.community_name}.", :keywords => "#{display_name(@user)}, #{@user.tags.join(", ") unless @user.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
 - @section = @user.eql?(current_user) ? 'my_profile' : 'users'
 - @sidebar_left = true
 
@@ -30,7 +30,7 @@
       = @representative.representative_role.name.capitalize
     %p  
       %b User login:
-      = @representative.user.login
+      = display_name(@representative.user)
   -#
     DJS
     -box :class => 'alt', :id => 'friends' do
@@ -85,7 +85,7 @@
       DJS
       - if @photos.empty? and @recent_posts.empty?
         -box :class => "alt first_alt" do
-          %h3= :small_profile.l :user => @user.login
+          %h3= :small_profile.l :user => display_name(@user)
 
       - unless @photos.empty?
         -box :id => "photos" do

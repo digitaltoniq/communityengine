@@ -386,5 +386,10 @@ module BaseHelper
     r ? company_representative_posts_path(r.company, r, *args) : super
   end
   # End user paths
-  
+
+  def display_name(user)
+    r = Representative.find_by_user_id(user.id)
+    r ? r.full_name : user.login    
+  end
+
 end
