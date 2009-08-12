@@ -1498,7 +1498,7 @@ en:
   # en: delete_this_company: "Delete this company"
   delete_this_company: "Delete this company"
   # en: recent_company_post_comments: "Recent post comments"
-  recent_company_post_comments: "Recent conversation comments"
+  recent_company_post_comments: "Recent comments"
   # en: enter_company_domains: "Company domains"
   enter_company_domains: "Company domains"
   # en: followed_companies: "Followed companies"
@@ -1517,5 +1517,6 @@ en:
   listing_representative_invitations: "Listing representative invitations"
   # en: new_representative_invitation: "New representative invitation"
   new_representative_invitation: "New representative invitation"  
-
+  #en: view_my_blog: View my blog
+  view_my_blog: View my conversations
 
