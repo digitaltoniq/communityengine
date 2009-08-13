@@ -16,6 +16,16 @@ class UserNotifier < ActionMailer::Base
     @body[:message] = message
   end
 
+  def representative_signup_invitation(representative)
+    setup_sender_info
+    @recipients  = "#{email}"
+    @subject     = "#{representative.full_name} would like you to join #{AppConfig.community_name}!"
+    @sent_on     = Time.now
+    @body[:representative] = representative
+    @body[:url]  = signup_by_id_url(user, user.invite_code)
+    @body[:message] = message
+  end
+
   def friendship_request(friendship)
     setup_email(friendship.friend)
     @subject     += "#{friendship.user.login} would like to be friends with you!"
@@ -71,13 +81,6 @@ class UserNotifier < ActionMailer::Base
     @body[:url]  = "#{application_url}/users/activate/#{user.activation_code}"
   end
 
-  # TODO: clean, send to representative new
-  def representative_signup_notification(user)
-    setup_email(user)
-    @subject    += "Please activate your new #{AppConfig.community_name} representative account"
-    @body[:url]  = "#{application_url}/users/activate/#{user.activation_code}"
-  end
-  
   def message_notification(message)
     setup_email(message.recipient)
     @subject     += "#{message.sender.login} sent you a private message!"

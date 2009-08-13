@@ -1,0 +1,19 @@
+<%= @message %>
+
+--------------
+
+Hi!
+
+"#{representative.full_name} would like you to join #{AppConfig.community_name} as a representative of #{representative.company.name}!"
+
+<%= @representative.full_name %>(<%= @representative.email %>) has just invited you to join <%= AppConfig.community_name %>
+as a representative of #{@representative.company.name}!.
+
+<%= AppConfig.community_description %>
+
+Visit this link to sign up:
+
+<%= @url %>
+
+Thanks,
+The <%= AppConfig.community_name %> team

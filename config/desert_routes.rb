@@ -150,10 +150,13 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
 }, :member => {
     :dashboard => :get,
     :posts => :get,
-    :post_comments => :get
+    :post_comments => :get,
 } do |company|
   company.resources :posts, :as => :conversations, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
-  company.resources :representatives, :member_path => '/:company_id/:id', :nested_member_path => '/:company_id/:representative_id', :member => {} do |representative|
+  company.resources :representatives, :member_path => '/:company_id/:id', :nested_member_path => '/:company_id/:representative_id', :member => {
+    :edit_account => :get,
+    :signup_completed => :get       
+  } do |representative|
     representative.resources :representative_invitations
     representative.resources :posts, :as => :conversations
   end
