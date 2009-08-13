@@ -1527,4 +1527,9 @@ en:
   recommended_posts: Recommended Conversations
   # en: representative_invitation_was_successfully_created
   representative_invitation_was_successfully_created: Representative invitation was successfully created
-
+  # en: representative_first_name: Representative first name
+  representative_first_name: First name
+  # en: representative_last_name: Representative first name
+  representative_last_name: Last name
+  # en: representative_title: Representative title
+  representative_title: Title

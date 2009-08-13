@@ -9,7 +9,7 @@ class BaseController < ApplicationController
   before_filter :login_from_cookie  
   skip_before_filter :verify_authenticity_token, :only => :footer_content
   helper_method :commentable_url
-  helper_method :user_path, :user_post_path, :user_posts_path # DigitalToniq
+  helper_method :user_path, :user_post_path, :user_posts_path, :edit_user_path # DigitalToniq
 
   caches_action :site_index, :footer_content, :if => Proc.new{|c| c.cache_action? }
   def cache_action?
@@ -85,8 +85,8 @@ class BaseController < ApplicationController
   
   def find_user
     # DT: If representative_id is given, determine the user and stuff params with the id  (Discuss)
-    if params[:representative_id]
-      @user =  Representative.find(params[:representative_id]).user
+    if params[:company_id]
+      @user = Representative.find(params[:representative_id] || params[:id]).user
       params[:user_id] = @user.id
     else
       @user = User.active.find(params[:user_id] || params[:id])
@@ -189,6 +189,11 @@ class BaseController < ApplicationController
   def user_posts_path(user, *args)
     r = Representative.find_by_user_id(user.id)
     r ? company_representative_posts_path(r.company, r, *args) : super
+  end
+
+  def edit_user_path(user, *args)
+    r = Representative.find_by_user_id(user.id)
+    r ? edit_company_representative_path(r.company, r, *args) : super
   end
   # End user paths  
 
