@@ -1,0 +1,23 @@
+# http://ph7spot.com/articles/getting_started_with_autotest
+
+# Additional info and setup related to rspec  
+# http://blog.davidchelimsky.net/?s=autotest
+
+# Verbosity setup
+# http://www.subelsky.com/2008/01/autotest-with-verbose-flag-on.html
+
+require 'redgreen/autotest'
+# require 'growl/autotest'          # Needs Growl and GrowlNotify
+# require 'autotest/pretty'       # Needs RubyCocoa
+# require 'autotest/pretty'       # Needs ~/Sites directory before you enable
+require 'autotest/timestamp'
+
+# see: http://www.viget.com/extend/how-why-to-run-autotest-on-your-mac/
+require 'autotest/fsevent'       
+
+# See
+# http://blog.airbladesoftware.com/2007/3/22/filtering-autotest-s-output
+# http://www.bitcetera.com/en/techblog/2009/05/27/mac-friendly-autotest/
+# Autotest.add_hook :ran_command do |autotest|
+#   autotest.results.gsub!(%r{^.*/usr/local/lib/.*\n?}, '')
+# end
