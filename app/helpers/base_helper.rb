@@ -190,11 +190,19 @@ module BaseHelper
 		html
   end
 
-  def topnav_tab(name, options)
+  def nav(name, options, subnav = false)
     classes = [options.delete(:class)]
-    classes << 'current' if options[:section] && (options.delete(:section).to_a.include?(@section))
+    classes << 'current' if options[:section] && (options.delete(:section).to_a.include?(subnav ? @subsection : @section))
     
     "<li class='#{classes.join(' ')}'>" + link_to( "<span>"+name+"</span>", options.delete(:url), options) + "</li>"
+  end
+
+  def topnav_tab(name, options)
+     nav(name, options, false)
+  end
+
+  def subnav_tab(name, options)
+     nav(name, options, true)
   end
 
   # def format_post_totals(posts)

@@ -213,7 +213,27 @@ class PostsController < BaseController
       }
     end    
   end
-  
+
+  def most_commented
+    @posts = Post.find_most_commented # TODO: more options
+
+    @recent_clippings = Clipping.find_recent(:limit => 15)
+    @recent_photos = Photo.find_recent(:limit => 10)
+
+    @rss_title = "#{AppConfig.community_name} "+:most_commented_posts.l
+    @rss_url = most_commented_rss_url
+    respond_to do |format|
+      format.html
+# TODO
+      
+#      format.rss do
+#        render_rss_feed_for(@posts, { :feed => {:title => @rss_title, :link => most_commented_url},
+#          :item => {:title => :title, :link => Proc.new {|post| user_post_url(post.user, post)}, :description => :post, :pub_date => :published_at}
+#          })
+#      end
+    end
+  end
+
   def featured
     @posts = Post.by_featured_writers.recent.find(:all, :page => {:current => params[:page]})
     @featured_writers = User.featured

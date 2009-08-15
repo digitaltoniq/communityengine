@@ -60,6 +60,8 @@ popular '/popular', :controller => 'posts', :action => 'popular'
 popular_rss '/popular.rss', :controller => 'posts', :action => 'popular', :format => 'rss'
 recent '/recent', :controller => 'posts', :action => 'recent'
 recent_rss '/recent.rss', :controller => 'posts', :action => 'recent', :format => 'rss'
+most_commented '/most_discussed', :controller => 'posts', :action => 'most_commented'
+most_commented_rss '/most_discussed.rss', :controller => 'posts', :action => 'most_commented', :format => 'rss'
 rss_redirect '/rss', :controller => 'base', :action => 'rss_site_index'
 rss '/site_index.rss', :controller => 'base', :action => 'site_index', :format => 'rss'
 

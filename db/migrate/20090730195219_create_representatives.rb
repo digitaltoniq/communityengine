@@ -2,7 +2,10 @@ class CreateRepresentatives < ActiveRecord::Migration
   def self.up
     create_table :representatives do |t|
       t.integer :user_id, :company_id
-      t.string :title, :first_name, :last_name, :url_slug   
+      t.string :title
+      t.string :first_name
+      t.string :last_name
+      t.string :url_slug   
       t.timestamps
     end
   end

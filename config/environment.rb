@@ -27,7 +27,7 @@ Rails::Initializer.run do |config|
   config.gem 'hpricot'
 
   config.gem "faker"
-  config.gem "thoughtbot-factory_girl", :lib    => "factory_girl", :source => "http://gems.github.com"
+  config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
   config.gem 'flickr-fu', :lib => 'flickr_fu'
   config.gem 'xml-magic', :lib => 'xml_magic'
 

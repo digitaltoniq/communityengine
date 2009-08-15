@@ -1538,4 +1538,12 @@ en:
   # en: first_name: First name
   first_name: First name
   # en: last_name: Last name
-  last_name: Last name  
+  last_name: Last name
+  # en: post: Post
+  post: Conversation
+  # en: posts: Posts
+  posts: Conversations
+  # en: most_commented: Most commented
+  most_commented: Most discussed
+  # en: most_commented_posts: Most commented posts
+  most_commented_posts: Most discussed conversations

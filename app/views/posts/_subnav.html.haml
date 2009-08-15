@@ -1,0 +1,6 @@
+#SubNavBar
+  %ul
+    = subnav_tab :recent.l, { :url => recent_path, :section => 'recent' }
+    = subnav_tab :popular.l, { :url => popular_path, :section => 'popular' }
+    = subnav_tab :most_commented.l, { :url => most_commented_path, :section => 'most_commented' }
+.clear

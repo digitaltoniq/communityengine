@@ -12,7 +12,7 @@ a:hover {
     color: #56bef2;
 }
 
-#NavBar {
+#NavBar, #SubNavBar {
     background: #ABA8A3 url(/images/theme/nav_bg.png) repeat-x scroll 0 0;
     color: #FFF;
     border: none;
@@ -90,6 +90,27 @@ a:hover {
 #NavBar ul li#active a, #NavBar ul li.current a {
     color: #4c6e93;
 }
+
+#SubNavBar {
+    border: none;
+    margin-top: 20px;
+}
+
+
+#SubNavBar ul li a {
+    padding: 5px 8px;
+    color: #888;
+    font-size: 90%;
+    text-transform: none;
+
+}
+
+#SubNavBar ul li#active a, #SubNavBar ul li.current a {
+    color: #FFF;
+    background: #777;
+}
+
+
 
 #hd h2 {
     margin-top: 17px;
