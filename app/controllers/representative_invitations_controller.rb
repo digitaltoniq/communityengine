@@ -20,10 +20,10 @@ class RepresentativeInvitationsController < BaseController
       if @representative_invitation.save
         flash[:notice] = :representative_invitation_was_successfully_created.l
         format.html do
-          unless params[:welcome]  # TODO: what's this about?
+          unless params[:welcome]
             redirect_to company_representative_path(@representative.company, @representative)
           else
-            redirect_to welcome_complete_user_path(@representative.user)     # TODO: don't reference user       
+            redirect_to welcome_complete_company_representative_path(@representative.company, @representative)         
           end
         end
       else

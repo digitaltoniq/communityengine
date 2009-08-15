@@ -1533,3 +1533,9 @@ en:
   representative_last_name: Last name
   # en: representative_title: Representative title
   representative_title: Title
+  # en: invite_your_fellow_representatives_to_join: Invite your fellow representatives to join
+  invite_your_fellow_representatives_to_join: Invite your fellow representatives to join
+  # en: first_name: First name
+  first_name: First name
+  # en: last_name: Last name
+  last_name: Last name  

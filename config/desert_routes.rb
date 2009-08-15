@@ -33,7 +33,7 @@ admin_dashboard   '/admin/dashboard', :controller => 'homepage_features', :actio
 admin_users       '/admin/users', :controller => 'admin', :action => 'users'
 admin_messages    '/admin/messages', :controller => 'admin', :action => 'messages'
 admin_comments    '/admin/comments', :controller => 'admin', :action => 'comments'
- admin_tags        'admin/tags/:action', :controller => 'tags', :defaults => {:action=>:manage}
+admin_tags        'admin/tags/:action', :controller => 'tags', :defaults => {:action=>:manage}
 
 # sessions routes
 teaser '', :controller=>'base', :action=>'teaser'
@@ -41,6 +41,9 @@ login  '/login',  :controller => 'sessions', :action => 'new'
 signup '/signup', :controller => 'users', :action => 'new'
 logout '/logout', :controller => 'sessions', :action => 'destroy'
 signup_by_id '/signup/:inviter_id/:inviter_code', :controller => 'users', :action => 'new'
+
+representative_signup_by_id '/:company_id/signup/:inviter_id/:inviter_code', :controller => 'representatives', :action => 'new'
+representative_activation '/:company_id/:representative_id/activate/:activation_code', :controller => 'representatives', :action => 'activate'
 
 forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
 forgot_username '/forgot_username', :controller => 'users', :action => 'forgot_username'  
@@ -155,7 +158,12 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
   company.resources :posts, :as => :conversations, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
   company.resources :representatives, :member_path => '/:company_id/:id', :nested_member_path => '/:company_id/:representative_id', :member => {
     :edit_account => :get,
-    :signup_completed => :get       
+    :signup_completed => :get,
+    :welcome_photo => :get,
+    :welcome_about => :get, 
+    :welcome_invite => :get,
+    :welcome_complete => :get,
+    :activate => :get
   } do |representative|
     representative.resources :representative_invitations
     representative.resources :posts, :as => :conversations

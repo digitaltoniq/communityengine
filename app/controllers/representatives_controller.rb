@@ -34,12 +34,38 @@ class RepresentativesController < BaseController
   before_filter :admin_required, :only => [:assume, :destroy, :featured, :toggle_featured, :toggle_moderator]
   before_filter :admin_or_current_user_required, :only => [:statistics]
 
+  def activate
+    redirect_to signup_path and return if params[:activation_code].blank?
+    @user = User.find_by_activation_code(params[:activation_code])
+    @representative = @user && Representative.find_by_user_id(@user.id)
+    if @representative and @representative.activate
+      self.current_user = @user
+      current_user.track_activity(:joined_the_site)
+      redirect_to welcome_photo_company_representative_path(@representative.company, @representative)
+      flash[:notice] = :thanks_for_activating_your_account.l
+      run_later { UserNotifier.deliver_representative_activation(@representative) }
+      return
+    end
+    flash[:error] = :account_activation_error.l_with_args(:email => AppConfig.support_email)
+    redirect_to signup_path
+  end
+
+  # TODO
+  def deactivate
+    @user.deactivate
+    self.current_user.forget_me if logged_in?
+    cookies.delete :auth_token
+    reset_session
+    flash[:notice] = :deactivate_completed.l
+    redirect_to login_path
+  end
+  
   def index
     @body_class = 'representives-browser'
 
     @company = Company.find(params[:company_id])
-    @representative_count = @company.representatives.count
-    @representatives = @company.representatives.find :all, :page => {:current => params[:page], :size => 12, :count => @representative_count }
+    @representative_count = @company.representatives.active.count
+    @representatives = @company.representatives.active.find :all, :page => {:current => params[:page], :size => 12, :count => @representative_count }   # TODO: will paginate
    
     respond_to do |format|
       format.html
@@ -78,27 +104,20 @@ class RepresentativesController < BaseController
     @representative.user = User.new( {:birthday => Date.parse((Time.now - 25.years).to_s) }.merge(params[:user] || {}) )
     @inviter_id = params[:id]
     @inviter_code = params[:code]
-
     render :action => 'new', :layout => 'beta' and return if AppConfig.closed_beta_mode
   end
 
   def create
-    user = User.new # ( {:birthday => Date.parse((Time.now - 25.years).to_s) }.merge(params[:user] || {}) )
-    # params[:representative][:user] = user
     @representative = Representative.new(params[:representative])
-    # @representative.user = user
     @representative.company = Company.find(params[:company_id])
-    # @representative.attributes = params[:representative]
-    # @representative = Representative.new(params[:representative])
-    # @representative.company = Company.find(params[:company_id])
     @representative.representative_role = RepresentativeRole[:representative]
-    @representative.user.role = Role[:member]
+    @representative.role = Role[:member]
+    @representative.birthday = DateTime.now.years_ago(18)
 
     if (!AppConfig.require_captcha_on_signup || verify_recaptcha(@representative)) && @representative.save
-      # create_friendship_with_inviter(@user, params)
       flash[:notice] = :email_signup_thanks.l_with_args(:email => @representative.email)
-      redirect_to signup_completed_user_path(@representative.user) # TODO: need representative signup completed?
-      run_later {UserNotifier.deliver_signup_notification(@representative.user)}
+      redirect_to signup_completed_company_representative_path(@representative.company, @representative.id) 
+      run_later { UserNotifier.deliver_representative_signup_notification(@representative) }
     else
       render :action => 'new'
     end
@@ -155,15 +174,44 @@ class RepresentativesController < BaseController
   end
 
   def destroy
-    unless @user.admin? || @user.featured_writer?
-      @user.destroy
-      flash[:notice] = :the_user_was_deleted.l
-    else
-      flash[:error] = :you_cant_delete_that_user.l
+    @representative = Representative.find(params[:representative_id] || params[:id])
+    if current_user.admin?
+      @representative.destroy
+      flash[:notice] = :the_representative_was_deleted.l
     end
     respond_to do |format|
       format.html { redirect_to users_url }
     end
-  end  
+  end
 
+  def signup_completed
+    @representative = Representative.find(params[:representative_id] || params[:id])
+    redirect_to home_path and return unless @representative
+    render :action => 'signup_completed', :layout => 'beta' if AppConfig.closed_beta_mode
+  end
+
+  def welcome_photo
+    @representative = Representative.find(params[:representative_id] || params[:id])
+  end
+
+  def welcome_about
+    @representative = Representative.find(params[:representative_id] || params[:id])
+    @metro_areas, @states = setup_locations_for(@user)
+  end
+
+  def welcome_invite
+    @representative = Representative.find(params[:representative_id] || params[:id])
+  end
+
+  protected
+    # TODO: refactor with user_controller
+    def setup_locations_for(user)
+      metro_areas = states = []
+
+      states = user.country.states if user.country
+
+      metro_areas = user.state.metro_areas.all(:order => "name") if user.state
+
+      return metro_areas, states
+    end
 end

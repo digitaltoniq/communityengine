@@ -4,6 +4,10 @@ module AuthenticatedTestHelper
     @request.session[:user] = user ? users(user).id : nil
   end
 
+  def representative_login_as(representative)
+    @request.session[:user] = representative ? representatives(representative).user.id : nil
+  end
+
   def content_type(type)
     @request.env['Content-Type'] = type
   end

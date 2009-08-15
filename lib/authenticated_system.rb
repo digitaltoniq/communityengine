@@ -25,7 +25,7 @@ module AuthenticatedSystem
       unless new_user.nil?
         if @current_user and !@current_user.eql?(:false) and @current_user.admin? and !new_user.admin?
           session[:admin_id] = @current_user.id
-        elsif !session[:admin_id].nil? && !@current_user.admin? && new_user.admin?
+        elsif @current_user && !session[:admin_id].nil? && !@current_user.admin? && new_user.admin?
           session[:admin_id] = nil
         end
       else

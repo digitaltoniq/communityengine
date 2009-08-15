@@ -17,7 +17,7 @@
 #yui-main
   .yui-b
     -box do 
-      %h3=:invite_your_friends_to_join.l
+      %h3=:invite_your_fellow_representatives_to_join.l
       = error_messages_for :representative_invitation
       - form_for(:representative_invitation, :url => company_representative_representative_invitations_path(), :html => {:class => "MainForm"} ) do |f|
         .right

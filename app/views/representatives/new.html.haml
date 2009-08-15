@@ -33,6 +33,14 @@
           %em=:required_we_will_send_a_confirmation_e_mail_to_the_address_you_enter.l
         = rep_form.text_field :email
 
+        %label{"for"=>"representative_first_name"}
+          =:first_name.l
+        = rep_form.text_field :first_name
+
+        %label{"for"=>"representative_last_name"}
+          =:last_name.l
+        = rep_form.text_field :last_name
+
         %label{"for"=>"representive_password"}
           =:type_your_password.l
         = rep_form.password_field :password

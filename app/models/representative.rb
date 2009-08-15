@@ -8,14 +8,12 @@ class Representative < ActiveRecord::Base
   #validation
 
   validates_presence_of :company, :user
-  # TODO validates_length_of   :first_name, :within => 1..30
-  # TODO validates_length_of   :last_name,  :within => 2..30
-  
-#
-#  validates_each :email do |record, attr, email|
-#    # TODO: better message, localize
-#    record.errors.add(:email, " domain of email address not related to your company") unless record.company.accepts_email?(email)
-#  end
+  validates_length_of   :first_name, :within => 1..30
+  validates_length_of   :last_name,  :within => 2..30 
+  validates_each :email do |record, attr, email|
+    # TODO: better message, localize
+    record.errors.add(:email, " domain of email address not related to your company") unless record.company.accepts_email?(email)
+  end
 
   #associations
   has_enumerated :representative_role
@@ -25,12 +23,16 @@ class Representative < ActiveRecord::Base
 
   #  TODO: consider method_missing approach...
   delegate :avatar_photo_url, :this_months_posts, :last_months_posts, :location, :full_location,
-           :recent, :active, :tagged_with,
+           :recent, :active, :tagged_with, :invite_code, :invite_code=, :birthday, :birthday=,
            :login, :login=, :email, :email=, :password, :password=, :password_confirmation, :password_confirmation=,
            :zip, :zip=, :description, :description=, :country, :country=, :state, :state=, :metro_area, :metro_area=,
-           :invitations, :posts, :photos, :avatar, :avatar=, :tag_list, :tag_list=,
+           :invitations, :posts, :photos, :avatar, :avatar=, :tag_list, :tag_list=, :role, :role=,
            :comments_as_author, :comments_as_recipient, :clippings, :favorites, :followings, :to => :user
 
+  #named scopes
+  named_scope :recent, :order => 'representatives.created_at DESC'
+  named_scope :active, :conditions => ["users.activated_at IS NOT NULL"],
+              :joins => "left join users on representatives.user_id = users.id"
 
   ## Class Methods
 
@@ -45,11 +47,14 @@ class Representative < ActiveRecord::Base
 
   ## Instance Methods
 
-  def method_missing(method, *args) 
-    self.user.send(method, *args)
+  # TODO: discuss, working?
+  def method_missing_with_user_delegation(method, *args, &block)
+    self.user.__send__(method, *args, &block)
   rescue
-    super
+    method_missing_without_user_delegation(method, *args, &block)
   end
+
+  alias_method_chain :method_missing, :user_delegation    # TODO: shouldn't need chaining
 
   def full_name
     "#{first_name} #{last_name}"
@@ -60,7 +65,7 @@ class Representative < ActiveRecord::Base
   end
 
   def attributes=(new_attributes, guard_protected_attributes = true)
-    # ensure user delegate is available before settings attributes
+    # ensure user delegate is available before setting attributes
     self.user = new_attributes[:user] || User.new unless self.user
     super
   end
@@ -85,6 +90,6 @@ class Representative < ActiveRecord::Base
   
   def validate
     user.valid?
-    user.errors.each { |attr, msg| errors.add(attr, msg); puts msg }
+    user.errors.each { |attr, msg| errors.add(attr, msg) }
   end
 end

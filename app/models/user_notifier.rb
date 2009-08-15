@@ -16,16 +16,6 @@ class UserNotifier < ActionMailer::Base
     @body[:message] = message
   end
 
-  def representative_signup_invitation(representative)
-    setup_sender_info
-    @recipients  = "#{email}"
-    @subject     = "#{representative.full_name} would like you to join #{AppConfig.community_name}!"
-    @sent_on     = Time.now
-    @body[:representative] = representative
-    @body[:url]  = signup_by_id_url(user, user.invite_code)
-    @body[:message] = message
-  end
-
   def friendship_request(friendship)
     setup_email(friendship.friend)
     @subject     += "#{friendship.user.login} would like to be friends with you!"
@@ -133,6 +123,34 @@ class UserNotifier < ActionMailer::Base
     @from       = "The #{AppConfig.community_name} Team <#{AppConfig.support_email}>" 
     headers     "Reply-to" => "#{AppConfig.support_email}"
     @content_type = "text/plain"           
+  end
+
+  # DigitalToniq - Representative
+
+  def representative_signup_invitation(email, representative, message)
+    setup_sender_info
+    @recipients  = "#{email}"
+    @subject     = "#{representative.full_name} would like you to join #{AppConfig.community_name}!"
+    @sent_on     = Time.now
+    @body[:representative] = representative
+    @body[:url]  = representative_signup_by_id_url(representative.company, representative, representative.invite_code)
+    @body[:message] = message
+  end
+
+  def representative_signup_notification(representative)
+    setup_email(representative)
+    @subject    += "Please activate your new #{AppConfig.community_name} account"
+    @body[:representative] = representative
+    # TODO remove @body[:url]  = "#{application_url}#{representative.company.to_param}/#{representative.to_param}/activate?activation_code=#{representative.activation_code}"
+    # @body[:url] = activate_company_representative_url({ :company => representative.company, :representative => representative, :activation_code => representative.activation_code})
+    @body[:url] = representative_activation_url(representative.company, representative, representative.activation_code)
+  end
+
+  def representative_activation(representative)
+    setup_email(representative)
+    @subject    += "Your #{AppConfig.community_name} account has been activated!"
+    @body[:representative] = representative
+    @body[:url]  = home_url
   end
   
 end

@@ -15,6 +15,8 @@ class RepresentativeTest < ActiveSupport::TestCase
   protected
 
     def create_representative(options = {})
-      Representative.create({ :first_name => "Joe", :last_name => "Tester", :title => "TestTitle" }.merge(options))
+      Representative.create({ :company => companies(:digitaltoniq), :login => "dtoniq", :first_name => "Joe", :last_name => "Tester",
+                              :title => "TestTitle", :email => 'joe@digitaltoniq.com',
+                              :password => "password", :password_confirmation => "password", :birthday => 18.years.ago }.merge(options))
     end
 end

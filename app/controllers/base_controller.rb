@@ -81,18 +81,20 @@ class BaseController < ApplicationController
   def admin_or_moderator_required
     current_user && (current_user.admin? || current_user.moderator?) ? true : access_denied
   end
-  
-  
-  def find_user
-    # DT: If representative_id is given, determine the user and stuff params with the id  (Discuss)
-    if params[:company_id]
-      @user = Representative.find(params[:representative_id] || params[:id]).user
-      params[:user_id] = @user.id
-    else
-      @user = User.active.find(params[:user_id] || params[:id])
-    end
 
-    if @user
+  def determine_user
+    # DT: If representative_id is given, determine the user and stuff params with the id 
+    if params[:company_id]
+      user = Representative.find(params[:representative_id] || params[:id]).user
+      params[:user_id] = user.id
+    else
+      user = User.active.find(params[:user_id] || params[:id])
+    end
+    user
+  end
+
+  def find_user
+    if @user = determine_user
         @is_current_user = (@user && @user.eql?(current_user))
       unless logged_in? || @user.profile_public?
         flash[:error] = :this_users_profile_is_not_public_youll_need_to_create_an_account_and_log_in_to_access_it.l
@@ -107,7 +109,7 @@ class BaseController < ApplicationController
   end
   
   def require_current_user
-    @user ||= User.find(params[:user_id] || params[:id] )
+    @user ||= determine_user
     unless admin? || (@user && (@user.eql?(current_user)))
       redirect_to :controller => 'sessions', :action => 'new' and return false
     end
@@ -182,7 +184,7 @@ class BaseController < ApplicationController
   end
 
   def user_path(user)
-    r = Representative.find_by_user_id(user.id)
+    r = user.class == User ? Representative.find_by_user_id(user.id) : nil # TODO: a view in CE is calling this with a hash, that valid?
     r ? company_representative_path(r.company, r) : super
   end
 

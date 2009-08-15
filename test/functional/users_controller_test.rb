@@ -188,7 +188,7 @@ class UsersControllerTest < ActionController::TestCase
 
   def test_should_list_users
     get :index
-    assert_equal assigns(:users).size, 13
+    assert_equal assigns(:users).size, 14
     
     assert_response :success
   end

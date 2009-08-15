@@ -105,7 +105,8 @@ class MessagesControllerTest < ActionController::TestCase
     get :show, :id => Message.last.id, :user_id => users(:leopoldo).id
     assert_response :success
     assert_equal assigns(:message).body, 'Some content'
-    assert_tag :tag=>'a', :attributes=>{:href=>"/leopoldo/messages/new?reply_to=#{Message.last.id}"}
+    user_path(users(:quentin))
+    assert_tag :tag=>'a', :attributes=>{:href=>"#{user_path(users(:leopoldo))}/messages/new?reply_to=#{Message.last.id}"}
   end
   
   def test_show_send_links_if_logged_in
@@ -153,10 +154,10 @@ class MessagesControllerTest < ActionController::TestCase
   end
   
   def should_mark_deleted(user)
-    @request.env['HTTP_REFERER'] = "#{user.login}/messages"
+    @request.env['HTTP_REFERER'] = "#{user_path(user)}/messages"
     create_message(users(:leopoldo),users(:florian))
     post :delete_selected, :delete => [Message.last.id], :user_id => user.id
-    assert_redirected_to "#{user.login}/messages"
+    assert_redirected_to "#{user_path(user)}/messages"
   end
   
 

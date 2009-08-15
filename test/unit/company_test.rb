@@ -5,7 +5,7 @@ class CompanyTest < ActiveSupport::TestCase
   # Then, you can remove it from this and the functional test.
   fixtures :all
 
-  def test_should_create_user
+  def test_should_create_company
     assert_difference Company, :count do
       company = create_company
       assert !company.new_record?, "#{company.errors.full_messages.to_sentence}"
@@ -15,6 +15,6 @@ class CompanyTest < ActiveSupport::TestCase
   protected
 
     def create_company(options = {})
-      Company.create({ :name => "TestCompany", :description => "TestCompanyDescription" }.merge(options))
+      Company.create({ :name => "Another Company", :description => "TestCompanyDescription" }.merge(options))
     end
 end
