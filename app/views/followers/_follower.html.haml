@@ -7,8 +7,9 @@
       %h2= link_to display_name(user), user_path(user)
       = "from #{user.location}<br/>" if user.metro_area      
       -# DJS = friendship.friendship_status.name ? :accepted.l : :denied.l
-      \: 
-      =:requested.l
+
+      =:followed.l
+      \:
       = time_ago_in_words follower.created_at
 
     -# DJS .yui-u= friendship_control_links(friendship) if @is_current_user

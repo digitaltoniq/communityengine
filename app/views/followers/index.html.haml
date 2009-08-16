@@ -2,11 +2,11 @@
 
 #yui-main
   .yui-b
-    -box :id => "friends" do
+    -box :id => "followers" do
       %h3
         = @followings.total_entries
-        =:accepted_friendships.l
-      .pagination=will_paginate @followings
+        =:followers.l
+      .pagination= will_paginate @followings
 
       .clear
       .user_list= render :partial => "followers/follower", :collection => @followings

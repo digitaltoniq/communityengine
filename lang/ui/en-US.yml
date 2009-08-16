@@ -1549,10 +1549,14 @@ en:
   most_commented_posts: Most discussed conversations
   # en: follow: Follow
   follow: Follow
+  # en: followers: Followers
+  followers: Followers 
   # en: following: Following
   following: Following
   # en: requesting_follow: Requesting follow
   requesting_follow: Requesting
+  # followed: followed
+  followed: Followed
   # en: sorry_there_was_an_error_while_following: Sorry, there was an error while attempting to follow
   sorry_there_was_an_error_while_following: Sorry, there was an error while attempting to follow
   # en: now_following: Now following {{followee}}.
