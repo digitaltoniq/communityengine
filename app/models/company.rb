@@ -3,16 +3,16 @@ class Company < ActiveRecord::Base
   acts_as_taggable
   acts_as_commentable
   has_private_messages
-  tracks_unlinked_activities [:logged_in, :invited_friends, :updated_profile, :joined_the_site]
+  tracks_unlinked_activities [:logged_in, :updated_profile, :joined_the_site]
 
   # validation
   validates_length_of       :name,      :within => 1..100
   validates_uniqueness_of   :name,      :case_sensitive => false
-  # TODO validates_format_of       :name,      :with => /^[\sA-Za-z0-9_-]+$/
-  # TODO validates_exclusion_of    :name, :in => AppConfig.reserved_company_names
+  validates_format_of       :name,      :with => /^[\sA-Za-z0-9_-]+$/
+  validates_exclusion_of    :name, :in => AppConfig.reserved_company_names
   # validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :url_slug
-  # validates_presence_of     :domains
+  validates_presence_of     :domains
  
   validates_each :domains do |record, attr, domain_csv|
     domain_csv && domain_csv.validate(/((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i) do |domains, invalid_domains|
@@ -23,7 +23,6 @@ class Company < ActiveRecord::Base
   #associations
   has_many    :representatives, :dependent => :destroy
   has_many    :followings, :as => :followee
-  has_many    :followers, :through => :followings, :source => :user  # TODO NEED?
   
   belongs_to  :logo, :class_name => "Logo", :foreign_key => "logo_id"
   belongs_to  :metro_area

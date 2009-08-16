@@ -121,3 +121,7 @@ reserved_logins: [
   'topics', 
   'users', 
   'votes']
+
+
+# TODO: determine automatically by looking at routes?
+reserved_company_names: [ ]

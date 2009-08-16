@@ -15,6 +15,6 @@ class CompanyTest < ActiveSupport::TestCase
   protected
 
     def create_company(options = {})
-      Company.create({ :name => "Another Company", :description => "TestCompanyDescription" }.merge(options))
+      Company.create({ :name => "Another Company", :description => "TestCompanyDescription", :domains => "example.com" }.merge(options))
     end
 end
