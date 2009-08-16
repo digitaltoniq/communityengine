@@ -1,13 +1,13 @@
 class Following < ActiveRecord::Base
-  belongs_to :followed, :polymorphic => true
+  belongs_to :followee, :polymorphic => true
   belongs_to :user
 
 #  @@daily_request_limit = 12
 #  cattr_accessor :daily_request_limit
 
   # validation
-  validates_presence_of     :user, :followed
-  validates_uniqueness_of   :followed_id, :scope => :user_id
+  validates_presence_of     :user, :followee
+  validates_uniqueness_of   :followee_id, :scope => :user_id
 
 #  TODO
 #  def validate
@@ -26,16 +26,16 @@ class Following < ActiveRecord::Base
     { :conditions => ["user_id = ?", user.id] }
   }
   named_scope :by_company, lambda { |company|
-    { :conditions => ["followed_id = ?", company.id] }
+    { :conditions => ["followee_id = ?", company.id] }
   }
-  named_scope :for_companies, :conditions => ["followed_type = ?", "Company"]
-  named_scope :for_posts, :conditions => ["followed_type = ?", "Post"]
+  named_scope :for_companies, :conditions => ["followee_type = ?", "Company"]
+  named_scope :for_posts, :conditions => ["followee_type = ?", "Post"]
   named_scope :limited, lambda { |*limit|
     { :limit => limit.empty? ? 4 : limit }
   }
 
   def self.following_for(followee, follower)
-    find(:first, :conditions => ["followed_id = ? AND user_id = ? AND followed_type = ?", followee.id, follower.id, followee.class.name])
+    find(:first, :conditions => ["followee_id = ? AND user_id = ? AND followee_type = ?", followee.id, follower.id, followee.class.name])
   end
 
   def self.following_exist?(followee, follower)

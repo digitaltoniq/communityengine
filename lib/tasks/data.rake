@@ -45,7 +45,7 @@ namespace :data do
     task :followings => [:environment, :prevent_production, :factories] do
       Company.all.each do |c|
         create_users(rand(2) + 1).each do |u|
-          Factory(:following, :followed => c, :user => u)
+          Factory(:following, :followee => c, :user => u)
         end
       end
     end
@@ -64,7 +64,8 @@ namespace :data do
     
     task :users => [:environment, :prevent_production, :factories] do
       ['ryan@digitaltoniq.com', 'dsnider@digitaltoniq.com', 'ryanmickle@gmail.com'].each do |f|
-        Factory(:user, :email => f, :login => f.split('@').first, :role => Role[:admin])
+        u = Factory(:user, :email => f, :login => f.split('@').first)
+        u.role = Role[:admin]
         User.delete_all("avatar_id IS NULL") # RWD Factory girl circular dependency bug?
       end
     end

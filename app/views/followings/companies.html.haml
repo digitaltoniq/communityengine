@@ -11,5 +11,5 @@
       .clear
       .company_list
         - @company_followings.each do |following|
-          =render :partial => "companies/company", :locals => { :company => following.followed }
+          =render :partial => "companies/company", :locals => { :company => following.followee }
 

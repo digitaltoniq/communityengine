@@ -1,4 +1,4 @@
 Factory.define :following do |f|
-  f.association :followed
+  f.association :followee
   f.association :user
 end

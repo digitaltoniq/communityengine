@@ -4,11 +4,8 @@ class FollowersController < BaseController
   #before_filter :require_current_user, :only => [:accept, :deny, :pending, :destroy]
 
   def index
-    @followed = Company.find(params[:company_id])    # TODO: determine followed type based on context
-    @followings = Following.by_company(@followed).paginate(paging_params)
-
-    #@following_count = @followed.followings.count
-    #@followings = @followed.followings.find :all, :page => {:size => 12, :current => params[:page], :count => @followed_count}
+    @followee = Company.find(params[:company_id])    # TODO: determine followed type based on context, don't assume company
+    @followings = Following.by_company(@followee).paginate(paging_params)
   end
 
 end

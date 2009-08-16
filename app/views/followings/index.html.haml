@@ -6,7 +6,7 @@
         =:followed_companies.l
       %br
       - @followings.for_companies.limited.each do |following|
-        =render :partial => "companies/company", :locals => { :company => following.followed }
+        =render :partial => "companies/company", :locals => { :company => following.followee }
       -if @followings.for_companies.count > 4
         %h6.all
           =link_to :see_all.l, companies_user_followings_path(@user)
@@ -17,7 +17,7 @@
         =:followed_posts.l
       %br
       - @followings.for_posts.limited.each do |following|
-        =render :partial => "posts/post", :locals => { :post => following.followed }
+        =render :partial => "posts/post", :locals => { :post => following.followee }
       -if @followings.for_posts.count > 4
         %h6.all
           =link_to :see_all.l, posts_user_followings_path(@user)

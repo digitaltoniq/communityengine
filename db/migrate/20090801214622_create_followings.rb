@@ -2,8 +2,8 @@ class CreateFollowings < ActiveRecord::Migration
   def self.up
     create_table :followings do |t|
       t.integer :user_id
-      t.integer :followed_id
-      t.string  :followed_type
+      t.integer :followee_id
+      t.string  :followee_type
       t.timestamps
     end
   end

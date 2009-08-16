@@ -19,7 +19,7 @@ class FollowingsController < BaseController
   def create
     @user = User.find(params[:user_id])
     @followee = params[:followee_type] == "Company" ? Company.find(params[:followee_id]) : Post.find(params[:followee_id])
-    @following = Following.new(:user => @user, :followed => @followee)
+    @following = Following.new(:user => @user, :followee => @followee)
     respond_to do |format|
       if @following.save
         format.html do
@@ -39,7 +39,7 @@ class FollowingsController < BaseController
   def destroy
     @user = User.find(params[:user_id])
     @following = Following.find(params[:id])
-    @followee = @following.followed
+    @followee = @following.followee
     @following.destroy
     respond_to do |format|
       format.html { redirect_to user_followings_path(@user) }
