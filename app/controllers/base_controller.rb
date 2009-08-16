@@ -9,7 +9,7 @@ class BaseController < ApplicationController
   before_filter :login_from_cookie  
   skip_before_filter :verify_authenticity_token, :only => :footer_content
   helper_method :commentable_url
-  helper_method :user_path, :user_post_path, :user_posts_path, :edit_user_path # DigitalToniq
+  helper_method :user_path, :user_post_path, :user_posts_path, :edit_user_path, :display_text # DigitalToniq
 
   caches_action :site_index, :footer_content, :if => Proc.new{|c| c.cache_action? }
   def cache_action?
@@ -177,13 +177,9 @@ class BaseController < ApplicationController
 
   # DigitalToniq
 
-  # TODO: patch model classes with to_label instead? Merge with with display_name used for representative unwinding
+  # TODO: patch model classes with to_label instead? Merge with with display_name used for representative unwinding, call this label
   def display_text(target)
-    target.respond_to?(:label?) ? target.label :
-      target.respond_to?(:title) ? target.title :
-        target.respond_to?(:name) ? target.name :
-           target.respond_to?(:text) ? target.text :
-              target.respond_to?(:login) ? target.login : target.to_s
+    target.send [:title, :name, :login, :label, :text, :to_s].find { |m| target.respond_to? m }
   end
 
   # The following automatically routes user paths to representative paths if user is wrapped by representative
