@@ -127,6 +127,9 @@ resources :users, :member => {
     :crop_profile_photo => [:get, :put],
     :upload_profile_photo => [:get, :put]
      } do |user|
+  # DJS
+  user.resources :followings, :as => :follows, :only => [:index, :create, :destroy], :collection => { :companies => :get, :posts => :get }
+
   user.resources :friendships, :member => { :accept => :put, :deny => :put }, :collection => { :accepted => :get, :pending => :get, :denied => :get }
   user.resources :photos, :collection => {:swfupload => :post, :slideshow => :get}
   user.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
@@ -141,9 +144,6 @@ resources :users, :member => {
   user.resources :albums, :path_prefix => ':user_id/photo_manager', :member => {:add_photos => :get, :photos_added => :post}, :collection => {:paginate_photos => :get}  do |album| 
     album.resources :photos, :collection => {:swfupload => :post, :slideshow => :get}
   end
-
-  # DJS
-  user.resources :followings, :as => :follows, :only => [:index, :create, :destroy], :collection => { :companies => :get, :posts => :get } 
 end
 resources :votes
 resources :invitations
@@ -157,8 +157,10 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :posts => :get,
     :post_comments => :get,
 } do |company|
+  company.resources :conversations, :collection => { :comments => :get }
+  company.resources :followers  
   company.resources :posts, :as => :conversations, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
-  company.resources :representatives, :member_path => '/:company_id/:id', :nested_member_path => '/:company_id/:representative_id', :member => {
+  company.resources :representatives, :member_path => '/:company_id/representatives/:id', :nested_member_path => '/:company_id/representatives/:representative_id', :member => {
     :edit_account => :get,
     :signup_completed => :get,
     :welcome_photo => :get,
@@ -170,8 +172,6 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     representative.resources :representative_invitations
     representative.resources :posts, :as => :conversations
   end
-  company.resources :conversations, :collection => { :comments => :get }
-  company.resources :followers
 end
 
 
