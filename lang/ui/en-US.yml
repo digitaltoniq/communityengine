@@ -1547,3 +1547,15 @@ en:
   most_commented: Most discussed
   # en: most_commented_posts: Most commented posts
   most_commented_posts: Most discussed conversations
+  # en: follow: Follow
+  follow: follow
+  # en: following: Following
+  following: Following
+  # en: requesting_follow: Requesting follow
+  requesting_follow: Requesting
+  # en: sorry_there_was_an_error_while_following: Sorry, there was an error while attempting to follow
+  sorry_there_was_an_error_while_following: Sorry, there was an error while attempting to follow
+  # en: now_following: Now following {{followee}}.
+  now_following: "Now following {{followee}}."
+  # en: following_could_not_be_created: Following could not be created
+  following_could_not_be_created: Following could not be created

@@ -143,7 +143,7 @@ resources :users, :member => {
   end
 
   # DJS
-  user.resources :followings, :as => :follows, :only => [:index], :collection => { :companies => :get, :posts => :get } 
+  user.resources :followings, :as => :follows, :only => [:index, :create, :destroy], :collection => { :companies => :get, :posts => :get } 
 end
 resources :votes
 resources :invitations

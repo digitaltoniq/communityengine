@@ -177,6 +177,15 @@ class BaseController < ApplicationController
 
   # DigitalToniq
 
+  # TODO: patch model classes with to_label instead? Merge with with display_name used for representative unwinding
+  def display_text(target)
+    target.respond_to?(:label?) ? target.label :
+      target.respond_to?(:title) ? target.title :
+        target.respond_to?(:name) ? target.name :
+           target.respond_to?(:text) ? target.text :
+              target.respond_to?(:login) ? target.login : target.to_s
+  end
+
   # The following automatically routes user paths to representative paths if user is wrapped by representative
   def user_post_path(user, post)
     r = Representative.find_by_user_id(user.id)

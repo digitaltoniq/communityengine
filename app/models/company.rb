@@ -44,10 +44,8 @@ class Company < ActiveRecord::Base
       super
     end
   end
-                               
-  ## End Class Methods  
 
-  ## Instance Methods
+  ## Instance Methods  
 
   def accepts_email?(email)
     domains.include? email.split('@').last

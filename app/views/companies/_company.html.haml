@@ -13,10 +13,10 @@
             %abbr.published{:title=>"#{company.created_at}"}
               =:joined.l + " #{time_ago_in_words company.created_at}"
 
-          -#
-            DJS
-            - if current_user and current_user.can_request_friendship_with(user)
-              %li.addfriend= add_friend_link(user)
+          - if current_user and Following.can_follow(company, current_user)
+            %li.addfollowing= add_follow_link(company)
+          - if current_user and Following.following_exist?(company, current_user)
+            %li.follows= " #{:following.l}"
 
         = "<p>" + company.tags[0...6].collect{|t| link_to( t.name, tag_url(t), :class => "tag") if t }.join(" ") + "</p>" unless company.tags.empty?
 

@@ -190,19 +190,35 @@ module BaseHelper
 		html
   end
 
-  def nav(name, options, subnav = false)
+  # TODO: remove any friend references => stylize
+  def add_follow_link(followee)
+		html = "<span class='friendship_request' id='follow_request_#{followee.id}'>"
+        html += link_to_remote :follow.l,
+				{:update => "follow_request_#{followee.id}",
+					:loading => "$$('span#follow_request_#{followee.id} span.spinner')[0].show(); $$('span#follow_request_#{followee.id} a.add_friend_btn')[0].hide()",
+					:complete => visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
+                    500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
+					:url => hash_for_user_followings_url(:user_id => current_user.id, :followee_id => followee.id, :followee_type => followee.class.name),
+					:method => :post }, {:class => "add_friend button"}
+		html +=	"<span style='display:none;' class='spinner'>"
+		html += image_tag 'spinner.gif', :plugin => "community_engine"
+		html += :requesting_follow.l+" ...</span></span>"
+		html
+  end
+
+  def nav_tab(name, options, section)
     classes = [options.delete(:class)]
-    classes << 'current' if options[:section] && (options.delete(:section).to_a.include?(subnav ? @subsection : @section))
+    classes << 'current' if options[:section] && (options.delete(:section).to_a.include?(section))
     
     "<li class='#{classes.join(' ')}'>" + link_to( "<span>"+name+"</span>", options.delete(:url), options) + "</li>"
   end
 
   def topnav_tab(name, options)
-     nav(name, options, false)
+     nav_tab(name, options, @section)
   end
 
   def subnav_tab(name, options)
-     nav(name, options, true)
+     nav_tab(name, options, @subsection)
   end
 
   # def format_post_totals(posts)
@@ -378,6 +394,7 @@ module BaseHelper
   
   # DigitalToniq
 
+  # TODO: make this more generic and move to base controller or patch models
   def display_name(user)
     r = Representative.find_by_user_id(user.id)
     r ? r.full_name : user.login    

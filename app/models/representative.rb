@@ -60,6 +60,10 @@ class Representative < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def name
+    full_name
+  end
+
   def to_param
     url_slug || id
   end
