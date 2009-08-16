@@ -220,3 +220,6 @@ div.company_list div.vcard ul {
     margin-left: 0;
     font-size: 85%;
 }
+
+.hentry .vcard ul li.addfollowing{background-image: url(/plugin_assets/community_engine/images/icons/user_add.png) }
+.hentry .vcard ul li.removefollowing{background-image: url(/plugin_assets/community_engine/images/icons/user_add.png) }

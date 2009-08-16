@@ -1548,7 +1548,7 @@ en:
   # en: most_commented_posts: Most commented posts
   most_commented_posts: Most discussed conversations
   # en: follow: Follow
-  follow: follow
+  follow: Follow
   # en: following: Following
   following: Following
   # en: requesting_follow: Requesting follow
@@ -1559,3 +1559,7 @@ en:
   now_following: "Now following {{followee}}."
   # en: following_could_not_be_created: Following could not be created
   following_could_not_be_created: Following could not be created
+  # en: sorry_there_was_an_error_while_removing_following: Sorry, there was an error while removing the following
+  sorry_there_was_an_error_while_removing_following: Sorry, there was an error while removing the following
+  # en: requesting_unfollow: Requesting unfollow
+  requesting_unfollow: Requesting

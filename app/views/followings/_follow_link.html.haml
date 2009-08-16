@@ -1,0 +1,4 @@
+- if current_user and Following.can_follow(followee, current_user)
+  %li.addfollowing= add_follow_link(followee)
+- if current_user and Following.following_exist?(followee, current_user)
+  %li.removefollowing= add_unfollow_link(followee)

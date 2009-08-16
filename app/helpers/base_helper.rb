@@ -190,20 +190,36 @@ module BaseHelper
 		html
   end
 
-  # TODO: remove any friend references => stylize
   def add_follow_link(followee)
-		html = "<span class='friendship_request' id='follow_request_#{followee.id}'>"
-        html += link_to_remote :follow.l,
-				{:update => "follow_request_#{followee.id}",
-					:loading => "$$('span#follow_request_#{followee.id} span.spinner')[0].show(); $$('span#follow_request_#{followee.id} a.add_friend_btn')[0].hide()",
-					:complete => visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
-                    500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
-					:url => hash_for_user_followings_url(:user_id => current_user.id, :followee_id => followee.id, :followee_type => followee.class.name),
-					:method => :post }, {:class => "add_friend button"}
-		html +=	"<span style='display:none;' class='spinner'>"
-		html += image_tag 'spinner.gif', :plugin => "community_engine"
-		html += :requesting_follow.l+" ...</span></span>"
-		html
+    html = "<span class='following_request' id='follow_request_#{followee.id}'>"
+    html += link_to_remote :follow.l,
+            {:update => "follow_request_#{followee.id}",
+                :loading => "$$('span#follow_request_#{followee.id} span.spinner')[0].show(); $$('span#follow_request_#{followee.id} a.add_following_btn')[0].hide()",
+                :complete => visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
+                500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
+                :url => hash_for_user_followings_url(:user_id => current_user.id, :followee_id => followee.id, :followee_type => followee.class.name),
+                :method => :post }, {:class => "add_following_btn"}
+    html +=	"<span style='display:none;' class='spinner'>"
+    html += image_tag 'spinner.gif', :plugin => "community_engine"
+    html += :requesting_follow.l+" ...</span></span>"
+    html
+  end
+
+  # TODO: refactor with add_follow_link
+  def add_unfollow_link(followee)
+    following = Following.following_for(followee, current_user)
+    html = "<span class='unfollowing_request' id='unfollow_request_#{followee.id}'>"
+    html += link_to_remote "#{:following.l} (click to unfollow)" ,
+            {:update => "unfollow_request_#{followee.id}",
+                :loading => "$$('span#unfollow_request_#{followee.id} span.spinner')[0].show(); $$('span#unfollow_request_#{followee.id} a.remove_following_btn')[0].hide()",
+                :complete => visual_effect(:highlight, "unfollow_request_#{followee.id}", :duration => 1),
+                500 => "alert('"+:sorry_there_was_an_error_while_removing_following.l+"')",
+                :url => hash_for_user_following_url(:user_id => current_user.id, :id => following.id),
+                :method => :delete }, {:class => "remove_following_btn"}
+    html +=	"<span style='display:none;' class='spinner'>"
+    html += image_tag 'spinner.gif', :plugin => "community_engine"
+    html += :requesting_unfollow.l+" ...</span></span>"
+    html
   end
 
   def nav_tab(name, options, section)

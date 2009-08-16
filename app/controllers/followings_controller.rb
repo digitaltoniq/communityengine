@@ -26,7 +26,7 @@ class FollowingsController < BaseController
           flash[:notice] = :now_following.l_with_args(:followee => display_text(@followee))
           redirect_to user_followings_path(@user)
         end
-        format.js { render( :inline => :following.l ) }
+        format.js { render(:partial => 'follow_link_inner', :locals => { :followee => @followee }) }
       else
         flash.now[:error] = :following_could_not_be_created.l
         puts @following.errors.full_messages.join(", ")
@@ -38,12 +38,12 @@ class FollowingsController < BaseController
 
   def destroy
     @user = User.find(params[:user_id])
-    @following = Followings.find(params[:id])
+    @following = Following.find(params[:id])
+    @followee = @following.followed
     @following.destroy
     respond_to do |format|
       format.html { redirect_to user_followings_path(@user) }
+      format.js { render(:partial => 'follow_link_inner', :locals => { :followee => @followee }) }
     end
   end
-
-
 end
