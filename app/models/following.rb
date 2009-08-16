@@ -2,21 +2,9 @@ class Following < ActiveRecord::Base
   belongs_to :followee, :polymorphic => true
   belongs_to :user
 
-#  @@daily_request_limit = 12
-#  cattr_accessor :daily_request_limit
-
   # validation
   validates_presence_of     :user, :followee
   validates_uniqueness_of   :followee_id, :scope => :user_id
-
-#  TODO
-#  def validate
-#    if new_record? && user.has_reached_daily_friend_request_limit?
-#      errors.add_to_base("Sorry, you'll have to wait a little while before requesting any more friendships.")
-#    end
-#  end
-
-  # TODO after_save :notify_followee # use runs_later
 
   ## Named scopes
 
@@ -44,10 +32,5 @@ class Following < ActiveRecord::Base
 
   def self.can_follow(followee, follower)
     not following_exist?(followee, follower)
-  end
-
-  # TODO: needed?
-  def notify_followee
-    UserNotifier.deliver_following_notice(self)
   end
 end
