@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
   validates_length_of       :name,      :within => 1..100
   validates_uniqueness_of   :name,      :case_sensitive => false
   validates_format_of       :name,      :with => /^[\sA-Za-z0-9_-]+$/
-  validates_exclusion_of    :name, :in => AppConfig.reserved_company_names
+  validates_exclusion_of    :name, :in => AppConfig.reserved_company_names || []
   # validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :url_slug
   validates_presence_of     :domains
@@ -47,7 +47,7 @@ class Company < ActiveRecord::Base
   ## Instance Methods  
 
   def accepts_email?(email)
-    domains.include? email.split('@').last
+    domains.collect(&:downcase).include? email.split('@').last.downcase
   end
 
   def posts
