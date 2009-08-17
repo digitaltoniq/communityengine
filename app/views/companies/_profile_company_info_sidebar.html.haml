@@ -50,8 +50,6 @@
           %li.tags= :my_tags.l+": #{@company.tags.collect{|t| link_to t.name, tag_url(t) }.join(", ")}"
       - if @company.metro_area
         %li.geo= link_to( @company.full_location, companies_path(:metro_area_id => @company.metro_area_id, :state_id => @company.state_id, :country_id => @company.country_id ) )
-      -#
-        DJS
-        - if current_company
-          %li.compose= link_to(:send_me_a_message.l, new_company_message_path(current_company, :to=>@company))
+
+      =render :partial => 'followings/follow_link', :locals => {:followee => company}
   .clear

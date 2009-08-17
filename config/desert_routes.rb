@@ -34,6 +34,7 @@ admin_users       '/admin/users', :controller => 'admin', :action => 'users'
 admin_messages    '/admin/messages', :controller => 'admin', :action => 'messages'
 admin_comments    '/admin/comments', :controller => 'admin', :action => 'comments'
 admin_tags        'admin/tags/:action', :controller => 'tags', :defaults => {:action=>:manage}
+admin_events      'admin/events', :controller => 'admin', :action=>'events'
 
 # sessions routes
 teaser '', :controller=>'base', :action=>'teaser'
@@ -133,6 +134,7 @@ resources :users, :member => {
   user.resources :friendships, :member => { :accept => :put, :deny => :put }, :collection => { :accepted => :get, :pending => :get, :denied => :get }
   user.resources :photos, :collection => {:swfupload => :post, :slideshow => :get}
   user.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
+  user.resources :events # Needed this to make comments work
   user.resources :clippings
   user.resources :activities, :collection => {:network => :get}
   user.resources :invitations

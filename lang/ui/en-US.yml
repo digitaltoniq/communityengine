@@ -77,6 +77,8 @@ en:
   admin_controls: Admin Controls
   #en: admin_dashboard: Admin dashboard
   admin_dashboard: Admin dashboard
+  #en: administer_events: Administer events
+  administer_events: Administer events
   #en: ads: Ads
   ads: Ads
   #en: advertise: Advertise
@@ -252,7 +254,9 @@ en:
   #en: comments_rss: Comments RSS
   comments_rss: Comments RSS
   #en: community_tagline: CommunityEngine Rocks!
-  community_tagline: Authentic Conversations with Companies.
+  community_tagline: CommunityEngine Rocks!
+  #en: comment_unsubscribe_succeeded: Thanks, you have been unsubscribed from notifications on this comment.  
+  comment_unsubscribe_succeeded: "Thanks, you have been unsubscribed from notifications on this comment."
   #en: compose: Compose
   compose: Compose
   #en: compose_message: Compose message
@@ -423,6 +427,8 @@ en:
   estimated_writers_costs_this_month: "Estimated writers' costs this month"
   #en: event_details: Event Details
   event_details: Event Details
+  #en: event_comments: Event Comments
+  event_comments: Event Comments
   #en: event_was_successfully_created: Event was successfully created.
   event_was_successfully_created: Event was successfully created.
   #en: events: Events
@@ -1487,6 +1493,10 @@ en:
   static_page_content: "Content"
 
   # DigitalToniq
+  
+  # Ensuring overridden
+  community_tagline: Authentic Conversations with Companies.
+
   #en: company: Company
   company: Company
   #en: companies: Companies

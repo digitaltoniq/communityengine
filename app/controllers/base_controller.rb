@@ -173,7 +173,7 @@ class BaseController < ApplicationController
     else
       "#{polymorphic_path(commentable)}#comments"      
     end    
-  end
+  end  
 
   # DigitalToniq
 
