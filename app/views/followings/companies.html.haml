@@ -1,15 +1,15 @@
--# DJS TODO .yui-b= render :partial => 'users/profile_user_info_sidebar'
+.yui-b= render :partial => 'users/profile_user_info_sidebar'
 
 #yui-main
   .yui-b
     -box :id => "followed_companies" do
       %h3
-        = @company_followings.total_entries
+        = @followings.total_entries
         =:followed_companies.l
       .pagination=will_paginate @company_followings
 
       .clear
       .company_list
-        - @company_followings.each do |following|
+        - @followings.each do |following|
           =render :partial => "companies/company", :locals => { :company => following.followee }
 

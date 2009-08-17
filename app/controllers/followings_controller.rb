@@ -1,24 +1,22 @@
 class FollowingsController < BaseController
-  # TODO
-  #before_filter :login_required, :except => [:accepted, :index]
-  before_filter :find_user, :only => [:index, :companies, :posts]
-  #before_filter :require_current_user, :only => [:accept, :deny, :pending, :destroy]
+  before_filter :login_required, :except => [:index, :companies, :posts]
+  before_filter :find_user, :only => [:index, :companies, :posts, :create, :destroy]
+  before_filter :require_current_user, :only => [:create, :destroy]
 
   def index
     @followings = Following.by_user(@user)
   end
 
   def companies
-    @company_followings = Following.by_user(@user).for_companies.paginate(paging_params)
+    @followings = Following.by_user(@user).for_companies.paginate(paging_params)
   end
 
   def posts
-    @post_followings = Following.by_user(@user).for_posts.paginate(paging_params)
+    @followings = Following.by_user(@user).for_posts.paginate(paging_params)
   end
 
   def create
-    @user = User.find(params[:user_id])
-    @followee = params[:followee_type] == "Company" ? Company.find(params[:followee_id]) : Post.find(params[:followee_id])
+    @followee = params[:followee_type].classify.constantize.find(params[:followee_id])
     @following = Following.new(:user => @user, :followee => @followee)
     respond_to do |format|
       if @following.save
@@ -37,7 +35,6 @@ class FollowingsController < BaseController
   end
 
   def destroy
-    @user = User.find(params[:user_id])
     @following = Following.find(params[:id])
     @followee = @following.followee
     @following.destroy
