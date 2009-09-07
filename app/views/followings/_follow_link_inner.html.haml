@@ -1,4 +1,4 @@
-- if current_user and Following.can_follow(followee, current_user)
+- if current_user and Following.can_follow?(followee, current_user)
   = add_follow_link(followee)
 - if current_user and Following.following_exist?(followee, current_user)
   = add_unfollow_link(followee)

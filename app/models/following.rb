@@ -30,7 +30,7 @@ class Following < ActiveRecord::Base
     following_for(followee, follower)
   end
 
-  def self.can_follow(followee, follower)
+  def self.can_follow?(followee, follower)
     not following_exist?(followee, follower)
   end
 end

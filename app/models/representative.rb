@@ -21,7 +21,9 @@ class Representative < ActiveRecord::Base
   belongs_to :company
   has_many   :representative_invitations
 
-  #  TODO: consider method_missing approach...
+  delegate :password_confirmation, :password_confirmation=, :to => :user
+
+  #  TODO: Note, method_missing will not work, attributes= fails, etc.
   delegate :avatar_photo_url, :this_months_posts, :last_months_posts, :location, :full_location,
            :recent, :active, :tagged_with, :invite_code, :invite_code=, :birthday, :birthday=,
            :login, :login=, :email, :email=, :password, :password=, :password_confirmation, :password_confirmation=,
@@ -47,14 +49,12 @@ class Representative < ActiveRecord::Base
 
   ## Instance Methods
 
-  # TODO: discuss, working?
-  def method_missing_with_user_delegation(method, *args, &block)
+  # TODO: discuss, working?  No, can't entirely work like rails delegate method can, doesn't handle attributes= correctly
+  def method_missing(method, *args, &block)
     self.user.__send__(method, *args, &block)
   rescue
-    method_missing_without_user_delegation(method, *args, &block)
+    super
   end
-
-  alias_method_chain :method_missing, :user_delegation    # TODO: shouldn't need chaining
 
   def full_name
     "#{first_name} #{last_name}"

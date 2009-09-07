@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   
   MALE    = 'M'
   FEMALE  = 'F'
-  attr_accessor :password
+  attr_accessor :password, :password_confirmation
   attr_protected :admin, :featured, :role_id
   
   acts_as_taggable  

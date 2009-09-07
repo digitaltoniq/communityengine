@@ -101,6 +101,7 @@ class RepresentativesController < BaseController
   def new
     @representative = Representative.new
     @representative.company = Company.find(params[:company_id])
+    redirect_to signup_path if @representative.company.blank?
     @representative.user = User.new( {:birthday => Date.parse((Time.now - 25.years).to_s) }.merge(params[:user] || {}) )
     @inviter_id = params[:id]
     @inviter_code = params[:code]
