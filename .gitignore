@@ -1,7 +1,5 @@
 .DS_Store
-.idea/
-.idea/**
-.idea/inspectionProfiles
+.idea
 .autotest
 
 log/*.log

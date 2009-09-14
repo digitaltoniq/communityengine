@@ -10,7 +10,7 @@ end
 
 def flickr_photo(tags)
   url = flickr_photo_url(tags)
-  tmp_file = Tempfile.new(ActiveSupport::SecureRandom.hex(10))
+  tmp_file = Tempfile.new("#{ActiveSupport::SecureRandom.hex(10)}#{url.from(url.rindex('.'))}")
   # puts "Downloading from #{url}"
   `wget #{url} -O #{tmp_file.path}`
   tmp_file.path
