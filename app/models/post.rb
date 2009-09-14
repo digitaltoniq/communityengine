@@ -1,4 +1,7 @@
 class Post < ActiveRecord::Base
+
+  extend ActiveSupport::Memoizable
+  
   acts_as_commentable
   acts_as_taggable
   acts_as_activity :user, :if => Proc.new{|r| r.is_live?}
@@ -78,6 +81,33 @@ class Post < ActiveRecord::Base
       :limit => limit
       )
   end
+
+  # All representatives of the poster's company that are participating in the comments of this post
+  # NOTE: The definition of this might be better placed as an association extension of post has_many :comments
+  # but we don't have direct access to that association as it's declared within the acts_as_commentable plugin
+  def participating_representatives
+    if company
+      company.representatives.find(:all,
+                                   :joins => "RIGHT JOIN comments ON representatives.user_id = comments.user_id",
+                                   :conditions => ["comments.user_id != ? AND comments.commentable_id = ? AND commentable_type = ?",
+                                                   user.id, id, 'Post'],
+                                   :group => "comments.user_id")
+    else
+      []
+    end
+  end  
+
+  # The representative that authored this post
+  def representative
+    Representative.for_user(user)
+  end
+
+  # What company is this post posted under (via the representative)
+  def company
+    representative.company if representative
+  end
+
+  memoize :participating_representatives, :representative, :company
 
   def display_title
     t = self.title

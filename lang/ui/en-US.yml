@@ -1526,7 +1526,11 @@ en:
   # en: listing_representative_invitations: "Listing representative invitations"
   listing_representative_invitations: "Listing representative invitations"
   # en: new_representative_invitation: "New representative invitation"
-  new_representative_invitation: "New representative invitation"  
+  new_representative_invitation: "New representative invitation"
+  # en: participating_representatives: "Participating representatives"
+  participating_representatives:
+    one: "1 Other representative is participating" 
+    other: "{{count}} Other representatives are participating"
   # en: view_my_blog: View my blog
   view_my_blog: View my conversations
   # en: recent_blog_posts: Recent Blog Posts

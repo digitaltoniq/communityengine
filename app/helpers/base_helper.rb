@@ -410,9 +410,13 @@ module BaseHelper
   # DigitalToniq
 
   # TODO: make this more generic and move to base controller or patch models
-  def display_name(user)
-    r = Representative.find_by_user_id(user.id)
-    r ? r.full_name : user.login    
+  def display_name(user_or_rep)
+    if user_or_rep.is_a?(Representative)
+      user_or_rep.full_name
+    else
+      r = Representative.find_by_user_id(user_or_rep.id)
+      r ? r.full_name : user_or_rep.login
+    end
   end
 
 end

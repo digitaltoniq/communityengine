@@ -23,7 +23,7 @@ namespace :data do
 
     task :representatives => [:environment, :prevent_production, :factories] do
       Company.all.each do |c|
-        create_users(rand(3) + 2).each_with_index do |u, ndx|
+        create_users(rand(5) + 2).each_with_index do |u, ndx|
           Factory(:representative, :company => c, :user => u,
                   :representative_role => ndx == 0 ? RepresentativeRole[:admin] :
                           ndx > 1 ? RepresentativeRole[:representative] : RepresentativeRole[:poster])
@@ -51,10 +51,17 @@ namespace :data do
     end
     
     task :comments => [:environment, :prevent_production, :factories] do
+
       member_users = User.find(:all, :conditions => ["id NOT IN (?)", Representative.all(:select => 'user_id').collect(&:user_id) ])
       Post.all.each do |p|
         rand(5).times do
           Factory(:comment, :commentable => p, :user => member_users.rand )
+        end
+      end
+
+      Post.all.each do |p|
+        (rand(2) + 1).times do
+          Factory(:comment, :commentable => p, :user => p.company.representatives.rand.user )
         end
       end
     end

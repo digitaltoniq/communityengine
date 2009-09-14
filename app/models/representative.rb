@@ -47,6 +47,10 @@ class Representative < ActiveRecord::Base
     end
   end
 
+  def self.for_user(user)
+    find(:first, :conditions => { :user_id => user.id })
+  end
+
   ## Instance Methods
 
   # TODO: discuss, working?  No, can't entirely work like rails delegate method can, doesn't handle attributes= correctly

@@ -66,21 +66,17 @@
 / ends yui-main
 
 .yui-b
-  =render :partial => 'author_profile', :locals => {:user => @user}
 
-  - unless @related.empty?
-    -box :class => 'alt' do
-      %h3=:related_posts.l
-      %ul.list.page
-        - @related.each do |post|
-          %li=link_to truncate(post.title, :length => 75), user_post_path(post.user, post)      
+  = render :partial => 'author_profile', :locals => {:user => @user}
 
-  - unless @popular_posts.empty?
+  - unless @post.participating_representatives.empty?
     -box :class => 'alt' do
-      %h3=:popular_posts.l
-      %ul.list.page
-        - @popular_posts.each do |post|
-          %li=link_to truncate(post.title, :length => 75), user_post_path(post.user, post)      
+      %h3=:participating_representatives.l(:count => @post.participating_representatives.size)
+      %ul.list.user
+        - @post.participating_representatives.each do |representative|
+          %li
+            = link_to image_tag(representative.avatar_photo_url(:thumb), :height => '50', :width => '50', :alt => "#{display_name(representative)}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{display_name(representative)}'s profile"
+            = link_to display_name(representative), representative_path(representative), :class => 'url'
 / sidebar
 
 %script{:type=>"text/javascript", :charset=>"utf-8"}
