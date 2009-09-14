@@ -29,6 +29,11 @@
           -# DJS %em=:required_your_username_must_not_contain_numerals_spaces_or_special_characters.l
         = f.text_field :name
 
+        %label{"for"=>"company_domains"}
+          =:company_domains.l
+          -# DJS %em=:required_your_username_must_not_contain_numerals_spaces_or_special_characters.l
+        = f.text_field :domains
+
         -#
           DJS: user for initial primary representive
           %label{"for"=>"company_email"}
