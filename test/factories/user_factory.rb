@@ -1,7 +1,10 @@
 Factory.define :user do |u|
-  # u.login { n = Faker::Name.first_name.downcase until User.find_by_login(n).nil?; n }   # TODO:why doesn't this work? DJS
-  u.login { Faker::Name.first_name.downcase + rand(99).to_s }
-  u.email { u.login + "@example.com" }
+  u.login do
+    while User.exists?(:login => (l = Faker::Name.first_name))
+    end
+    l
+  end
+  u.email { |u| u.login + "@example.com" }
   u.password 'password'
   u.password_confirmation { |u| u.password }
   u.birthday { (rand(30) + 20).years.ago }
