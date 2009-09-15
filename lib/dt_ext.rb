@@ -28,5 +28,14 @@ module ActionMailer
       run_later { deliver_without_run_later!(mail) }
     end    
     alias_method_chain :deliver!, :run_later
+
+# Be able to turn off mailing (i.e. during demo data creation)
+module ActionMailer
+  class Base
+    def self.no_deliveries
+      previous = perform_deliveries
+      self.perform_deliveries = false
+      returning(yield) { self.perform_deliveries = previous }
+    end
   end
 end
