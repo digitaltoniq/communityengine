@@ -48,7 +48,23 @@ class Representative < ActiveRecord::Base
   end
 
   def self.for_user(user)
-    find(:first, :conditions => { :user_id => user.id })
+    find_by_user_id(user.id )
+  end
+
+  # Get the reps participating in the given post/commentable (minus the author of
+  # the post) who belong to the company of the author.
+  # NOTE: This could be a named_scope for more flexibility, but would run into issues
+  # with count operator b/c of group/distinct clauses.
+  def self.participating_in(commentable)
+    if(company = Representative.for_user(commentable.user).try(:company))
+      company.representatives.find(:all,
+                                   :joins => "RIGHT JOIN comments ON representatives.user_id = comments.user_id",
+                                   :conditions => ["comments.user_id != ? AND comments.commentable_id = ? AND commentable_type = ?",
+                                                   commentable.user.id, commentable.id, commentable.class.to_s],
+                                   :group => "comments.user_id")
+    else
+      []
+    end
   end
 
   ## Instance Methods
