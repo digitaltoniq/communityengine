@@ -39,8 +39,7 @@ class UsersController < BaseController
       self.current_user = @user
       current_user.track_activity(:joined_the_site)      
       redirect_to welcome_photo_user_path(@user)
-      flash[:notice] = :thanks_for_activating_your_account.l 
-      UserNotifier.deliver_activation(@user)
+      flash[:notice] = :thanks_for_activating_your_account.l
       return
     end
     flash[:error] = :account_activation_error.l_with_args(:email => AppConfig.support_email) 
@@ -111,7 +110,6 @@ class UsersController < BaseController
       create_friendship_with_inviter(@user, params)
       flash[:notice] = :email_signup_thanks.l_with_args(:email => @user.email) 
       redirect_to signup_completed_user_path(@user)
-      UserNotifier.deliver_signup_notification(@user)
     else
       render :action => 'new'
     end

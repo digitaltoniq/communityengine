@@ -17,10 +17,9 @@ class User < ActiveRecord::Base
   before_save   :encrypt_password, :whitelist_attributes
   before_create :make_activation_code
   after_create  :update_last_login
+  after_create  :deliver_signup_notification
+  after_save    :deliver_activation
   
-  # RWD
-  # after_create  :deliver_signup_notification
-  # after_save    :deliver_activation
   before_save   :generate_login_slug
   after_save    :recount_metro_area_users
   after_destroy :recount_metro_area_users
@@ -358,14 +357,13 @@ class User < ActiveRecord::Base
     self.login_slug = self.login.gsub(/[^a-z0-9]+/i, '-')
   end
 
-  # RWD
-  # def deliver_activation
-  #   UserNotifier.deliver_activation(self) if self.recently_activated?
-  # end
-  # 
-  # def deliver_signup_notification
-  #   UserNotifier.deliver_signup_notification(self)    
-  # end
+  def deliver_activation
+    UserNotifier.deliver_activation(self) if self.recently_activated?
+  end
+
+  def deliver_signup_notification
+    UserNotifier.deliver_signup_notification(self)
+  end
 
   def update_last_login
     self.track_activity(:logged_in) if self.last_login_at.nil? || (self.last_login_at && self.last_login_at < Time.now.beginning_of_day)
