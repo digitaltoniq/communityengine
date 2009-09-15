@@ -59,9 +59,10 @@ namespace :data do
         end
       end
 
+      # Participating reps
       Post.all.each do |p|
         (rand(2) + 1).times do
-          Factory(:comment, :commentable => p, :user => p.company.representatives.rand.user )
+          Factory(:comment, :commentable => p, :user => Representative.for_user(p.user).company.representatives.rand.user)
         end
       end
     end
