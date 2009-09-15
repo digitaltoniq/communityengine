@@ -9,10 +9,12 @@ namespace :data do
     prevent_production
   end
   
-  task :demo => [:environment, :prevent_production, 'db:revert', 'default:users', 'demo:companies', 'demo:followings',
+  task :demo => [:environment, :prevent_production, 'default:users', 'demo:companies', 'demo:followings',
                  'demo:representatives', 'demo:posts', 'demo:users', 'demo:comments']
   
   namespace :demo do
+
+    task :reset => ['db:revert', 'data:demo']
     
     task :companies => [:environment, :prevent_production, :factories] do
       8.times do
