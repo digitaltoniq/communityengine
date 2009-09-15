@@ -40,7 +40,7 @@ class UsersController < BaseController
       current_user.track_activity(:joined_the_site)      
       redirect_to welcome_photo_user_path(@user)
       flash[:notice] = :thanks_for_activating_your_account.l 
-      run_later { UserNotifier.deliver_activation(@user) }
+      UserNotifier.deliver_activation(@user)
       return
     end
     flash[:error] = :account_activation_error.l_with_args(:email => AppConfig.support_email) 
@@ -111,7 +111,7 @@ class UsersController < BaseController
       create_friendship_with_inviter(@user, params)
       flash[:notice] = :email_signup_thanks.l_with_args(:email => @user.email) 
       redirect_to signup_completed_user_path(@user)
-      run_later {UserNotifier.deliver_signup_notification(@user)}
+      UserNotifier.deliver_signup_notification(@user)
     else
       render :action => 'new'
     end
@@ -318,7 +318,7 @@ class UsersController < BaseController
 
     @user = User.find_by_email(params[:email])  
     if @user && @user.reset_password
-      run_later {UserNotifier.deliver_reset_password(@user)}
+      UserNotifier.deliver_reset_password(@user)
       @user.save
       redirect_to login_url
       flash[:info] = :your_password_has_been_reset_and_emailed_to_you.l      
@@ -331,7 +331,7 @@ class UsersController < BaseController
     return unless request.post?   
     
     if @user = User.find_by_email(params[:email])
-      run_later {UserNotifier.deliver_forgot_username(@user)}
+      UserNotifier.deliver_forgot_username(@user)
       redirect_to login_url
       flash[:info] = :your_username_was_emailed_to_you.l      
     else
@@ -345,7 +345,7 @@ class UsersController < BaseController
     @user = User.find(params[:id])    
     if @user && !@user.active?
       flash[:notice] = :activation_email_resent_message.l
-      run_later {UserNotifier.deliver_signup_notification(@user)}
+      UserNotifier.deliver_signup_notification(@user)
       redirect_to login_path and return
     else
       flash[:notice] = :activation_email_not_sent_message.l

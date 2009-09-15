@@ -66,7 +66,7 @@ class CompaniesController < BaseController
 
    if @company.save
      # TODO flash[:notice] = :company_signup_thanks.l_with_args(:email => @user.email)
-     # TODO run_later {UserNotifier.deliver_representative_signup_notification(@user)}
+     # TODO UserNotifier.deliver_representative_signup_notification(@user)
      # redirect_to signup_completed_company_path(@company)
      redirect_to company_path(@company)
     else
