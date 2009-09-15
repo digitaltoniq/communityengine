@@ -1,13 +1,13 @@
 class Logo < ActiveRecord::Base
   belongs_to :company
-  
-  # TODO: use AppConfig as in Photo
-  has_attachment :content_type => :image,
-               :storage => :file_system,
-               :max_size => 500.kilobytes,
-               :resize_to => '320x200>',
-               :thumbnails => { :thumb => '100x100>' }
+  has_attachment prepare_options_for_attachment_fu(AppConfig.logo['attachment_fu_options'])
 
-  # TODO: additional validates as in Photo
-  validates_as_attachment
+  # From Photo
+  validates_presence_of :size
+  validates_presence_of :content_type
+  validates_presence_of :filename
+  # Causes failure in factory demo data
+#  validates_presence_of :company, :if => Proc.new{|record| record.parent.nil? }
+  validates_inclusion_of :content_type, :in => attachment_options[:content_type], :message => "is not allowed", :allow_nil => true
+  validates_inclusion_of :size, :in => attachment_options[:size], :message => " is too large", :allow_nil => true
 end
