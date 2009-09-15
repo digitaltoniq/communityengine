@@ -12,8 +12,7 @@ public/plugin_assets
 vendor/plugins
 
 # Temp files - should be moved to shared/...
-public/photos
-public/logos
+public/system
 
 config/database.yml
 
