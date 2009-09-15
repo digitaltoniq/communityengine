@@ -1,0 +1,12 @@
+h1. Dependencies
+
+* In environment.rb:
+
+  config.gem 'flickr-fu', :lib => 'flickr_fu'
+
+* In config dir, a flickr.yml file:
+
+  --- !map:HashWithIndifferentAccess
+  key: "c3d5943ac3a5663b0c7d98436b958430"
+  secret: "6e81235f6fdbee2b"
+  token_cache: "token_cache.yml"
