@@ -24,10 +24,21 @@ ActiveRecord::Base.send(:extend, DigitalToniq::ActiveRecordExtensions)
 ActionMailer::Base.send(:include, RunLater::InstanceMethods)
 module ActionMailer
   class Base
-    def deliver_with_run_later!(mail = @mail)
-      run_later { deliver_without_run_later!(mail) }
-    end    
-    alias_method_chain :deliver!, :run_later
+
+    # Add run_later to these types of deliveries
+    # NOTE: This is better placed as an alias of Mailer::Base.deliver!, but
+    # that obscures our attempt to turn off Mailer::Base.perform_deliveries so
+    # have to dive down another level to the specific delivery types
+    [:sendmail, :smtp].each do |mail_type|
+      class_eval <<-EOV
+        def perform_delivery_#{mail_type}_with_run_later(*args)
+          run_later { perform_delivery_#{mail_type}_without_run_later(*args) }
+        end
+        alias_method_chain :perform_delivery_#{mail_type}, :run_later
+      EOV
+    end
+  end
+end
 
 # Be able to turn off mailing (i.e. during demo data creation)
 module ActionMailer
