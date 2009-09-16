@@ -18,7 +18,7 @@ namespace :data do
     
     task :companies => [:environment, :prevent_production, :factories] do
       8.times do
-        Factory(:company, :metro_area => MetroArea.all.rand)
+        Factory(:company)
         Company.delete_all("logo_id IS NULL") # RWD Factory girl circular dependency bug?
       end
     end
