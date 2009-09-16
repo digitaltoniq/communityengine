@@ -21,11 +21,13 @@ Rails::Initializer.run do |config|
   config.gem 'desert'
   config.gem 'calendar_date_select'
   config.gem 'mislav-will_paginate', :version => '~> 2.3.11', :lib => 'will_paginate', :source => 'http://gems.github.com'
+  config.gem 'yfactorial-utility_scopes', :lib => 'utility_scopes', :source => 'http://gems.github.com'
 
   # These must be compiled natively and can't be vendored
   config.gem 'rmagick', :lib => 'RMagick'
   config.gem 'hpricot'
 
+  # Testing/demo data
   config.gem "faker"
   config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
   config.gem 'flickr-fu', :lib => 'flickr_fu'
