@@ -65,7 +65,7 @@ class RepresentativesController < BaseController
 
     @company = Company.find(params[:company_id])
     @representative_count = @company.representatives.active.count
-    @representatives = @company.representatives.active.find :all, :page => {:current => params[:page], :size => 12, :count => @representative_count }   # TODO: will paginate
+    @representatives = @company.representatives.active.with({:user => :avatar}, :company).paginate(paging_params)
    
     respond_to do |format|
       format.html
@@ -80,19 +80,19 @@ class RepresentativesController < BaseController
     @user = @representative.user
 
     @friend_count               = @user.accepted_friendships.count
-    @accepted_friendships       = @user.accepted_friendships.find(:all, :limit => 5).collect{|f| f.friend }
-    @pending_friendships_count  = @user.pending_friendships.count()
+    @accepted_friendships       = @user.accepted_friendships.limited(5).with(:friend).collect{|f| f.friend }
+    @pending_friendships_count  = @user.pending_friendships.count
 
-    @comments       = @user.comments.find(:all, :limit => 10, :order => 'created_at DESC')
+    @comments       = @user.comments.ordered('created_at DESC').limited(10)
     @photo_comments = Comment.find_photo_comments_for(@user)
     @users_comments = Comment.find_comments_by_user(@user, :limit => 5)
 
-    @recent_posts   = @user.posts.find(:all, :limit => 2, :order => "published_at DESC")
+    @recent_posts   = @user.posts.ordered("published_at DESC").limited(2)
     @clippings      = @user.clippings.find(:all, :limit => 5)
     @photos         = @user.photos.find(:all, :limit => 5)
     @comment        = Comment.new(params[:comment])
 
-    @my_activity = Activity.recent.by_users([@user.id]).find(:all, :limit => 10)
+    @my_activity = Activity.recent.by_users([@user.id]).limited(10)
 
     # TODO update_view_count(@user) unless current_user && current_user.eql?(@user)
   end
@@ -211,7 +211,7 @@ class RepresentativesController < BaseController
 
       states = user.country.states if user.country
 
-      metro_areas = user.state.metro_areas.all(:order => "name") if user.state
+      metro_areas = user.state.metro_areas.ordered('name') if user.state
 
       return metro_areas, states
     end

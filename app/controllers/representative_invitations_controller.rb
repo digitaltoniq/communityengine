@@ -3,7 +3,7 @@ class RepresentativeInvitationsController < BaseController
 
   def index
     @representative = Representative.find(params[:representative_id] || params[:id])
-    @invitations = @representative.representative_invitations
+    @invitations = @representative.representative_invitations.paginate(paging_params)
   end
   
   def new

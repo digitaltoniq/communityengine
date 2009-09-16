@@ -1,0 +1,13 @@
+%h3= :listing_representative_invitations.l
+
+= will_paginate @invitations
+
+%table
+  %tr
+  - for invitation in @invitations do
+    %tr
+      %td= invitation.email_addresses
+
+%br/
+
+= link_to :new_representative_invitation.l, new_company_representative_representative_invitation_path(@representative.company, @representative)

@@ -4,5 +4,5 @@ Factory.define :company do |c|
   # TODO c.slogan { Faker::Company.catch_phrase } 
   c.description { Faker::Lorem.sentences(rand(3) + 3).join(' ') }
   c.association :logo
-  c.association :metro_area
+  c.metro_area { MetroArea.all.rand }
 end

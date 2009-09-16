@@ -15,14 +15,8 @@ class CompaniesController < BaseController
   def index
     # cond, @search, @metro_areas, @states = Company.paginated_users_conditions_with_search(params)  # TODO discuss apprach
 
-    @companies = Company.recent.find(:all,
-      # :conditions => cond.to_sql,
-      :include => [:tags],
-      :page => {:current => params[:page], :size => 20}
-      )
-
-    @tags = Company.tag_counts :limit => 10
-
+    @companies = Company.recent.with(:metro_area, :logo).paginate(paging_params)
+    # @tags = Company.tag_counts :limit => 10
     # setup_metro_areas_for_cloud  # TODO: discuss -- why have sidebar here?
   end
 
@@ -39,12 +33,14 @@ class CompaniesController < BaseController
     #@accepted_friendships       = @company.accepted_friendships.find(:all, :limit => 5).collect{|f| f.friend }
     #@pending_friendships_count  = @company.pending_friendships.count()
     #
-    @post_comments       = @company.post_comments.find(:all, :limit => 10, :order => 'created_at DESC')
+    @post_comments       = @company.post_comments.ordered('created_at DESC').limited(10)
+    #@post_comments = @company.post_comments.find(:all, :limit => 10, :order => 'created_at DESC')
     #@photo_comments = Comment.find_photo_comments_for(@user)
     #@users_comments = Comment.find_comments_by_user(@user, :limit => 5)
     #
 
-    @recent_posts   = @company.posts.find(:all, :limit => 2, :order => "published_at DESC")
+    @recent_posts   = @company.posts.ordered("published_at DESC").limited(2)
+    #@recent_posts = @company.posts.find(:all, :limit => 2, :order => "published_at DESC")
 
     #@clippings      = @user.clippings.find(:all, :limit => 5)
     #@photos         = @user.photos.find(:all, :limit => 5)
@@ -161,7 +157,8 @@ class CompaniesController < BaseController
     render :action => 'signup_completed', :layout => 'beta' if AppConfig.closed_beta_mode
   end
 
-  # TODO: refactor post_controller index to handle company
+  # TODO: refactor post_controller index to handle company parent objectm
+  # TODO: This is broken at the routing level as well
   def posts
     @company = Company.find(params[:id])
     @category = Category.find_by_name(params[:category_name]) if params[:category_name]

@@ -8,11 +8,13 @@
     -box :class => "company_list" do
       %h3=:companies.l :site => AppConfig.community_name
 
-      .pagination= paginating_links @companies, :params => params if @companies.page_count > 1
+      = will_paginate @companies
+      /.pagination= paginating_links @companies, :params => params if @companies.page_count > 1
 
       %br.clear
 
       = render :partial => "companies/company", :collection => @companies
 
       %br.clear
-      .pagination= paginating_links @companies, :params => params if @companies.page_count > 1
+      = will_paginate @companies
+      /.pagination= paginating_links @companies, :params => params if @companies.page_count > 1

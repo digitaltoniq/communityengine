@@ -15,7 +15,7 @@
 
           =render :partial => 'followings/follow_link', :locals => {:followee => company}
 
-        = "<p>" + company.tags[0...6].collect{|t| link_to( t.name, tag_url(t), :class => "tag") if t }.join(" ") + "</p>" unless company.tags.empty?
+        /= "<p>" + company.tags[0...6].collect{|t| link_to( t.name, tag_url(t), :class => "tag") if t }.join(" ") + "</p>" unless company.tags.empty?
 
       .yui-u{"style"=>"overflow:hidden"}
         - if @search && @search['description']
