@@ -92,6 +92,8 @@ resources :events, :collection => { :past => :get } do |event|
 end
 resources :favorites, :path_prefix => '/:favoritable_type/:favoritable_id'
 resources :comments, :path_prefix => '/:commentable_type/:commentable_id'
+resources :likes, :path_prefix => '/:likeable_type/:likeable_id',
+          :only => [:create], :collection => { :no_more => :delete }
 delete_selected_comments 'comments/delete_selected', :controller => "comments", :action => 'delete_selected'
 
 resources :homepage_features

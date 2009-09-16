@@ -323,6 +323,14 @@ en:
   delete_this_topic_forever: Delete this topic forever?
   #en: delete_this_user: Delete this user
   delete_this_user: Delete this user
+  like_it: Like it
+  you_like_this: You like this
+  other_people_like_this:
+    one: "One other person likes this"
+    other: "{{count}} others like this"
+  people_like_this:
+    one: "One person likes this"
+    other: "{{count}} people like this"
   #en: deny: Deny
   deny: Deny
   #en: denied: denied

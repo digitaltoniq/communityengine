@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090807231721) do
+ActiveRecord::Schema.define(:version => 20090916175001) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -215,6 +215,17 @@ ActiveRecord::Schema.define(:version => 20090807231721) do
     t.integer  "user_id"
     t.datetime "created_at"
   end
+
+  create_table "likes", :force => true do |t|
+    t.boolean  "like",          :default => true, :null => false
+    t.integer  "likeable_id",                     :null => false
+    t.string   "likeable_type",                   :null => false
+    t.integer  "user_id",                         :null => false
+    t.datetime "created_at",                      :null => false
+  end
+
+  add_index "likes", ["likeable_id", "likeable_type"], :name => "index_likes_on_likeable_id_and_likeable_type"
+  add_index "likes", ["user_id"], :name => "index_likes_on_user_id"
 
   create_table "logos", :force => true do |t|
     t.integer  "company_id"
