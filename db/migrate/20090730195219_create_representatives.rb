@@ -5,7 +5,8 @@ class CreateRepresentatives < ActiveRecord::Migration
       t.string :title
       t.string :first_name
       t.string :last_name
-      t.string :url_slug   
+      t.string :url_slug
+      t.string :linked_in_url
       t.timestamps
     end
   end

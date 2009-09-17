@@ -355,6 +355,7 @@ ActiveRecord::Schema.define(:version => 20090916175001) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "url_slug"
+    t.string   "linked_in_url"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "representative_role_id"

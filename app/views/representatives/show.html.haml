@@ -22,6 +22,17 @@
         =:about_me.l
       %p= @user.description
 
+  -box :class => 'hentry', :id => 'profile_details' do
+    %h3=:representative_details.l
+    .vcard.author
+      %ul
+        %li.title= "#{:title.l}: #{@representative.title if @representative.title}"
+        %li.company= "#{:company.l}: #{link_to(@representative.company, company_path(@representative.company))}"
+        %li.update= "#{:member_since.l}#{@representative.created_at.strftime(": %m/%d/%y")}"
+        %li.linked_in= "#{:linked_in_url.l} #{link_to @representative.linked_in_url if @representative.linked_in_url}"
+        =render :partial => 'followings/follow_link', :locals => {:followee => @representative}
+    .clear
+
   -box do
     %h3
       Development Information
@@ -102,13 +113,19 @@
         = render :partial => 'posts/post', :collection => @recent_posts
         %h6.right.all= link_to :view_my_blog.l, user_posts_path(@user)
 
-    - unless @clippings.empty?
-      -box :id => "clippings" do
-        %h3=:clippings.l
-        - @clippings.each do |clipping|
-          %a{"href"=>"#{h user_clipping_url(@user, clipping)}"}
-            %img.clipping.polaroid{"src"=>"#{h clipping.image_uri(:thumb)}", :width => '100', :height => '100'}
-        %h6.all.right= link_to :view_all_my_clippings.l, user_clippings_path(@user)
+    - unless @recent_comments.empty?
+      -box :id => "comments" do
+        %h3=:recent_user_comments.l(:user_name => display_name(@user))
+        = render :partial => 'comments/comment', :collection => @recent_comments
+
+    -#
+      - unless @clippings.empty?
+        -box :id => "clippings" do
+          %h3=:clippings.l
+          - @clippings.each do |clipping|
+            %a{"href"=>"#{h user_clipping_url(@user, clipping)}"}
+              %img.clipping.polaroid{"src"=>"#{h clipping.image_uri(:thumb)}", :width => '100', :height => '100'}
+          %h6.all.right= link_to :view_all_my_clippings.l, user_clippings_path(@user)
 
     -#
       DJS

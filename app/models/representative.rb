@@ -20,6 +20,7 @@ class Representative < ActiveRecord::Base
   belongs_to :user
   belongs_to :company
   has_many   :representative_invitations
+  has_many :followings, :as => :followee
 
   delegate :password_confirmation, :password_confirmation=, :to => :user
 

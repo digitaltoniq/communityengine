@@ -2,6 +2,7 @@ class RepresentativesController < BaseController
   #before_filter :login_required, :except => [:accepted, :index]
   #before_filter :find_user, :only => [:accepted, :pending, :denied]
   #before_filter :require_current_user, :only => [:accept, :deny, :pending, :destroy]
+  before_filter :find_user, :only => [:show]
 
   include Viewable
   cache_sweeper :taggable_sweeper, :only => [:activate, :update, :destroy]
@@ -74,23 +75,10 @@ class RepresentativesController < BaseController
   end
 
   def show
-    @representative = Representative.find(params[:representative_id] || params[:id])
 
-    # TODO: temp use representative    
-    @user = @representative.user
-
-    @friend_count               = @user.accepted_friendships.count
-    @accepted_friendships       = @user.accepted_friendships.limited(5).with(:friend).collect{|f| f.friend }
-    @pending_friendships_count  = @user.pending_friendships.count
-
-    @comments       = @user.comments.ordered('created_at DESC').limited(10)
-    @photo_comments = Comment.find_photo_comments_for(@user)
-    @users_comments = Comment.find_comments_by_user(@user, :limit => 5)
-
+    @representative = Representative.for_user(@user)
+    @recent_comments       = Comment.ordered('created_at DESC').limited(10).find_all_by_user_id(@user.id)
     @recent_posts   = @user.posts.ordered("published_at DESC").limited(2)
-    @clippings      = @user.clippings.find(:all, :limit => 5)
-    @photos         = @user.photos.find(:all, :limit => 5)
-    @comment        = Comment.new(params[:comment])
 
     @my_activity = Activity.recent.by_users([@user.id]).limited(10)
 

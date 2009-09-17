@@ -44,7 +44,9 @@ class Company < ActiveRecord::Base
     end
   end
 
-  ## Instance Methods  
+  ## Instance Methods
+
+  def to_s; name; end
 
   def accepts_email?(email)
     email && email.include?("@") && domains.downcase.include?(email.split('@').last.downcase)

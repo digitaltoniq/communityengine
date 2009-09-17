@@ -1516,10 +1516,13 @@ en:
   representatives: Representatives
   #en: active_representatives: Active Representatives
   active_representatives: Active Representatives
+  representative_details: Representative details
+  linked_in_url: LinkedIn
   # en: delete_this_company: "Delete this company"
   delete_this_company: "Delete this company"
   # en: recent_company_post_comments: "Recent post comments"
   recent_company_post_comments: "Latest responses by {{company_name}} representatives"
+  recent_user_comments: "Latest responses by {{user_name}}"
   # en: enter_company_domains: "Company domains"
   enter_company_domains: "Company domains"
   # en: followed_companies: "Followed companies"
