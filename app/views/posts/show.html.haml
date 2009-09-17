@@ -18,6 +18,8 @@
                 %abbr.published{"title"=>"#{@post.published_at}"}= @post.published_at_display("%B %d, %Y")
             %li.view= :views.l+" (#{@post.view_count})"
             %li.comments= link_to :comments.l+" (#{@post.comments.size})", user_post_path(@user, @post)+'#comments'
+            =render :partial => 'followings/follow_link', :locals => {:followee => @post}
+            
             -#
               DJS
               - if current_user and current_user.can_request_friendship_with(@post.user)

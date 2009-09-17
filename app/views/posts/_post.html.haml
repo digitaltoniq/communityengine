@@ -17,6 +17,8 @@
         = "(#{post.view_count})"
       %li.comments
         = link_to :comments.l+" (#{post.comments.count})", user_post_path(post.user, post)+'#comments'
+      =render :partial => 'followings/follow_link', :locals => {:followee => post}
+      
       -#
         DJS
         - if current_user and current_user.can_request_friendship_with(post.user)
@@ -28,4 +30,3 @@
     = render :partial => 'polls/excerpt', :locals => {:poll => post.poll} if post.poll
     
     %h6=link_to :read_more.l, user_post_path(post.user, post), :rel=> 'bookmark'
-  

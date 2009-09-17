@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   belongs_to :contest
   has_many   :polls, :dependent => :destroy
   has_many :favorites, :as => :favoritable, :dependent => :destroy
+  has_many :followings, :as => :followee
   
   validates_presence_of :raw_post
   validates_presence_of :title
