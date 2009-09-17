@@ -72,7 +72,7 @@ namespace :data do
   
   namespace :default do
     
-    task :users => [:environment, :prevent_production, :factories] do
+    task :users => [:environment, :factories] do
       #, 'ryanmickle@gmail.com'
       ['ryan@digitaltoniq.com', 'dsnider@digitaltoniq.com'].each do |f|
         Factory(:user, :email => f, :login => f.split('@').first, :role => Role[:admin])
