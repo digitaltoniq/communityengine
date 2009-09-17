@@ -9,8 +9,8 @@ namespace :data do
     prevent_production
   end
   
-  task :demo => [:environment, :prevent_production, 'default:users', 'demo:companies', 'demo:followings',
-                 'demo:representatives', 'demo:posts', 'demo:users', 'demo:comments']
+  task :demo => [:environment, :prevent_production, 'default:users', 'demo:companies',
+                 'demo:representatives', 'demo:posts', 'demo:users', 'demo:followings', 'demo:comments']
   
   namespace :demo do
 
@@ -45,9 +45,9 @@ namespace :data do
     end
 
     task :followings => [:environment, :prevent_production, :factories] do
-      Company.all.each do |c|
-        create_users(rand(2) + 1).each do |u|
-          Factory(:following, :followee => c, :user => u)
+      User.all.each do |u|
+        (rand(2) +5).times do
+          Following.follow!(u, Company.all.rand)
         end
       end
     end
@@ -56,7 +56,7 @@ namespace :data do
 
       member_users = User.find(:all, :conditions => ["id NOT IN (?)", Representative.all(:select => 'user_id').collect(&:user_id) ])
       Post.all.each do |p|
-        rand(5).times do
+        (rand(20) + 3).times do
           Factory(:comment, :commentable => p, :user => member_users.rand )
         end
       end

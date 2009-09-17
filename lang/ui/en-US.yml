@@ -1518,6 +1518,7 @@ en:
   active_representatives: Active Representatives
   representative_details: Representative details
   linked_in_url: LinkedIn
+  user_details: User details
   # en: delete_this_company: "Delete this company"
   delete_this_company: "Delete this company"
   # en: recent_company_post_comments: "Recent post comments"
@@ -1526,9 +1527,12 @@ en:
   # en: enter_company_domains: "Company domains"
   enter_company_domains: "Company domains"
   # en: followed_companies: "Followed companies"
-  followed_companies: "Followed companies"
+  followed_companies:
+    one: "{{user_name}} follows this company"
+    other: "{{user_name}} follows {{count}} companies"
   # en: followed_posts: "Followed post"
   followed_posts: "Followed conversations"
+  recent_posts_in_followed_companies: "Recent conversations from {{user_name}}'s followed companies" 
   # en: recent_company_blog_posts: "Recent conversations"
   recent_company_blog_posts: "Recent conversations"
   # en: about_company: "About Company"

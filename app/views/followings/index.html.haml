@@ -5,7 +5,7 @@
     -box :id => "followed_companies", :class => "company_list" do
       %h3
         = @followings.for_companies.count
-        =:followed_companies.l
+        =:followed_companies.l(:user_name => display_name(@user), :count => @followings.for_companies.count)
       %br
       - @followings.for_companies.limited.each do |following|
         =render :partial => "companies/company", :locals => { :company => following.followee }

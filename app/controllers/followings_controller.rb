@@ -4,22 +4,22 @@ class FollowingsController < BaseController
   before_filter :require_current_user, :only => [:create, :destroy]
 
   def index
-    @followings = Following.by_user(@user)
+    @followings = Following.by(@user)
   end
 
   def companies
-    @followings = Following.by_user(@user).for_companies.paginate(paging_params)
+    @followings = Following.by(@user).for_companies.paginate(paging_params)
   end
 
   def posts
-    @followings = Following.by_user(@user).for_posts.paginate(paging_params)
+    @followings = Following.by(@user).for_posts.paginate(paging_params)
   end
 
   def create
     @followee = params[:followee_type].classify.constantize.find(params[:followee_id])
-    @following = Following.new(:user => @user, :followee => @followee)
+    @following = Following.follow!(@user, @followee)
     respond_to do |format|
-      if @following.save
+      if !@following.new_record?
         format.html do
           flash[:notice] = :now_following.l_with_args(:followee => display_text(@followee))
           redirect_to user_followings_path(@user)

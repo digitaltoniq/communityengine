@@ -20,7 +20,9 @@ class Comment < ActiveRecord::Base
 
   # named_scopes
   named_scope :recent, :order => 'created_at DESC'
-
+  named_scope :by, lambda { |user|
+    { :conditions => {:user_id => user.id} }
+  }
   def self.find_photo_comments_for(user)
     Comment.find(:all, :conditions => ["recipient_id = ? AND commentable_type = ?", user.id, 'Photo'], :order => 'created_at DESC')
   end

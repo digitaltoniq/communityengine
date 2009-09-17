@@ -75,18 +75,11 @@ class UsersController < BaseController
     @recommended_posts = @user.recommended_posts
   end
   
-  def show  
-    @friend_count               = @user.accepted_friendships.count
-    @accepted_friendships       = @user.accepted_friendships.find(:all, :limit => 5).collect{|f| f.friend }
-    @pending_friendships_count  = @user.pending_friendships.count()
+  def show
 
-    @comments       = @user.comments.find(:all, :limit => 10, :order => 'created_at DESC')
-    @photo_comments = Comment.find_photo_comments_for(@user)    
-    @users_comments = Comment.find_comments_by_user(@user, :limit => 5)
-
-    @recent_posts   = @user.posts.find(:all, :limit => 2, :order => "published_at DESC")
-    @clippings      = @user.clippings.find(:all, :limit => 5)
-    @photos         = @user.photos.find(:all, :limit => 5)
+    @companies = Following.limited(12).by(@user).for_companies.with(:followee).collect(&:followee)
+    @recent_comments       = Comment.by(@user).limited(5).ordered('created_at DESC').limited(5)
+    @recent_posts_in_followed_companies = Company.posts_in(@companies).ordered('published_at DESC').limited(2)
     @comment        = Comment.new(params[:comment])
     
     @my_activity = Activity.recent.by_users([@user.id]).find(:all, :limit => 10) 

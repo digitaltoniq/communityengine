@@ -36,7 +36,7 @@ class CompaniesController < BaseController
     @post_comments       = @company.post_comments.ordered('created_at DESC').limited(10)
     #@post_comments = @company.post_comments.find(:all, :limit => 10, :order => 'created_at DESC')
     #@photo_comments = Comment.find_photo_comments_for(@user)
-    #@users_comments = Comment.find_comments_by_user(@user, :limit => 5)
+    #@users_comments = Comment.by(@user).limited(5)
     #
 
     @recent_posts   = @company.posts.ordered("published_at DESC").limited(2)

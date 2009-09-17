@@ -34,6 +34,22 @@ class Company < ActiveRecord::Base
 
   ## Class Methods
 
+  class << self
+
+    # Get a Post scope for all posts by a company rep
+    def posts
+      Post.scoped :joins => "left join representatives on representatives.user_id = posts.user_id"
+    end
+
+    # Get a Post scope for all posts for the given companies
+    def posts_in(*companies)
+      company_ids = companies.flatten.collect(&:id)
+      company_ids.any? ?
+              posts.scoped(:conditions => ["representatives.company_id IN (?)", company_ids]) :
+              Post.scoped(:conditions => '1 = 0')
+    end
+  end
+
   # override activerecord's find to allow us to find by name or id transparently
   # TODO: factor this out, needed for anything slugged
   def self.find(*args)
@@ -53,8 +69,7 @@ class Company < ActiveRecord::Base
   end
 
   def posts
-    Post.scoped :joins => "left join representatives on representatives.user_id = posts.user_id",
-                :conditions => ["representatives.company_id = ?", id]
+    self.class.posts_in(self)
   end
 
   def post_comments

@@ -9,21 +9,18 @@ class Following < ActiveRecord::Base
   ## Named scopes
 
   # TODO: need to support representative following, as well. Should we remove all Followee typing and just pass in?
+  named_scope :by, lambda { |user|
+    { :conditions => { :user_id => user.id } }
+  }
+  named_scope :for, lambda { |followee|
+    { :conditions => { :followee_type => followee.class.to_s, :followee_id => followee.id }}
+  }
+  named_scope :for_companies, :conditions => { :followee_type => Company.to_s }
+  named_scope :for_posts, :conditions => { :followee_type => Post.to_s }
 
-  named_scope :by_user, lambda { |user|
-    { :conditions => ["user_id = ?", user.id] }
-  }
-  named_scope :by_company, lambda { |company|
-    { :conditions => ["followee_id = ?", company.id] }
-  }
-  named_scope :for_companies, :conditions => ["followee_type = ?", "Company"]
-  named_scope :for_posts, :conditions => ["followee_type = ?", "Post"]
-  named_scope :limited, lambda { |*limit|
-    { :limit => limit.empty? ? 4 : limit }
-  }
-
+  # TODO: Shouldn't need this - instead use association (user.followings.for)
   def self.following_for(followee, follower)
-    find(:first, :conditions => ["followee_id = ? AND user_id = ? AND followee_type = ?", followee.id, follower.id, followee.class.name])
+    self.by(follower).for(followee).first
   end
 
   def self.following_exist?(followee, follower)
@@ -32,5 +29,9 @@ class Following < ActiveRecord::Base
 
   def self.can_follow?(followee, follower)
     not following_exist?(followee, follower)
+  end
+
+  def self.follow!(follower, followee)
+    create(:user => follower, :followee => followee) if can_follow?(followee, follower)
   end
 end

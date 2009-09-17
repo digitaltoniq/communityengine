@@ -5,7 +5,7 @@ class FollowersController < BaseController
 
   def index
     @followee = Company.find(params[:company_id])    # TODO: determine followed type based on context, don't assume company
-    @followings = Following.by_company(@followee).paginate(paging_params)
+    @followings = @followee.followings.paginate(paging_params)
   end
 
 end

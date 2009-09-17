@@ -5,7 +5,7 @@
     -box :id => "followed_companies" do
       %h3
         = @followings.total_entries
-        =:followed_companies.l
+        =:followed_companies.l(:user_name => display_name(@user), :count => @followings.total_entries)
       .pagination=will_paginate @company_followings
 
       .clear
