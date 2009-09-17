@@ -5,6 +5,7 @@ class CreateRepresentativeRoles < ActiveRecord::Migration
       t.timestamps
     end
 
+    # TODO: Move this to app:bootstrap=like task
     RepresentativeRole.enumeration_model_updates_permitted = true
     RepresentativeRole.create(:name => 'admin')
     RepresentativeRole.create(:name => 'poster')
