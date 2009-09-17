@@ -109,7 +109,7 @@
 
 
     -box :class => 'hfeed comments', :id => 'comments' do
-      %h3=:recent_company_post_comments.l
+      %h3=:recent_company_post_comments.l(:company_name => @company.name)
       %a#newest_comment
       = render :partial => 'comments/comment', :collection => @post_comments
       %span#more_comments_links= more_company_post_comments_links(@company)
