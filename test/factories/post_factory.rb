@@ -10,4 +10,5 @@ Factory.define :post do |u|
   u.association :user
   u.published_at { rand(7).days.ago }
   u.published_as 'live'
+  u.view_count { rand(10000) }
 end
