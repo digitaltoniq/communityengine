@@ -17,7 +17,7 @@ namespace :data do
     task :reset => ['db:revert', 'data:demo']
     
     task :companies => [:environment, :prevent_production, :factories] do
-      8.times do
+      25.times do
         Factory(:company)
         Company.delete_all("logo_id IS NULL") # RWD Factory girl circular dependency bug?
       end

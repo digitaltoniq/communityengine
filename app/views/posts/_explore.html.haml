@@ -1,0 +1,13 @@
+.yui-b
+  -box do
+    %h3= :explore_site.l :site => AppConfig.community_name
+
+  -box :class => "alt" do
+    %h3= :active_companies.l
+    -@active_companies.each do |company|
+      =render :partial => "companies/sidebar_company", :locals => {:company => company}
+
+  -box :class => "alt" do
+    %h3= :active_users.l
+    -@active_users.each do |user|
+      =render :partial => "users/sidebar_user", :locals => {:user => user}

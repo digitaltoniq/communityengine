@@ -36,8 +36,19 @@ class Representative < ActiveRecord::Base
   named_scope :recent, :order => 'representatives.created_at DESC'
   named_scope :active, :conditions => ["users.activated_at IS NOT NULL"],
               :joins => "left join users on representatives.user_id = users.id"
+  named_scope :for_users, lambda { |*users_or_ids|
+    { :conditions => users_or_ids.any? ? ["user_id IN (?)", users_or_ids.flatten] : '1 = 0'}
+  }
 
   ## Class Methods
+
+  class << self
+
+    # Get all users that are reps
+    def users
+      User.scoped :joins => "left join representatives on representatives.user_id = users.id"
+    end
+  end
 
   # override activerecord's find to allow us to find by name or id transparently
   def self.find(*args)
@@ -48,8 +59,8 @@ class Representative < ActiveRecord::Base
     end
   end
 
-  def self.for_user(user)
-    find_by_user_id(user.id )
+  def self.for_user(user_or_id)
+    find_by_user_id(user_or_id)
   end
 
   # Get the reps participating in the given post/commentable (minus the author of

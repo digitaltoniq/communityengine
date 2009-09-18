@@ -16,6 +16,9 @@ class CompaniesController < BaseController
     # cond, @search, @metro_areas, @states = Company.paginated_users_conditions_with_search(params)  # TODO discuss apprach
 
     @companies = Company.recent.with(:metro_area, :logo).paginate(paging_params)
+    respond_to do |format|
+      format.html { get_additional_companies_page_data }
+    end
     # @tags = Company.tag_counts :limit => 10
     # setup_metro_areas_for_cloud  # TODO: discuss -- why have sidebar here?
   end
@@ -208,24 +211,30 @@ class CompaniesController < BaseController
   end
 
   protected
-  
-    def admin_or_company_admin_required
-      company = Company.find(params[:id]) 
-      company && current_user && (current_user.admin? || company.company_admin?(current_user)) ? true : access_denied
-    end
 
-    def setup_metro_areas_for_cloud
-      @metro_areas_for_cloud = MetroArea.find(:all, :conditions => "companies_count > 0", :order => "companies_count DESC", :limit => 100)
-      @metro_areas_for_cloud = @metro_areas_for_cloud.sort_by{|m| m.name}
-    end
+  def admin_or_company_admin_required
+    company = Company.find(params[:id])
+    company && current_user && (current_user.admin? || company.company_admin?(current_user)) ? true : access_denied
+  end
 
-    def setup_locations_for(company)
-      metro_areas = states = []
+  def setup_metro_areas_for_cloud
+    @metro_areas_for_cloud = MetroArea.find(:all, :conditions => "companies_count > 0", :order => "companies_count DESC", :limit => 100)
+    @metro_areas_for_cloud = @metro_areas_for_cloud.sort_by{|m| m.name}
+  end
 
-      states = company.country.states if company.country
+  def setup_locations_for(company)
+    metro_areas = states = []
 
-      metro_areas = company.state.metro_areas.all(:order => "name") if company.state
+    states = company.country.states if company.country
 
-      return metro_areas, states
-    end
+    metro_areas = company.state.metro_areas.all(:order => "name") if company.state
+
+    return metro_areas, states
+  end
+
+  def get_additional_companies_page_data
+    @sidebar_right = true
+    @popular_posts = Post.find_popular(:limit => 5, :since => 5.days)
+    @active_users = User.active.with(:photos).find_by_activity({:limit => 5, :require_avatar => false})
+  end
 end

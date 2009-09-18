@@ -49,6 +49,7 @@ en:
   active: active
   #en: active_users: Active Users
   active_users: Active Users
+  active_companies: Active Companies
   #en: activity_from_your_network: Activity from your network
   activity_from_your_network: Activity from your network
   #en: ad_was_successfully_created: Ad was successfully created.

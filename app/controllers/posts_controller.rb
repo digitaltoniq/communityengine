@@ -175,18 +175,18 @@ class PostsController < BaseController
 
 
   def popular
-    @posts = Post.find_popular({:limit => 15, :since => 3.days})
+    @posts = Post.find_popular({:limit => 10, :since => 3.days})
 
-    @monthly_popular_posts = Post.find_popular({:limit => 20, :since => 30.days})
+#    @monthly_popular_posts = Post.find_popular({:limit => 20, :since => 30.days})
     
-    @related_tags = Tag.find_by_sql("SELECT tags.id, tags.name, count(*) AS count 
-      FROM taggings, tags 
-      WHERE tags.id = taggings.tag_id GROUP BY tags.id, tags.name");
+#    @related_tags = Tag.find_by_sql("SELECT tags.id, tags.name, count(*) AS count
+#      FROM taggings, tags
+#      WHERE tags.id = taggings.tag_id GROUP BY tags.id, tags.name");
 
     @rss_title = "#{AppConfig.community_name} "+:popular_posts.l
     @rss_url = popular_rss_url    
     respond_to do |format|
-      format.html # index.rhtml
+      format.html  { get_additional_posts_page_data }
       format.rss {
         render_rss_feed_for(@posts, { :feed => {:title => @rss_title, :link => popular_url},
           :item => {:title => :title, :link => Proc.new {|post| user_post_url(post.user, post)}, :description => :post, :pub_date => :published_at}
@@ -196,15 +196,15 @@ class PostsController < BaseController
   end
   
   def recent
-    @posts = Post.recent.find :all, :page => {:current => params[:page], :size => 20}
+    @posts = Post.recent.find :all, :page => {:current => params[:page], :size => 10}
 
-    @recent_clippings = Clipping.find_recent(:limit => 15)
-    @recent_photos = Photo.find_recent(:limit => 10)
+#    @recent_clippings = Clipping.find_recent(:limit => 15)
+#    @recent_photos = Photo.find_recent(:limit => 10)
     
     @rss_title = "#{AppConfig.community_name} "+:recent_posts.l
     @rss_url = recent_rss_url
     respond_to do |format|
-      format.html 
+      format.html { get_additional_posts_page_data }
       format.rss {
         render_rss_feed_for(@posts, { :feed => {:title => @rss_title, :link => recent_url},
           :item => {:title => :title, :link => Proc.new {|post| user_post_url(post.user, post)}, :description => :post, :pub_date => :published_at}
@@ -214,15 +214,15 @@ class PostsController < BaseController
   end
 
   def most_commented
-    @posts = Post.find_most_commented # TODO: more options
+    @posts = Post.find_most_commented(10, 5.days.ago)
 
-    @recent_clippings = Clipping.find_recent(:limit => 15)
-    @recent_photos = Photo.find_recent(:limit => 10)
+#    @recent_clippings = Clipping.find_recent(:limit => 15)
+#    @recent_photos = Photo.find_recent(:limit => 10)
 
     @rss_title = "#{AppConfig.community_name} "+:most_commented_posts.l
     @rss_url = most_commented_rss_url
     respond_to do |format|
-      format.html
+      format.html { get_additional_posts_page_data }
 # TODO
       
 #      format.rss do
@@ -267,5 +267,10 @@ class PostsController < BaseController
     end
     return @user
   end
-  
+
+  def get_additional_posts_page_data
+    @sidebar_right = true
+    @active_companies = Company.recently_active(:limit => 5)
+    @active_users = User.active.find_by_activity({:limit => 5, :require_avatar => false})
+  end
 end

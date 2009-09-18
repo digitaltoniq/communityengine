@@ -18,3 +18,5 @@
       %br.clear
       = will_paginate @companies
       /.pagination= paginating_links @companies, :params => params if @companies.page_count > 1
+
+= render :partial => 'explore'

@@ -3,7 +3,7 @@ class Company < ActiveRecord::Base
   acts_as_taggable
   acts_as_commentable
   has_private_messages
-  tracks_unlinked_activities [:logged_in, :updated_profile, :joined_the_site]
+  tracks_unlinked_activities [:updated_profile, :joined_the_site]
 
   # validation
   validates_length_of       :name,      :within => 1..100
@@ -47,6 +47,37 @@ class Company < ActiveRecord::Base
       company_ids.any? ?
               posts.scoped(:conditions => ["representatives.company_id IN (?)", company_ids]) :
               Post.scoped(:conditions => '1 = 0')
+    end
+
+    def register_activity(activity_item)
+      company = case activity_item.class.to_s
+        when 'Comment' then for_comment(activity_item)
+        when 'Post' then for_post(activity_item)
+      end
+      Activity.create(:item => company, :user_id => activity_item.user_id,
+                      :action => "#{activity_item.class.to_s.downcase}_published")
+    end
+
+    # TODO: will need to update when more than just posts can be commented on
+    def for_comment(comment)
+      for_post(comment.commentable)
+    end
+
+    def for_post(post)
+      rep = Representative.for_user(post.user_id)
+      rep.company if rep
+    end
+
+    def recently_active(opts = {})
+      since = opts[:since] || 5.days.ago
+      Activity.since(since).
+              of_item_type('Company').
+              find(:all,
+                   :select => 'activities.item_id, activities.item_type, count(*) as count',
+                   :group => 'activities.item_id',
+                   :order => 'count DESC',
+                   :include => :item,
+                   :limit => (opts[:limit] || 30)).collect(&:item)
     end
   end
 

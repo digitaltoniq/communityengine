@@ -12,9 +12,9 @@
       = render :partial => 'posts/post', :collection => @posts
 
 .yui-b  
-  -box do 
+  -box do
     %h3= :explore_site.l :site => AppConfig.community_name
-    %ul.list.checks
+    -#%ul.list.checks
       - Category.find(:all).each do |c|
         %li= link_to c.name, category_path(c)
       %li= link_to :whats_popular.l, popular_url, {:class => 'popular'}
@@ -22,7 +22,7 @@
         DJS
         %li= link_to :find_an_expert.l, skills_path, {:class => 'users'}
 
-  -box :class => "alt" do 
+  -#box :class => "alt" do 
     %h3
       = :whats_hot.l
       
@@ -38,6 +38,11 @@
         =:featured_writer.l
       -@featured_writers.each do |user|
         =render :partial => "users/sidebar_user", :locals => {:user => user}
+
+  -box :class => "alt" do
+    %h3= :active_companies.l
+    -@active_companies.each do |company|
+      =render :partial => "companies/sidebar_company", :locals => {:company => company}      
 
   -box :class => "alt" do 
     %h3= :active_users.l

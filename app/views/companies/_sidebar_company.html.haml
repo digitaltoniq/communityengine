@@ -1,0 +1,8 @@
+%dl.vcard
+  %dt.photo
+    = link_to image_tag(company.logo_photo_url(:thumb), :alt => "#{company}", :width => '50', :height => '50'), company_path(company)
+  %dd.fn
+    =link_to company, company_path(company), :class => 'url'
+  %dd
+    - if company.description
+      %p= truncate_words( company.description, 9, '...')

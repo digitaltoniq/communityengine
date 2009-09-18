@@ -34,8 +34,7 @@ class BaseController < ApplicationController
   end
 
   def site_index    
-    @posts = Post.find_recent(:limit => 20)
-
+    @posts = Post.recent.limited(10)
     @rss_title = "#{AppConfig.community_name} "+:recent_posts.l
     @rss_url = rss_url
     respond_to do |format|     
@@ -141,17 +140,18 @@ class BaseController < ApplicationController
     @sidebar_right = true
     @homepage_features = HomepageFeature.find_features
     @homepage_features_data = @homepage_features.collect {|f| [f.id, f.public_filename(:large) ]  }    
-    
+
+    @active_companies = Company.recently_active(:limit => 5)
     @active_users = User.active.find_by_activity({:limit => 5, :require_avatar => false})
-    @featured_writers = User.find_featured
+#    @featured_writers = User.find_featured
 
-    @featured_posts = Post.find_featured
+#    @featured_posts = Post.find_featured
     
-    @topics = Topic.find(:all, :limit => 5, :order => "replied_at DESC")
+#    @topics = Topic.find(:all, :limit => 5, :order => "replied_at DESC")
 
-    @active_contest = Contest.get_active
-    @popular_posts = Post.find_popular({:limit => 10})    
-    @popular_polls = Poll.find_popular(:limit => 8)
+#    @active_contest = Contest.get_active
+#    @popular_posts = Post.find_popular({:limit => 10})
+#    @popular_polls = Poll.find_popular(:limit => 8)
   end
 
 

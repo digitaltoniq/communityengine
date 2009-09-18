@@ -164,7 +164,10 @@ class User < ActiveRecord::Base
       :joins => "LEFT JOIN users ON users.id = activities.user_id",
       :limit => options[:limit]
       )
-    activities.map{|a| find(a.user_id) }
+    user_ids = activities.collect(&:user_id)
+    user_ids.any? ?
+            User.scoped(:conditions => ["users.id IN (?)", user_ids]) :
+            User.recent.limited(options[:limit])
   end  
     
   def self.find_featured
