@@ -667,7 +667,7 @@ padding-left: 0;
 #CommunityFooter p{
 float: right;
 padding: 2px 0 2px 120px;
-background: url(/plugin_assets/community_engine/images/logo.gif) no-repeat left center;
+/*background: url(/plugin_assets/community_engine/images/logo.gif) no-repeat left center;*/
 }
 
 /* =============================================== */
