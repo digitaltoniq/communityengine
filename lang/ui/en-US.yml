@@ -1505,6 +1505,8 @@ en:
   
   # Ensuring overridden
   community_tagline: Authentic Conversations with Companies.
+  
+  could_not_find_item: "We're sorry, we couldn't find the requested {{item_name}}."
 
   #en: company: Company
   company: Company

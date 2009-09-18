@@ -1,6 +1,13 @@
 require "RMagick"
 
 class CompaniesController < BaseController
+
+  # Trying to clean up RESTfully
+  inherit_resources
+  respond_to :html
+
+  before_filter :ensure_valid_resource, :only => [:show, :dashboard, :edit, :update, :destroy]
+
   uses_tiny_mce(:options => AppConfig.default_mce_options.merge({:editor_selector => "rich_text_editor"}),
     :only => [:new, :create, :update, :edit, :welcome_about])
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
@@ -11,74 +18,31 @@ class CompaniesController < BaseController
                                               #:welcome_photo, :welcome_about, :welcome_invite, :deactivate,
                                               # :crop_profile_photo
                                               ]
-
-  def index
-    # cond, @search, @metro_areas, @states = Company.paginated_users_conditions_with_search(params)  # TODO discuss apprach
-
-    @companies = Company.recent.with(:metro_area, :logo).paginate(paging_params)
-    respond_to do |format|
-      format.html { get_additional_companies_page_data }
-    end
-    # @tags = Company.tag_counts :limit => 10
-    # setup_metro_areas_for_cloud  # TODO: discuss -- why have sidebar here?
-  end
+   def index
+     index! { get_additional_companies_page_data }
+   end
 
   def dashboard
-    @company = Company.find(params[:id])
-    #@network_activity = @company.network_activity
-    #@recommended_posts = @company.recommended_posts
+    respond_to(:with => resource)
   end
   
   def show
-    @company = Company.find(params[:id])
-
-    #@friend_count               = @company.accepted_friendships.count
-    #@accepted_friendships       = @company.accepted_friendships.find(:all, :limit => 5).collect{|f| f.friend }
-    #@pending_friendships_count  = @company.pending_friendships.count()
-    #
-    @post_comments       = @company.post_comments.ordered('created_at DESC').limited(10)
-    #@post_comments = @company.post_comments.find(:all, :limit => 10, :order => 'created_at DESC')
-    #@photo_comments = Comment.find_photo_comments_for(@user)
-    #@users_comments = Comment.by(@user).limited(5)
-    #
-
-    @recent_posts   = @company.posts.ordered("published_at DESC").limited(2)
-    #@recent_posts = @company.posts.find(:all, :limit => 2, :order => "published_at DESC")
-
-    #@clippings      = @user.clippings.find(:all, :limit => 5)
-    #@photos         = @user.photos.find(:all, :limit => 5)
-    #@comment        = Comment.new(params[:comment])
-    #
-    #@my_activity = Activity.recent.by_users([@user.id]).find(:all, :limit => 10)
-    #
-    #update_view_count(@user) unless current_user && current_user.eql?(@user)
-
-  end
-  
-  def new
-    @company         = Company.new(params[:company])
-    render :action => 'new', :layout => 'beta' and return if AppConfig.closed_beta_mode    
-  end
-
-  def create
-    @company = Company.new(params[:company])
-
-   if @company.save
-     # TODO flash[:notice] = :company_signup_thanks.l_with_args(:email => @user.email)
-     # TODO UserNotifier.deliver_representative_signup_notification(@user)
-     # redirect_to signup_completed_company_path(@company)
-     redirect_to company_path(@company)
-    else
-      render :action => 'new'
+    # TODO: Move these auxiliary items up to view or filter?
+    show! do
+      @post_comments = @company.post_comments.ordered('created_at DESC').limited(10)
+      @recent_posts = @company.posts.ordered("published_at DESC").limited(2)
     end
   end
     
   def edit
-    @company = Company.find(params[:id])
-    @metro_areas, @states = setup_locations_for(@company)
-    @logo = Logo.new
+    # TODO: Move out of controller
+    edit! do
+      @metro_areas, @states = setup_locations_for(@company)
+      @logo = Logo.new
+    end
   end
-  
+
+  # TODO: This is fugly, clean up.
   def update
     @company = Company.find(params[:id])
     @company.attributes = params[:company]
@@ -112,8 +76,10 @@ class CompaniesController < BaseController
   rescue ActiveRecord::RecordInvalid
     render :action => 'edit'
   end
-  
+
+  # TODO: Broken
   def destroy
+    resource
     unless @company.admin?
       @company.destroy
       flash[:notice] = :the_company_was_deleted.l
@@ -211,6 +177,10 @@ class CompaniesController < BaseController
   end
 
   protected
+
+   def collection
+     @companies ||= end_of_association_chain.recent.with(:metro_area, :logo).paginate(paging_params)
+   end
 
   def admin_or_company_admin_required
     company = Company.find(params[:id])

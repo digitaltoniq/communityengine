@@ -84,12 +84,15 @@ class BaseController < ApplicationController
   def determine_user
     # DT: If representative_id is given, determine the user and stuff params with the id 
     if params[:company_id]
-      user = Representative.find(params[:representative_id] || params[:id]).user
-      params[:user_id] = user.id
+      rep = Representative.find(params[:representative_id] || params[:id])
+      if rep
+        user = rep.user
+        params[:user_id] = user.id
+        return user
+      end
     else
-      user = User.active.find(params[:user_id] || params[:id])
+      return User.active.find(params[:user_id] || params[:id])
     end
-    user
   end
 
   def find_user
@@ -101,9 +104,13 @@ class BaseController < ApplicationController
       end
       return @user
     else
-      flash[:error] = :please_log_in.l
-      redirect_to :controller => 'sessions', :action => 'new'
-      return false
+      if logged_in?
+        flash[:error] = :could_not_find_item.l(:item_name => controller_name.singularize)
+        redirect_to application_url
+      else
+        flash[:error] = :please_log_in.l
+        redirect_to :controller => 'sessions', :action => 'new'
+      end
     end
   end
   
@@ -202,6 +209,13 @@ class BaseController < ApplicationController
     r = Representative.find_by_user_id(user.id)
     r ? edit_company_representative_path(r.company, r, *args) : super
   end
-  # End user paths  
+  # End user paths
+
+  def ensure_valid_resource
+    unless resource
+      flash[:error] = :could_not_find_item.l(:item_name => resource_class.to_s.downcase)
+      redirect_to application_path
+    end
+  end
 
 end

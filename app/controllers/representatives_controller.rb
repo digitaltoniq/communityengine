@@ -1,8 +1,12 @@
 class RepresentativesController < BaseController
-  #before_filter :login_required, :except => [:accepted, :index]
-  #before_filter :find_user, :only => [:accepted, :pending, :denied]
-  #before_filter :require_current_user, :only => [:accept, :deny, :pending, :destroy]
+
+  # Trying to clean up RESTfully
+  inherit_resources
+  actions :show
+  respond_to :html
+
   before_filter :find_user, :only => [:show]
+  before_filter :ensure_valid_resource, :only => [:show]
 
   include Viewable
   cache_sweeper :taggable_sweeper, :only => [:activate, :update, :destroy]
@@ -75,14 +79,11 @@ class RepresentativesController < BaseController
   end
 
   def show
-
-    @representative = Representative.for_user(@user)
-    @recent_comments       = Comment.ordered('created_at DESC').limited(10).find_all_by_user_id(@user.id)
-    @recent_posts   = @user.posts.ordered("published_at DESC").limited(2)
-
-    @my_activity = Activity.recent.by_users([@user.id]).limited(10)
-
-    # TODO update_view_count(@user) unless current_user && current_user.eql?(@user)
+    show! do
+      @recent_comments       = Comment.ordered('created_at DESC').limited(10).find_all_by_user_id(@user.id)
+      @recent_posts   = @user.posts.ordered("published_at DESC").limited(2)
+      # TODO update_view_count(@user) unless current_user && current_user.eql?(@user)
+    end
   end
 
 
@@ -203,4 +204,10 @@ class RepresentativesController < BaseController
 
       return metro_areas, states
     end
+
+  # Inherited resource overrides
+  # NOTE: Will need to make better once nesting is supported?
+  def resource
+    @representative ||= Representative.for_user(@user)
+  end
 end
