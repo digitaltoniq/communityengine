@@ -11,7 +11,7 @@ class PostsController < BaseController
   end  
                            
   before_filter :login_required, :only => [:new, :edit, :update, :destroy, :create, :manage]
-  before_filter :find_user, :only => [:new, :edit, :index, :show, :update_views, :manage]
+  before_filter :find_user, :only => [:new, :create, :edit, :index, :show, :update_views, :manage]
   before_filter :require_ownership_or_moderator, :only => [:edit, :update, :destroy, :create, :manage, :new]
 
   skip_before_filter :verify_authenticity_token, :only => [:update_views, :send_to_friend] #called from ajax on cached pages 
