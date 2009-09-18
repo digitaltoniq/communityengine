@@ -24,7 +24,7 @@
 
   - unless @companies.empty?
     -box :id => 'followed_companies' do
-      %h3=:followed_companies.l(:user_name => display_name(@user), :count => @companies.size)
+      %h3=:followed_companies.l(:user_name => h(@user), :count => @companies.size)
       - @companies.in_groups_of(4).each do |companies_group|
         %span
           - companies_group.each do |company|
@@ -93,12 +93,12 @@
 
     - unless @recent_posts_in_followed_companies.empty?
       -box :id => "posts" do
-        %h3=:recent_posts_in_followed_companies.l(:user_name => display_name(@user))
+        %h3=:recent_posts_in_followed_companies.l(:user_name => h(@user))
         = render :partial => 'posts/post', :collection => @recent_posts_in_followed_companies
         
     - unless @recent_comments.empty?
       -box :id => "comments" do
-        %h3=:recent_user_comments.l(:user_name => display_name(@user))
+        %h3=:recent_user_comments.l(:user_name => h(@user))
         = render :partial => 'comments/comment', :collection => @recent_comments
 
     -#

@@ -3,6 +3,7 @@ class Post < ActiveRecord::Base
   acts_as_taggable
   acts_as_activity :user, :if => Proc.new{|r| r.is_live?}
   acts_as_publishable :live, :draft
+  acts_as_label
 
   belongs_to :user
   belongs_to :category

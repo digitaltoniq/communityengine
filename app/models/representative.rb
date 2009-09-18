@@ -1,5 +1,6 @@
 class Representative < ActiveRecord::Base
   acts_as_slugable :source_column => :full_name, :scope => :company
+  acts_as_label
 
   attr_protected :representative_role_id
 

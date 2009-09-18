@@ -1,10 +1,10 @@
 -if comment.user
   .hentry{:id => "comment_#{comment.id}"}
     .vcard.author
-      %h5= link_to image_tag(comment.user.avatar_photo_url(:thumb), :height => '50', :width => '50', :alt => "#{display_name(comment.user)}"), user_path(comment.user), :rel => 'bookmark', :class => 'photo', :title => "#{display_name(comment.user)}'s profile"
+      %h5= link_to image_tag(comment.user.avatar_photo_url(:thumb), :height => '50', :width => '50', :alt => "#{comment.user}"), user_path(comment.user), :rel => 'bookmark', :class => 'photo', :title => "#{comment.user}'s profile"
       %ul
         %li.fn
-          = link_to display_name(comment.user), user_path(comment.user), :class => 'url'
+          = link_to comment.user, user_path(comment.user), :class => 'url'
         %li.update
           %a{"href"=> commentable_url(comment), "rel"=>"bookmark"}
             %abbr.published{"title"=>"#{comment.created_at}"}

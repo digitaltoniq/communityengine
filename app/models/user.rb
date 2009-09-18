@@ -11,7 +11,8 @@ class User < ActiveRecord::Base
   acts_as_taggable  
   acts_as_commentable
   has_private_messages
-  tracks_unlinked_activities [:logged_in, :invited_friends, :updated_profile, :joined_the_site]  
+  tracks_unlinked_activities [:logged_in, :invited_friends, :updated_profile, :joined_the_site]
+  acts_as_label
   
   #callbacks  
   before_save   :encrypt_password, :whitelist_attributes
@@ -438,6 +439,11 @@ class User < ActiveRecord::Base
   
   def display_name
     login
+  end
+
+  def to_label
+    @representative ||= Representative.for_user(self)
+    @representative ? @representative.to_label : login
   end
   
   def admin?

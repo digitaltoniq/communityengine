@@ -115,7 +115,7 @@
 
     - unless @recent_comments.empty?
       -box :id => "comments" do
-        %h3=:recent_user_comments.l(:user_name => display_name(@user))
+        %h3=:recent_user_comments.l(:user_name => h(@user))
         = render :partial => 'comments/comment', :collection => @recent_comments
 
     -#

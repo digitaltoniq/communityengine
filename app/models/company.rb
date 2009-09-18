@@ -4,6 +4,7 @@ class Company < ActiveRecord::Base
   acts_as_commentable
   has_private_messages
   tracks_unlinked_activities [:updated_profile, :joined_the_site]
+  acts_as_label
 
   # validation
   validates_length_of       :name,      :within => 1..100
@@ -92,8 +93,6 @@ class Company < ActiveRecord::Base
   end
 
   ## Instance Methods
-
-  def to_s; name; end
 
   def accepts_email?(email)
     email && email.include?("@") && domains.downcase.include?(email.split('@').last.downcase)

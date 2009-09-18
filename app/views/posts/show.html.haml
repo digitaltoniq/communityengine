@@ -8,7 +8,7 @@
 #yui-main
   .yui-b
     -box :class => 'hfeed' do  
-      %h3=:users_blog.l :user=>  display_name(@user)
+      %h3=:users_blog.l :user=>  h(@user)
       .hentry.main
         %h4.entry-title= link_to @post.title, user_post_path(@user, @post), :rel => 'bookmark'
         .vcard.author
@@ -78,8 +78,8 @@
       %ul.list.user
         - participating_representatives.each do |representative|
           %li
-            = link_to image_tag(representative.avatar_photo_url(:thumb), :height => '50', :width => '50', :alt => "#{display_name(representative)}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{display_name(representative)}'s profile"
-            = link_to display_name(representative), representative_path(representative), :class => 'url'
+            = link_to image_tag(representative.avatar_photo_url(:thumb), :height => '50', :width => '50', :alt => "#{h(representative)}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{h(representative)}'s profile"
+            = link_to h(representative), representative_path(representative), :class => 'url'
 / sidebar
 
 %script{:type=>"text/javascript", :charset=>"utf-8"}

@@ -27,7 +27,7 @@
       - @users.each do |user|
         %tr{:id => "user_#{user.id}"}
           %td
-            = link_to h(display_name(user)), user_path(user)
+            = link_to h(user), user_path(user)
           %td
             = h user.email
           %td
