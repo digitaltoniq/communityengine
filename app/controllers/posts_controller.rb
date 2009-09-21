@@ -107,6 +107,7 @@ class PostsController < BaseController
     @post = Post.new(params[:post])
     @post.user = @user
     @post.tag_list = params[:tag_list] || ''
+    @categories = Category.find(:all)
     
     respond_to do |format|
       if @post.save
