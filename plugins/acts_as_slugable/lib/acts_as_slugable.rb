@@ -61,7 +61,7 @@ module Multiup
             
             #{scope_condition_method}
           
-            after_validation :create_slug
+            before_validation :create_slug
           EOV
         end
       end
