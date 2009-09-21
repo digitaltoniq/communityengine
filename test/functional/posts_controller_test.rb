@@ -83,7 +83,7 @@ class PostsControllerTest < ActionController::TestCase
   def test_should_update_post
     login_as :quentin
     put :update, :id => posts(:funny_post).id, :user_id => users(:quentin).id, :post => { :title => "changed_name" }
-    assert_redirected_to user_post_path(users(:quentin), assigns(:post))
+    assert_redirected_to post_path(assigns(:post))
     assert_equal assigns(:post).title, "changed_name"
   end
 

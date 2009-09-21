@@ -10,7 +10,7 @@
       - case activity.item_type
         - when 'Post'
           =:wrote_a_post.l
-          = link_to activity.item.title, user_post_path(activity.item.user, activity.item)
+          = link_to activity.item.title, post_path(activity.item)
         - when 'Photo'
           =:uploaded_a_photo.l
           = link_to image_tag(activity.item.public_filename(:thumb), :width => '50px'), user_photo_path(activity.item.user, activity.item)

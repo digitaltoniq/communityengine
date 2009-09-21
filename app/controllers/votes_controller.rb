@@ -4,7 +4,7 @@ class VotesController < BaseController
   
   def new
     @post = Post.find(params[:post_id])
-    redirect_to user_post_path(@post.user, @post)
+    redirect_to post_path(@post)
   end
   
   def create

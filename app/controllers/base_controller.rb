@@ -9,7 +9,7 @@ class BaseController < ApplicationController
   before_filter :login_from_cookie  
   skip_before_filter :verify_authenticity_token, :only => :footer_content
   helper_method :commentable_url
-  helper_method :user_path, :user_post_path, :user_posts_path, :edit_user_path, :display_text # DigitalToniq
+  helper_method :user_path, :post_path, :user_posts_path, :edit_user_path, :display_text # DigitalToniq
 
   caches_action :site_index, :footer_content, :if => Proc.new{|c| c.cache_action? }
   def cache_action?
@@ -190,9 +190,9 @@ class BaseController < ApplicationController
   end
 
   # The following automatically routes user paths to representative paths if user is wrapped by representative
-  def user_post_path(user, post)
-    r = Representative.find_by_user_id(user.id)
-    r ? company_representative_post_path(r.company, r, post) : super
+  def post_path(post)
+    r = Representative.for_user(post.user_id)
+    r ? company_representative_post_path(r.company, r, post) : user_post_path(post.user_id, post)
   end
 
   def user_path(user)

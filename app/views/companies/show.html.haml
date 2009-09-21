@@ -95,7 +95,7 @@
       -box :id => "posts" do
         %h3=:recent_company_blog_posts.l
         = render :partial => 'posts/post', :collection => @recent_posts
-        %h6.right.all= link_to :view_company_blog.l, company_posts_path(@company)
+        %h6.right.all= link_to :view_company_blog.l, posts_company_path(@company)
         
     -#
       DJS

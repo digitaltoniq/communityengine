@@ -136,23 +136,23 @@ class CompaniesController < BaseController
       cond.append ['category_id = ?', @category.id]
     end
 
-    @posts = @company.posts.recent.find :all, :conditions => cond.to_sql, :page => {:size => 10, :current => params[:page]}
+    @posts = @company.posts.recent.scoped(:conditions => cond.to_sql).paginate(paging_params)
 
     # @is_current_company = @company.eql?(current_company)
 
     @popular_posts = @company.posts.find(:all, :limit => 10, :order => "view_count DESC")
 
     @rss_title = "#{AppConfig.community_name}: #{@company.name}'s posts"
-    @rss_url = company_posts_path(@company, :format => :rss)
+    @rss_url = posts_company_path(@company, :format => :rss)
 
     respond_to do |format|
       format.html # index.rhtml
       format.rss do
         render_rss_feed_for(@posts,
-                            { :feed => {:title => @rss_title, :link => url_for(:controller => 'posts', :action => 'index', :company_id => @company) },
+                            { :feed => {:title => @rss_title, :link => @rss_url },
                               :item => {:title => :title,
                                         :description => :post,
-                                        :link => Proc.new {|post| company_post_url(post.company, post)},
+                                        :link => Proc.new {|post| post_path(post)},
                                         :pub_date => :published_at} })
       end
     end

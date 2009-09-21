@@ -23,4 +23,4 @@
 
       = render :partial => 'posts/post', :collection => @posts
 
-      .pagination=paginating_links @posts if @posts.page_count > 1
+      .pagination= will_paginate @posts
