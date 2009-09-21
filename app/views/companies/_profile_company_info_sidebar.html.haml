@@ -56,7 +56,7 @@
 
   %h3=:representatives.l
   %ul.list.user
-    - @company.representatives.each do |representative|
+    - @company.representatives.active.each do |representative|
       %li
         = link_to image_tag(representative.avatar_photo_url(:thumb), :height => '50', :width => '50', :alt => "#{representative}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{representative}'s profile"
         = link_to h(representative), representative_path(representative), :class => 'url'

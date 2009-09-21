@@ -27,7 +27,7 @@ class Representative < ActiveRecord::Base
 
   #  TODO: Note, method_missing will not work, attributes= fails, etc.
   delegate :avatar_photo_url, :this_months_posts, :last_months_posts, :location, :full_location,
-           :recent, :active, :tagged_with, :invite_code, :invite_code=, :birthday, :birthday=,
+           :recent, :active?, :tagged_with, :invite_code, :invite_code=, :birthday, :birthday=,
            :login, :login=, :email, :email=, :password, :password=, :password_confirmation, :password_confirmation=,
            :zip, :zip=, :description, :description=, :country, :country=, :state, :state=, :metro_area, :metro_area=,
            :invitations, :posts, :photos, :avatar, :avatar=, :tag_list, :tag_list=, :role, :role=,
