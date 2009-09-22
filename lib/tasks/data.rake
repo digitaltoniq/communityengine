@@ -24,6 +24,14 @@ namespace :data do
     end
 
     task :representatives => [:environment, :prevent_production, :factories] do
+
+      # Create an easily remember company users
+      c = Company.all.rand
+      RepresentativeRole.all.each do |role|
+        Factory(:representative, :company => c, :user => Factory(:user, :login => role.name), :representative_role => role)
+      end
+
+      # Fill in with random reps 
       Company.all.each do |c|
         create_users(rand(5) + 2).each_with_index do |u, ndx|
           Factory(:representative, :company => c, :user => u,
@@ -73,8 +81,9 @@ namespace :data do
   namespace :default do
     
     task :users => [:environment, :factories] do
-      #, 'ryanmickle@gmail.com'
-      ['ryan@digitaltoniq.com', 'dsnider@digitaltoniq.com'].each do |f|
+      users = ['ryan@digitaltoniq.com', 'dsnider@digitaltoniq.com']
+      users << 'ryanmickle@gmail.com' if Rails.env.client? or Rails.env.production?
+      users.each do |f|
         Factory(:user, :email => f, :login => f.split('@').first, :role => Role[:admin])
         User.delete_all("avatar_id IS NULL") # RWD Factory girl circular dependency bug?
       end
