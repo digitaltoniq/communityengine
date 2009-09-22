@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
   # validation
   validates_length_of       :name,      :within => 1..100
   validates_uniqueness_of   :name,      :case_sensitive => false
-  validates_format_of       :name,      :with => /^[\sA-Za-z0-9_,-]+$/
+#  validates_format_of       :name,      :with => /^[\sA-Za-z0-9'_,-]+$/
   validates_exclusion_of    :url_slug, :in => AppConfig.reserved_company_names
   # validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :url_slug
