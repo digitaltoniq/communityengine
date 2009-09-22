@@ -15,7 +15,7 @@
                 %td{:width => '10px'}
                   %fieldset.inline= check_box_tag "delete[]", message.id
                 %td{:width => '60px'}
-                  .photo= link_to image_tag( message.recipient.avatar_photo_url(:thumb), "height"=>"50px", "alt"=>"#{message.recipient.login}", "width"=>"50px" ), user_path(message.recipient), :title => "#{message.recipient.login}'s " + :profile.l
+                  .photo= link_to image_tag( message.recipient.avatar_photo_url(:small), "height"=>"50px", "alt"=>"#{message.recipient.login}", "width"=>"50px" ), user_path(message.recipient), :title => "#{message.recipient.login}'s " + :profile.l
 
                 %td
                   = link_to h(message.subject), user_message_path(@user, message)                  

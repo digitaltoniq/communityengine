@@ -2,7 +2,7 @@
   %h3=:author.l
   %dl.vcard
     %dt.photo
-      = link_to image_tag( user.avatar_photo_url(:thumb), "height"=>"50", "alt"=>"#{h(user)}", "width"=>"50" ), user_path(user), :title => "#{h(user)}'s"+ :profile.l
+      = link_to image_tag( user.avatar_photo_url(:small), "height"=>"50", "alt"=>"#{h(user)}", "width"=>"50" ), user_path(user), :title => "#{h(user)}'s"+ :profile.l
     %dd.fn
       = link_to h(user), user_path(user), :class => 'url'
       = " <small>(" + :featured_writer.l + ")</small>" if user.featured_writer?        

@@ -3,7 +3,7 @@ xml.instruct!
 xml.gallery do 
   xml.album :title=>:photos.l, :lgPath=>"", :tnPath=>"" do 
     @photos.each do |photo|
-      xml.img :src=> photo.public_filename(:large), :tn=> photo.public_filename(:thumb), :link => user_photo_url(@user, photo)
+      xml.img :src=> photo.public_filename(:large), :tn=> photo.public_filename(:small), :link => user_photo_url(@user, photo)
     end
   end
 end

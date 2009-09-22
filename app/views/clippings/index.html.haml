@@ -24,7 +24,7 @@
 
         - @clippings.each do |clipping|
           %a{"href"=>"#{user_clipping_url(@user, clipping) }"}
-            %img.polaroid.clipping{"class"=>"polaroid clipping", "src"=>"#{h clipping.image_uri(:thumb) }"}/
+            %img.polaroid.clipping{"class"=>"polaroid clipping", "src"=>"#{h clipping.image_uri(:small) }"}/
       - else
         %p= @is_current_user ? :you_have_no_clippings_use_the_bookmarklet_on_the_right_to_add_some.l : :no_clippings_yet.l
 

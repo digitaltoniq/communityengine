@@ -37,14 +37,14 @@
       %br.clear
       %h3=:photos.l
       - @photos.each do |photo|
-        = link_to image_tag(photo.public_filename(:thumb), :title => "#{photo.description} ("+:uploaded_by.l+" #{photo.user.login})", :class => "polaroid"), user_photo_path(photo.user, photo)
+        = link_to image_tag(photo.public_filename(:small), :title => "#{photo.description} ("+:uploaded_by.l+" #{photo.user.login})", :class => "polaroid"), user_photo_path(photo.user, photo)
       %h6.all= link_to :all_photos_tagged.l(:tag_name => @tags_raw), show_tag_type_path(:id => @tags_raw, :type => 'Photo') unless params[:type]
       
     - if @users.any?
       .user
         %h3=:users.l
         - @users.each do |user|
-          = link_to image_tag(user.avatar_photo_url(:thumb), :class => "polaroid"), user_path(user), :title => user.login
+          = link_to image_tag(user.avatar_photo_url(:small), :class => "polaroid"), user_path(user), :title => user.login
         %h6.all= link_to :all_users_tagged.l(:tag_name => @tags_raw), show_tag_type_path(:id => @tags_raw, :type => 'User') unless params[:type]
 
 

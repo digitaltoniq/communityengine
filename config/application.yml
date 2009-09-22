@@ -42,7 +42,7 @@ photo:
     min_size: 1    
     #size in megabytes
     max_size: 3
-    thumbnails: {thumb: "100x100!", medium: "290x320!"}
+    thumbnails: {small: "100x100!", medium: "290x320!"}
     #options - 's3', 'file_system', 'db_system' - see attachment_fu for details
     storage: 'file_system'
     path_prefix: 'public/system/photos'

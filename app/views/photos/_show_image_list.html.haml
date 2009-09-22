@@ -5,8 +5,8 @@
         .thumbs
           = :insert.l + ":"
           %br
-          %a{:href=>p.public_filename(:thumb), :alt => p.display_name}
-            = :thumb.l
+          %a{:href=>p.public_filename(:small), :alt => p.display_name}
+            = :small.l
           %a{:href=>p.public_filename(:medium), :alt => p.display_name}
             = :medium.l
           %a{:href=>p.public_filename(), :alt => p.display_name}
@@ -15,7 +15,7 @@
           %a{:href=>'#', :onclick=>"$(this).up('li').removeClassName('selected');return false;", :style => 'float:right; font-size: 10px;'}
             = :cancel.l
         %a{:href=>'#', :onclick=>"select_image(this);return false;"}
-          = image_tag( p.public_filename(:thumb), :alt => p.display_name )
+          = image_tag( p.public_filename(:small), :alt => p.display_name )
           
   %script{:type => 'text/javascript'}
     :plain
