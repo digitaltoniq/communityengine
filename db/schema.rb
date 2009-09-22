@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090916175001) do
+ActiveRecord::Schema.define(:version => 20090921200851) do
 
   create_table "activities", :force => true do |t|
     t.integer  "user_id"
@@ -159,6 +159,19 @@ ActiveRecord::Schema.define(:version => 20090916175001) do
   end
 
   add_index "favorites", ["user_id"], :name => "fk_favorites_user"
+
+  create_table "feature_images", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "filename"
+    t.string   "content_type"
+    t.integer  "parent_id"
+    t.string   "thumbnail"
+    t.integer  "size"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "followings", :force => true do |t|
     t.integer  "user_id"

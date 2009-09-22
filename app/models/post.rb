@@ -11,6 +11,7 @@ class Post < ActiveRecord::Base
   has_many   :polls, :dependent => :destroy
   has_many :favorites, :as => :favoritable, :dependent => :destroy
   has_many :followings, :as => :followee
+  has_one :photo, :class_name => 'FeatureImage', :dependent => :destroy
   
   validates_presence_of :raw_post
   validates_presence_of :title
@@ -147,7 +148,11 @@ class Post < ActiveRecord::Base
       :raw_post => "<a href='#{params[:uri]}'>#{params[:uri]}</a>#{params[:selection] ? "<p>#{params[:selection]}</p>" : ''}"
       )
   end
-  
+
+  def feature_image(size = :medium)
+    photo ? photo.public_filename(size) : user.avatar_photo_url(size)
+  end
+
   def image_for_excerpt
     first_image_in_body || user.avatar_photo_url(:medium)  
   end
