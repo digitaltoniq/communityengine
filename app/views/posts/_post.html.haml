@@ -5,7 +5,7 @@
   .vcard.author
     %h5
       %a{:href=>"#{post_path(post)}", :class=>"photo", :rel=>"bookmark"}
-        =image_tag((post.first_image_in_body || post.user.avatar_photo_url(:thumb)), :alt=>"", :width=>"50", :height=>"50")
+        =image_tag(post.feature_image(:small), :alt=>"", :width=>"50", :height=>"50")
 
     %ul
       %li.fn=link_to h(post.user), user_path(post.user)
