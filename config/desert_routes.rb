@@ -178,6 +178,8 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
   end
 end
 
+# RWD
+resources :feature_images, :only => [:create, :update]
 
 users_posts_in_category '/users/:user_id/posts/category/:category_name', :controller => 'posts', :action => 'index', :category_name => :category_name
 

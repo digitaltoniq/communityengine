@@ -7,8 +7,9 @@
     - else 
       = render :partial => "/categories/tips", :locals => {:category => nil}
 
-  -box :class => "alt" do 
-    %a.button.positive{:href => '#', :onclick => "tinyMCE.execCommand('mceCurblyAdvImage');return false;"}="Upload an image for your post".l
+  -box :id => 'feature_image', :class => "alt" do
+    = render :partial => 'posts/feature_image', :locals => { :feature_image => @post.feature_image }
+    -#%a.button.positive{:href => '#', :onclick => "tinyMCE.execCommand('mceCurblyAdvImage');return false;"}="Upload an image for your post".l
     
 #yui-main
   .yui-b
@@ -27,6 +28,8 @@
         -else
           = f.hidden_field :category_id
           = f.hidden_field :contest_id
+
+        = f.hidden_field :feature_image_id
 
         %label
           =:title.l

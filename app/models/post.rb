@@ -5,13 +5,15 @@ class Post < ActiveRecord::Base
   acts_as_publishable :live, :draft
   acts_as_label
 
+  attr_accessor :feature_image_id
+
   belongs_to :user
   belongs_to :category
   belongs_to :contest
   has_many   :polls, :dependent => :destroy
   has_many :favorites, :as => :favoritable, :dependent => :destroy
   has_many :followings, :as => :followee
-  has_one :photo, :class_name => 'FeatureImage', :dependent => :destroy
+  has_one :feature_image, :dependent => :destroy
   
   validates_presence_of :raw_post
   validates_presence_of :title
@@ -29,7 +31,9 @@ class Post < ActiveRecord::Base
       activity.destroy
     end
   end
-    
+
+  after_save :link_feature_image
+
   attr_accessor :invalid_emails
   
   #Named scopes
@@ -42,6 +46,12 @@ class Post < ActiveRecord::Base
   named_scope :tagged_with, lambda {|tag_name|
     {:conditions => ["tags.name = ?", tag_name], :include => :tags}
   }
+
+  # Make sure we have a feature_image to hook up with after saving.
+  # NOTE: Will need to mock this if not going through web form, i.e. in factory
+  def validate
+    errors.add(:feature_image, "must be uploaded") if feature_image_id.blank? and !feature_image
+  end
   
   def self.find_related_to(post, options = {})
     merged_options = options.merge({:limit => 8, 
@@ -149,8 +159,8 @@ class Post < ActiveRecord::Base
       )
   end
 
-  def feature_image(size = :medium)
-    photo ? photo.public_filename(size) : user.avatar_photo_url(size)
+  def photo(size = :medium)
+    feature_image ? feature_image.public_filename(size) : user.avatar_photo_url(size)
   end
 
   def image_for_excerpt
@@ -190,6 +200,12 @@ class Post < ActiveRecord::Base
 
   def published_at_display(format = 'published_date')
     is_live? ? I18n.l(published_at, :format => format) : 'Draft'
+  end
+
+  private
+
+  def link_feature_image
+    self.feature_image = FeatureImage.find(feature_image_id) if feature_image_id
   end
       
 end

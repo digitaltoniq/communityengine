@@ -46,6 +46,7 @@ class User < ActiveRecord::Base
     has_enumerated :role  
     has_many :posts, :order => "published_at desc", :dependent => :destroy
     has_many :photos, :order => "created_at desc", :dependent => :destroy
+    has_many :feature_images, :order => "created_at desc", :dependent => :destroy
     has_many :invitations, :dependent => :destroy
     has_many :offerings, :dependent => :destroy
     has_many :rsvps, :dependent => :destroy

@@ -12,6 +12,7 @@
       .hentry.main
         %h4.entry-title= link_to @post.title, post_path(@post), :rel => 'bookmark'
         .vcard.author
+          = image_tag(@post.photo(:medium))
           %ul
             %li.update
               %a{"href"=>"#{post_path(@post)}", "rel"=>"bookmark"}
