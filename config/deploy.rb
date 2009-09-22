@@ -10,7 +10,7 @@ set :deploy_via,    :export
 set :monit_group,   "#{application}"
 set :scm,           :git
 set :git_enable_submodules, 1
-set :branch,  'edge-as-app'
+set :branch,  'cam'
 # This is the same database name for all environments
 set :production_database,'CompaniesAndMe_production'
 
