@@ -1,6 +1,7 @@
 # Hook into cap deployment lifecycle to get our app specific configs
 after 'deploy:setup', 'candme:setup'
-
+after 'candme:setup_nginx_proxying', 'nginx:restart'
+after 'candme:setup_nginx_auth', 'nginx:restart'
 namespace :candme do
 
   NGINX_DIR = "/etc/nginx/servers"
