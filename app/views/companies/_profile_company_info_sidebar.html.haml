@@ -25,7 +25,7 @@
         =:no_profile_photo.l
         = link_to :click_here_to_upload_one.l, edit_company_path(@company)
       %br        
-    = image_tag( @company.logo_photo_url(), :class => "polaroid")    
+    = image_tag( @company.logo_photo_url(:small), :class => "polaroid")    
 
   -#
     DJS
@@ -58,6 +58,6 @@
   %ul.list.user
     - @company.representatives.active.each do |representative|
       %li
-        = link_to image_tag(representative.avatar_photo_url(:small), :height => '50', :width => '50', :alt => "#{representative}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{representative}'s profile"
+        = link_to image_tag(representative.avatar_photo_url(:small), :alt => "#{representative}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{representative}'s profile"
         = link_to h(representative), representative_path(representative), :class => 'url'
   .clear
