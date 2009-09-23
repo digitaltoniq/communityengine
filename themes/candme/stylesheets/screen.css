@@ -79,8 +79,9 @@ h1, h2, h3 {
 /*}*/
 
 .alt {
-    background: #FFFFD9 none repeat scroll 0 0;
-    border: 1px solid #FFDB7F;
+    background: #e7eefb url(/images/theme/light-blue-sidebar-bg.png) repeat-x scroll 0 -125px;
+    border: 1px solid #94BEFF;
+    border: none;
 }
 
 .alt h3 {
@@ -89,6 +90,16 @@ h1, h2, h3 {
     color: #fffbf4;
     padding: 5px 10px;
 }
+
+h3.alt {
+    background:#646464 url(/images/theme/subnav_bg.png) no-repeat scroll 0 0;
+    border: medium none;
+    color: #fffbf4;
+    padding: 5px 10px;
+    font-size: 115%;
+    margin-bottom: 4px;
+}
+
 
 #doc2 {
     background-color: #FFF;
@@ -100,7 +111,7 @@ h1, h2, h3 {
 #bd {
      /*-moz-border-radius-topright:8px;*/
     /*background-color:#FFFFFF;*/
-    padding:12px 20px;
+    padding:22px 20px;
     background: #FFF url(/images/theme/top_shading.png) repeat-x scroll 0 2px;
 }
 
