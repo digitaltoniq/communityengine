@@ -1,12 +1,13 @@
 - @section = 'posts'
 - @subsection = 'popular'
 
-= render :partial => 'subnav'
+- content_for :subnav do
+  = render :partial => 'subnav'
 
 #yui-main
   .yui-b
     -box :class => "hfeed" do
-      %h3=:what_is_popular.l
+      / %h3=:what_is_popular.l
       = render :partial => 'posts/post', :collection => @posts
 
 = render :partial => 'explore'
