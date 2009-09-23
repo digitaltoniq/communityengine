@@ -6,7 +6,7 @@
 #yui-main
   .yui-b
     -box :class => "company_list" do
-      %h3=:companies.l :site => AppConfig.community_name
+      / %h3=:companies.l :site => AppConfig.community_name
 
       = will_paginate @companies
       /.pagination= paginating_links @companies, :params => params if @companies.page_count > 1
