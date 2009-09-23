@@ -524,6 +524,7 @@ en:
   get_started_invite_some_friends: "Get Started: Invite some friends!"
   #en: get_started_tell_us_about_yourself: "Get Started: Tell us about yourself"
   get_started_tell_us_about_yourself: "Get Started: Tell us about yourself"
+  get_started_tell_us_about_professional: "Get Started: Tell us some of your professional details"
   #en: get_started_upload_a_profile_photo: "Get Started: Upload a profile photo"
   get_started_upload_a_profile_photo: "Get Started: Upload a profile photo"
   #en: go: Go
@@ -1523,6 +1524,7 @@ en:
   #en: active_representatives: Active Representatives
   active_representatives: Active Representatives
   representative_details: Representative details
+  edit_linked_in_url: Your Public LinkedIn URL
   linked_in_url: LinkedIn
   user_details: User details
   # en: delete_this_company: "Delete this company"
@@ -1572,6 +1574,9 @@ en:
   representative_last_name: Last name
   # en: representative_title: Representative title
   representative_title: Title
+  representative_title_at: "at {{company_name}}"
+  representative_linked_in_url: LinkedIn URL
+  professional: Professional
   # en: invite_your_fellow_representatives_to_join: Invite your fellow representatives to join
   invite_your_fellow_representatives_to_join: Invite your fellow representatives to join
   # en: first_name: First name

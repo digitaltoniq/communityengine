@@ -26,17 +26,22 @@
       = text_field :representative, :last_name
 
       %label{"for"=>"representative_title"}
-        =:representative_title.l
+        = "#{:representative_title.l} #{:representative_title_at.l(:company_name => @representative.company)}"
       = text_field :representative, :title
+
+      %label{"for"=>"representative_linked_in_url"}
+        =:representative_linked_in_url.l
+      = text_field :representative, :linked_in_url
 
       -#
         DJS
         %h3= :location.l
         = render :partial => 'shared/location_chooser', :locals => {:selected_country => @representative.country_id, :selected_state => @representative.state_id, :selected_metro_area => @representative.metro_area_id, :states => @states, :metro_areas => @metro_areas}
 
-      %label
-        =:zippostal_code.l
-      = text_field :representative, :zip, :style=>"width:90px"
+      -#
+        %label
+          =:zippostal_code.l
+        = text_field :representative, :zip, :style=>"width:90px"
 
       -#
         DJS

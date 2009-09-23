@@ -5,9 +5,6 @@ class RepresentativesController < BaseController
   actions :show
   respond_to :html
 
-  before_filter :find_user, :only => [:show]
-  before_filter :ensure_valid_resource, :only => [:show]
-
   include Viewable
   cache_sweeper :taggable_sweeper, :only => [:activate, :update, :destroy]
 
@@ -34,10 +31,11 @@ class RepresentativesController < BaseController
                                       :crop_profile_photo, :upload_profile_photo ]
   before_filter :require_current_user, :only => [:edit, :update, :update_account,
                                                 :edit_pro_details, :update_pro_details,
-                                                :welcome_photo, :welcome_about, :welcome_invite, :deactivate,
+                                                :welcome_photo, :welcome_about, :welcome_invite, :welcome_professional, :deactivate,
                                                 :crop_profile_photo, :upload_profile_photo]
   before_filter :admin_required, :only => [:assume, :destroy, :featured, :toggle_featured, :toggle_moderator]
   before_filter :admin_or_current_user_required, :only => [:statistics]
+  before_filter :ensure_valid_resource, :only => [:show]
 
   def activate
     redirect_to signup_path and return if params[:activation_code].blank?
@@ -202,6 +200,10 @@ class RepresentativesController < BaseController
   end
 
   def welcome_invite
+    @representative = Representative.find(params[:representative_id] || params[:id])
+  end
+
+  def welcome_professional
     @representative = Representative.find(params[:representative_id] || params[:id])
   end
 

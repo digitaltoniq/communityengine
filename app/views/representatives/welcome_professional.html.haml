@@ -1,0 +1,29 @@
+.yui-b
+  -box :class => "alt first_alt" do
+    %h3
+      =:get_started_tell_us_about_professional.l
+    = render :partial => 'shared/bio_help'
+    %p
+      =:remember_you_can_always_change_this_later.l
+    %p
+      = link_to "&raquo; "+  :skip_this_and_go_to_your_profile.l, user_path(@user)
+
+  - if @user.avatar_photo_url
+    -box :class => "alt" do
+      %h3=:your_profile_photo.l
+      .centered
+        = @user.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
+        = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid", :style=>"width:250px" )
+      =link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)
+
+#yui-main
+  -box :class => "yui-b" do
+    - form_for @representative, :url => representative_path(@representative), :html => { :method => 'put', :multipart =>true, :class => "MainForm"} do |f|
+
+      %h3= "#{:representative_title.l} #{:representative_title_at.l(:company_name => @representative.company)}"
+      = f.text_field :title, :size => 15
+
+      %h3=:edit_linked_in_url.l
+      = f.text_field :linked_in_url, :size => 25
+
+      %p= submit_tag :save.l
