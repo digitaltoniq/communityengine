@@ -3,7 +3,7 @@ class RepresentativeInvitation < ActiveRecord::Base
 
   belongs_to :representative
 
-  after_save :send_invite   # TODO: user run later?
+  after_save :send_invite
 
   validates_presence_of :representative
   validates_presence_of :email_addresses
@@ -29,6 +29,21 @@ class RepresentativeInvitation < ActiveRecord::Base
     emails.each do |email|
       UserNotifier.deliver_representative_signup_invitation(email, self.representative, self.message)    # TODO: use RepresentativeNotifier?
     end
+  end
+
+  def accepted_users
+    @accepted_users ||= User.find(:all, :conditions => { :email => email_address_list })
+  end
+
+  def pending_emails
+    @pending_emails ||= email_address_list - accepted_users.collect(&:email)
+  end
+
+  private
+
+  # TODO: Really should split on invitation creation into individual invites?
+  def email_address_list
+    @email_address_list ||= email_addresses.split(',').collect(&:strip)
   end
 
 end

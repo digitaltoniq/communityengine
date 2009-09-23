@@ -3,7 +3,7 @@ class RepresentativeInvitationsController < BaseController
 
   def index
     @representative = Representative.find(params[:representative_id] || params[:id])
-    @invitations = @representative.representative_invitations.paginate(paging_params)
+    @invitations = @representative.representative_invitations.ordered('created_at DESC').paginate(paging_params)
   end
   
   def new
@@ -21,7 +21,7 @@ class RepresentativeInvitationsController < BaseController
         flash[:notice] = :representative_invitation_was_successfully_created.l
         format.html do
           unless params[:welcome]
-            redirect_to company_representative_path(@representative.company, @representative)
+            redirect_to company_representative_representative_invitations_path(@representative.company, @representative)
           else
             redirect_to welcome_complete_company_representative_path(@representative.company, @representative)         
           end

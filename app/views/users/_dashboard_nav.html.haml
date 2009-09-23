@@ -23,6 +23,9 @@
           %li=link_to :blog_posts.l, manage_user_posts_path(@user)     
           -if current_user.admin?
             %li=link_to :admin_dashboard.l, admin_dashboard_path
+
+          - if representative = Representative.for_user(@user)
+            %li= link_to :manage_representative_invitations.l(:company_name => representative.company), company_representative_representative_invitations_path(representative.company, representative)
                
   
   -box :class => "alt" do 
