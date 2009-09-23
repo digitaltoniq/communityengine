@@ -42,8 +42,9 @@ photo:
     min_size: 1    
     #size in megabytes
     max_size: 3
-    thumbnails: {small: "50x50>", medium: '100x100>', large: "290x320!"}
+    thumbnails: {small: "50x50!", medium: "150x150!", large: "300x300!"}
     #options - 's3', 'file_system', 'db_system' - see attachment_fu for details
+    processor: image_science
     storage: 'file_system'
     path_prefix: 'public/system/photos'
     content_type: ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png']
@@ -56,8 +57,9 @@ logo:
     min_size: 1
     #size in megabytes
     max_size: 3
-    thumbnails: {small: "50x50>", medium: "100x100>"}
+    thumbnails: {small: "50x50>", medium: "150x150>", large: "300x300>"}
     #options - 's3', 'file_system', 'db_system' - see attachment_fu for details
+    processor: image_science
     storage: 'file_system'
     path_prefix: 'public/system/logos'
     content_type: ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png']
@@ -70,7 +72,8 @@ feature_image:
     resize_to: "465>"
     min_size: 1
     max_size: 3
-    thumbnails: {small: "50x50>", medium: "100x100>"}
+    thumbnails: {small: "50x50!", medium: "190x140!"}
+    processor: image_science
     storage: 'file_system'
     path_prefix: 'public/system/feature_images'
     content_type: ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png']
