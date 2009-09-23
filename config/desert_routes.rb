@@ -47,7 +47,7 @@ representative_signup_by_id '/:company_id/signup/:inviter_id/:inviter_code', :co
 representative_activation '/:company_id/:representative_id/activate/:activation_code', :controller => 'representatives', :action => 'activate'
 
 forgot_password '/forgot_password', :controller => 'users', :action => 'forgot_password'
-forgot_username '/forgot_username', :controller => 'users', :action => 'forgot_username'  
+forgot_username '/forgot_username', :controller => 'users', :action => 'forgot_username'
 resend_activation '/resend_activation', :controller => 'users', :action => 'resend_activation'  
 
 #clippings routes
@@ -171,7 +171,8 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :welcome_about => :get, 
     :welcome_invite => :get,
     :welcome_complete => :get,
-    :activate => :get
+    :activate => :get,
+    :resend_activation => :get
   } do |representative|
     representative.resources :representative_invitations
     representative.resources :posts, :as => :conversations

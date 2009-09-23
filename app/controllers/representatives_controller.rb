@@ -180,6 +180,18 @@ class RepresentativesController < BaseController
     render :action => 'signup_completed', :layout => 'beta' if AppConfig.closed_beta_mode
   end
 
+  def resend_activation
+    @representative = Representative.find(params[:id])
+    if @representative && !@representative.active?
+      flash[:notice] = :activation_email_resent_message.l   
+      RepresentativeNotifier.deliver_signup_notification(@representative)
+      redirect_to login_path and return
+    else
+      flash[:notice] = :activation_email_not_sent_message.l
+      redirect_to signup_completed_company_representative_path(@representative.company, @representative)
+    end
+  end
+
   def welcome_photo
     @representative = Representative.find(params[:representative_id] || params[:id])
   end
