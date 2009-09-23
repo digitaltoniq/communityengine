@@ -2,12 +2,13 @@
 - @subsection = 'recent'
 - @meta = { :description => AppConfig.meta_description, :keywords => AppConfig.meta_keywords, :robots => AppConfig.robots_meta_list_content }
 
-= render :partial => 'subnav'
+- content_for :subnav do
+  = render :partial => 'subnav'
 
 #yui-main
   .yui-b
     -box :class => "hfeed" do
-      %h3=:recent_posts.l
+      / %h3=:recent_posts.l
       = render :partial => 'posts/post', :collection => @posts
       .pagination=paginating_links @posts
 
