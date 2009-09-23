@@ -275,7 +275,7 @@ dl.vcard dd.member, dl.vcard dd.post, dl.vcard dd.rss {
 }
 
 div.user_list .row, div.company_list .row {
-    border-bottom: 1px solid #FFDB7F;
+    /*border-bottom: 1px solid #FFDB7F;*/
     padding: 12px 0px;
     margin: 0;
     border-top: 0;
@@ -329,13 +329,14 @@ img.polaroid {
 div.company_list div.vcard ul {
     margin-left: 0;
     font-size: 85%;
+    width: 180px;
 }
 
 .hentry .vcard ul li.addfollowing{background-image: url(/plugin_assets/community_engine/images/icons/user_add.png) }
 .hentry .vcard ul li.removefollowing{background-image: url(/plugin_assets/community_engine/images/icons/user_add.png) }
 
-.hentry .vcard {
-    margin-top:-25px;
+.hfeed .hentry .vcard {
+    /*margin-top:-25px;*/
 }
 
 .hentry h4 {
@@ -345,22 +346,28 @@ div.company_list div.vcard ul {
     color: #333d6a;
     font-weight: normal;
     font-size: 20px;
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 .hentry h4 a {
     color: #333d6a;
 }
 
-.hentry .vcard h5 a img {
+div.hentry div.vcard img {
     background: transparent url(/images/theme/article_border.png) no-repeat scroll 0 0;
+}
+
+.hentry .vcard h5 a img, .main .vcard img {
     border: none;
     padding: 6px;
-    margin: -42px 16px;
+}
+
+.hentry .vcard h5 a img {
+    margin: -42px 16px;  
 }
 
 .hentry .mugshot {
-    margin-top:-27px;
+    margin-top:-52px;
     margin-left: -15px;
 }
 
@@ -370,7 +377,7 @@ div.company_list div.vcard ul {
     padding: 16px;
 }
 
-.hentry .vcard ul {
+.hfeed .hentry .vcard ul {
     margin-top: 120px;
     margin-left: 25px;
 }
@@ -382,6 +389,40 @@ div.company_list div.vcard ul {
 .hfeed .hentry {
     border-bottom:none;
     padding-bottom:0;
+}
+
+.main h4 {
+    margin-left: 0;
+}
+
+div.main div.entry-content {
+    margin-left: 210px;
+}
+
+.hfeed .main .vcard ul {
+    margin-left: 0;
+    margin-top: 10px;
+}
+
+div.comments div.author img {
+    background: transparent url(/images/theme/mugshot_border.png) no-repeat scroll 0 0;
+    margin-left:-12px;
+    margin-top:-10px;
+    padding:16px;
+}
+
+div.comments .hentry .vcard ul {
+    margin-top: 2px;
+    margin-left: 78px;
+}
+
+div.comments .hentry .vcard {
+    width: 214px;
+}
+
+div.comments .hentry {
+    margin-bottom: 16px;
+    min-height:72px;
 }
 
 #CommunityFooter li#rss a {
