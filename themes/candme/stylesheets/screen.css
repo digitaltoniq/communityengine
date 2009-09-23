@@ -53,6 +53,14 @@ h1, h2, h3 {
     -webkit-border-radius-top-right: 8px;
 }
 
+#HeaderCallout.empty {
+    background: #ec7000 url(/images/theme/empty_header_callout_bg.png) repeat-x scroll 0 0;
+    height: 50px;
+    border-top-right-radius: 8px;
+    -moz-border-radius-topright:8px;
+    -webkit-border-radius-top-right: 8px;
+}
+
 #HeaderPhotos {
    background: transparent url(/images/theme/bagworks_photos.png) no-repeat scroll 0 0;
     height: 193px;
@@ -119,7 +127,7 @@ h1, h2, h3 {
     -webkit-border-radius-bottom-right: 8px;
 }
 
-#doc-wrapper {
+#masthead-bg {
     background: transparent url(/images/theme/body_wrapper_bg.png) repeat-x center top;
     height: 139px;
 }
