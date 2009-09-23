@@ -71,8 +71,8 @@ class UsersController < BaseController
   
   def dashboard
     @user = current_user
-    @network_activity = @user.network_activity
-    @recommended_posts = @user.recommended_posts
+#    @network_activity = @user.network_activity
+#    @recommended_posts = @user.recommended_posts
   end
   
   def show
