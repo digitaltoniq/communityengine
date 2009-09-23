@@ -7,6 +7,9 @@
     - else
       = render :partial => "/categories/tips", :locals => {:category => nil}
 
+  -box :id => 'feature_image', :class => "alt" do
+    = render :partial => 'posts/feature_image', :locals => { :feature_image => @post.feature_image }
+
 #yui-main
   .yui-b
     -box do 

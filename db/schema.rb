@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
 
   create_table "feature_images", :force => true do |t|
     t.integer  "post_id"
+    t.integer  "user_id"
     t.string   "filename"
     t.string   "content_type"
     t.integer  "parent_id"
@@ -172,6 +173,9 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "feature_images", ["post_id"], :name => "index_feature_images_on_post_id"
+  add_index "feature_images", ["user_id"], :name => "index_feature_images_on_user_id"
 
   create_table "followings", :force => true do |t|
     t.integer  "user_id"

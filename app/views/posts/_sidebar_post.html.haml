@@ -1,6 +1,6 @@
 %dl.vcard
   %dt.photo
-    = link_to image_tag(post.feature_image(:small), :alt=>"", :width=>"50", :height=>"50"), post_path(post)
+    = link_to image_tag(post.photo(:small), :alt=>""), post_path(post)
   %dd.fn
     = link_to post.title, post_path(post), :rel => 'bookmark'
   %dd= truncate_words(post.post, 9, '...' )
