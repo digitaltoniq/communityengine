@@ -27,7 +27,7 @@ class RepresentativeInvitation < ActiveRecord::Base
   def send_invite
     emails = self.email_addresses.split(",").collect{|email| email.strip }.uniq
     emails.each do |email|
-      UserNotifier.deliver_representative_signup_invitation(email, self.representative, self.message)    # TODO: use RepresentativeNotifier?
+      RepresentativeNotifier.deliver_signup_invitation(email, self.representative, self.message)
     end
   end
 

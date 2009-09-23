@@ -48,7 +48,7 @@ class RepresentativesController < BaseController
       current_user.track_activity(:joined_the_site)
       redirect_to welcome_photo_company_representative_path(@representative.company, @representative)
       flash[:notice] = :thanks_for_activating_your_account.l
-      UserNotifier.deliver_representative_activation(@representative)
+      RepresentativeNotifier.deliver_activation(@representative)
       return
     end
     flash[:error] = :account_activation_error.l_with_args(:email => AppConfig.support_email)
@@ -107,7 +107,7 @@ class RepresentativesController < BaseController
     if (!AppConfig.require_captcha_on_signup || verify_recaptcha(@representative)) && @representative.save
       flash[:notice] = :email_signup_thanks.l_with_args(:email => @representative.email)
       redirect_to signup_completed_company_representative_path(@representative.company, @representative.id) 
-      UserNotifier.deliver_representative_signup_notification(@representative)
+      RepresentativeNotifier.deliver_signup_notification(@representative)
     else
       render :action => 'new'
     end
