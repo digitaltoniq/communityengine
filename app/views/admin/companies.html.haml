@@ -1,0 +1,31 @@
+.yui-b.sidebar
+  = render :partial => 'shared/admin_nav'
+
+
+#yui-main
+  -box :class => "yui-b" do
+    %h3
+      = AppConfig.community_name
+      = :companies.l
+
+    .actions{:style => 'padding: 5px 0px 15px 0px;'}
+      = link_to :create_new_company.l, new_company_path
+
+    = will_paginate @companies
+
+    %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%", :style => "table-layout:fixed;"}
+      %thead
+        %tr
+          %th=:name.l
+          %th=:description.l
+          %th=:date_created.l
+
+      %tbody
+        - @companies.each do |company|
+          %tr{:id => dom_id(company)}
+            %td{:valign =>'top'}= link_to company, company_path(company)
+            %td{:style => 'overflow:hidden;'}
+              = company.description
+            %td= company.created_at.to_s(:concise)
+
+    = will_paginate @companies

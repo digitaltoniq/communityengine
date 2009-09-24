@@ -34,6 +34,10 @@ class AdminController < BaseController
   def comments
     @comments = Comment.find(:all, :page => {:current => params[:page], :size => 100}, :order => 'created_at DESC')
   end
+
+  def companies
+    @companies = Company.ordered("created_at DESC").paginate(paging_params.merge(:per_page => 25))
+  end
   
   def activate_user
     user = User.find(params[:id])

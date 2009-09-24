@@ -29,10 +29,11 @@ end
 application '', :controller => "posts", :action => "recent"
 
 # admin routes
-admin_dashboard   '/admin/dashboard', :controller => 'homepage_features', :action => 'index'
+admin_dashboard   '/admin/dashboard', :controller => 'admin', :action => 'comments'
 admin_users       '/admin/users', :controller => 'admin', :action => 'users'
 admin_messages    '/admin/messages', :controller => 'admin', :action => 'messages'
 admin_comments    '/admin/comments', :controller => 'admin', :action => 'comments'
+admin_companies    '/admin/companies', :controller => 'admin', :action => 'companies'
 admin_tags        'admin/tags/:action', :controller => 'tags', :defaults => {:action=>:manage}
 admin_events      'admin/events', :controller => 'admin', :action=>'events'
 

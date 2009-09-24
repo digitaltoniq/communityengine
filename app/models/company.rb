@@ -124,6 +124,19 @@ class Company < ActiveRecord::Base
     url_slug || id
   end
 
+  # Can the given user administer this company?
+  def admin?(user)
+    return true if user.admin?
+    rep = representative_for_user(user)
+    rep ? rep.representative_role.admin? : false
+  end
+
+  # Can the given user invite others to this company?
+  def invite?(user)
+    rep = representative_for_user(user)
+    rep ? (rep.representative_role.admin? or rep.representative_role.representative?) : false
+  end
+
   def representative_for_user(user)
      representatives.find(:first, :conditions => ["user_id = ?", user.id])
   end

@@ -282,6 +282,7 @@ en:
   create_a_post: Create a post
   #en: create_new_forum: Create new forum
   create_new_forum: Create new forum
+  create_new_company: Create new company
   #en: create_your_account: Create Your Account
   create_your_account: Create Your Account
   #en: created_at: Created at
@@ -1519,7 +1520,7 @@ en:
   #en: company_name: Company name
   company_name: Company name
   #en: company_domains: Valid domains
-  company_domains: Valid domains
+  company_domains: Valid domains (comma separated)
   representatives: Representatives
   #en: active_representatives: Active Representatives
   active_representatives: Active Representatives
@@ -1579,6 +1580,7 @@ en:
   professional: Professional
   # en: invite_your_fellow_representatives_to_join: Invite your fellow representatives to join
   invite_your_fellow_representatives_to_join: Invite your fellow representatives to join
+  invite_representatives: Invite representatives
   # en: first_name: First name
   first_name: First name
   # en: last_name: Last name
