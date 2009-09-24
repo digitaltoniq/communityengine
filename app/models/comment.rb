@@ -90,9 +90,17 @@ class Comment < ActiveRecord::Base
   end
   
   def notify_previous_commenters
-    previous_commenters_to_notify.each do |commenter|
+    previous_commenters_to_notify.uniq.each do |commenter|
       UserNotifier.deliver_follow_up_comment_notice(commenter, self)
     end    
+  end
+
+  def notify_post_followers
+    if commentable.is_a?(Post)
+      (commentable.followers - [user] - previous_commenters_to_notify).uniq.each do |follower|
+        UserNotifier.deliver_following_post_comment_notice(user, self)
+      end
+    end  
   end
   
   def notify_previous_anonymous_commenters
@@ -106,6 +114,7 @@ class Comment < ActiveRecord::Base
     UserNotifier.deliver_comment_notice(self) if should_notify_recipient?
     self.notify_previous_commenters
     self.notify_previous_anonymous_commenters if AppConfig.allow_anonymous_commenting
+    self.notify_post_followers
   end
   
   def token_for(email)

@@ -13,6 +13,7 @@ class Post < ActiveRecord::Base
   has_many   :polls, :dependent => :destroy
   has_many :favorites, :as => :favoritable, :dependent => :destroy
   has_many :followings, :as => :followee
+  has_many :followers, :through =>:followings, :source => :user
   has_one :feature_image, :dependent => :destroy
   
   validates_presence_of :raw_post
@@ -200,6 +201,17 @@ class Post < ActiveRecord::Base
 
   def published_at_display(format = 'published_date')
     is_live? ? I18n.l(published_at, :format => format) : 'Draft'
+  end
+
+  def notify_company_followers
+    company = Company.for_post(self)
+    company.followers.each do |follower|
+      UserNotifier.deliver_following_company_post_notice(follower, company, self)
+    end if company
+  end
+
+  def send_notifications
+    notify_company_followers
   end
 
   private

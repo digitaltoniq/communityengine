@@ -45,7 +45,24 @@ class UserNotifier < ActionMailer::Base
     @body[:url]  = commentable_url(comment)
     @body[:comment] = comment
     @body[:commenter] = comment.user
-  end  
+  end
+
+  def following_post_comment_notice(user, comment)
+    setup_email(user)
+    @subject     += "#{comment.username} has commented on a #{comment.commentable_type} that youre following."
+    @body[:url]  = commentable_url(comment)
+    @body[:comment] = comment
+    @body[:commenter] = comment.user
+    @body[:post] = comment.commentable
+  end
+
+  def following_company_post_notice(user, company, post)
+    setup_email(user)
+    @subject     += "A new conversation has been created for #{company} entitled \"#{post.title}\"."
+    @body[:url]  = post_url(post)
+    @body[:company] = company
+    @body[:post] = post
+  end
 
   def follow_up_comment_notice_anonymous(email, comment)
     @recipients  = "#{email}"

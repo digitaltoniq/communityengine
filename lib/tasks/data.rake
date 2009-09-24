@@ -65,6 +65,9 @@ namespace :data do
         (rand(2) +5).times do
           Following.follow!(u, Company.all.rand)
         end
+        (rand(2) +5).times do
+          Following.follow!(u, Post.all.rand)
+        end
       end
     end
     

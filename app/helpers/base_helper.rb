@@ -10,6 +10,12 @@ module BaseHelper
       user_url(comment.recipient)+"#comment_#{comment.id}"
     end
   end
+
+  def post_url(post)
+    r = Representative.for_user(post.user_id)
+    path = r ? company_representative_post_path(r.company, r, post) : user_post_path(post.user_id, post)
+    "#{application_url.to(-2)}#{path}"
+  end
   
   def forum_page?
     %w(forums topics sb_posts).include?(@controller.controller_name)
