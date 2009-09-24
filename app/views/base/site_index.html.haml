@@ -38,13 +38,12 @@
         =:featured_writer.l
       -@featured_writers.each do |user|
         =render :partial => "users/sidebar_user", :locals => {:user => user}
-
+  %h3= :active_companies.l
   -box :class => "alt" do
-    %h3= :active_companies.l
     -@active_companies.each do |company|
-      =render :partial => "companies/sidebar_company", :locals => {:company => company}      
+      =render :partial => "companies/sidebar_company", :locals => {:company => company}
 
-  -box :class => "alt" do 
-    %h3= :active_users.l
+  %h3= :active_users.l
+  -box :class => "alt" do
     -@active_users.each do |user|    
       =render :partial => "users/sidebar_user", :locals => {:user => user}      

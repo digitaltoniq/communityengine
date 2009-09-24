@@ -39,10 +39,11 @@
       %input{ :type=>"hidden", :name=>"cof", :value=>"GALT:#008000;GL:1;DIV:#FFFFFF;VLC:663399;AH:center;BGC:FFFFFF;LBGC:FFFFFF;ALC:0066CC;LC:0066CC;T:000000;GFNT:0000FF;GIMP:0000FF;LH:50;LW:90;S:http://#{application_url};FORID:1"}
       %input{ :type=>"hidden", :name=>"hl", :value=>"en"}
 
-  #HeaderCallout
-    #HeaderPhotos
+  - if header_callout = yield(:header_callout)
+    = header_callout
+  - else
+    #HeaderCallout.empty
   
-
   = yield :subnav
 
   / NavBar 
