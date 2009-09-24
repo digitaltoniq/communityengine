@@ -1,5 +1,5 @@
 Factory.define :feature_image do |i|
-  i.sequence(:uploaded_data) do |n|
-    DT::FlickrDownloader.photo_upload(:tags => 'recycling,green', :sequence => n, :size => :small)
+  i.uploaded_data do
+    DT::FlickrDownloader.for('recycling,green').photo_upload
   end
 end

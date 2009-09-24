@@ -1,7 +1,7 @@
 Factory.define :post do |u|
   u.title { Faker::Lorem.words(3).join(' ').capitalize }
   u.sequence(:raw_post) do |n|
-    image_url = DT::FlickrDownloader.photo_url(:tags => 'recycling,green', :sequence => n, :size => :small)
+    image_url = DT::FlickrDownloader.for('recycling,green').photo_url
     <<-POST
       #{Faker::Lorem.paragraphs(rand(2) + 1).collect { |p| "<p>#{p}</p>" }.join("") }
       <img align="right" style="padding: 0px 0px 10px 10px;" src="#{image_url}" />

@@ -62,7 +62,7 @@ class Flickr::Photos::Photo
       f = File.new(filename, 'w+')
       f.puts open(self.url(size)).read
       f.close
-      true
+      filename
     end
   end
   

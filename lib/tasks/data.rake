@@ -9,8 +9,8 @@ namespace :data do
     prevent_production
   end
   
-  task :demo => [:environment, :prevent_production, 'demo:reset_image_cache', 'demo:prefetch_images', 'default:users', 'demo:companies',
-                 'demo:representatives', 'demo:posts', 'demo:users', 'demo:followings', 'demo:comments', 'demo:reset_image_cache']
+  task :demo => [:environment, :prevent_production, 'demo:prefetch_images', 'default:users', 'demo:companies',
+                 'demo:representatives', 'demo:posts', 'demo:users', 'demo:followings', 'demo:comments']
   
   namespace :demo do
 
@@ -19,13 +19,7 @@ namespace :data do
     # TODO: move to image/cache namespace?
     task :prefetch_images do
       required_photos.each do |tags, count|
-        DT::FlickrDownloader.prime_cache(:tags => tags, :count => count, :size => :small)
-      end
-    end
-
-    task :reset_image_cache do
-      required_photos.each do |tags, count|
-        DT::FlickrDownloader.reset!(:tags => tags)
+        DT::FlickrDownloader.register(:tags => tags, :count => count, :size => :small)
       end
     end
 
@@ -57,7 +51,7 @@ namespace :data do
 
     task :posts => [:environment, :prevent_production, :factories] do
       Representative.all.each do |r|
-        (rand(5) + 1).times { Factory(:post, :user => r.user) }
+        (rand(3) + 1).times { Factory(:post, :user => r.user) }
       end
     end
 
@@ -105,6 +99,7 @@ namespace :data do
   end
 end
 
+# NOTE: Keep in synch with photo|logo|feature_image|post factories
 def required_photos
   { 'headshot,portrait' => 50, 'logo' => 10, 'recycling,green' => 150 }
 end

@@ -1,5 +1,5 @@
 Factory.define :logo do |u|
-  u.sequence(:uploaded_data) do |n|
-    DT::FlickrDownloader.photo_upload(:tags => 'logo', :sequence => n, :size => :small)
+  u.uploaded_data do
+    DT::FlickrDownloader.for('logo').photo_upload
   end
 end
