@@ -9,12 +9,26 @@ namespace :data do
     prevent_production
   end
   
-  task :demo => [:environment, :prevent_production, 'default:users', 'demo:companies',
-                 'demo:representatives', 'demo:posts', 'demo:users', 'demo:followings', 'demo:comments']
+  task :demo => [:environment, :prevent_production, 'demo:reset_image_cache', 'demo:prefetch_images', 'default:users', 'demo:companies',
+                 'demo:representatives', 'demo:posts', 'demo:users', 'demo:followings', 'demo:comments', 'demo:reset_image_cache']
   
   namespace :demo do
 
     task :reset => ['db:revert', 'data:demo']
+
+    # TODO: move to image/cache namespace?
+    task :prefetch_images do
+      required_photos.each do |tags, count|
+        DT::FlickrDownloader.prime_cache(:tags => tags, :count => count, :size => :small)
+      end
+    end
+
+    task :reset_image_cache do
+      required_photos.each do |tags, count|
+        DT::FlickrDownloader.reset!(:tags => tags)
+      end
+    end
+
     
     task :companies => [:environment, :prevent_production, :factories] do
       5.times do
@@ -89,6 +103,10 @@ namespace :data do
       end
     end
   end
+end
+
+def required_photos
+  { 'headshot,portrait' => 50, 'logo' => 10, 'recycling,green' => 150 }
 end
 
 def prevent_production
