@@ -77,6 +77,7 @@ class User < ActiveRecord::Base
     has_many    :favorites, :order => "created_at desc", :dependent => :destroy
 
     has_many    :followings, :order => "created_at desc", :dependent => :destroy  # DJS
+    has_many   :representative_invitations
     
   #named scopes
   named_scope :recent, :order => 'users.created_at DESC'

@@ -7,14 +7,15 @@ class RepresentativeNotifier < ActionMailer::Base
   include BaseHelper
   ActionMailer::Base.default_url_options[:host] = APP_URL.sub('http://', '')
 
-  def signup_invitation(email, representative, message)
+  def signup_invitation(company, email, user, message)
     setup_sender_info
     @recipients  = "#{email}"
-    @subject     = "#{representative.full_name} would like you to join #{AppConfig.community_name}!"
+    @subject     = "#{user} would like you to join #{AppConfig.community_name}!"
     @sent_on     = Time.now
-    @body[:representative] = representative
-    @body[:url]  = representative_signup_by_id_url(representative.company, representative, representative.invite_code)
+    @body[:user] = user
+    @body[:url]  = representative_signup_by_id_url(company, user, user.invite_code)
     @body[:message] = message
+    @body[:company] = company
   end
 
   def signup_notification(representative)

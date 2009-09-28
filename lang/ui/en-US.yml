@@ -190,6 +190,7 @@ en:
   cancel_and_go_back_to_my_posts: cancel and go back to my posts
   #en: cannot_rsvp_for_an_event_that_has_already_happened: Cannot RSVP for an event that has already happened.
   cannot_rsvp_for_an_event_that_has_already_happened: Cannot RSVP for an event that has already happened.
+  cannot_invite_representatives_for_this_company: "You do not have the correct permissions to invite representatives to {{company_name}}" 
   #en: categories: Categories
   categories: Categories
   #en: category: Category

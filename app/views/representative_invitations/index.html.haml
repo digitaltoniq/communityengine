@@ -2,7 +2,7 @@
   -box do
     %h3=:links.l
     %ul.checks
-      %li= link_to :new_representative_invitation.l(:company_name => @representative.company), new_company_representative_representative_invitation_path(@representative.company, @representative)
+      %li= link_to :new_representative_invitation.l(:company_name => @company), new_company_representative_invitation_path(@company)
 
 #yui-main
   .yui-b

@@ -176,9 +176,9 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :activate => :get,
     :resend_activation => :get
   } do |representative|
-    representative.resources :representative_invitations
     representative.resources :posts, :as => :conversations
   end
+  company.resources :representative_invitations
 end
 
 # RWD

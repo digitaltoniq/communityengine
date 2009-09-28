@@ -1,14 +1,19 @@
 class RepresentativeInvitation < ActiveRecord::Base
   acts_as_activity :representative  # TODO: activity on representative?
 
-  belongs_to :representative
+  belongs_to :user
+  belongs_to :company
 
   after_save :send_invite
 
-  validates_presence_of :representative
+  validates_presence_of :user
+  validates_presence_of :company
   validates_presence_of :email_addresses
   validates_length_of :email_addresses, :minimum => 6
   validates_length_of :email_addresses, :maximum => 1500
+
+  named_scope :by, lambda { |user| { :conditions => { :user_id => user }}}
+  named_scope :for, lambda { |company| { :conditions => { :company_id => company }}}
 
   # TODO: take out side effect of updating email_addresses, don't use collection as yield values, and remove formatting
   validates_each :email_addresses, :if =>  Proc.new { |r| r.email_addresses? } do |record, attr, email_addresses|
@@ -18,7 +23,7 @@ class RepresentativeInvitation < ActiveRecord::Base
     end
 
     emails = email_addresses.split(',').collect(&:strip).uniq
-    invalid_by_domain_emails = emails.reject { |email| record.representative.company.accepts_email?(email) }   # TODO: move format check to accepts_email
+    invalid_by_domain_emails = emails.reject { |email| record.company.accepts_email?(email) }   # TODO: move format check to accepts_email
     # TODO: better message, localize
     record.errors.add(:email_addresses, " included addresses with a domain not related to your company: " +
             invalid_by_domain_emails.join(', ')) unless invalid_by_domain_emails.empty?
@@ -27,7 +32,7 @@ class RepresentativeInvitation < ActiveRecord::Base
   def send_invite
     emails = self.email_addresses.split(",").collect{|email| email.strip }.uniq
     emails.each do |email|
-      RepresentativeNotifier.deliver_signup_invitation(email, self.representative, self.message)
+      RepresentativeNotifier.deliver_signup_invitation(company, email, user, message)
     end
   end
 

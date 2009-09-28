@@ -352,12 +352,17 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "representative_invitations", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "company_id"
     t.string   "email_addresses"
     t.string   "message"
     t.integer  "representative_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "representative_invitations", ["company_id"], :name => "index_representative_invitations_on_company_id"
+  add_index "representative_invitations", ["user_id"], :name => "index_representative_invitations_on_user_id"
 
   create_table "representative_roles", :force => true do |t|
     t.string   "name"

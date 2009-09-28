@@ -25,6 +25,7 @@ class Company < ActiveRecord::Base
   has_many    :representatives, :dependent => :destroy
   has_many    :followings, :as => :followee
   has_many :followers, :through =>:followings, :source => :user
+  has_many   :representative_invitations
   
   belongs_to  :logo, :class_name => "Logo", :foreign_key => "logo_id"
   belongs_to  :metro_area
@@ -145,6 +146,10 @@ class Company < ActiveRecord::Base
   def company_admin?(user)
     r = representative_for_user(user)
     r && r.admin?
+  end
+
+  def representative?(user)
+    !representative_for_user(user).nil?
   end
 
   def location
