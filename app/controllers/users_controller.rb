@@ -102,6 +102,7 @@ class UsersController < BaseController
       create_friendship_with_inviter(@user, params)
       flash[:notice] = :email_signup_thanks.l_with_args(:email => @user.email) 
       redirect_to signup_completed_user_path(@user)
+      UserNotifier.deliver_signup_notification(@user)
     else
       render :action => 'new'
     end

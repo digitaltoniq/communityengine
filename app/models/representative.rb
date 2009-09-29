@@ -124,6 +124,7 @@ class Representative < ActiveRecord::Base
     !representative_role || representative_role.eql?(RepresentativeRole[:representative])
   end
 
+  # TODO: Not sure this is necessary as dependent has_one associations are already saved?
   def after_save
     user.save
   end
