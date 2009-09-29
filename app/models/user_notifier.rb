@@ -49,7 +49,7 @@ class UserNotifier < ActionMailer::Base
 
   def following_post_comment_notice(user, comment)
     setup_email(user)
-    @subject     += "#{comment.username} has commented on a #{comment.commentable_type} that youre following."
+    @subject     += "#{comment.username} has commented on a #{comment.commentable_type} that you're following."
     @body[:url]  = commentable_url(comment)
     @body[:comment] = comment
     @body[:commenter] = comment.user
