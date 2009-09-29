@@ -669,6 +669,7 @@ en:
   #en: map_it: Map It!
   map_it: Map It!
   medium: Medium
+  small: Small
   #en: megabyte_upload_limit: megabyte upload limit
   megabyte_upload_limit: megabyte upload limit
   #en: megabyte_upload_limit_per_file: megabyte upload limit per file.
