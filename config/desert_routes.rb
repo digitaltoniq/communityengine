@@ -161,9 +161,10 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :dashboard => :get,
     :posts => :get,
     :post_comments => :get,
+    :activity => :get
 } do |company|
 #  company.resources :conversations, :collection => { :comments => :get }
-  company.resources :followers  
+  company.resources :followers
 #  company.resources :posts, :as => :conversations, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
   company.resources :representatives, :member_path => '/:company_id/representatives/:id', :nested_member_path => '/:company_id/representatives/:representative_id', :member => {
     :edit_account => :get,

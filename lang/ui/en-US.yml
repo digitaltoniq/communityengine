@@ -52,6 +52,7 @@ en:
   active_companies: Active Companies
   #en: activity_from_your_network: Activity from your network
   activity_from_your_network: Activity from your network
+  recent_company_activity: Recent company activity
   #en: ad_was_successfully_created: Ad was successfully created.
   ad_was_successfully_created: Ad was successfully created.
   #en: ad_was_successfully_updated: Ad was successfully updated.
@@ -612,6 +613,8 @@ en:
   last_post: Last post
   #en: left_a_comment: "left a comment:"
   left_a_comment: "left a comment:"
+  company_comment_activity: "left a comment on a company conversation"
+  company_post_activity: "published a new conversation"
   #en: links: Links
   links: Links
   #en: listing_invitations: Listing invitations

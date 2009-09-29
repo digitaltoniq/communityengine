@@ -7,26 +7,27 @@ class CompaniesController < BaseController
   inherit_resources
   respond_to :html
 
-  before_filter :ensure_valid_resource, :only => [:show, :dashboard, :edit, :update, :destroy]
+  before_filter :ensure_valid_resource, :only => [:show, :dashboard, :edit, :update, :destroy, :activity]
 
   uses_tiny_mce(:options => AppConfig.default_mce_options.merge({:editor_selector => "rich_text_editor"}),
     :only => [:new, :create, :update, :edit, :welcome_about])
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
 
-  before_filter :login_required, :only => [:new, :create, :edit, :update, :destroy, :dashboard]
+  before_filter :login_required, :only => [:new, :create, :edit, :update, :destroy, :dashboard, :activity]
   before_filter :admin_required, :only => [:new, :create, :destroy]
 
-  before_filter :admin_or_company_admin_required, :only => [:edit, :update, :change_company_logo, :upload_company_logo,
+  before_filter :admin_or_company_admin_required, :only => [:edit, :update, :change_company_logo, :upload_company_logo
                                               #:welcome_photo, :welcome_about, :welcome_invite, :deactivate,
                                               # :crop_profile_photo
                                               ]
-  before_filter :admin_or_company_representative_required, :only => :dashboard
+  before_filter :admin_or_company_representative_required, :only => [:dashboard, :activity]
   
    def index
      index! { get_additional_companies_page_data }
    end
 
   def dashboard
+    @network_activity = Activity.about(resource).recent.limited(15)
     respond_to(:with => resource)
   end
   
@@ -129,6 +130,10 @@ class CompaniesController < BaseController
     @company = Company.find(params[:id])
     redirect_to home_path and return unless @company
     render :action => 'signup_completed', :layout => 'beta' if AppConfig.closed_beta_mode
+  end
+
+  def activity
+    @activities = Activity.about(resource).recent.paginate(paging_params.merge(:per_page => 25))
   end
 
   # TODO: refactor post_controller index to handle company parent objectm

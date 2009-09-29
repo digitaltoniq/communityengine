@@ -18,6 +18,9 @@ class Activity < ActiveRecord::Base
   named_scope :by_users, lambda {|user_ids|
     {:conditions => ['activities.user_id in (?)', user_ids]}
   }
+  named_scope :about, lambda { |item|
+    { :conditions => { :item_type => item.class.to_s, :item_id => item.id } }
+  }
   
   
   def update_counter_on_user
