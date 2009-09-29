@@ -4,9 +4,11 @@
     .yui-g
       .yui-u.first
         = image_tag 'icons/accept.png', :plugin => 'community_engine'            
-        =:view_my.l
+        =:view.l
         %ul
-          %li=link_to :profile.l, company_path(@company)
+          %li=link_to :company_profile.l, company_path(@company)
+          %li=link_to :view_company_blog.l, posts_company_path(@company)
+          %li=link_to :view_company_representative_comments.l, post_comments_company_path(@company)
           -# DJS %li=link_to :blog.l, user_posts_path(@user)
           -#
             DJS
@@ -16,9 +18,14 @@
             %li=link_to :inbox.l, user_messages_path(@user)
       .yui-u
         = image_tag 'icons/wrench.png', :plugin => 'community_engine'      
-        =:manage_my.l
+        =:manage.l
         %ul
-          %li=link_to :profile.l, edit_company_path(@company)
+          - if(@company.admin?(current_user))
+            %li=link_to :edit_company.l, edit_company_path(@company)
+          - if(@company.invite?(current_user))
+            %li= link_to :listing_representative_invitations.l(:company_name => @company), company_representative_invitations_path(@company)
+          - if(@company.post?(current_user))
+            %li= link_to :create_new_company_post.l, new_user_post_path(current_user)
           -# DJS %li=link_to :account_settings.l, edit_account_company_path(@company)
           -# DJS TODO %li=link_to :blog_posts.l, manage_company_posts_path(@company)
           -#
@@ -31,17 +38,23 @@
     %h3=:stats.l
     %ul
       -# DJS REMOVE %li=:you_last_logged_in_on.l+" #{@company.last_login_at && @company.last_login_at.strftime("%m/%d/%y")}"
-      %li= @company.created_at.strftime(:member_since.l+": %m/%d/%y")
+      %li= "#{:registered_on.l}: #{@company.created_at.to_s(:concise)}"
       -unless @company.posts.empty?
-        %li=:you_have_written.l+" #{@company.posts.count} "+:blog_posts.l+"."
+        %li=:there_are_company_posts.l(:count => @company.posts.count)
       -#
         DJS
         -unless @company.photos.empty?
           %li=:you_have_uploaded.l+" #{@company.photos.count} "+:photos.l+"."
         -unless @company.clippings.empty?
           %li=:you_have_created.l+" #{@company.clippings.count} "+:clippings.l+"."
-      -unless @company.comments.empty?
-        %li=:you_have_left.l+" #{@company.posts.count} "+:comments.l+"."
+      -unless @company.representative_comments.empty?
+        %li= :there_are_representative_comments.l(:count => @company.representative_comments.count)
+      -unless @company.post_comments.empty?
+        %li= :there_are_company_comments.l(:count => @company.post_comments.count)
+      -unless @company.followers.empty?
+        %li= :there_are_company_followers.l(:count => @company.followers.count)
+      -unless @company.view_count <= 0
+        %li= :there_are_profile_views.l(:count => @company.view_count)
       -#
         DJS
         -unless @company.accepted_friendships.empty?

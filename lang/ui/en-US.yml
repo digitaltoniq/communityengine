@@ -92,6 +92,7 @@ en:
   all_clippings_tagged: "All clippings tagged {{tag_name}}"
   #en: all_comments: All comments
   all_comments: All comments
+  view_company_representative_comments: View company representative comments 
   #en: all_photos_tagged: All photos tagged {{tag_name}}
   all_photos_tagged: "All photos tagged {{tag_name}}"
   #en: all_posts_tagged: All posts tagged {{tag_name}}
@@ -201,6 +202,8 @@ en:
   choices: Choices
   #en: choose_a_photo_for_your_profile: "Choose a photo for your profile:"
   choose_a_photo_for_your_profile: "Choose a photo for your profile:"
+  choose_a_company_photo: "Choose a company photo:"
+  company_photo: "Company photo"
   #en: choose_a_photo_to_upload: "Choose a photo to upload:"
   choose_a_photo_to_upload: "Choose a photo to upload:"
   #en: choose_your_location: Choose your location
@@ -368,6 +371,7 @@ en:
   edit_account: Edit account
   #en: edit_contest: Edit Contest
   edit_contest: Edit Contest
+  edit_company: Edit company
   #en: edit_event: Edit event
   edit_event: Edit event
   #en: edit_forum: Edit forum
@@ -376,6 +380,7 @@ en:
   edit_post: Edit post
   #en: edit_profile: Edit profile
   edit_profile: Edit profile
+  company_profile: "Company profile"
   #en: edit_rsvp_for: Edit RSVP for
   edit_rsvp_for: Edit RSVP for
   #en: edit_this_event: Edit this event
@@ -663,6 +668,7 @@ en:
   male: Male
   #en: manage_my: "Manage my:"
   manage_my: "Manage my:"
+  manage: Manage
   #en: manage_posts: Manage Posts
   manage_posts: Manage Posts
   #en: medium: Medium
@@ -680,6 +686,7 @@ en:
   members: Members
   #en: member_since: Member since
   member_since: Member since
+  registered_on: Registered on
   #en: message: Message
   message: Message
   #en: messages_deleted: Messages deleted
@@ -756,6 +763,7 @@ en:
   new_photos_multiple_uploader: "New Photos &raquo; Multiple Uploader"
   #en: new_post: New post
   new_post: New post
+  create_new_company_post: "Create new company conversation"
   #en: new_post_for_category: New {{category}}
   new_post_for_category: "New {{category}}"
   #en: new_post_text: New Post text
@@ -1309,6 +1317,7 @@ en:
   view_comment: View Comment
   #en: view_my: "View my:"
   view_my: "View my:"
+  view: View
   #en: view_my_blog: View my blog
   view_my_blog: View my blog
   #en: view_profile: View profile
@@ -1415,6 +1424,21 @@ en:
   you_have_uploaded: You have uploaded
   #en: you_have_written: You have written
   you_have_written: You have written
+  there_are_company_posts:
+    one: "1 company conversation"
+    other: "{{count}} company conversations"
+  there_are_representative_comments:
+    one: "1 representative comments"
+    other: "{{count}} representative comments"
+  there_are_company_comments:
+    one: "1 company conversation comment"
+    other: "{{count}} company conversation comments"
+  there_are_company_followers:
+    one: "1 followers"
+    other: "{{count}} followers"
+  there_are_profile_views:
+    one: "1 profile view"
+    other: "{{count}} profile views"
   #en: you_last_logged_in_on: You last logged in on
   you_last_logged_in_on: You last logged in on
   #en: you_may_want_to_use_your_company_logo_or_a_photo_of_one_of_your_products_: "You may want to use your company logo, or a photo of one of your products. "
@@ -1533,6 +1557,7 @@ en:
   # en: delete_this_company: "Delete this company"
   delete_this_company: "Delete this company"
   edit_this_company: "Edit this company"
+  manage_this_company: "Manage this company"
   # en: recent_company_post_comments: "Recent post comments"
   recent_company_post_comments: "Latest responses by {{company_name}} representatives"
   recent_user_comments: "Latest responses by {{user_name}}"
@@ -1553,11 +1578,12 @@ en:
   company_details: "Company details"
   # en: view_company_blog: "View company conversastions"
   view_company_blog: "View company conversastions"
+  view_company_dashboard: View company dashboard
   # en: listing_representative_invitations: "Listing representative invitations"
   listing_representative_invitations: "Company representative invitations"
   # en: new_representative_invitation: "New representative invitation"
   manage_representative_invitations: 'Manage your {{company_name}} representative invitations'
-  new_representative_invitation: "Invite new {{company_name}} representatives"
+  new_representative_invitation: "Invite new company representatives"
   # en: participating_representatives: "Participating representatives"
   participating_representatives:
     one: "1 Other representative is participating" 

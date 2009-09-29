@@ -106,8 +106,13 @@ class Company < ActiveRecord::Base
 
   def post_comments
     Comment.scoped :joins => "left join posts on comments.commentable_id = posts.id left join representatives on representatives.user_id = posts.user_id",
-                :conditions => ["representatives.company_id = ?", id]
-  end 
+                :conditions => ["representatives.company_id = ? AND comments.commentable_type = ?", id, Post.to_s]
+  end
+
+  def representative_comments
+    Comment.scoped :joins => "left join representatives on representatives.user_id = comments.user_id",
+                :conditions => ["representatives.company_id = ? AND comments.commentable_type = ?", id, Post.to_s]
+  end
   
   def logo_photo_url(size = nil)
     if logo
@@ -138,6 +143,13 @@ class Company < ActiveRecord::Base
     return true if admin?(user)
     rep = representative_for_user(user)
     rep ? rep.representative? : false
+  end
+
+  # Can the given user post convos to this company?
+  def post?(user)
+    return true if admin?(user)
+    rep = representative_for_user(user)
+    rep ? (rep.representative? or rep.poster?) : false
   end
 
   def representative_for_user(user)

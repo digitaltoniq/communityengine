@@ -1,16 +1,21 @@
-- if current_user && (@company.admin?(current_user) or @company.invite?(current_user))
+- if current_user && (current_user.admin? or @company.representative?(current_user))
   -box :class => "first_alt alt" do 
     %h3
       =:admin_controls.l
     -#
       = link_to( "&raquo; #{:assume_company_id.l}", assume_company_path(@company) )
       %br/
-    - if @company.admin?(current_user)
       -#= link_to( "&raquo; #{:delete_this_company.l}", company_path(@company), {:method => :delete, :confirm => :are_you_sure_you_want_to_permanently_delete_this_company.l} )
-      = link_to( "&raquo; #{:edit_this_company.l}", edit_company_path(@company))
+    = link_to( "&raquo; #{:view_company_dashboard.l}", dashboard_company_path(@company))
+
+    -#
       %br/
-    -if @company.invite?(current_user)
-      = link_to "&raquo; #{:new_representative_invitation.l(:company_name => @company)}", new_company_representative_invitation_path(@company)
+      -if @company.invite?(current_user)
+        = link_to "&raquo; #{:new_representative_invitation.l(:company_name => @company)}", new_company_representative_invitation_path(@company)
+        %br/
+      -if @company.post?(current_user)
+        = link_to "&raquo; #{:create_new_company_post.l}", new_user_post_path(current_user)
+        %br/
     -#
       %br/
       = link_to( "&raquo; #{:assign_role.l}: #{@company.moderator? ? :member.l : :moderator.l}", toggle_moderator_company_path(@company), {:method => :put} )
@@ -30,7 +35,7 @@
         =:no_profile_photo.l
         = link_to :click_here_to_upload_one.l, edit_company_path(@company)
       %br        
-    = image_tag( @company.logo_photo_url(:medium), :class => "polaroid")    
+    = image_tag( @company.logo_photo_url(:large), :class => "polaroid")    
 
   -#
     DJS

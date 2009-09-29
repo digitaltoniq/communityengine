@@ -1,6 +1,7 @@
 require "RMagick"
 
 class CompaniesController < BaseController
+  include Viewable
 
   # Trying to clean up RESTfully
   inherit_resources
@@ -12,12 +13,15 @@ class CompaniesController < BaseController
     :only => [:new, :create, :update, :edit, :welcome_about])
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
 
-  before_filter :admin_required, :only => [:new, :destroy]
+  before_filter :login_required, :only => [:new, :create, :edit, :update, :destroy, :dashboard]
+  before_filter :admin_required, :only => [:new, :create, :destroy]
 
   before_filter :admin_or_company_admin_required, :only => [:edit, :update, :change_company_logo, :upload_company_logo,
                                               #:welcome_photo, :welcome_about, :welcome_invite, :deactivate,
                                               # :crop_profile_photo
                                               ]
+  before_filter :admin_or_company_representative_required, :only => :dashboard
+  
    def index
      index! { get_additional_companies_page_data }
    end
@@ -29,8 +33,9 @@ class CompaniesController < BaseController
   def show
     # TODO: Move these auxiliary items up to view or filter?
     show! do
-      @post_comments = @company.post_comments.ordered('created_at DESC').limited(10)
+      @post_comments = @company.representative_comments.ordered('created_at DESC').limited(10)
       @recent_posts = @company.posts.ordered("published_at DESC").limited(2)
+      update_view_count(@company) unless current_user && (@company.representative?(current_user) or current_user.admin?)
     end
   end
     
@@ -158,9 +163,9 @@ class CompaniesController < BaseController
     end
   end
 
-  def post_comments
+  def representative_comments
     @company = Company.find(params[:id])
-    @comments = @company.post_comments.recent.find(:all, :page => {:size => 10, :current => params[:page]})  # TODO: will paginate
+    @comments = @company.representative_comments.recent.find(:all, :page => {:size => 10, :current => params[:page]})  # TODO: will paginate
     @title = @company.name
     @back_url = company_path(@company)
     
@@ -185,6 +190,10 @@ class CompaniesController < BaseController
   def admin_or_company_admin_required
     company = Company.find(params[:id])
     company && current_user && (current_user.admin? || company.admin?(current_user)) ? true : access_denied
+  end
+
+  def admin_or_company_representative_required
+    current_user.admin? or @company.representative?(current_user) ? true : access_denied
   end
 
   def setup_metro_areas_for_cloud

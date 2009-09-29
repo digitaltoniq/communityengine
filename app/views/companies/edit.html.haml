@@ -13,14 +13,14 @@
       
   .yui-b
     -box :id => "profile_details" do
-      %h3=:profile_photo.l
+      %h3=:company_photo.l
       -#
         DJS
         = @company.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
         
       = image_tag( @company.logo_photo_url(), :class => "polaroid" )
       %label
-        =:choose_a_photo_for_your_profile.l
+        =:choose_a_company_photo.l
       = file_field :logo, :uploaded_data, :size => "20"
 
       -#
@@ -53,7 +53,7 @@
   #yui-main
     .yui-b
       -box do 
-        %h3=:about_me.l
+        %h3=:about.l
         = text_area :company, :description, :class => "rich_text_editor", :style => "width:100%"
 
         %label{"for"=>"domains"}
