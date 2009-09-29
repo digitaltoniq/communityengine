@@ -8,13 +8,16 @@ class Representative < ActiveRecord::Base
 
   #validation
 
-  validates_presence_of :company, :user
+  validates_presence_of :company, :user, :representative_role
   validates_length_of   :first_name, :within => 1..30
   validates_length_of   :last_name,  :within => 2..30 
   validates_each :email do |record, attr, email|
     # TODO: better message, localize
     record.errors.add(:email, " domain of email address not related to your company") unless record.company.accepts_email?(email)
   end
+
+  #-- Callbacks
+  before_validation :set_representative_role
 
   #associations
   has_enumerated :representative_role
@@ -107,6 +110,7 @@ class Representative < ActiveRecord::Base
   end
 
   # TODO: These need to be protected? They were in CE
+  # TODO: Shouldn't these be handled by has_enumerated?
 
   def admin?
     representative_role && representative_role.eql?(RepresentativeRole[:admin])
@@ -127,5 +131,12 @@ class Representative < ActiveRecord::Base
   def validate
     user.valid?
     user.errors.each { |attr, msg| errors.add(attr, msg) }
+  end
+
+  # If this is the first guy in the front door, he's the admin
+  def set_representative_role
+    if !representative_role_id
+      self.representative_role = RepresentativeRole[company.representatives.count > 0 ? :representative : :admin]
+    end
   end
 end

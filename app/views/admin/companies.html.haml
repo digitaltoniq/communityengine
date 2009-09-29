@@ -16,9 +16,9 @@
     %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%", :style => "table-layout:fixed;"}
       %thead
         %tr
-          %th=:name.l
-          %th=:description.l
-          %th=:date_created.l
+          %th{:width => '30%'}=:name.l
+          %th{:width => '50%'}=:description.l
+          %th{:width => '20%'}=:date_created.l
 
       %tbody
         - @companies.each do |company|
@@ -26,6 +26,6 @@
             %td{:valign =>'top'}= link_to company, company_path(company)
             %td{:style => 'overflow:hidden;'}
               = company.description
-            %td= company.created_at.to_s(:concise)
+            %td{:valign =>'top'}= company.created_at.to_s(:concise)
 
     = will_paginate @companies

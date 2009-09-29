@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
   tracks_unlinked_activities [:logged_in, :invited_friends, :updated_profile, :joined_the_site]
   acts_as_label
   
-  #callbacks  
+  #callbacks
+  before_validation :set_role
   before_save   :encrypt_password, :whitelist_attributes
   before_create :make_activation_code
   after_create  :update_last_login
@@ -492,6 +493,10 @@ class User < ActiveRecord::Base
   
     def password_required?
       crypted_password.blank? || !password.blank?
+    end
+
+    def set_role
+      self.role = Role[:member] if role_id.nil?
     end
   
 end

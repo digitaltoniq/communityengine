@@ -98,8 +98,6 @@ class RepresentativesController < BaseController
   def create
     @representative = Representative.new(params[:representative])
     @representative.company = Company.find(params[:company_id])
-    @representative.representative_role = RepresentativeRole[:representative]
-    @representative.role = Role[:member]
     @representative.birthday = DateTime.now.years_ago(18)
 
     if (!AppConfig.require_captcha_on_signup || verify_recaptcha(@representative)) && @representative.save

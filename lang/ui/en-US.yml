@@ -1531,6 +1531,7 @@ en:
   user_details: User details
   # en: delete_this_company: "Delete this company"
   delete_this_company: "Delete this company"
+  edit_this_company: "Edit this company"
   # en: recent_company_post_comments: "Recent post comments"
   recent_company_post_comments: "Latest responses by {{company_name}} representatives"
   recent_user_comments: "Latest responses by {{user_name}}"
@@ -1555,7 +1556,7 @@ en:
   listing_representative_invitations: "Company representative invitations"
   # en: new_representative_invitation: "New representative invitation"
   manage_representative_invitations: 'Manage your {{company_name}} representative invitations'
-  new_representative_invitation: "Invite new {{company_name}} representative(s)"
+  new_representative_invitation: "Invite new {{company_name}} representatives"
   # en: participating_representatives: "Participating representatives"
   participating_representatives:
     one: "1 Other representative is participating" 

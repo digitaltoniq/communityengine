@@ -184,7 +184,7 @@ class CompaniesController < BaseController
 
   def admin_or_company_admin_required
     company = Company.find(params[:id])
-    company && current_user && (current_user.admin? || company.company_admin?(current_user)) ? true : access_denied
+    company && current_user && (current_user.admin? || company.admin?(current_user)) ? true : access_denied
   end
 
   def setup_metro_areas_for_cloud

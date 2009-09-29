@@ -130,22 +130,18 @@ class Company < ActiveRecord::Base
   def admin?(user)
     return true if user.admin?
     rep = representative_for_user(user)
-    rep ? rep.representative_role.admin? : false
+    rep ? rep.admin? : false
   end
 
   # Can the given user invite others to this company?
   def invite?(user)
+    return true if admin?(user)
     rep = representative_for_user(user)
-    rep ? (rep.representative_role.admin? or rep.representative_role.representative?) : false
+    rep ? rep.representative? : false
   end
 
   def representative_for_user(user)
      representatives.find(:first, :conditions => ["user_id = ?", user.id])
-  end
-
-  def company_admin?(user)
-    r = representative_for_user(user)
-    r && r.admin?
   end
 
   def representative?(user)
