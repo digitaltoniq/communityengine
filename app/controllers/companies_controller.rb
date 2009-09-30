@@ -27,8 +27,9 @@ class CompaniesController < BaseController
    end
 
   def dashboard
-    @network_activity = Activity.about(resource).recent.limited(15)
-    respond_to(:with => resource)
+    redirect_to activity_company_path(resource)
+#    @network_activity = Activity.about(resource).recent.limited(15)
+#    respond_to(:with => resource)
   end
   
   def show

@@ -1,6 +1,8 @@
-.yui-gc
-  .yui-u.first
-    -box :class => "fresh" do
+=render :partial => "companies/dashboard_nav"
+
+#yui-main
+  .yui-b
+    -box(:class => 'fresh') do 
       %h3=:recent_company_activity.l
       =render :partial => "activities/activity", :collection => @activities
       =will_paginate @activities
