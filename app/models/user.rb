@@ -87,6 +87,13 @@ class User < ActiveRecord::Base
     {:conditions => ["tags.name = ?", tag_name], :include => :tags}
   }
 
+  # Role-based scopes
+  Role.all.collect(&:name).each do |role|
+    class_eval <<-EOV
+      named_scope :#{role}, lambda { { :conditions => { :role_id => Role[:#{role}].id } } }
+    EOV
+  end
+
   ## Class Methods
 
   # override activerecord's find to allow us to find by name or id transparently

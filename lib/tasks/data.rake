@@ -10,7 +10,8 @@ namespace :data do
   end
   
   task :demo => [:environment, :prevent_production, 'demo:prefetch_images', 'default:users', 'demo:companies',
-                 'demo:representatives', 'demo:posts', 'demo:users', 'demo:followings', 'demo:comments']
+                 'demo:representatives', 'demo:representative_invitations', 'demo:posts', 'demo:users',
+                 'demo:followings', 'demo:comments']
   
   namespace :demo do
 
@@ -46,6 +47,15 @@ namespace :data do
                   :representative_role => ndx == 0 ? RepresentativeRole[:admin] :
                           ndx > 1 ? RepresentativeRole[:representative] : RepresentativeRole[:poster])
         end
+      end
+    end
+
+    task :representative_invitations => [:environment, :prevent_production, :factories] do
+      Representative.all.each do |r|
+        (rand(3) + 1).times { Factory(:representative_invitation, :user => r.user) }
+      end
+      User.admin.each do |a|
+        (rand(3) + 1).times { Factory(:representative_invitation, :user => a) }
       end
     end
 
