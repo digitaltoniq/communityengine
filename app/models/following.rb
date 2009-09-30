@@ -6,13 +6,7 @@ class Following < ActiveRecord::Base
   validates_presence_of     :user, :followee
   validates_uniqueness_of   :followee_id, :scope => :user_id
 
-  acts_as_activity :user, :about => proc { |f|
-    case f.followee.class.to_s
-      when 'Company' then f.followee
-      when 'Post' then Company.for_post(f.followee)
-      else nil
-    end
-  }
+  acts_as_activity :user, :about => [:company, :representative], :ignore_nil_about => true
 
   ## Named scopes
 
@@ -41,5 +35,20 @@ class Following < ActiveRecord::Base
 
   def self.follow!(follower, followee)
     create(:user => follower, :followee => followee) if can_follow?(followee, follower)
+  end
+
+  def company
+    case followee.class.to_s
+      when 'Company' then followee
+      when 'Post' then Company.for_post(followee)
+      else nil
+    end
+  end
+
+  def representative
+    case followee.class.to_s
+      when 'Post' then Representative.for_user(followee.user)
+      else nil
+    end
   end
 end

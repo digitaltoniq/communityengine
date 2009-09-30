@@ -11,7 +11,7 @@ namespace :data do
   
   task :demo => [:environment, :prevent_production, 'demo:prefetch_images', 'default:users', 'demo:companies',
                  'demo:representatives', 'demo:representative_invitations', 'demo:posts', 'demo:users',
-                 'demo:followings', 'demo:comments']
+                 'demo:followings', 'demo:comments', 'demo:likes']
   
   namespace :demo do
 
@@ -95,6 +95,12 @@ namespace :data do
         (rand(2) + 1).times do
           Factory(:comment, :commentable => p, :user => Representative.for_user(p.user).company.representatives.rand.user)
         end
+      end
+    end
+
+    task :likes => [:environment, :prevent_production, :factories] do
+      Comment.all.each do |c|
+        rand(3).times { User.all.rand.likes!(c) }
       end
     end
   end

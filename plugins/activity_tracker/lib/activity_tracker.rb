@@ -8,7 +8,7 @@ module ActivityTracker # :nodoc:
 
     # Arguments: 
     #   <tt>:actor</tt> - the user model that owns this object. In most cases this will be :user. Required.
-    #   <tt>:options</tt> - hash of options.  <tt>:about</tt>, <tt>:if</tt>
+    #   <tt>:options</tt> - hash of options.  <tt>:about</tt>, <tt>:if</tt>, <tt>:ignore_nil_about</tt>
     #   * <tt>:about</tt> - the model that this activity is about (often the non-user owner of this item)
     #
     #
@@ -17,7 +17,7 @@ module ActivityTracker # :nodoc:
     #
     # Examples:
     #   acts_as_activity :user
-    #   acts_as_activity :user, :about => proc { |c| Company.for_comment(c) }
+    #   acts_as_activity :user, :about => [proc { |c| c.post.user }, proc { |c| Company.for_comment(c) }], :ignore_nil_about =>true
     #   acts_as_activity :user, :if => Proc.new{|record| record.post.length > 100 } - will only track the activity if the length of the post is more than 100
     def acts_as_activity(actor, options = {})
       unless included_modules.include? InstanceMethods
@@ -31,7 +31,7 @@ module ActivityTracker # :nodoc:
         class_inheritable_accessor :activity_options
         include InstanceMethods
       end      
-      self.activity_options = {:actor => actor, :about => options[:about]}
+      self.activity_options = {:actor => actor, :about => options[:about], :ignore_nil_about => (options[:ignore_nil_about] || false)}
     end
     
     # This adds a helper method to the model which makes it easy to track actions that can't be associated with an object in the database.
@@ -56,12 +56,18 @@ module ActivityTracker # :nodoc:
 
     def create_activity_from_self
       actor = activity_options[:actor] ? send(activity_options[:actor]) : nil
-      about = case (about_opt = activity_options[:about]).class.to_s
-        when 'Symbol' then send(about_opt)
-        when 'Proc' then about_opt.call(self)
-        else nil
-      end 
-      Activity.create(:item => self, :actor => actor, :about => about, :action => 'created')
+
+      # Create a new activity for each about obj there is
+      [activity_options[:about]].flatten.each do |about_opt|
+        about = case about_opt.class.to_s
+          when 'Symbol' then send(about_opt)
+          when 'Proc' then about_opt.call(self)
+          else nil
+        end
+        unless about.nil? and activity_options[:ignore_nil_about]
+          Activity.create(:item => self, :actor => actor, :about => about, :action => 'created')
+        end
+      end
     end
 
     def track_activity(action)

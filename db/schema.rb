@@ -361,7 +361,6 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.integer  "company_id"
     t.string   "email_addresses"
     t.string   "message"
-    t.integer  "representative_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

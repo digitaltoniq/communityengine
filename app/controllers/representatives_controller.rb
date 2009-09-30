@@ -86,6 +86,7 @@ class RepresentativesController < BaseController
 
   def dashboard
     @company = resource.company
+    @network_activity = Activity.about(resource).recent.paginate(paging_params.merge(:per_page => 25))
     respond_with(resource)
   end
 

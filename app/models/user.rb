@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
   }
 
   # Role-based scopes
-  Role.all.collect(&:name).each do |role|
+  [:admin, :moderator, :member].each do |role|
     class_eval <<-EOV
       named_scope :#{role}, lambda { { :conditions => { :role_id => Role[:#{role}].id } } }
     EOV

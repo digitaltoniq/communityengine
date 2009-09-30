@@ -54,6 +54,17 @@ class Representative < ActiveRecord::Base
     def users
       User.scoped :joins => "left join representatives on representatives.user_id = users.id"
     end
+
+    def for_user(user_or_id)
+      find_by_user_id(user_or_id)
+    end
+
+    # Get the rep whose post this comment is on
+    def for_comment_post(comment)
+      if comment.commentable_type == Post.to_s
+        for_user(comment.commentable.user_id)
+      end
+    end
   end
 
   # override activerecord's find to allow us to find by name or id transparently
@@ -63,10 +74,6 @@ class Representative < ActiveRecord::Base
     else
       super
     end
-  end
-
-  def self.for_user(user_or_id)
-    find_by_user_id(user_or_id)
   end
 
   # Get the reps participating in the given post/commentable (minus the author of
