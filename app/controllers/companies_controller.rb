@@ -7,7 +7,7 @@ class CompaniesController < BaseController
   inherit_resources
   respond_to :html
 
-  before_filter :ensure_valid_resource, :only => [:show, :dashboard, :edit, :update, :destroy, :activity]
+  before_filter :ensure_valid_resource, :only => [:show, :dashboard, :edit, :update, :destroy, :activity, :post_comments, :representative_comments]
 
   uses_tiny_mce(:options => AppConfig.default_mce_options.merge({:editor_selector => "rich_text_editor"}),
     :only => [:new, :create, :update, :edit, :welcome_about])
@@ -169,11 +169,27 @@ class CompaniesController < BaseController
   end
 
   def representative_comments
-    @company = Company.find(params[:id])
     @comments = @company.representative_comments.recent.find(:all, :page => {:size => 10, :current => params[:page]})  # TODO: will paginate
     @title = @company.name
     @back_url = company_path(@company)
     
+    respond_to do |format|
+      format.html do
+        render :action => 'post_comments' and return
+      end
+      format.rss do
+        @rss_title = "#{AppConfig.community_name}: #{@commentable.class.to_s.underscore.capitalize} Comments - #{@title}"
+        @rss_url = comment_rss_link
+        render_comments_rss_feed_for(@comments, @title) and return
+      end
+    end
+  end
+
+  def post_comments
+    @comments = @company.post_comments.recent.find(:all, :page => {:size => 10, :current => params[:page]})  # TODO: will paginate
+    @title = @company.name
+    @back_url = company_path(@company)
+
     respond_to do |format|
       format.html do
         render :action => 'post_comments' and return

@@ -3,7 +3,7 @@
 %script{"type"=>"text/javascript", "src"=>"http://www.plaxo.com/css/m/js/abc_launcher.js"}
 
 - @section = (@post.category && @post.category.name)
-- @meta = { :title => "#{@post.title}", :description => "#{truncate_words(@post.post, 75, '...' )}", :keywords => "#{@post.tags.join(", ") unless @post.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+- @meta = { :title => "#{@post.title}", :description => "#{truncate_words(@post.post, 75, '...' )}", :robots => AppConfig.robots_meta_show_content }
 
 #yui-main
   .yui-b
@@ -50,8 +50,8 @@
         / vcard
         .entry-content
           = @post.post
-          = render :partial => 'polls/poll_ui', :locals => {:poll => @post.polls.first} unless @post.polls.empty?
-          - unless @post.tags.empty?
+          -#= render :partial => 'polls/poll_ui', :locals => {:poll => @post.polls.first} unless @post.polls.empty?
+          -# unless @post.tags.empty?
             %ul.tags
               - @post.tags.each do |t|
                 %li=link_to( t.name, tag_url(t), :rel => 'tag')

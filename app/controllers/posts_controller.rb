@@ -66,11 +66,11 @@ class PostsController < BaseController
 
     @comments = @post.comments.find(:all, :limit => 20, :order => 'created_at DESC', :include => :user)
 
-    @previous = @post.previous_post
-    @next = @post.next_post    
-    @popular_posts = @user.posts.find(:all, :limit => 10, :order => "view_count DESC")    
-    @related = Post.find_related_to(@post)
-    @most_commented = Post.find_most_commented
+#    @previous = @post.previous_post
+#    @next = @post.next_post
+#    @popular_posts = @user.posts.find(:all, :limit => 10, :order => "view_count DESC")
+#    @related = Post.find_related_to(@post)
+#    @most_commented = Post.find_most_commented
     
     respond_to do |format|
       format.html

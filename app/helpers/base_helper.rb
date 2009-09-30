@@ -125,8 +125,8 @@ module BaseHelper
 			when 'posts'
         if @post and @post.title
           title = @post.title + ' &raquo; ' + app_base + tagline
-          title += (@post.tags.empty? ? '' : " &laquo; "+:keywords.l+": " + @post.tags[0...4].join(', ') )
-          @canonical_url = user_post_url(@post.user, @post)
+#          title += (@post.tags.empty? ? '' : " &laquo; "+:keywords.l+": " + @post.tags[0...4].join(', ') )
+          @canonical_url = post_url(@post)
         end
 			when 'users'
         if @user && !@user.new_record? && @user.login 
