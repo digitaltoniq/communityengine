@@ -85,7 +85,7 @@ module DT
       cached_count = unused_photos.size
       fetch_count = count - cached_count
 
-      if count > 0
+      if fetch_count > 0
 
         f_opts = flickr_fu_options.merge(:tags => tags, :per_page => fetch_count)
 
