@@ -12,15 +12,20 @@
 ActiveRecord::Schema.define(:version => 20090921200851) do
 
   create_table "activities", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "action",     :limit => 50
+    t.integer  "actor_id"
+    t.string   "actor_type"
     t.integer  "item_id"
     t.string   "item_type"
+    t.integer  "about_id"
+    t.string   "about_type"
+    t.string   "action"
     t.datetime "created_at"
   end
 
+  add_index "activities", ["about_id", "about_type"], :name => "index_activities_on_about_id_and_about_type"
+  add_index "activities", ["actor_id", "actor_type"], :name => "index_activities_on_actor_id_and_actor_type"
   add_index "activities", ["created_at"], :name => "index_activities_on_created_at"
-  add_index "activities", ["user_id"], :name => "index_activities_on_user_id"
+  add_index "activities", ["item_id", "item_type"], :name => "index_activities_on_item_id_and_item_type"
 
   create_table "ads", :force => true do |t|
     t.string   "name"

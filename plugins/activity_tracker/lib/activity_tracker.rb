@@ -8,7 +8,8 @@ module ActivityTracker # :nodoc:
 
     # Arguments: 
     #   <tt>:actor</tt> - the user model that owns this object. In most cases this will be :user. Required.
-    #   <tt>:options</tt> - hash of options.
+    #   <tt>:options</tt> - hash of options.  <tt>:about</tt>, <tt>:if</tt>
+    #   * <tt>:about</tt> - the model that this activity is about (often the non-user owner of this item)
     #
     #
     # Options:
@@ -16,7 +17,7 @@ module ActivityTracker # :nodoc:
     #
     # Examples:
     #   acts_as_activity :user
-    #   acts_as_activity :author
+    #   acts_as_activity :user, :about => proc { |c| Company.for_comment(c) }
     #   acts_as_activity :user, :if => Proc.new{|record| record.post.length > 100 } - will only track the activity if the length of the post is more than 100
     def acts_as_activity(actor, options = {})
       unless included_modules.include? InstanceMethods
@@ -30,7 +31,7 @@ module ActivityTracker # :nodoc:
         class_inheritable_accessor :activity_options
         include InstanceMethods
       end      
-      self.activity_options = {:actor => actor}
+      self.activity_options = {:actor => actor, :about => options[:about]}
     end
     
     # This adds a helper method to the model which makes it easy to track actions that can't be associated with an object in the database.
@@ -46,7 +47,7 @@ module ActivityTracker # :nodoc:
         include InstanceMethods
       end
       self.activity_options = {:actions => actions}    
-      after_destroy { |record| Activity.destroy_all(:user_id => record.id) }
+      after_destroy { |record| Activity.destroy_all(:actor_type => record.class.to_s, :actor_id => record.id) }
     end
         
   end
@@ -54,19 +55,20 @@ module ActivityTracker # :nodoc:
   module InstanceMethods
 
     def create_activity_from_self
-      activity = Activity.new
-      activity.item = self
-      activity.action = self.class.to_s.underscore
-      actor_id = self.send( activity_options[:actor].to_s + "_id" )
-      activity.user_id = actor_id
-      activity.save
+      actor = activity_options[:actor] ? send(activity_options[:actor]) : nil
+      about = case (about_opt = activity_options[:about]).class.to_s
+        when 'Symbol' then send(about_opt)
+        when 'Proc' then about_opt.call(self)
+        else nil
+      end 
+      Activity.create(:item => self, :actor => actor, :about => about, :action => 'created')
     end
 
     def track_activity(action)
       if activity_options[:actions].include?(action)
         activity = Activity.new
         activity.action = action.to_s
-        activity.user_id = self.id
+        activity.actor = self
         activity.save!
       else
         raise "The action #{action} can't be tracked."

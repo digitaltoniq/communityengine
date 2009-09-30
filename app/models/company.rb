@@ -52,15 +52,6 @@ class Company < ActiveRecord::Base
               Post.scoped(:conditions => '1 = 0')
     end
 
-    def register_activity(activity_item)
-      company = case activity_item.class.to_s
-        when 'Comment' then for_comment(activity_item)
-        when 'Post' then for_post(activity_item)
-      end
-      Activity.create(:item => company, :user_id => activity_item.user_id,
-                      :action => "#{activity_item.class.to_s.downcase}_published")
-    end
-
     # TODO: will need to update when more than just posts can be commented on
     def for_comment(comment)
       for_post(comment.commentable)
@@ -74,13 +65,13 @@ class Company < ActiveRecord::Base
     def recently_active(opts = {})
       since = opts[:since] || 5.days.ago
       Activity.since(since).
-              of_item_type('Company').
+              about_type(self).
               find(:all,
-                   :select => 'activities.item_id, activities.item_type, count(*) as count',
-                   :group => 'activities.item_id',
+                   :select => 'activities.about_id, activities.about_type, count(*) as count',
+                   :group => 'activities.about_id',
                    :order => 'count DESC',
-                   :include => :item,
-                   :limit => (opts[:limit] || 30)).collect(&:item)
+                   :include => :about,
+                   :limit => (opts[:limit] || 30)).collect(&:about)
     end
   end
 

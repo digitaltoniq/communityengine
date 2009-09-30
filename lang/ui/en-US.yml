@@ -93,7 +93,8 @@ en:
   all_clippings_tagged: "All clippings tagged {{tag_name}}"
   #en: all_comments: All comments
   all_comments: All comments
-  view_company_representative_comments: View company representative comments 
+  view_company_representative_comments: View company representative comments
+  view_company_conversation_comments: View comments on company conversations 
   #en: all_photos_tagged: All photos tagged {{tag_name}}
   all_photos_tagged: "All photos tagged {{tag_name}}"
   #en: all_posts_tagged: All posts tagged {{tag_name}}
@@ -1015,7 +1016,10 @@ en:
   rsvp_for: RSVP for
   #en: rsvped_for_an_event: "RSVPed for an event:"
   rsvped_for_an_event: "RSVPed for an event:"
-  #en: rsvp: RSVP  
+  #en: rsvp: RSVP
+  invited_representatives:
+    one: "invited a representative:"
+    other: "invited other representatives:"
   rsvp: RSVP
   #en: rsvps: RSVPs
   rsvps: RSVPs
@@ -1392,7 +1396,7 @@ en:
   #en: write_new_post: Write a '{{category}}' post
   write_new_post: "Write a '{{category}}' post"
   #en: wrote_a_post: "wrote a post:"
-  wrote_a_post: "wrote a post:"
+  wrote_a_post: "wrote a post entitled:"
   #en: yesterday: Yesterday
   yesterday: Yesterday
   #en: you_are_editing_your_account: You are editing your account.

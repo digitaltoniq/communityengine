@@ -82,7 +82,7 @@ class UsersController < BaseController
     @recent_posts_in_followed_companies = Company.posts_in(@companies).ordered('published_at DESC').limited(2)
     @comment        = Comment.new(params[:comment])
     
-    @my_activity = Activity.recent.by_users([@user.id]).find(:all, :limit => 10) 
+#    @my_activity = Activity.recent.by(@user).find(:all, :limit => 10)
 
     update_view_count(@user) unless current_user && current_user.eql?(@user)
   end

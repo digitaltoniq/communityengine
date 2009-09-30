@@ -153,20 +153,21 @@ class User < ActiveRecord::Base
     end    
     cond
   end  
-  
+
+  # TODO: This ties the actor id to a user, not allowing for true polymorphism
   def self.find_by_activity(options = {})
     options.reverse_merge! :limit => 30, :require_avatar => true, :since => 7.days.ago   
     #Activity.since.find(:all,:select => Activity.columns.map{|column| Activity.table_name + "." + column.name}.join(",")+', count(*) as count',:group => Activity.columns.map{|column| Activity.table_name + "." + column.name}.join(","),:order => 'count DESC',:joins => "LEFT JOIN users ON users.id = activities.user_id" )
     #Activity.since(7.days.ago).find(:all,:select => 'activities.user_id, count(*) as count',:group => 'activities.user_id',:order => 'count DESC',:joins => "LEFT JOIN users ON users.id = activities.user_id" )
     activities = Activity.since(options[:since]).find(:all, 
-      :select => 'activities.user_id, count(*) as count', 
-      :group => 'activities.user_id', 
+      :select => 'activities.actor_id, count(*) as count',
+      :group => 'activities.actor_id',
       :conditions => "#{options[:require_avatar] ? ' users.avatar_id IS NOT NULL' : nil}", 
       :order => 'count DESC', 
-      :joins => "LEFT JOIN users ON users.id = activities.user_id",
+      :joins => "LEFT JOIN users ON users.id = activities.actor_id",
       :limit => options[:limit]
       )
-    user_ids = activities.collect(&:user_id)
+    user_ids = activities.collect(&:actor_id)
     user_ids.any? ?
             User.scoped(:conditions => ["users.id IN (?)", user_ids]) :
             User.recent.limited(options[:limit])
@@ -398,7 +399,7 @@ class User < ActiveRecord::Base
     
     ids = ((friends_ids | metro_area_people_ids) - [self.id])[0..100] #don't pull TOO much activity for now
     
-    Activity.recent.since(since).by_users(ids).find(:all, :page => page)          
+    Activity.recent.since(since).by(ids).find(:all, :page => page)          
   end
 
   def comments_activity(page = {}, since = 1.week.ago)

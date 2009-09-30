@@ -1,13 +1,11 @@
 class Activity < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :item, :polymorphic => true
-  validates_presence_of :user_id
+
+  belongs_to :actor, :polymorphic => true # Who performed the activity
+  belongs_to :item, :polymorphic => true  # The item that triggered the activity
+  belongs_to :about, :polymorphic => true # What the activity is about (often the owner of the item)
   
-  after_save :update_counter_on_user
-  
-  named_scope :of_item_type, lambda {|type|
-    {:conditions => ["activities.item_type = ?", type]}
-  }
+  after_save :update_counter_on_actor
+
   named_scope :since, lambda { |time|
     {:conditions => ["activities.created_at > ?", time] }
   }
@@ -15,29 +13,26 @@ class Activity < ActiveRecord::Base
     {:conditions => ["activities.created_at < ?", time] }    
   }
   named_scope :recent, :order => "activities.created_at DESC"
-  named_scope :by_users, lambda {|user_ids|
-    {:conditions => ['activities.user_id in (?)', user_ids]}
+
+  named_scope :by, lambda {|actor|
+    {:conditions => { :actor_type => actor.class.to_s, :actor_id => actor.id } }
   }
-  named_scope :about, lambda { |item|
-    { :conditions => { :item_type => item.class.to_s, :item_id => item.id } }
+  named_scope :about, lambda { |about|
+    { :conditions => { :about_type => about.class.to_s, :about_id => about.id } }
   }
-  
-  
-  def update_counter_on_user
-    if user && user.class.column_names.include?('activities_count')
-      new_count =  Activity.by(user)
-      user.update_attribute(:activities_count, new_count )
+  named_scope :about_type, lambda {|type|
+    {:conditions => { :about_type => type.to_s } }
+  }
+
+  def update_counter_on_actor
+    if actor && actor.class.column_names.include?('activities_count')
+      actor.update_attribute(:activities_count, Activity.by(actor).count )
     end
   end
   
-  def self.by(user)
-    Activity.count(:all, :conditions => ["user_id = ?", user.id])
-  end
-  
-  def can_be_deleted_by?(user)
-    return false if user.nil?
-    return false unless user.admin? || user.moderator? || self.user_id.eql?(user.id)
-    true
+  def can_be_deleted_by?(actor)
+    return false if actor.nil?
+    actor.admin? || actor.moderator? || self.actor == actor
   end
     
 end

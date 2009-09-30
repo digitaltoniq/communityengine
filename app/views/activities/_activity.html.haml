@@ -4,8 +4,9 @@
   %dd
     -#if activity.can_be_deleted_by?(current_user)
       =link_to_remote image_tag("icons/delete.png", :plugin => 'community_engine'), :url => activity_path(activity), :method => :delete, :html => {:class => 'right'}
-  
-    =link_to activity.user, user_path(activity.user)  
+
+    - # TODO: Ties actor directly to user, preventing true polymorphism
+    =link_to activity.actor, user_path(activity.actor)
     - if activity.item
       - case activity.item_type
         - when 'Post'
@@ -27,7 +28,7 @@
           = link_to truncate_words(activity.item.body), forum_topic_path(topic.forum, topic)
         - when 'Comment'
           =:left_a_comment.l
-          = link_to truncate_words(activity.item.comment), commentable_url(activity.item)
+          = link_to truncate_words(activity.item.comment, 10), commentable_url(activity.item)
         - when 'Favorite'
           =:favorited.l
           = link_to " a #{activity.item.favoritable.class.to_s.humanize.downcase}", user_favorite_path(activity.item.user, activity.item)
@@ -42,12 +43,9 @@
         - when 'Rsvp'
           =:rsvped_for_an_event.l
           = link_to activity.item.event.name, event_path(activity.item.event)
-        - when 'Company'
-          - case activity.action
-            - when 'comment_published'
-              =:company_comment_activity.l
-            - when 'post_published'
-              =:company_post_activity.l
+        - when 'RepresentativeInvitation'
+          =:invited_representatives.l(:count => activity.item.email_address_list.size)
+          = link_to truncate_words(activity.item.email_address_list.join(', '), 10), company_representative_invitations(activity.about)
         -else
           =render :partial => 'activities/unhandled_item', :locals => {:activity => activity}
     - else

@@ -5,7 +5,9 @@ class AddMoreIndexes < ActiveRecord::Migration
     add_index :polls, :created_at    
     add_index :polls, :post_id
     add_index :activities, :created_at
-    add_index :activities, :user_id
+    add_index :activities, [:actor_id, :actor_type]
+    add_index :activities, [:item_id, :item_type]
+    add_index :activities, [:about_id, :about_type]
   end
   
   def self.down
@@ -14,6 +16,8 @@ class AddMoreIndexes < ActiveRecord::Migration
     remove_index :polls, :created_at    
     remove_index :polls, :post_id        
     remove_index :activities, :created_at
-    remove_index :activities, :user_id
+    remove_index :activities, [:actor_id, :actor_type]
+    remove_index :activities, [:item_id, :item_type]
+    remove_index :activities, [:about_id, :about_type]
   end  
 end

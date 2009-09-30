@@ -1,5 +1,6 @@
 class RepresentativeInvitation < ActiveRecord::Base
-  acts_as_activity :representative  # TODO: activity on representative?
+
+  acts_as_activity :representative, :about => :company
 
   belongs_to :user
   belongs_to :company
@@ -43,8 +44,6 @@ class RepresentativeInvitation < ActiveRecord::Base
   def pending_emails
     @pending_emails ||= email_address_list - accepted_users.collect(&:email)
   end
-
-  private
 
   # TODO: Really should split on invitation creation into individual invites?
   def email_address_list

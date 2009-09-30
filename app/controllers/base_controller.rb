@@ -163,7 +163,9 @@ class BaseController < ApplicationController
 
 
   def commentable_url(comment)
-    if comment.recipient && comment.commentable
+    if comment.commentable_type == 'Post'
+      post_path(comment.commentable)+"#comment_#{comment.id}"
+    elsif comment.recipient && comment.commentable
       if comment.commentable_type != "User"
         polymorphic_url([comment.recipient, comment.commentable])+"#comment_#{comment.id}"
       elsif comment
