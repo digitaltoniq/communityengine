@@ -161,6 +161,7 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :dashboard => :get,
     :posts => :get,
     :post_comments => :get,
+    :representative_comments => :get,
     :activity => :get
 } do |company|
 #  company.resources :conversations, :collection => { :comments => :get }

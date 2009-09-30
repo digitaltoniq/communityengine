@@ -8,7 +8,8 @@
         %ul
           %li=link_to :company_profile.l, company_path(@company)
           %li=link_to :view_company_blog.l, posts_company_path(@company)
-          %li=link_to :view_company_representative_comments.l, post_comments_company_path(@company)
+          %li=link_to :view_company_conversation_comments.l, post_comments_company_path(@company)
+          %li=link_to :view_company_representative_comments.l, representative_comments_company_path(@company)
           -# DJS %li=link_to :blog.l, user_posts_path(@user)
           -#
             DJS
