@@ -1592,7 +1592,8 @@ en:
   # en: listing_representative_invitations: "Listing representative invitations"
   listing_representative_invitations: "Company representative invitations"
   # en: new_representative_invitation: "New representative invitation"
-  manage_representative_invitations: 'Manage your {{company_name}} representative invitations'
+  manage_representative_invitations: 'Representative invitations'
+  company_dashboard: Company dashboard
   new_representative_invitation: "Invite new company representatives"
   # en: participating_representatives: "Participating representatives"
   participating_representatives:

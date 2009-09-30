@@ -9,7 +9,7 @@ class BaseController < ApplicationController
   before_filter :login_from_cookie  
   skip_before_filter :verify_authenticity_token, :only => :footer_content
   helper_method :commentable_url
-  helper_method :user_path, :post_path, :user_posts_path, :edit_user_path, :display_text # DigitalToniq
+  helper_method :user_path, :post_path, :user_posts_path, :edit_user_path, :display_text, :dashboard_path # DigitalToniq
 
   caches_action :site_index, :footer_content, :if => Proc.new{|c| c.cache_action? }
   def cache_action?
@@ -195,6 +195,11 @@ class BaseController < ApplicationController
   def post_path(post)
     r = Representative.for_user(post.user_id)
     r ? company_representative_post_path(r.company, r, post) : user_post_path(post.user_id, post)
+  end
+
+  def dashboard_path(user)
+    r = Representative.for_user(user)
+    r ? dashboard_company_representative_path(r.company, r) : dashboard_user_path(user)
   end
 
   def user_path(user)

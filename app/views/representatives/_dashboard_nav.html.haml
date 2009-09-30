@@ -1,0 +1,36 @@
+.yui-b
+  -box do
+    %h3=:dashboard.l
+    .yui-g
+      .yui-u.first
+        = image_tag 'icons/accept.png', :plugin => 'community_engine'
+        =:view.l
+        %ul
+          %li=link_to :profile.l, user_path(@user)
+          %li=link_to :blog.l, user_posts_path(@user)
+          %li=link_to :company_profile.l, company_path(@company)
+          %li=link_to :company_dashboard.l, dashboard_company_path(@company)
+      .yui-u
+        = image_tag 'icons/wrench.png', :plugin => 'community_engine'
+        =:manage.l
+        %ul
+          %li=link_to :edit_profile.l, edit_user_path(@user)
+          %li=link_to :account_settings.l, edit_account_user_path(@user)
+          %li=link_to :blog_posts.l, manage_user_posts_path(@user)
+
+
+  -box :class => "alt" do
+    %h3=:stats.l
+    %ul
+      %li=:you_last_logged_in_on.l+" #{@user.last_login_at && @user.last_login_at.strftime("%m/%d/%y")}"
+      %li= @user.created_at.strftime(:member_since.l+": %m/%d/%y")
+      -unless @user.posts.empty?
+        %li=:you_have_written.l+" #{@user.posts.count} "+:blog_posts.l+"."
+      -#unless @user.photos.empty?
+        %li=:you_have_uploaded.l+" #{@user.photos.count} "+:photos.l+"."
+      -#unless @user.clippings.empty?
+        %li=:you_have_created.l+" #{@user.clippings.count} "+:clippings.l+"."
+      -unless @user.comments.empty?
+        %li=:you_have_left.l+" #{@user.posts.count} "+:comments.l+"."
+      -#unless @user.accepted_friendships.empty?
+        %li=:you_have.l+" #{pluralize @user.accepted_friendships.count, :friend.l}."

@@ -176,7 +176,8 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :welcome_professional => :get,
     :welcome_complete => :get,
     :activate => :get,
-    :resend_activation => :get
+    :resend_activation => :get,
+    :dashboard => :get
   } do |representative|
     representative.resources :posts, :as => :conversations
   end

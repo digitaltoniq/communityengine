@@ -3,6 +3,7 @@ class Representative < ActiveRecord::Base
   acts_as_label
    
   acts_as_activity :user, :about => :company
+  tracks_unlinked_activities [:updated_profile]
 
   attr_protected :representative_role_id
 
