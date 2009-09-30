@@ -6,6 +6,14 @@ class Following < ActiveRecord::Base
   validates_presence_of     :user, :followee
   validates_uniqueness_of   :followee_id, :scope => :user_id
 
+  acts_as_activity :user, :about => proc { |f|
+    case f.followee.class.to_s
+      when 'Company' then f.followee
+      when 'Post' then Company.for_post(f.followee)
+      else nil
+    end
+  }
+
   ## Named scopes
 
   # TODO: need to support representative following, as well. Should we remove all Followee typing and just pass in?

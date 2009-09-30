@@ -45,7 +45,21 @@
           = link_to activity.item.event.name, event_path(activity.item.event)
         - when 'RepresentativeInvitation'
           =:invited_representatives.l(:count => activity.item.email_address_list.size)
-          = link_to truncate_words(activity.item.email_address_list.join(', '), 10), company_representative_invitations(activity.about)
+          = link_to truncate_words(activity.item.email_address_list.join(', '), 10), company_representative_invitations_path(activity.about)
+        - when 'Following'
+          =:now_follows.l(:type => activity.item.followee_type.downcase)
+          - case activity.item.followee.class.to_s
+            - when 'Company'
+              = link_to activity.item.followee, company_path(activity.item.followee)
+            - when 'Post'
+              = link_to activity.item.followee, post_path(activity.item.followee)
+        - when 'Like'
+          =:likes.l(:type => activity.item.likeable_type.downcase)
+          -# Doesn't handle likeable polymorphism here, just assumes likes a comment
+          = link_to truncate_words(activity.item.likeable.comment, 10), commentable_url(activity.item.likeable)
+        - when 'Representative'
+          =:representative_registered.l
+          = link_to activity.about, company_path(activity.about)
         -else
           =render :partial => 'activities/unhandled_item', :locals => {:activity => activity}
     - else

@@ -1,6 +1,6 @@
 class RepresentativeInvitation < ActiveRecord::Base
 
-  acts_as_activity :representative, :about => :company
+  acts_as_activity :user, :about => :company
 
   belongs_to :user
   belongs_to :company

@@ -66,10 +66,7 @@ module ActivityTracker # :nodoc:
 
     def track_activity(action)
       if activity_options[:actions].include?(action)
-        activity = Activity.new
-        activity.action = action.to_s
-        activity.actor = self
-        activity.save!
+        Activity.create(:action => action.to_s, :actor => self)
       else
         raise "The action #{action} can't be tracked."
       end

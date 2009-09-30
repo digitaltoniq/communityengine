@@ -1019,7 +1019,10 @@ en:
   #en: rsvp: RSVP
   invited_representatives:
     one: "invited a representative:"
-    other: "invited other representatives:"
+    other: "invited representatives:"
+  now_follows: "is now following the {{type}}:"
+  likes: "likes the {{type}}:"
+  representative_registered: "is now registered as a representative of"
   rsvp: RSVP
   #en: rsvps: RSVPs
   rsvps: RSVPs

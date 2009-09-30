@@ -43,7 +43,7 @@ class RepresentativesController < BaseController
     @representative = @user && Representative.find_by_user_id(@user.id)
     if @representative and @representative.activate
       self.current_user = @user
-      current_user.track_activity(:joined_the_site)
+#      current_user.track_activity(:joined_the_site) # Tracked directly in representative
       redirect_to welcome_photo_company_representative_path(@representative.company, @representative)
       flash[:notice] = :thanks_for_activating_your_account.l
       RepresentativeNotifier.deliver_activation(@representative)

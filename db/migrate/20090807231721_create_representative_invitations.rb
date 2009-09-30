@@ -4,7 +4,6 @@ class CreateRepresentativeInvitations < ActiveRecord::Migration
       t.belongs_to :user, :null => :false
       t.belongs_to :company, :null => :false
       t.string :email_addresses, :message
-      t.integer :representative_id
       t.timestamps
     end
     add_index :representative_invitations, :user_id

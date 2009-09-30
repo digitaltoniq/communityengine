@@ -62,6 +62,11 @@ class Company < ActiveRecord::Base
       rep.company if rep
     end
 
+    def for_user(user)
+      rep = Representative.for_user(user)
+      rep.company if rep
+    end
+
     def recently_active(opts = {})
       since = opts[:since] || 5.days.ago
       Activity.since(since).
