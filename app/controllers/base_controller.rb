@@ -197,6 +197,7 @@ class BaseController < ApplicationController
     r ? company_representative_post_path(r.company, r, post) : user_post_path(post.user_id, post)
   end
 
+  # TODO: add site admin support
   def dashboard_path(user)
     r = Representative.for_user(user)
     r ? dashboard_company_representative_path(r.company, r) : dashboard_user_path(user)

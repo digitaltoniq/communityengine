@@ -2,16 +2,6 @@
 - @section = @user.eql?(current_user) ? 'my_profile' : 'users'
 - @sidebar_left = true
 
-
-- if @is_current_user and @user.vendor? and (@user.offerings.empty? or @user.description.nil? )
-  %p
-    ? Hey, you're a
-    = AppConfig.community_name
-    Pro! You should
-    = link_to :update_your_profile.l, edit_user_path(@user)
-    \! Add your skills, contact info and Web site.
-
-
 .yui-b
   -box do 
     = render :partial => 'users/profile_user_info_sidebar', :locals => {:user => @user}
