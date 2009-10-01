@@ -9,7 +9,7 @@
       -unless @network_activity.empty?
         -box :class => "fresh" do
           =render :partial => "activities/activity", :collection => @network_activity
-          %h6.all= link_to :see_all_activity.l, network_user_activities_path(current_user)
+          = will_paginate @network_activity
 
       -#
         -unless @recommended_posts.empty?

@@ -26,16 +26,16 @@ class RepresentativesController < BaseController
   before_filter :login_required, :only => [:edit, :edit_account, :update, :welcome_photo, :welcome_about,
                                           :welcome_invite, :return_admin, :assume, :featured,
                                           :toggle_featured, :edit_pro_details, :update_pro_details, :dashboard, :deactivate,
-                                          :crop_profile_photo, :upload_profile_photo, :dashboard]
+                                          :crop_profile_photo, :upload_profile_photo, :dashboard, :activity]
   before_filter :find_user, :only => [:edit, :edit_pro_details, :show, :update, :destroy, :statistics, :deactivate,
-                                      :crop_profile_photo, :upload_profile_photo, :dashboard ]
+                                      :crop_profile_photo, :upload_profile_photo, :dashboard, :activity ]
   before_filter :require_current_user, :only => [:edit, :update, :update_account,
                                                 :edit_pro_details, :update_pro_details,
                                                 :welcome_photo, :welcome_about, :welcome_invite, :welcome_professional, :deactivate,
-                                                :crop_profile_photo, :upload_profile_photo, :dashboard]
+                                                :crop_profile_photo, :upload_profile_photo, :dashboard, :activity]
   before_filter :admin_required, :only => [:assume, :destroy, :featured, :toggle_featured, :toggle_moderator]
   before_filter :admin_or_current_user_required, :only => [:statistics]
-  before_filter :ensure_valid_resource, :only => [:show, :dashboard]
+  before_filter :ensure_valid_resource, :only => [:show, :dashboard, :activity]
 
   def activate
     redirect_to signup_path and return if params[:activation_code].blank?
@@ -85,11 +85,14 @@ class RepresentativesController < BaseController
   end
 
   def dashboard
+    redirect_to activity_company_representative_path(resource.company, resource)
+  end
+
+  def activity
     @company = resource.company
     @network_activity = Activity.about(resource).recent.paginate(paging_params.merge(:per_page => 25))
     respond_with(resource)
   end
-
 
   def new
     @representative = Representative.new
