@@ -20,6 +20,7 @@
             %li.view= :views.l+" (#{@post.view_count})"
             %li.comments= link_to :comments.l+" (#{@post.comments.size})", post_path(@post)+'#comments'
             =render :partial => 'followings/follow_link', :locals => {:followee => @post}
+            %li= render :partial => 'posts/share_button'
             
             -#
               DJS
