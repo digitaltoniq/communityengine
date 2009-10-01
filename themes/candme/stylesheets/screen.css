@@ -190,6 +190,10 @@ h3.alt {
     margin-right: 16px;
 }
 
+#hd h2 .logout {
+    font-size: 65%;
+}
+
 #NavBar ul li a {
     padding: 8px 10px;
     color: #FFF;
