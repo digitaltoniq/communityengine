@@ -7,7 +7,7 @@
         =:view_my.l
         %ul
           %li=link_to :profile.l, user_path(@user)  
-          %li=link_to :blog.l, user_posts_path(@user)
+          -#%li=link_to :blog.l, user_posts_path(@user)
           -#
             DJS
             %li=link_to :photo_manager.l, user_photo_manager_index_path(@user)
@@ -20,7 +20,7 @@
         %ul
           %li=link_to :profile.l, edit_user_path(@user)
           %li=link_to :account_settings.l, edit_account_user_path(@user)
-          %li=link_to :blog_posts.l, manage_user_posts_path(@user)     
+          -#%li=link_to :blog_posts.l, manage_user_posts_path(@user)     
           -if current_user.admin?
             %li=link_to :admin_dashboard.l, admin_dashboard_path
                
