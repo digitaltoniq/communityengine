@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of   :login, :email, :case_sensitive => false
   validates_uniqueness_of   :login_slug
   validates_exclusion_of    :login, :in => AppConfig.reserved_logins
-  validates_date :birthday, :before => 13.years.ago.to_date  
+#  validates_date :birthday, :before => 13.years.ago.to_date
 
   #associations
     has_enumerated :role  
