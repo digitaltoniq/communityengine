@@ -7,8 +7,6 @@ class Representative < ActiveRecord::Base
 
   attr_protected :representative_role_id
 
-  # TODO: need additional activities tracked? tracks_unlinked_activities [:xyz]    
-
   #validation
 
   validates_presence_of :company, :user, :representative_role

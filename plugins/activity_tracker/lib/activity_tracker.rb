@@ -28,7 +28,7 @@ module ActivityTracker # :nodoc:
         end
 
         has_many :activities, :as => :item, :dependent => :destroy
-        class_inheritable_accessor :activity_options
+        class_inheritable_accessor :activity_options, :unlinked_activity_options
         include InstanceMethods
       end      
       self.activity_options = {:actor => actor, :about => options[:about], :ignore_nil_about => (options[:ignore_nil_about] || false)}
@@ -43,10 +43,10 @@ module ActivityTracker # :nodoc:
     #
     def tracks_unlinked_activities(actions = [])
       unless included_modules.include? InstanceMethods
-        class_inheritable_accessor :activity_options
+        class_inheritable_accessor :activity_options, :unlinked_activity_options
         include InstanceMethods
       end
-      self.activity_options = {:actions => actions}    
+      self.unlinked_activity_options = {:actions => actions}
       after_destroy { |record| Activity.destroy_all(:actor_type => record.class.to_s, :actor_id => record.id) }
     end
         
@@ -55,8 +55,10 @@ module ActivityTracker # :nodoc:
   module InstanceMethods
 
     def create_activity_from_self
+      logger.info("Creating activity from actor option: #{activity_options[:actor]}")
       actor = activity_options[:actor] ? send(activity_options[:actor]) : nil
-
+      logger.info("Actor: #{actor}")
+      
       # Create a new activity for each about obj there is
       [activity_options[:about]].flatten.each do |about_opt|
         about = case about_opt.class.to_s
@@ -71,7 +73,7 @@ module ActivityTracker # :nodoc:
     end
 
     def track_activity(action)
-      if activity_options[:actions].include?(action)
+      if unlinked_activity_options[:actions].include?(action)
         Activity.create(:action => action.to_s, :actor => self)
       else
         raise "The action #{action} can't be tracked."
