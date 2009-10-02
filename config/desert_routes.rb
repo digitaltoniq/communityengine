@@ -29,7 +29,8 @@ end
 application '', :controller => "posts", :action => "recent"
 
 # admin routes
-admin_dashboard   '/admin/dashboard', :controller => 'admin', :action => 'comments'
+admin_dashboard   '/admin/dashboard', :controller => 'admin', :action => 'dashboard'
+admin_activity   '/admin/activity', :controller => 'admin', :action => 'activity'
 admin_users       '/admin/users', :controller => 'admin', :action => 'users'
 admin_messages    '/admin/messages', :controller => 'admin', :action => 'messages'
 admin_comments    '/admin/comments', :controller => 'admin', :action => 'comments'

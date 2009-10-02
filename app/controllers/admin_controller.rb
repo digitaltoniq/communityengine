@@ -30,6 +30,14 @@ class AdminController < BaseController
     
     @users = User.recent.find(:all, :page => {:current => params[:page], :size => 100}, :conditions => cond.to_sql)      
   end
+
+  def dashboard
+    @network_activity = Activity.recent.paginate(paging_params.merge(:per_page => 10))
+  end
+
+  def activity
+    @network_activity = Activity.recent.paginate(paging_params.merge(:per_page => 25))
+  end
   
   def comments
     @comments = Comment.ordered('created_at DESC').paginate(paging_params.merge(:per_page => 25))

@@ -1,0 +1,14 @@
+- @section = 'my_profile'
+
+.yui-b.sidebar
+  = render :partial => 'shared/admin_nav'
+
+#yui-main
+
+  -box :class => "yui-b" do
+    %h3= :site_activity.l
+
+    -unless @network_activity.empty?
+      -box :class => "fresh" do
+        =render :partial => "activities/activity", :collection => @network_activity
+        = will_paginate @network_activity

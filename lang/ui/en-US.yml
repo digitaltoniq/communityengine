@@ -80,6 +80,7 @@ en:
   #en: admin_dashboard: Admin dashboard
   admin_dashboard: Site admin dashboard
   view_my_representative_dashboard: View my representative dashboard
+  view_all_site_activity: View all site activity
   #en: administer_events: Administer events
   administer_events: Administer events
   #en: ads: Ads
@@ -1109,6 +1110,7 @@ en:
   singular_posts: "{{count}} post"
   #en: site_members: "{{site}} members"
   site_members: "{{site}} members"
+  site_activity: "Site activity"
   #en: skill_was_successfully_created: Skill was successfully created.
   skill_was_successfully_created: Skill was successfully created.
   #en: skills: Skills
