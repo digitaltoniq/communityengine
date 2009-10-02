@@ -32,7 +32,7 @@ class AdminController < BaseController
   end
   
   def comments
-    @comments = Comment.find(:all, :page => {:current => params[:page], :size => 100}, :order => 'created_at DESC')
+    @comments = Comment.ordered('created_at DESC').paginate(paging_params.merge(:per_page => 25))
   end
 
   def companies
