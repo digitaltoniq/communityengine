@@ -143,9 +143,9 @@ class Company < ActiveRecord::Base
 
   # Can the given user post convos to this company?
   def post?(user)
-    return true if admin?(user)
+#    return true if admin?(user)
     rep = representative_for_user(user)
-    rep ? (rep.representative? or rep.poster?) : false
+    rep ? true : false
   end
 
   def representative_for_user(user)

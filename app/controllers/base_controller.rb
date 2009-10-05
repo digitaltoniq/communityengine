@@ -122,6 +122,14 @@ class BaseController < ApplicationController
     return @user
   end
 
+  def require_representative
+    @user ||= determine_user
+    unless Representative.for_user(@user)
+      flash[:error] = "We're sorry, only company representatives can post conversations"
+      redirect_to application_path
+    end
+  end
+
   def popular_tags(limit = nil, order = ' tags.name ASC', type = nil)
     sql = "SELECT tags.id, tags.name, count(*) AS count 
       FROM taggings, tags 
