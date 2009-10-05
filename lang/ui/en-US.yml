@@ -1303,7 +1303,7 @@ en:
   #en: users: Users
   users: Users
   #en: users_blog: "{{user}}'s Blog"
-  users_blog: "{{user}}'s Blog"
+  users_blog: "{{user}}'s Conversations"
   #en: user_clippings: Clippings of {{user}}
   user_clippings: "Clippings of {{user}}"
   #en: user_login: User login
