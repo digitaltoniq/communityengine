@@ -72,16 +72,8 @@
 .yui-b
 
   = render :partial => 'author_profile', :locals => {:user => @user}
-
-  - participating_representatives = Representative.participating_in(@post)
-  - unless participating_representatives.empty?
-    -box :class => 'alt' do
-      %h3=:participating_representatives.l(:count => participating_representatives.size)
-      %ul.list.user
-        - participating_representatives.each do |representative|
-          %li
-            = link_to image_tag(representative.avatar_photo_url(:small), :alt => "#{h(representative)}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{h(representative)}'s profile"
-            = link_to h(representative), representative_path(representative), :class => 'url'
+  = render :partial => 'company_profile', :locals => {:company => Company.for_post(@post)}
+  = render :partial => 'participating_representatives', :locals => {:representatives => Representative.participating_in(@post)}
 / sidebar
 
 %script{:type=>"text/javascript", :charset=>"utf-8"}
