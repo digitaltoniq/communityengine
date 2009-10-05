@@ -11,8 +11,9 @@
               = comment.created_at.strftime("%B %d, %Y")
         -if ( comment.can_be_deleted_by(current_user) )
           %li.delete=link_to_remote("Delete".l, {:url => comment_path(comment.commentable_type, comment.commentable_id, comment), :method => :delete, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "comment_#{comment.id}"), :confirm => :are_you_sure_you_want_to_permanently_delete_this_comment.l} )
-        %li.like{:id => "likeable_#{comment.id}_toggle"}
-          = render :partial => 'likeable/toggle', :locals => { :likeable => comment, :liker => current_user }
+        -if logged_in? or comment.likes.count > 0
+          %li.like{:id => "likeable_#{comment.id}_toggle"}
+            = render :partial => 'likeable/toggle', :locals => { :likeable => comment, :liker => current_user }
     .entry-content= comment.comment
 
 -else
