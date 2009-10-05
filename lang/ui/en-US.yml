@@ -100,7 +100,7 @@ en:
   #en: all_photos_tagged: All photos tagged {{tag_name}}
   all_photos_tagged: "All photos tagged {{tag_name}}"
   #en: all_posts_tagged: All posts tagged {{tag_name}}
-  all_posts_tagged: "All posts tagged {{tag_name}}"
+  all_posts_tagged: "All conversations tagged {{tag_name}}"
   #en: all_tags: All tags
   all_tags: All tags
   #en: all_users_tagged: All users tagged {{tag_name}}
@@ -118,7 +118,7 @@ en:
   #en: are_you_sure_you_want_to_delete_this_photo: "Are you sure you want to delete this photo?"
   are_you_sure_you_want_to_delete_this_photo: "Are you sure you want to delete this photo?"
   #en: are_you_sure_you_want_to_delete_this_post: "Are you sure you want to delete this post?"
-  are_you_sure_you_want_to_delete_this_post: "Are you sure you want to delete this post?"
+  are_you_sure_you_want_to_delete_this_post: "Are you sure you want to delete this conversation?"
   #en: are_you_sure_you_want_to_permanently_delete_this_comment: "Are you sure you want to permanently delete this comment?"
   are_you_sure_you_want_to_permanently_delete_this_comment: "Are you sure you want to permanently delete this comment?"
   #en: are_you_sure_you_want_to_permanently_delete_this_user: Are you sure you want to permanently delete this user?
@@ -160,9 +160,9 @@ en:
   #en: birthday_gender: Birthday & Gender
   birthday_gender: "Birthday & Gender"
   #en: blog: Blog
-  blog: Blog
+  blog: Conversations
   #en: blog_posts: Blog posts
-  blog_posts: Blog posts
+  blog_posts: Conversations
   #en: body_text: Body Text
   body_text: Body Text
   #en: body_text_reqiured: Body Text (required)
@@ -192,7 +192,7 @@ en:
   #en: cancel_and_go_back_to_my_photos: cancel and go back to my photos
   cancel_and_go_back_to_my_photos: cancel and go back to my photos
   #en: cancel_and_go_back_to_my_posts: cancel and go back to my posts
-  cancel_and_go_back_to_my_posts: cancel and go back to my posts
+  cancel_and_go_back_to_my_posts: cancel and go back to my conversations
   #en: cannot_rsvp_for_an_event_that_has_already_happened: Cannot RSVP for an event that has already happened.
   cannot_rsvp_for_an_event_that_has_already_happened: Cannot RSVP for an event that has already happened.
   cannot_invite_representatives_for_this_company: "You do not have the correct permissions to invite representatives to {{company_name}}" 
@@ -287,7 +287,7 @@ en:
   #en: create_a_clipping: Create a clipping
   create_a_clipping: Create a clipping
   #en: create_a_post: Create a post
-  create_a_post: Create a post
+  create_a_post: Create a conversation
   #en: create_new_forum: Create new forum
   create_new_forum: Create new forum
   create_new_company: Create new company
@@ -328,7 +328,7 @@ en:
   #en: delete_this_photo: Delete this photo
   delete_this_photo: Delete this photo
   #en: delete_this_post: Delete this post?
-  delete_this_post: Delete this post?
+  delete_this_post: Delete this conversation?
   #en: delete_this_topic_forever: Delete this topic forever?
   delete_this_topic_forever: Delete this topic forever?
   #en: delete_this_user: Delete this user
@@ -381,7 +381,7 @@ en:
   #en: edit_forum: Edit forum
   edit_forum: Edit forum
   #en: edit_post: Edit post
-  edit_post: Edit post
+  edit_post: Edit conversation
   #en: edit_profile: Edit profile
   edit_profile: Edit profile
   company_profile: "Company profile"
@@ -410,7 +410,7 @@ en:
   #en: editing_photo: Editing photo
   editing_photo: Editing photo
   #en: editing_post: Editing post
-  editing_post: Editing post
+  editing_post: Editing conversation
   #en: editing_skill: Editing skill
   editing_skill: Editing skill
   #en: editing_tag: Editing tag
@@ -468,7 +468,7 @@ en:
   #en: favorite_this: Favorite this
   favorite_this: Favorite this
   #en: featured_posts: Featured posts
-  featured_posts: Featured posts
+  featured_posts: Featured conversations
   #en: featured_writer: Featured writer
   featured_writer: Featured writer
   #en: featured_writers: Featured writers
@@ -613,7 +613,7 @@ en:
   #en: last: last
   last: last
   #en: last_post: Last post
-  last_post: Last post
+  last_post: Last conversation
   #en: left_a_comment: "left a comment:"
   left_a_comment: "left a comment:"
   company_comment_activity: "left a comment on a company conversation"
@@ -676,7 +676,7 @@ en:
   manage_my: "Manage my:"
   manage: Manage
   #en: manage_posts: Manage Posts
-  manage_posts: Manage Posts
+  manage_posts: Manage conversations
   #en: medium: Medium
   #en: map_it: Map It!
   map_it: Map It!
@@ -768,12 +768,12 @@ en:
   #en: new_photos_multiple_uploader: "New Photos &raquo; Multiple Uploader"
   new_photos_multiple_uploader: "New Photos &raquo; Multiple Uploader"
   #en: new_post: New post
-  new_post: New post
+  new_post: New conversation
   create_new_company_post: "Create new company conversation"
   #en: new_post_for_category: New {{category}}
   new_post_for_category: "New {{category}}"
   #en: new_post_text: New Post text
-  new_post_text: New Post text
+  new_post_text: New conversation text
   #en: new_skill: New skill
   new_skill: New skill
   #en: new_today: New today
@@ -831,7 +831,7 @@ en:
   #en: optional_keywords_describing_this_photo_separated_by_commas: optional keywords describing this photo, separated by commas
   optional_keywords_describing_this_photo_separated_by_commas: optional keywords describing this photo, separated by commas
   #en: optional_keywords_describing_this_post_separated_by_commas: optional keywords describing this post, separated by commas
-  optional_keywords_describing_this_post_separated_by_commas: "optional keywords describing this post, separated by commas"
+  optional_keywords_describing_this_post_separated_by_commas: "optional keywords describing this conversation, separated by commas"
   #en: optional_keywords_describing_this_topic_separated_by_commas: optional keywords describing this topic, separated by commas
   optional_keywords_describing_this_topic_separated_by_commas: optional keywords describing this topic, separated by commas
   #en: or: or
@@ -857,7 +857,7 @@ en:
   #en: permanently_delete_this_event: Permanently delete this event?
   permanently_delete_this_event: Permanently delete this event?
   #en: permanently_delete_this_post: Permanently delete this post?
-  permanently_delete_this_post: Permanently delete this post?
+  permanently_delete_this_post: Permanently delete this conversation?
   #en: photo_comments: Photo Comments
   photo_comments: Photo Comments
   #en: photo_from_user: "{{photo_description}} from {{user}}"
@@ -879,23 +879,23 @@ en:
   #en: please_post_something_at_least: Please post something at least...
   please_post_something_at_least: Please post something at least...
   #en: plural_posts: "{{count}} posts"
-  plural_posts: "{{count}} posts"
+  plural_posts: "{{count}} conversations"
   #en: popular: Popular
   popular: Popular
   #en: popular_catgory: Popular {{name}}
   popular_catgory: "Popular {{name}}"
   #en: popular_posts: Popular Posts
-  popular_posts: Popular Posts
+  popular_posts: Popular conversations
   #en: popular_posts_on: Popular Posts on
-  popular_posts_on: Popular Posts on
+  popular_posts_on: Popular conversations on
   #en: popular_polls: Popular Polls
   popular_polls: Popular Polls
   #en position: Position
   position: Position
   #en: post: Post
-  post: Post
+  post: Conversation
   #en: posts: Posts
-  posts: Posts
+  posts: Conversations
   #en: post_a_new_topic: Post a new topic
   post_a_new_topic: Post a new topic
   #en: post_an_event: Post an event
@@ -907,7 +907,7 @@ en:
   #en: past_events: Past Events
   past_events: Past Events
   #en: post_created_for_category: Your '{{category}}' post was successfully created.
-  post_created_for_category: "Your '{{category}}' post was successfully created."
+  post_created_for_category: "Your '{{category}}' conversation was successfully created."
   #en: post_comments: Post Comments
   post_comments: Post Comments
   #en: postal_code: "Postal code:"
@@ -917,13 +917,13 @@ en:
   #en: post_topic: Post topic
   post_topic: Post topic
   #en: posts_photos_and_bookmarks: posts, photos and bookmarks
-  posts_photos_and_bookmarks: posts, photos and bookmarks
+  posts_photos_and_bookmarks: conversations, photos and bookmarks
   #en: posts_saved_with_draft_status_wont_appear_in_your_blog_until_you_publish_them: "Posts saved with 'draft' status won't appear in your blog until you publish them."
-  posts_saved_with_draft_status_wont_appear_in_your_blog_until_you_publish_them: "Posts saved with 'draft' status won't appear in your blog until you publish them."
+  posts_saved_with_draft_status_wont_appear_in_your_blog_until_you_publish_them: "Conversations saved with 'draft' status won't appear in your public conversations until you publish them."
   #en: preview: Preview
   preview: Preview
   #en: previewing_your_post: Previewing your post
-  previewing_your_post: Previewing your post
+  previewing_your_post: Previewing your conversation
   #en: previous: previous
   previous: previous
   #en: print: Print
@@ -961,17 +961,17 @@ en:
   #en: recent_activity: Recent activity
   recent_activity: Recent activity
   #en: recent_blog_posts: Recent Blog Posts
-  recent_blog_posts: Recent Blog Posts
+  recent_blog_posts: Recent Conversations
   #en: recent_posts: Recent Posts
-  recent_posts: Recent Posts
+  recent_posts: Recent conversations
   #en: recommended_posts: Recommended Posts
-  recommended_posts: Recommended Posts
+  recommended_posts: Recommended conversations
   #en: related_clippings_all_members: Related Clippings (all members)
   related_clippings_all_members: Related Clippings (all members)
   #en: related_photos_all_members: Related Photos (all members)
   related_photos_all_members: Related Photos (all members)
   #en: related_posts: Related Posts
-  related_posts: Related Posts
+  related_posts: Related conversations
   #en: related_tags: Related Tags
   related_tags: Related Tags
   #en: remember_me: Remember me
@@ -1039,13 +1039,13 @@ en:
   #en: save_forum: Save Forum
   save_forum: Save Forum
   #en: save_post_as: "Save post as:"
-  save_post_as: "Save post as:"
+  save_post_as: "Save conversation as:"
   #en: save_reply: Save reply
   save_reply: Save reply
   #en: says: says
   says: says
   #en: sb_post_was_deleted: Post '{{title}}' was deleted.
-  sb_post_was_deleted: "Post '{{title}}' was deleted."
+  sb_post_was_deleted: "Conversation '{{title}}' was deleted."
   #en: scrapbook: Scrapbook
   scrapbook: Scrapbook
   #en: search: Search
@@ -1107,7 +1107,7 @@ en:
   #en: sign_up_reason_2: Some reason to sign up
   sign_up_reason_2: Some reason to sign up
   #en: singular_posts: "{{count}} post"
-  singular_posts: "{{count}} post"
+  singular_posts: "{{count}} conversation"
   #en: site_members: "{{site}} members"
   site_members: "{{site}} members"
   site_activity: "Site activity"
@@ -1177,7 +1177,7 @@ en:
   #en: tags_are_keywords_you_use_to_organize_your_photos: Tags are keywords you use to organize your photos. Separate multiple tags with commas.
   tags_are_keywords_you_use_to_organize_your_photos: Tags are keywords you use to organize your photos. Separate multiple tags with commas.
   #en: tags_are_one_word_descriptors_users_assign_to_blog_posts_pictures_and_clippings_on: Tags are one-word descriptors user assign to blog posts, pictures and clippings on
-  tags_are_one_word_descriptors_users_assign_to_blog_posts_pictures_and_clippings_on: Tags are one-word descriptors user assign to blog posts, pictures and clippings on
+  tags_are_one_word_descriptors_users_assign_to_blog_posts_pictures_and_clippings_on: Tags are one-word descriptors user assign to conversations, pictures and clippings on
   #en: tagged: tagged
   tagged: tagged
   #en: tags_page: tags page
@@ -1207,7 +1207,7 @@ en:
   #en: this_contest_is_closed: This contest is closed
   this_contest_is_closed: This contest is closed
   #en: this_forum_is_still_getting_started: "This forum is still getting started ... here are some blog posts to get you thinking ..."
-  this_forum_is_still_getting_started: "This forum is still getting started ... here are some blog posts to get you thinking ..."
+  this_forum_is_still_getting_started: "This forum is still getting started ... here are some conversations to get you thinking ..."
   #en: this_friendship_is_pending: This Friendship is pending.
   this_friendship_is_pending: This Friendship is pending.
   #en: this_is_your_dashboard: This is your dashboard.
@@ -1285,7 +1285,7 @@ en:
   #en: updated_their_profile: updated their profile
   updated_their_profile: updated their profile
   #en: upload_an_image_for_your_post: Upload an image for your post
-  upload_an_image_for_your_post: Upload an image for your post
+  upload_an_image_for_your_post: Upload an image for your conversation
   #en: upload_and_continue_to_step_two: Upload, and continue to step two
   upload_and_continue_to_step_two: "Upload, and continue to step two"
   #en: uploaded_a_photo: "uploaded a photo:"
@@ -1332,7 +1332,7 @@ en:
   view_my: "View my:"
   view: View
   #en: view_my_blog: View my blog
-  view_my_blog: View my blog
+  view_my_blog: View my conversations
   #en: view_profile: View profile
   view_profile: View profile
   #en: voice: voice
@@ -1396,13 +1396,13 @@ en:
   #en: why_sign_up: Why Sign up?
   why_sign_up: Why Sign up?
   #en: write_a_blog_post: Write a blog post!
-  write_a_blog_post: Write a blog post!
+  write_a_blog_post: Write a conversation!
   #en: write_a_message: "Write a message:"
   write_a_message: "Write a message:"
   #en: write_new_post: Write a '{{category}}' post
-  write_new_post: "Write a '{{category}}' post"
+  write_new_post: "Write a '{{category}}' conversation"
   #en: wrote_a_post: "wrote a post:"
-  wrote_a_post: "wrote a post entitled:"
+  wrote_a_post: "wrote a conversation entitled:"
   #en: yesterday: Yesterday
   yesterday: Yesterday
   #en: you_are_editing_your_account: You are editing your account.
@@ -1466,9 +1466,9 @@ en:
   #en: your_password_has_been_reset_and_emailed_to_you: Your password has been reset and emailed to you.
   your_password_has_been_reset_and_emailed_to_you: Your password has been reset and emailed to you.
   #en: your_post_was_deleted: Your post was deleted.
-  your_post_was_deleted: Your post was deleted.
+  your_post_was_deleted: Your conversation was deleted.
   #en: your_post_was_successfully_created: Your post was successfully created.
-  your_post_was_successfully_created: Your post was successfully created.
+  your_post_was_successfully_created: Your conversation was successfully created.
   #en: your_profile_photo: "Your profile photo:"
   your_profile_photo: "Your profile photo:"
   #en: your_rsvp_has_been_retracted: Your RSVP has been retracted.
