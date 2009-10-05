@@ -4,9 +4,13 @@ class ActivitiesController < BaseController
   before_filter :require_current_user,            :except => [:index, :destroy]
   before_filter :require_ownership_or_moderator,  :only   => [:destroy]  
   
-  
+
   def network
-    @activities = @user.network_activity(:size => 15, :current => params[:page])
+    @activities = @user.following.network_activity(:size => 15, :current => params[:page])
+  end
+
+  def following
+    @activities = @user.following_network_activity.paginate(paging_params.merge(:per_page => 15))
   end
   
   def index

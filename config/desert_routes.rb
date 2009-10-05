@@ -140,7 +140,7 @@ resources :users, :member => {
   user.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
   user.resources :events # Needed this to make comments work
   user.resources :clippings
-  user.resources :activities, :collection => {:network => :get}
+  user.resources :activities, :collection => {:network => :get, :following => :get}
   user.resources :invitations
   user.resources :offerings, :collection => {:replace => :put}
   user.resources :favorites, :name_prefix => 'user_'

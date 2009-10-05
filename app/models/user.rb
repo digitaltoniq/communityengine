@@ -229,6 +229,10 @@ class User < ActiveRecord::Base
   
   
   ## Instance Methods
+
+  def followees
+    followings.all(:include => :followee).collect(&:followee)
+  end
   
   def moderator_of?(forum)
     moderatorships.count(:all, :conditions => ['forum_id = ?', (forum.is_a?(Forum) ? forum.id : forum)]) == 1
@@ -407,6 +411,10 @@ class User < ActiveRecord::Base
     ids = ((friends_ids | metro_area_people_ids) - [self.id])[0..100] #don't pull TOO much activity for now
     
     Activity.recent.since(since).by(ids).find(:all, :page => page)          
+  end
+
+  def following_network_activity
+    Activity.public.about(followees).recent
   end
 
   def comments_activity(page = {}, since = 1.week.ago)

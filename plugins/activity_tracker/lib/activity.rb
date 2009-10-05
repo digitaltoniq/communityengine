@@ -17,12 +17,16 @@ class Activity < ActiveRecord::Base
   named_scope :by, lambda {|actor|
     {:conditions => { :actor_type => actor.class.to_s, :actor_id => actor.id } }
   }
-  named_scope :about, lambda { |about|
-    { :conditions => { :about_type => about.class.to_s, :about_id => about.id } }
+  named_scope :about, lambda { |*abouts|
+    conditions = abouts.flatten.collect do |about|
+      sanitize_sql_array(["(about_type = ? AND about_id = ?)", about.class.to_s, about])
+    end.join(' OR ')
+    { :conditions => conditions ? conditions : {} }
   }
   named_scope :about_type, lambda {|type|
     {:conditions => { :about_type => type.to_s } }
   }
+  named_scope :public, :conditions => ["item_type NOT IN (?) AND item_type IS NOT NULL", [RepresentativeInvitation.to_s]]
 
   def update_counter_on_actor
     if actor && actor.class.column_names.include?('activities_count')

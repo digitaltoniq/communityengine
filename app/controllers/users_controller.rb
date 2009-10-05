@@ -71,7 +71,7 @@ class UsersController < BaseController
   
   def dashboard
     @user = current_user
-    @network_activity = @user.network_activity
+    @network_activity = @user.following_network_activity.all(:limit => 15)
 #    @recommended_posts = @user.recommended_posts
   end
   
