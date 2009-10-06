@@ -2,6 +2,8 @@
 after 'deploy:setup', 'candme:setup'
 after 'candme:setup_nginx_proxying', 'nginx:restart'
 after 'candme:setup_nginx_auth', 'nginx:restart'
+after 'deploy:symlink', 'candme:setup_nginx_auth' # TODO: why on every deploy?
+
 namespace :candme do
 
   NGINX_DIR = "/etc/nginx/servers"
