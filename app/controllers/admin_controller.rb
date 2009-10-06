@@ -32,11 +32,11 @@ class AdminController < BaseController
   end
 
   def dashboard
-    @network_activity = Activity.recent.paginate(paging_params.merge(:per_page => 10))
+    @network_activity = Activity.recent.root.paginate(paging_params.merge(:per_page => 10))
   end
 
   def activity
-    @network_activity = Activity.recent.paginate(paging_params.merge(:per_page => 25))
+    @network_activity = Activity.recent.root.paginate(paging_params.merge(:per_page => 25))
   end
   
   def comments

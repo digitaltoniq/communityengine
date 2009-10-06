@@ -4,6 +4,7 @@ class CreateActivitiesTable < ActiveRecord::Migration
       t.belongs_to :actor, :polymorphic => true
       t.belongs_to :item, :polymorphic => true
       t.belongs_to :about, :polymorphic => true
+      t.belongs_to :parent
       t.column :action, :string
       t.column :created_at, :datetime
     end

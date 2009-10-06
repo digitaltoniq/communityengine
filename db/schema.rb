@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.string   "item_type"
     t.integer  "about_id"
     t.string   "about_type"
+    t.integer  "parent_id"
     t.string   "action"
     t.datetime "created_at"
   end
@@ -26,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
   add_index "activities", ["actor_id", "actor_type"], :name => "index_activities_on_actor_id_and_actor_type"
   add_index "activities", ["created_at"], :name => "index_activities_on_created_at"
   add_index "activities", ["item_id", "item_type"], :name => "index_activities_on_item_id_and_item_type"
+  add_index "activities", ["parent_id"], :name => "index_activities_on_parent_id"
 
   create_table "ads", :force => true do |t|
     t.string   "name"

@@ -8,6 +8,7 @@ class AddMoreIndexes < ActiveRecord::Migration
     add_index :activities, [:actor_id, :actor_type]
     add_index :activities, [:item_id, :item_type]
     add_index :activities, [:about_id, :about_type]
+    add_index :activities, :parent_id
   end
   
   def self.down

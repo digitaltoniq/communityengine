@@ -6,8 +6,8 @@ class Like < ActiveRecord::Base
 
   # TODO: Breaks when more than a comment can be likeable
   acts_as_activity :user, :about => [
-          proc { |l| Representative.for_comment_post(l.likeable) },
-          proc { |l| Company.for_comment(l.likeable) }
+          proc { |l| Company.for_comment(l.likeable) },
+          proc { |l| Representative.for_comment_post(l.likeable) }
   ]
 
   named_scope :for, lambda { |likeable|

@@ -59,7 +59,9 @@ module ActivityTracker # :nodoc:
       actor = activity_options[:actor] ? send(activity_options[:actor]) : nil
       logger.info("Actor: #{actor}")
       
-      # Create a new activity for each about obj there is
+      # Create a new activity for each about obj there is.  Any activities created
+      # after the initial one is considered a child of the first activity
+      parent = nil
       [activity_options[:about]].flatten.each do |about_opt|
         about = case about_opt.class.to_s
           when 'Symbol' then send(about_opt)
@@ -67,7 +69,8 @@ module ActivityTracker # :nodoc:
           else nil
         end
         unless about.nil? and activity_options[:ignore_nil_about]
-          Activity.create(:item => self, :actor => actor, :about => about, :action => 'created')
+          a = Activity.create(:item => self, :actor => actor, :about => about, :action => 'created', :parent => parent)
+          parent ||= a if !a.new_record?
         end
       end
     end

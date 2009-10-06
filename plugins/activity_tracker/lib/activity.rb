@@ -3,6 +3,7 @@ class Activity < ActiveRecord::Base
   belongs_to :actor, :polymorphic => true # Who performed the activity
   belongs_to :item, :polymorphic => true  # The item that triggered the activity
   belongs_to :about, :polymorphic => true # What the activity is about (often the owner of the item)
+  belongs_to :parent, :class_name => 'Activity'
   
   after_save :update_counter_on_actor
 
@@ -27,6 +28,8 @@ class Activity < ActiveRecord::Base
     {:conditions => { :about_type => type.to_s } }
   }
   named_scope :public, :conditions => ["item_type NOT IN (?) AND item_type IS NOT NULL", [RepresentativeInvitation.to_s]]
+  named_scope :root, :conditions => "activities.parent_id IS NULL"
+  named_scope :child, :conditions => "activities.parent_id IS NOT NULL"
 
   def update_counter_on_actor
     if actor && actor.class.column_names.include?('activities_count')

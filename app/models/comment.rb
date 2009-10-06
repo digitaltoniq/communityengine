@@ -17,8 +17,8 @@ class Comment < ActiveRecord::Base
   validates_format_of :author_url, :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, :unless => Proc.new{|record| record.user }
 
   acts_as_activity :user, :about => [
-          proc { |c| Representative.for_comment_post(c) },
-          proc { |c| Company.for_comment(c) }
+          proc { |c| Company.for_comment(c) },
+          proc { |c| Representative.for_comment_post(c) }
   ]
 
   # named_scopes
