@@ -1,5 +1,5 @@
 - if current_user
-  -if current_user.admin?
+  -#if current_user.admin?
     -box :class => "first_alt alt" do
       %h3= :admin_controls.l
       = link_to( "&raquo; #{:assume_user_id.l}", assume_user_path(@user) )
@@ -9,10 +9,13 @@
       = link_to( "&raquo; #{:toggle.l} #{:featured_writer.l}", toggle_featured_user_path(@user), {:method => :put} )
       %br/
       = link_to( "&raquo; #{:assign_role.l}: #{@user.moderator? ? :member.l : :moderator.l}", toggle_moderator_user_path(@user), {:method => :put} )
-  - elsif @is_current_user and (@representative = Representative.for_user(@user))
+  - if @is_current_user
     -box :class => "first_alt alt" do
       %h3= :admin_controls.l
-      = link_to( "&raquo; #{:view_my_representative_dashboard.l}", dashboard_path(@user))
+      - if(@representative = Representative.for_user(@user))
+        = link_to( "&raquo; #{:view_my_representative_dashboard.l}", dashboard_path(@user))
+      - else
+        = link_to( "&raquo; #{:view_my_user_dashboard.l}", dashboard_path(@user))
 
 -box :class => 'hentry', :id => 'profile_details' do
   %h3

@@ -80,6 +80,7 @@ en:
   #en: admin_dashboard: Admin dashboard
   admin_dashboard: Site admin dashboard
   view_my_representative_dashboard: View my representative dashboard
+  view_my_user_dashboard: View my dashboard
   view_all_site_activity: View all site activity
   #en: administer_events: Administer events
   administer_events: Administer events
