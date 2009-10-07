@@ -2,6 +2,7 @@ class FeatureImage < ActiveRecord::Base
   belongs_to :post
   belongs_to :user
   has_attachment prepare_options_for_attachment_fu(AppConfig.feature_image['attachment_fu_options'])
+  has_default_attachment# :file => "#{Rails.root}/public/images/default_feature_image.gif"
 
   # From Photo
 #  validates_presence_of :size

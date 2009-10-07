@@ -12,8 +12,10 @@ class CreatePhotos < ActiveRecord::Migration
       t.column "parent_id",  :integer 
       t.column "thumbnail", :string      
       t.column "width", :integer  
-      t.column "height", :integer      
+      t.column "height", :integer
+      t.boolean :default, :default => false
     end
+    add_index :photos, :default   
   end
 
   def self.down

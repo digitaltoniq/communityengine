@@ -270,12 +270,7 @@ class User < ActiveRecord::Base
     if avatar
       avatar.public_filename(size)
     else
-      case size
-        when :thumb
-          AppConfig.photo['missing_thumb']
-        else
-          AppConfig.photo['missing_medium']
-      end
+      Photo.default.public_filename(size)
     end
   end
 

@@ -10,10 +10,12 @@ class CreateFeatureImage < ActiveRecord::Migration
       t.integer :size
       t.integer :width
       t.integer :height
+      t.boolean :default, :default => false
       t.timestamps
     end
     add_index :feature_images, :post_id
     add_index :feature_images, :user_id
+    add_index :feature_images, :default
   end
 
   def self.down

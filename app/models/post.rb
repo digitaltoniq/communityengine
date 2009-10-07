@@ -161,7 +161,9 @@ class Post < ActiveRecord::Base
   end
 
   def photo(size = :medium)
-    feature_image ? feature_image.public_filename(size) : user.avatar_photo_url(size)
+    feature_image ?
+            feature_image.public_filename(size) :
+            FeatureImage.default.public_filename(size)
   end
 
   def image_for_excerpt

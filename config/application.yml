@@ -12,7 +12,7 @@ theme: 'candme'
 
 meta_description: 'A description of your community for use in META tags.'
 meta_keywords: 'keywords for use in META tags'
-sections_enabled: ['photos', 'posts', 'clippings', 'contests', 'categories', 'events']
+sections_enabled: ['photos', 'posts'] #, 'clippings', 'contests', 'categories', 'events'
 show_advertising: false
 closed_beta_mode: false
 # Comment this out if you want to infer the locale

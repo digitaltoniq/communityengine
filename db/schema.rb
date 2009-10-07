@@ -177,10 +177,12 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.integer  "size"
     t.integer  "width"
     t.integer  "height"
+    t.boolean  "default",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "feature_images", ["default"], :name => "index_feature_images_on_default"
   add_index "feature_images", ["post_id"], :name => "index_feature_images_on_post_id"
   add_index "feature_images", ["user_id"], :name => "index_feature_images_on_user_id"
 
@@ -260,9 +262,12 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.integer  "size"
     t.integer  "width"
     t.integer  "height"
+    t.boolean  "default",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "logos", ["default"], :name => "index_logos_on_default"
 
   create_table "messages", :force => true do |t|
     t.integer  "sender_id"
@@ -314,11 +319,13 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.string   "thumbnail"
     t.integer  "width"
     t.integer  "height"
+    t.boolean  "default",      :default => false
     t.integer  "album_id"
     t.integer  "view_count"
   end
 
   add_index "photos", ["created_at"], :name => "index_photos_on_created_at"
+  add_index "photos", ["default"], :name => "index_photos_on_default"
   add_index "photos", ["parent_id"], :name => "index_photos_on_parent_id"
 
   create_table "plugin_schema_migrations", :id => false, :force => true do |t|

@@ -1,6 +1,7 @@
 class Logo < ActiveRecord::Base
   belongs_to :company
   has_attachment prepare_options_for_attachment_fu(AppConfig.logo['attachment_fu_options'])
+  has_default_attachment# :file => "#{Rails.root}/public/images/default_logo.gif"
 
   # From Photo
   validates_presence_of :size

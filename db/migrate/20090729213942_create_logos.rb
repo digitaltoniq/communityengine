@@ -9,8 +9,10 @@ class CreateLogos < ActiveRecord::Migration
       t.integer :size
       t.integer :width
       t.integer :height
+      t.boolean :default, :default => false
       t.timestamps
     end
+    add_index :logos, :default
   end
 
   def self.down

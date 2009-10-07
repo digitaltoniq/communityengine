@@ -21,7 +21,7 @@
     .vcard.author
       %h5
         %a{:href => '#', :rel => 'bookmark', :class => 'photo', :onclick => 'return false;'}
-          = image_tag(AppConfig.photo['missing_thumb'])
+          = image_tag(Photo.default.public_filename(:small))
       %ul
         %li.fn
           =link_to_unless(comment.author_url.blank?, h(comment.username), h(comment.author_url)){ h(comment.username) }

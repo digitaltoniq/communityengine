@@ -114,12 +114,7 @@ class Company < ActiveRecord::Base
     if logo
       logo.public_filename(size)
     else
-      case size
-        when :thumb
-          AppConfig.photo['missing_thumb']   # TODO: use logo
-        else
-          AppConfig.photo['missing_medium']
-      end
+      Logo.default.public_filename(size)
     end
   end
 
