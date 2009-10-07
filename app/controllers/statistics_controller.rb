@@ -34,9 +34,9 @@ class StatisticsController < BaseController
     range = (params[:range].blank? ? 10 : params[:range].to_i ) #days
     
     chart = Ziya::Charts::Line.new
-    @logins = Activity.count(:group => "date(created_at)", :conditions => ["action = ? AND created_at > ?", 'logged_in', range.days.ago ] )
-    @comments = Activity.count(:group => "date(created_at)", :conditions => ["action = ? AND created_at > ?", 'comment', range.days.ago ] )    
-    @posts = Activity.count(:group => "date(created_at)", :conditions => ["action = ? AND created_at > ?", 'post', range.days.ago ] )        
+    @logins = Activity.since(range.days.ago).action('logged_in').count(:group => "date(created_at)")
+    @comments = Activity.root.since(range.days.ago).for_type(Comment).count(:group => "date(created_at)")
+    @posts = Activity.root.since(range.days.ago).for_type(Post).count(:group => "date(created_at)")        
 #    @photos = Activity.count(:group => "date(created_at)", :conditions => ["action = ? AND created_at > ?", 'photo', range.days.ago ] )
 #    @clippings = Activity.count(:group => "date(created_at)", :conditions => ["action = ? AND created_at > ?", 'clipping', range.days.ago ] )
 

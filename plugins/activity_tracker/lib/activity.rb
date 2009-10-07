@@ -30,6 +30,8 @@ class Activity < ActiveRecord::Base
   named_scope :public, :conditions => ["item_type NOT IN (?) AND item_type IS NOT NULL", [RepresentativeInvitation.to_s]]
   named_scope :root, :conditions => "activities.parent_id IS NULL"
   named_scope :child, :conditions => "activities.parent_id IS NOT NULL"
+  named_scope :action, lambda { |action| { :conditions => { :action => action }}}
+  named_scope :for_type, lambda { |type| { :conditions => { :item_type => type.to_s }}}
 
   def update_counter_on_actor
     if actor && actor.class.column_names.include?('activities_count')
