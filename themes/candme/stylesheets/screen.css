@@ -388,11 +388,13 @@ div.hentry div.vcard img {
 
 .hentry .vcard h5 a img, .main .vcard img {
     border: none;
-    padding: 6px;
+    // padding: 6px;
+    padding:25px 24px;
 }
 
 .hentry .vcard h5 a img {
-    margin: -42px 16px;  
+    // margin: -42px 16px; 
+    margin:-57px 0;
 }
 
 .hentry .mugshot {
@@ -403,7 +405,7 @@ div.hentry div.vcard img {
 .hentry .vcard .mugshot a img {
     background: transparent url(/images/theme/mugshot_border.png) no-repeat scroll 0 0;
     border: none;
-    padding: 19px;
+    padding:19px 19px 19px 22px;
 }
 
 .hfeed .hentry .vcard ul, #posts .hentry .vcard ul {
