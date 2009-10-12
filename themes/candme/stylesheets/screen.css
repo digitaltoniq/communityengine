@@ -1,5 +1,5 @@
 html {
-    background: #d9b880 url(/images/theme/body_bg.png) repeat-y center top;
+    background: #e2e3e6 url(/images/theme/body_bg.png) repeat-y center top;
 }
 
 a {
@@ -397,12 +397,22 @@ div.hentry div.vcard img {
 .hentry .vcard .mugshot a img {
     background: transparent url(/images/theme/mugshot_border.png) no-repeat scroll 0 0;
     border: none;
-    padding: 16px;
+    padding: 19px;
 }
 
-.hfeed .hentry .vcard ul {
+.hfeed .hentry .vcard ul, #posts .hentry .vcard ul {
     margin-top: 120px;
     margin-left: 25px;
+}
+
+
+#comment .hentry .vcard ul {
+    margin-top: 20px;
+    margin-left: 22px;    
+}
+
+#comment .hentry .vcard h5 a img {
+
 }
 
 .entry-content {
