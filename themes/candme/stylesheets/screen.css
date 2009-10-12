@@ -241,6 +241,9 @@ h3.alt {
 }
 
 #SubNavBar ul li a {
+    display: block;
+    text-decoration: none;
+
     padding: 5px 15px;
     color: #fc720d;
     font-size: 85%;
@@ -250,9 +253,12 @@ h3.alt {
 }
 
 #SubNavBar ul li#active a, #SubNavBar ul li.current a {
-    /*color: #FFF;*/
-    /*background: #777;*/
+  text-decoration: none !important;
 }
+
+#SubNavBar ul, #SubNavBar ul li {float: left;}
+
+#SubNavBar ul li a:hover { text-decoration: underline; }
 
 #hd h2 {
     margin-top: 17px;
