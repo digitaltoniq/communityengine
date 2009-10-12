@@ -382,13 +382,14 @@ div.company_list div.vcard ul {
     color: #333d6a;
 }
 
-div.hentry div.vcard img {
+div.hentry div.vcard img, div.hentry div.vcard h5 a:hover img {
     background: transparent url(/images/theme/article_border.png) no-repeat scroll 0 0;
 }
 
 .hentry .vcard h5 a img, .main .vcard img {
     border: none;
     // padding: 6px;
+    margin:-21px -20px;
     padding:25px 24px;
 }
 
@@ -414,17 +415,23 @@ div.hentry div.vcard img {
 }
 
 
-#comment .hentry .vcard ul {
+.comments .hentry .vcard ul {
     margin-top: 20px;
-    margin-left: 22px;    
+    margin-left: 22px;
 }
 
 #comments .hentry .vcard h5 a img {
-    margin:-2px 0;
+    margin:-12px -15px;
+    padding:19px 22px;
+    background: transparent url(/images/theme/mugshot_border.png) no-repeat scroll 0 0;
 }
 
 #comments .hentry .vcard {
     width: 15.5em;
+}
+
+#comments .hentry .vcard ul {
+   margin-left: 76px;
 }
 
 .entry-content {
@@ -479,3 +486,8 @@ div.comments .hentry {
     border-right:1px solid #CCCCCC;
 }
 
+div.hentry div.vcard a.addthis_button img {
+    background:transparent none;
+    padding: 0;
+    margin-top: 10px;
+}

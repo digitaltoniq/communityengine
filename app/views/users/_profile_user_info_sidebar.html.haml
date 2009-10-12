@@ -11,7 +11,7 @@
       = link_to( "&raquo; #{:assign_role.l}: #{@user.moderator? ? :member.l : :moderator.l}", toggle_moderator_user_path(@user), {:method => :put} )
   - if @is_current_user
     -box :class => "first_alt alt" do
-      %h3= :admin_controls.l
+      / %h3= :admin_controls.l
       - if(@representative = Representative.for_user(@user))
         = link_to( "&raquo; #{:view_my_representative_dashboard.l}", dashboard_path(@user))
       - else
