@@ -411,8 +411,12 @@ div.hentry div.vcard img {
     margin-left: 22px;    
 }
 
-#comment .hentry .vcard h5 a img {
+#comments .hentry .vcard h5 a img {
+    margin:-2px 0;
+}
 
+#comments .hentry .vcard {
+    width: 15.5em;
 }
 
 .entry-content {
