@@ -104,7 +104,7 @@ h3.alt {
 #doc2 {
     background-color: #FFF;
     width: 970px;
-    margin-top: -139px;
+    margin-top: -500px;
     margin-bottom: 10px;
 }
 
@@ -140,7 +140,7 @@ h3.alt {
 
 #masthead-bg {
     background: transparent url(/images/theme/body_wrapper_bg.png) repeat-x center top;
-    height: 139px;
+    height: 500px;
 }
 
 #doc2, #CommunityFooter {
@@ -261,7 +261,10 @@ h3.alt {
 #SubNavBar ul li a:hover { text-decoration: underline; }
 
 #hd h2 {
-    margin-top: 17px;
+    color:#777777;
+    font-size:16px;
+    font-style:normal;
+    margin-top:17px;
 }
 
 /* User Menu Dropdown*/
