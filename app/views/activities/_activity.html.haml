@@ -1,72 +1,72 @@
-%dl{:class => (activity.item_type && activity.item_type.humanize.downcase), :id => dom_id(activity) }
-  %dt
-    =time_ago_in_words_or_date(activity.created_at)
-  %dd
-    -#if activity.can_be_deleted_by?(current_user)
-      =link_to_remote image_tag("icons/delete.png", :plugin => 'community_engine'), :url => activity_path(activity), :method => :delete, :html => {:class => 'right'}
-
-    - # TODO: Ties actor directly to user, preventing true polymorphism
-    =link_to activity.actor, user_path(activity.actor)
-    - if activity.item
-      - case activity.item_type
-        - when 'Post'
-          =:wrote_a_post.l
-          = link_to activity.item.title, post_path(activity.item)
-        - when 'Photo'
-          =:uploaded_a_photo.l
-          = link_to image_tag(activity.item.public_filename(:small), :width => '50px'), user_photo_path(activity.item.user, activity.item)
-        - when 'Album'
-          =:created_an_album.l
-          = link_to activity.item.title, user_album_path(activity.item.user, activity.item)
-        - when 'Topic'
-          =:started_a_topic.l
-          -topic = activity.item
-          = link_to truncate_words(topic.title), forum_topic_path(topic.forum, topic)
-        - when 'SbPost'
-          =:added_to_a_forum_topic.l
-          - topic = activity.item.topic
-          = link_to truncate_words(activity.item.body), forum_topic_path(topic.forum, topic)
-        - when 'Comment'
-          =:left_a_comment.l
-          = link_to truncate_words(activity.item.comment, 10), commentable_url(activity.item)
-        - when 'Favorite'
-          =:favorited.l
-          = link_to " a #{activity.item.favoritable.class.to_s.humanize.downcase}", user_favorite_path(activity.item.user, activity.item)
-        - when 'Clipping'
-          =:added_a_clipping.l
-          = link_to image_tag( activity.item.image_uri(:small), :width => '50px'), user_clipping_path(activity.item.user, activity.item)        
-        - when 'Invitation'
-          =:invited_friends.l
-        - when 'Event'
-          =:posted_an_event.l
-          = link_to activity.item.name, event_path(activity.item)
-        - when 'Rsvp'
-          =:rsvped_for_an_event.l
-          = link_to activity.item.event.name, event_path(activity.item.event)
-        - when 'RepresentativeInvitation'
-          =:invited_representatives.l(:count => activity.item.email_address_list.size)
-          = link_to truncate_words(activity.item.email_address_list.join(', '), 10), company_representative_invitations_path(activity.about)
-        - when 'Following'
-          =:now_follows.l(:type => activity.item.followee_type.downcase)
-          - case activity.item.followee.class.to_s
-            - when 'Company'
-              = link_to activity.item.followee, company_path(activity.item.followee)
-            - when 'Post'
-              = link_to activity.item.followee, post_path(activity.item.followee)
-        - when 'Like'
-          =:likes.l(:type => activity.item.likeable_type.downcase)
-          -# Doesn't handle likeable polymorphism here, just assumes likes a comment
-          = link_to truncate_words(activity.item.likeable.comment, 10), commentable_url(activity.item.likeable)
-        - when 'Representative'
-          =:representative_registered.l
-          = link_to activity.about, company_path(activity.about)
-        -else
-          =render :partial => 'activities/unhandled_item', :locals => {:activity => activity}
-    - else
-      - case activity.action
-        - when 'updated_profile'
-          =:updated_their_profile.l
-        - when 'logged_in'
-          =:logged_into_the_site.l
-        - else
-          = " #{activity.action.humanize.downcase }"
+- if activity.actor # Non actor activity is system stuff (like default photos) that can be ignored
+  %dl{:class => (activity.item_type && activity.item_type.humanize.downcase), :id => dom_id(activity) }
+    %dt
+      =time_ago_in_words_or_date(activity.created_at)
+    %dd
+      -#if activity.can_be_deleted_by?(current_user)
+        =link_to_remote image_tag("icons/delete.png", :plugin => 'community_engine'), :url => activity_path(activity), :method => :delete, :html => {:class => 'right'}
+      - # TODO: Ties actor directly to user, preventing true polymorphism
+      = link_to activity.actor, user_path(activity.actor)
+      - if activity.item
+        - case activity.item_type
+          - when 'Post'
+            =:wrote_a_post.l
+            = link_to activity.item.title, post_path(activity.item)
+          - when 'Photo'
+            =:uploaded_a_photo.l
+            = link_to image_tag(activity.item.public_filename(:small), :width => '50px'), user_photo_path(activity.item.user, activity.item)
+          - when 'Album'
+            =:created_an_album.l
+            = link_to activity.item.title, user_album_path(activity.item.user, activity.item)
+          - when 'Topic'
+            =:started_a_topic.l
+            -topic = activity.item
+            = link_to truncate_words(topic.title), forum_topic_path(topic.forum, topic)
+          - when 'SbPost'
+            =:added_to_a_forum_topic.l
+            - topic = activity.item.topic
+            = link_to truncate_words(activity.item.body), forum_topic_path(topic.forum, topic)
+          - when 'Comment'
+            =:left_a_comment.l
+            = link_to truncate_words(activity.item.comment, 10), commentable_url(activity.item)
+          - when 'Favorite'
+            =:favorited.l
+            = link_to " a #{activity.item.favoritable.class.to_s.humanize.downcase}", user_favorite_path(activity.item.user, activity.item)
+          - when 'Clipping'
+            =:added_a_clipping.l
+            = link_to image_tag( activity.item.image_uri(:small), :width => '50px'), user_clipping_path(activity.item.user, activity.item)
+          - when 'Invitation'
+            =:invited_friends.l
+          - when 'Event'
+            =:posted_an_event.l
+            = link_to activity.item.name, event_path(activity.item)
+          - when 'Rsvp'
+            =:rsvped_for_an_event.l
+            = link_to activity.item.event.name, event_path(activity.item.event)
+          - when 'RepresentativeInvitation'
+            =:invited_representatives.l(:count => activity.item.email_address_list.size)
+            = link_to truncate_words(activity.item.email_address_list.join(', '), 10), company_representative_invitations_path(activity.about)
+          - when 'Following'
+            =:now_follows.l(:type => activity.item.followee_type.downcase)
+            - case activity.item.followee.class.to_s
+              - when 'Company'
+                = link_to activity.item.followee, company_path(activity.item.followee)
+              - when 'Post'
+                = link_to activity.item.followee, post_path(activity.item.followee)
+          - when 'Like'
+            =:likes.l(:type => activity.item.likeable_type.downcase)
+            -# Doesn't handle likeable polymorphism here, just assumes likes a comment
+            = link_to truncate_words(activity.item.likeable.comment, 10), commentable_url(activity.item.likeable)
+          - when 'Representative'
+            =:representative_registered.l
+            = link_to activity.about, company_path(activity.about)
+          -else
+            =render :partial => 'activities/unhandled_item', :locals => {:activity => activity}
+      - else
+        - case activity.action
+          - when 'updated_profile'
+            =:updated_their_profile.l
+          - when 'logged_in'
+            =:logged_into_the_site.l
+          - else
+            = " #{activity.action.humanize.downcase }"
