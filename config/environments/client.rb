@@ -27,4 +27,4 @@ config.action_view.cache_template_loading            = true
 # Enable threaded mode
 # config.threadsafe!
 
-APP_URL = "http://candme.digitaltoniq.com"
+APP_URL = "http://candme.clients.digitaltoniq.com"
