@@ -177,7 +177,7 @@ class PostsController < BaseController
 
 
   def popular
-    @posts = Post.find_popular({:limit => 10, :since => 3.days})
+    @posts = Post.find_popular({:limit => 10})
 
 #    @monthly_popular_posts = Post.find_popular({:limit => 20, :since => 30.days})
     
