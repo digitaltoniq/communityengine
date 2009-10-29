@@ -18,7 +18,7 @@ namespace :data do
     task :reset => ['db:revert', 'data:demo']
 
     # TODO: move to image/cache namespace?
-    task :prefetch_images do
+    task :prefetch_images => :environment do
       required_photos.each do |tags, count|
         DT::FlickrDownloader.register(:tags => tags, :count => count, :size => :small)
       end
