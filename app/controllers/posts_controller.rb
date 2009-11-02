@@ -11,7 +11,7 @@ class PostsController < BaseController
   end  
                            
   before_filter :login_required, :only => [:new, :edit, :update, :destroy, :create, :manage]
-  before_filter :find_user, :only => [:new, :create, :edit, :index, :show, :update_views, :manage, :destroy]
+  before_filter :find_user, :only => [:new, :create, :edit, :index, :update_views, :manage, :destroy]
   before_filter :require_ownership_or_moderator, :only => [:edit, :update, :destroy, :create, :manage, :new]
   before_filter :require_representative, :only => [:new, :create]
 
@@ -57,11 +57,13 @@ class PostsController < BaseController
   # GET /posts/1
   # GET /posts/1.xml
   def show
-    @rss_title = "#{AppConfig.community_name}: #{@user.login}'s posts"
-    @rss_url = user_posts_path(@user,:format => :rss)
     
     @post = Post.find(params[:id])
     @user = @post.user
+
+    @rss_title = "#{AppConfig.community_name}: #{@user.login}'s posts"
+    @rss_url = user_posts_path(@user,:format => :rss)
+
     @is_current_user = @user.eql?(current_user)
     @comment = Comment.new(params[:comment])
 

@@ -202,7 +202,7 @@ class BaseController < ApplicationController
   # The following automatically routes user paths to representative paths if user is wrapped by representative
   def post_path(post)
     r = Representative.for_user(post.user_id)
-    r ? company_representative_post_path(r.company, r, post) : user_post_path(post.user_id, post)
+    r ? company_post_path(r.company, post) : user_post_path(post.user_id, post)
   end
 
   # TODO: add site admin support
