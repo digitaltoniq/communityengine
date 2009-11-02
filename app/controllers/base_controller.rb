@@ -6,7 +6,7 @@ class BaseController < ApplicationController
   include AuthenticatedSystem
   include LocalizedApplication
   around_filter :set_locale  
-  before_filter :login_from_cookie  
+  before_filter :login_from_cookie, :store_return_to
   skip_before_filter :verify_authenticity_token, :only => :footer_content
   helper_method :commentable_url
   helper_method :user_path, :post_path, :user_posts_path, :edit_user_path, :display_text, :dashboard_path # DigitalToniq

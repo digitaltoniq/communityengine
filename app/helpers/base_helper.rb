@@ -196,18 +196,23 @@ module BaseHelper
   end
 
   def add_follow_link(followee)
-    html = "<span class='following_request' id='follow_request_#{followee.id}'>"
-    html += link_to_remote :follow.l,
-            {:update => "follow_request_#{followee.id}",
-                :loading => "$$('span#follow_request_#{followee.id} span.spinner')[0].show(); $$('span#follow_request_#{followee.id} a.add_following_btn')[0].hide()",
-                :complete => visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
-                500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
-                :url => hash_for_user_followings_url(:user_id => current_user.id, :followee_id => followee.id, :followee_type => followee.class.name),
-                :method => :post }, {:class => "add_following_btn"}
-    html +=	"<span style='display:none;' class='spinner'>"
-    html += image_tag 'spinner.gif', :plugin => "community_engine"
-    html += :requesting_follow.l+" ...</span></span>"
-    html
+    if logged_in?
+      html = "<span class='following_request' id='follow_request_#{followee.id}'>"
+      html += link_to_remote :follow.l,
+              {:update => "follow_request_#{followee.id}",
+                  :loading => "$$('span#follow_request_#{followee.id} span.spinner')[0].show(); $$('span#follow_request_#{followee.id} a.add_following_btn')[0].hide()",
+                  :complete => visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
+                  500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
+                  :url => hash_for_user_followings_url(:user_id => current_user.id, :followee_id => followee.id, :followee_type => followee.class.name),
+                  :method => :post }, {:class => "add_following_btn"}
+      html +=	"<span style='display:none;' class='spinner'>"
+      html += image_tag 'spinner.gif', :plugin => "community_engine"
+      html += :requesting_follow.l+" ...</span></span>"
+      return html
+    else
+      # Might not work for any other followee besides company because of nested paths?
+      link_to :follow.l, login_path(:return_to => polymorphic_path(followee))
+    end
   end
 
   # TODO: refactor with add_follow_link

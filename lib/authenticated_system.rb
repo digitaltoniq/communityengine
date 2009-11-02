@@ -1,4 +1,9 @@
 module AuthenticatedSystem
+
+  def store_return_to
+    session[:return_to] = params[:return_to] if params[:return_to]
+  end
+
   def update_last_seen_at
      return unless logged_in?
      User.update_all ['sb_last_seen_at = ?', Time.now.utc], ['id = ?', current_user.id] 
