@@ -22,16 +22,7 @@
   -box :class => "yui-b" do
     - form_tag user_path(:welcome => 'invite'), :method => 'put', :multipart =>true, :class => "MainForm" do
       %h3=:about_you.l
-      = text_area :user, :description, :rows => 30, :style => 'width:100%', :class => "rich_text_editor"
-      
-      %h3=:gender.l
-      %fieldset
-        %label
-          = radio_button :user, :gender, User::MALE
-          =:male.l
-        %label
-          = radio_button :user, :gender, User::FEMALE
-          =:female.l
+      = text_area :user, :description, :rows => 4, :style => 'width:95%'
           
       - if @user.vendor?
         %p= render :partial => 'offerings/chooser'
