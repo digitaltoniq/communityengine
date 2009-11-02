@@ -8,6 +8,7 @@ class Company < ActiveRecord::Base
 
   # validation
   validates_length_of       :name,      :within => 1..100
+  validates_length_of       :description,      :maximum => 300, :allow_blank => true
   validates_uniqueness_of   :name,      :case_sensitive => false
 #  validates_format_of       :name,      :with => /^[\sA-Za-z0-9'_,-]+$/
   validates_exclusion_of    :url_slug, :in => AppConfig.reserved_company_names

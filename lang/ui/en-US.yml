@@ -252,6 +252,8 @@ en:
   comma_separated_keywords_that_describe_you: Comma-separated keywords that describe you.
   #en: comment_character_limit: (2000 character limit)
   comment_character_limit: (2000 character limit)
+  character_limit: "({{length}} character limit)"
+  current_character_count: "Current count:"
   #en: comment_could_not_be_deleted: Comment could not be deleted.
   comment_could_not_be_deleted: Comment could not be deleted.
   #en: comment_save_error: Your comment couldn't be saved.

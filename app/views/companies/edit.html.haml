@@ -54,7 +54,10 @@
     .yui-b
       -box do 
         %h3=:about.l
-        = text_area :company, :description, :class => "rich_text_editor", :style => "width:100%"
+        = text_area :company, :description, :style => "width:95%", :rows => 4
+        = :character_limit.l(:length => 300)
+        = :current_character_count.l
+        %span#counter-company_description
 
         -#
           %label{"for"=>"domains"}
@@ -100,3 +103,6 @@
 
       %p
         = submit_tag :save_changes.l
+
+%script{:type => 'text/javascript'}
+  makeItCount('company_description', 300);

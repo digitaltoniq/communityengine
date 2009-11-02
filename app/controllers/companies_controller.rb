@@ -10,8 +10,8 @@ class CompaniesController < BaseController
   before_filter :ensure_valid_resource, :only => [:show, :dashboard, :edit, :update, :destroy, :activity, :post_comments, :representative_comments]
 
   uses_tiny_mce(:options => AppConfig.default_mce_options.merge({:editor_selector => "rich_text_editor"}),
-    :only => [:new, :create, :update, :edit, :welcome_about])
-  uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
+    :only => [])
+  uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [])
 
   before_filter :login_required, :only => [:new, :create, :edit, :update, :destroy, :dashboard, :activity]
   before_filter :admin_required, :only => [:new, :create, :destroy]
