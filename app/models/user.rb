@@ -292,6 +292,10 @@ class User < ActiveRecord::Base
   def recently_activated?
     @activated
   end
+
+  def reset_recently_activated
+    @activated = false
+  end
   
   def encrypt(password)
     self.class.encrypt(password, salt)

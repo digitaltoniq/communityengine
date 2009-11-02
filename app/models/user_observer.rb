@@ -11,6 +11,7 @@ class UserObserver < ActiveRecord::Observer
   def after_save(user)
     if !Representative.for_user(user)
       UserNotifier.deliver_activation(user) if user.recently_activated?
+      user.reset_recently_activated
     end
   end
 end
