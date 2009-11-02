@@ -37,6 +37,10 @@
           =:zippostal_code.l
         = f.text_field :zip, :style=>"width:90px"
 
+        %label{:for => 'company_url'}
+          =:company_url.l
+        = f.text_field :url, :style=>"width:350px"
+
         -#
           DJS: user for initial primary representive
           %label{"for"=>"company_email"}

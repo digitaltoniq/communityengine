@@ -45,6 +45,10 @@
   %h3=:company_details.l
   .vcard.author
     %ul
+      -if @company.url
+        %li.url
+          = :company_url.l
+          = link_to @company.url, @company.url
       %li.update
         %a{:href=>"#{company_path(@company)}", :rel=>"bookmark"}
           %abbr.published{:title=>"#{@company.created_at}"}

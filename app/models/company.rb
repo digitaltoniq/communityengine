@@ -14,6 +14,7 @@ class Company < ActiveRecord::Base
   validates_exclusion_of    :url_slug, :in => AppConfig.reserved_company_names
   # validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :url_slug
+  validates_format_of       :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix, :allow_blank => true
 
 #  validates_presence_of     :domains
 #

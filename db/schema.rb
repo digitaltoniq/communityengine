@@ -123,10 +123,12 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.boolean  "profile_public"
     t.string   "zip"
     t.string   "url_slug"
-    t.string   "domains"
+    t.string   "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "companies", ["url_slug"], :name => "index_companies_on_url_slug"
 
   create_table "contests", :force => true do |t|
     t.string   "title"

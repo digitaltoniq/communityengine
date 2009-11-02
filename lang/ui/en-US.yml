@@ -1583,6 +1583,7 @@ en:
   recent_user_comments: "Latest responses by {{user_name}}"
   # en: enter_company_domains: "Company domains"
   enter_company_domains: "Company domains"
+  company_url: "Website"
   # en: followed_companies: "Followed companies"
   followed_companies:
     one: "{{user_name}} follows this company"

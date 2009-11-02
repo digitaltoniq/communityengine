@@ -9,9 +9,11 @@
       t.boolean :profile_public
       t.string  :zip
       t.string  :url_slug
+      t.string  :url
 #      t.string  :domains
       t.timestamps
     end
+    add_index :companies, :url_slug
   end
 
   def self.down

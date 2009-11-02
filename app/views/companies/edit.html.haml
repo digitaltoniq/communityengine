@@ -59,6 +59,10 @@
         = :current_character_count.l
         %span#counter-company_description
 
+        %label{"for"=>"url"}
+          =:company_url.l
+        = text_field :company, :url, :size => "50"
+
         -#
           %label{"for"=>"domains"}
             =:enter_company_domains.l
