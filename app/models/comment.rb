@@ -82,7 +82,13 @@ class Comment < ActiveRecord::Base
   end
   
   def can_be_deleted_by(person)
-    person && (person.admin? || person.id.eql?(user_id) || person.id.eql?(recipient_id) )
+    if person
+      return true if person.admin? or person.id.eql?(user_id)
+      case commentable.class.to_s
+        when "Post" then commentable.user_id.eql?(person.id)
+        else person.id.eql?(recipient_id)
+      end
+    end
   end
   
   def should_notify_recipient?
