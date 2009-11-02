@@ -99,11 +99,11 @@ class Comment < ActiveRecord::Base
   end
 
   def notify_post_followers
-    if commentable.is_a?(Post)
-      (commentable.followers - [user] - previous_commenters_to_notify).uniq.each do |follower|
-        UserNotifier.deliver_following_post_comment_notice(follower, self)
-      end
-    end  
+#    if commentable.is_a?(Post)
+#      (commentable.followers - [user] - previous_commenters_to_notify).uniq.each do |follower|
+#        UserNotifier.deliver_following_post_comment_notice(follower, self)
+#      end
+#    end  
   end
   
   def notify_previous_anonymous_commenters
