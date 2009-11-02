@@ -580,6 +580,7 @@ en:
   image: Image
   #en: image_url: Image URL
   image_url: Image URL
+  url_slug: URL Slug
   #en: in_the_forums: In the forums
   in_the_forums: In the forums
   #en: in_your_favorites: In your favorites

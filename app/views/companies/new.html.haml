@@ -29,6 +29,10 @@
           -# DJS %em=:required_your_username_must_not_contain_numerals_spaces_or_special_characters.l
         = f.text_field :name
 
+        %label{:for => 'company_url_slug'}
+          =:url_slug.l
+        = f.text_field :url_slug, :style=>"width:200px"
+
         %label{:for => 'company_zip'}
           =:zippostal_code.l
         = f.text_field :zip, :style=>"width:90px"
