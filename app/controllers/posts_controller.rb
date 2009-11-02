@@ -271,7 +271,9 @@ class PostsController < BaseController
 
   def get_additional_posts_page_data
     @sidebar_right = true
-    @active_companies = Company.recently_active(:limit => 5)
-    @active_users = User.active.find_by_activity({:limit => 5, :require_avatar => false})
+    @recent_posts = Post.recent.find :all, :limit => 5
+    @most_discussed_posts = Post.find_most_commented(5, 7.days.ago)
+#    @active_companies = Company.recently_active(:limit => 5)
+#    @active_users = User.active.find_by_activity({:limit => 5, :require_avatar => false})
   end
 end

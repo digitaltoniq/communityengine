@@ -1,16 +1,12 @@
 .yui-b
-  / -box do
-  /  %h3= :explore_site.l :site => AppConfig.community_name
-
-  / TODO: remove
   %br
 
-  %h3.alt= :active_companies.l
+  %h3.alt= :recent_posts.l
   -box :class => "alt" do
-    -@active_companies.each do |company|
-      =render :partial => "companies/sidebar_company", :locals => {:company => company}
+    - @recent_posts.each do |post|
+      =render :partial => "posts/sidebar_post", :locals => {:post => post}
 
-  %h3.alt= :active_users.l
+  %h3.alt= :most_commented_posts.l
   -box :class => "alt" do
-    -@active_users.each do |user|
-      =render :partial => "users/sidebar_user", :locals => {:user => user}
+    - @most_discussed_posts.each do |post|
+      =render :partial => "posts/sidebar_post", :locals => {:post => post}
