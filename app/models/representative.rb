@@ -12,10 +12,6 @@ class Representative < ActiveRecord::Base
   validates_presence_of :company, :user, :representative_role
   validates_length_of   :first_name, :within => 1..30
   validates_length_of   :last_name,  :within => 2..30 
-  validates_each :email do |record, attr, email|
-    # TODO: better message, localize
-    record.errors.add(:email, " domain of email address not related to your company") unless record.company.accepts_email?(email)
-  end
 
   #-- Callbacks
   before_validation :set_representative_role

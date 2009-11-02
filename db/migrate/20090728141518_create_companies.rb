@@ -9,7 +9,7 @@
       t.boolean :profile_public
       t.string  :zip
       t.string  :url_slug
-      t.string  :domains
+#      t.string  :domains
       t.timestamps
     end
   end

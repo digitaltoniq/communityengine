@@ -22,12 +22,6 @@ class RepresentativeInvitation < ActiveRecord::Base
       record.errors.add(:email_addresses, " included invalid addresses: " + invalid_emails.join(', '))
       record.email_addresses = (emails - invalid_emails).join(', ')
     end
-
-    emails = email_addresses.split(',').collect(&:strip).uniq
-    invalid_by_domain_emails = emails.reject { |email| record.company.accepts_email?(email) }   # TODO: move format check to accepts_email
-    # TODO: better message, localize
-    record.errors.add(:email_addresses, " included addresses with a domain not related to your company: " +
-            invalid_by_domain_emails.join(', ')) unless invalid_by_domain_emails.empty?
   end
 
   def send_invite

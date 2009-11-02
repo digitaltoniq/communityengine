@@ -13,13 +13,14 @@ class Company < ActiveRecord::Base
   validates_exclusion_of    :url_slug, :in => AppConfig.reserved_company_names
   # validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_uniqueness_of   :url_slug
-  validates_presence_of     :domains
- 
-  validates_each :domains do |record, attr, domain_csv|
-    domain_csv && domain_csv.validate(/((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i) do |domains, invalid_domains|
-      record.errors.add(:domains, " included invalid domains: #{invalid_domains.join(", ")}")
-    end
-  end
+
+#  validates_presence_of     :domains
+#
+#  validates_each :domains do |record, attr, domain_csv|
+#    domain_csv && domain_csv.validate(/((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i) do |domains, invalid_domains|
+#      record.errors.add(:domains, " included invalid domains: #{invalid_domains.join(", ")}")
+#    end
+#  end
 
   #associations
   has_many    :representatives, :dependent => :destroy
@@ -92,9 +93,9 @@ class Company < ActiveRecord::Base
 
   ## Instance Methods
 
-  def accepts_email?(email)
-    email && email.include?("@") && domains.downcase.include?(email.split('@').last.downcase)
-  end
+#  def accepts_email?(email)
+#    email && email.include?("@") && domains.downcase.include?(email.split('@').last.downcase)
+#  end
 
   def posts
     self.class.posts_in(self)
