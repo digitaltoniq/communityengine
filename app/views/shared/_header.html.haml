@@ -15,7 +15,7 @@
       -# Category.find(:all).each do |c|
         = topnav_tab c.name, {:url => category_path(c), :section => c.name}
       -# DJS = topnav_tab :forums.l, { :url => forums_path, :section => 'forums'
-      = topnav_tab :posts.l, { :url => recent_path, :section => 'posts' }
+      = topnav_tab :posts.l, { :url => popular_path, :section => 'posts' }
       -# = topnav_tab :recent.l, { :url => recent_path, :section => 'recent' }
       -# = topnav_tab :popular.l, { :url => popular_path, :section => 'popular' }
       = topnav_tab :companies.l, { :url => companies_path, :section => 'companies' }

@@ -24,9 +24,9 @@ if AppConfig.closed_beta_mode
   connect '', :controller => "base", :action => "teaser"
   home 'home', :controller => "base", :action => "site_index"
 else
-  home '', :controller => "posts", :action => "recent"
+  home '', :controller => "posts", :action => "popular"
 end
-application '', :controller => "posts", :action => "recent"
+application '', :controller => "posts", :action => "popular"
 
 # admin routes
 admin_dashboard   '/admin/dashboard', :controller => 'admin', :action => 'dashboard'
