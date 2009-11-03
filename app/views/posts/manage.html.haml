@@ -31,10 +31,19 @@
               %td
                 %abbr{:title=>"#{post.created_at}"}= post.created_at.to_s(:concise)
               %td
-                %abbr{:title=>"#{post.published_at}"}= post.published_at.to_s(:concise)
+                %abbr{:title=>"#{post.published_at}"}
+                  - if post.is_live?
+                    = post.published_at.to_s(:concise)
+                  - else
+                    = :draft.l
               %td
                 = link_to post.title, edit_user_post_path(post.user, post)
-                = link_to("(#{:preview.l})", post_path(post), :target => '_blank') unless post.is_live?
               %td= post.user
               -#%td= post.comments.count
-              %td= post.is_live? ? link_to(:published.l, post_path(post)) : :draft.l
+              %td
+                - if post.is_live?
+                  = :published.l
+                  = "(#{link_to(:view.l, post_path(post))})"
+                - else
+                  = :draft.l
+                  = "(#{link_to(:preview.l, post_path(post), :target => '_blank')})"
