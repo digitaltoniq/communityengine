@@ -18,7 +18,7 @@
 
 #yui-main
   -box :class => "yui-b" do
-    - form_for @representative, :url => representative_path(@representative), :html => { :method => 'put', :multipart =>true, :class => "MainForm"} do |f|
+    - form_for @representative, :url => representative_path(@representative, :registered => true), :html => { :method => 'put', :multipart =>true, :class => "MainForm"} do |f|
 
       %h3= "#{:representative_title.l} #{:representative_title_at.l(:company_name => @representative.company)}"
       = f.text_field :title, :size => 15

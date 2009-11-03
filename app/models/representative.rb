@@ -135,7 +135,7 @@ class Representative < ActiveRecord::Base
   
   def validate
     errors.add(:base, "There is already a representative with the same first and last name registered for this company.") if
-            Representative.exists?(:first_name => first_name, :last_name => last_name, :company_id => company_id)
+            Representative.exists?(["first_name = ? AND last_name = ? AND company_id = ? AND id != ?", first_name, last_name, company_id, id])
     user.valid?
     user.errors.each { |attr, msg| errors.add(attr, msg) }
   end

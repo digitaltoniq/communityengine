@@ -150,10 +150,12 @@ class RepresentativesController < BaseController
       @representative.track_activity(:updated_profile) # TODO: think about acitivity tracking across representative and user
 
       flash[:notice] = :your_changes_were_saved.l
-      unless params[:welcome]
-        redirect_to company_representative_path(@representative.company, @representative)
+      if params[:welcome]
+        redirect_to :action => "welcome_#{params[:welcome]}", :id => @representative
+      elsif params[:registered]
+        redirect_to dashboard_company_path(@representative.company)
       else
-        redirect_to :action => "welcome_#{params[:welcome]}", :id => @representative  # TODO
+        redirect_to company_representative_path(@representative.company, @representative)
       end
     end
   rescue ActiveRecord::RecordInvalid
