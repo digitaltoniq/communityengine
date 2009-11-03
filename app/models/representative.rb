@@ -113,19 +113,10 @@ class Representative < ActiveRecord::Base
     super
   end
 
-  # TODO: These need to be protected? They were in CE
   # TODO: Shouldn't these be handled by has_enumerated?
-
-  def admin?
-    representative_role && representative_role.eql?(RepresentativeRole[:admin])
-  end
-
-  def poster?
-    representative_role && representative_role.eql?(RepresentativeRole[:poster])
-  end
-
   def representative?
-    !representative_role || representative_role.eql?(RepresentativeRole[:representative])
+    true # TODO: update when more than one role
+#    !representative_role || representative_role.eql?(RepresentativeRole[:representative])
   end
 
   # TODO: Not sure this is necessary as dependent has_one associations are already saved?
@@ -143,7 +134,7 @@ class Representative < ActiveRecord::Base
   # If this is the first guy in the front door, he's the admin
   def set_representative_role
     if !representative_role_id
-      self.representative_role = RepresentativeRole[company.representatives.count > 0 ? :representative : :admin]
+      self.representative_role = RepresentativeRole[:representative]
     end
   end
 end

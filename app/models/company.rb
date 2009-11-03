@@ -127,23 +127,17 @@ class Company < ActiveRecord::Base
 
   # Can the given user administer this company?
   def admin?(user)
-    return true if user.admin?
-    rep = representative_for_user(user)
-    rep ? rep.admin? : false
+    user.admin? or representative_for_user(user)
   end
 
   # Can the given user invite others to this company?
   def invite?(user)
-    return true if admin?(user)
-    rep = representative_for_user(user)
-    rep ? rep.representative? : false
+    admin?(user)
   end
 
   # Can the given user post convos to this company?
   def post?(user)
-#    return true if admin?(user)
-    rep = representative_for_user(user)
-    rep ? true : false
+    admin?(user)
   end
 
   def representative_for_user(user)

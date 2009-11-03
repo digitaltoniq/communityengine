@@ -1,4 +1,4 @@
-- if current_user && (current_user.admin? or @company.representative?(current_user))
+- if current_user && (current_user.admin? or @company.admin?(current_user))
   -box :class => "first_alt alt" do 
     %h3
       =:admin_controls.l
