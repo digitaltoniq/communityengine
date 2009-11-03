@@ -22,21 +22,17 @@
             %th=:date_created.l
             %th=:date_published.l            
             %th=:title.l
-            %th=:category.l
-            %th=:tags.l
             %th=:comments.l
             %th=:status.l
         %tbody
           - @posts.each do |post|
             %tr            
               %td
-                %abbr{:title=>"#{post.created_at}"}= post.created_at.strftime("%Y/%m/%d")
+                %abbr{:title=>"#{post.created_at}"}= post.created_at.to_s(:concise)
               %td
-                %abbr{:title=>"#{post.published_at}"}= post.published_at_display
+                %abbr{:title=>"#{post.published_at}"}= post.published_at.to_s(:concise)
               %td
                 = link_to post.title, edit_user_post_path(post.user, post)
                 = link_to("(#{:preview.l})", post_path(post), :target => '_blank') unless post.is_live?
-              %td= post.category ? post.category.name : :uncategorized.l
-              %td= post.tags.any? ? post.tag_list : :no_tags.l
               %td= post.comments.count
               %td= post.is_live? ? link_to(:published.l, post_path(post)) : :draft.l
