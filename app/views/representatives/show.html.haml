@@ -19,7 +19,7 @@
         %li.title= "#{:title.l}: #{@representative.title if @representative.title}"
         %li.company= "#{:company.l}: #{link_to(@representative.company, company_path(@representative.company))}"
         %li.update= "#{:member_since.l}#{@representative.created_at.strftime(": %m/%d/%y")}"
-        %li.linked_in= "#{:linked_in_url.l} #{link_to @representative.linked_in_url if @representative.linked_in_url}"
+        %li.linked_in= "#{:linked_in_url.l} #{link_to(@representative.linked_in_url, @representative.linked_in_url) if @representative.linked_in_url}"
         -# =render :partial => 'followings/follow_link', :locals => {:followee => @representative}
     .clear
   -#
