@@ -251,9 +251,12 @@ module BaseHelper
   #   "#{posts.size} posts, How to: #{posts.select{ |p| p.category.eql?(Category.get(:how_to))}.size}, Non How To: #{posts.select{ |p| !p.category.eql?(Category.get(:how_to))}.size}"
   # end
   
-  def more_comments_links(commentable)
-    html = link_to "&raquo; " + :all_comments.l, comments_url(commentable.class.to_s.underscore, commentable.to_param)
-    html += "<br />"
+  def more_comments_links(commentable, displayed_comments = commentable.comments)
+    html = ""
+    if commentable.comments.count > displayed_comments.size
+      html += link_to "&raquo; " + :all_comments.l, comments_url(commentable.class.to_s.underscore, commentable.to_param)
+      html += "<br />"
+    end
 		html += link_to "&raquo; " + :comments_rss.l, comments_url(commentable.class.to_s.underscore, commentable.to_param, :format => :rss)
 		html
   end

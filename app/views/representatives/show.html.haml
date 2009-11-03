@@ -22,16 +22,6 @@
         %li.linked_in= "#{:linked_in_url.l} #{link_to @representative.linked_in_url if @representative.linked_in_url}"
         -# =render :partial => 'followings/follow_link', :locals => {:followee => @representative}
     .clear
-
-  -box do
-    %h3
-      Development Information
-    %p
-      %b Representative Role:
-      = @representative.representative_role.name.capitalize
-    %p  
-      %b User login:
-      = @representative.user.login
   -#
     DJS
     -box :class => 'alt', :id => 'friends' do

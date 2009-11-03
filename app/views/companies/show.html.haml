@@ -112,4 +112,4 @@
       %h3=:recent_company_post_comments.l(:company_name => @company.name)
       %a#newest_comment
       = render :partial => 'comments/comment', :collection => @post_comments
-      %span#more_comments_links= more_company_post_comments_links(@company)
+      %span#more_comments_links= more_company_representative_comments_links(@company, @post_comments)

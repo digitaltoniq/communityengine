@@ -35,7 +35,7 @@ class CompaniesController < BaseController
   def show
     # TODO: Move these auxiliary items up to view or filter?
     show! do
-      @post_comments = @company.representative_comments.ordered('created_at DESC').limited(10)
+      @post_comments = @company.representative_comments.ordered('created_at DESC').limited(25)
       @recent_posts = @company.posts.ordered("published_at DESC").limited(2)
       update_view_count(@company) unless current_user && (@company.representative?(current_user) or current_user.admin?)
     end
@@ -170,7 +170,7 @@ class CompaniesController < BaseController
   end
 
   def representative_comments
-    @comments = @company.representative_comments.recent.find(:all, :page => {:size => 10, :current => params[:page]})  # TODO: will paginate
+    @comments = @company.representative_comments.recent.find(:all, :page => {:size => 25, :current => params[:page]})  # TODO: will paginate
     @title = @company.name
     @back_url = company_path(@company)
     
@@ -187,7 +187,7 @@ class CompaniesController < BaseController
   end
 
   def post_comments
-    @comments = @company.post_comments.recent.find(:all, :page => {:size => 10, :current => params[:page]})  # TODO: will paginate
+    @comments = @company.post_comments.recent.find(:all, :page => {:size => 25, :current => params[:page]})  # TODO: will paginate
     @title = @company.name
     @back_url = company_path(@company)
 

@@ -67,7 +67,7 @@ class PostsController < BaseController
     @is_current_user = @user.eql?(current_user)
     @comment = Comment.new(params[:comment])
 
-    @comments = @post.comments.find(:all, :limit => 20, :order => 'created_at DESC', :include => :user)
+    @comments = @post.comments.find(:all, :limit => 25, :order => 'created_at DESC', :include => :user)
 
 #    @previous = @post.previous_post
 #    @next = @post.next_post
