@@ -16,7 +16,16 @@
             %li.view= :views.l+" (#{@post.view_count})"
             %li.comments= link_to :comments.l+" (#{@post.comments.size})", post_path(@post)+'#comments'
             -# =render :partial => 'followings/follow_link', :locals => {:followee => @post}
-            %li= render :partial => 'posts/share_button'
+            %li
+              -# http://www.facebook.com/facebook-widgets/share.php
+              %a{:name => "fb_share", :type => "button_count", :href => "http://www.facebook.com/sharer.php"} Share
+              %script{:type => "text/javascript", :src => "http://static.ak.fbcdn.net/connect.php/js/FB.Share"}
+            %li
+              -# http://help.tweetmeme.com/2009/04/06/tweetmeme-button/
+              %script{:type => "text/javascript"}
+                tweetmeme_service = 'bit.ly';
+                tweetmeme_style = 'compact';
+              %script{:type => "text/javascript", :src => "http://tweetmeme.com/i/scripts/button.js"}
             
             -#
               DJS
