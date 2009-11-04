@@ -40,6 +40,6 @@ class FeatureImagesController < BaseController
   #-- Inherited resources overrides
 
   def begin_of_association_chain
-    current_user
+    current_user if action_name == 'create'
   end
 end

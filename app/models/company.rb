@@ -100,7 +100,10 @@ class Company < ActiveRecord::Base
 #  end
 
   def posts
-    self.class.posts_in(self)
+
+    # TODO: Have to do this to avoid getting back readonly posts?
+    ids = self.class.posts_in(self).find(:all, :select => 'posts.id').collect(&:id)
+    Post.scoped(:conditions => (ids.any? ? ["posts.id IN (?)", ids] : '1 = 2'))
   end
 
   def post_comments

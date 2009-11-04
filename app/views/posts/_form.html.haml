@@ -1,0 +1,39 @@
+%label
+  = :select_post_author.l
+  = f.select :user_id, company_authors_select
+
+%label
+  =:title.l
+  %em= '('+:required.l+')'
+= f.text_field :title
+
+%label
+  =:body_text.l
+  %em= '('+:required.l+')'
+= f.text_area :raw_post, :size => "86x15"
+
+%label=:save_post_as.l
+= f.select(:published_as, [[:draft.l, 'draft'], [:published.l, 'live']], {}, {:onChange => "toggleSaveButtons(this.value)"})
+
+%p#draft-actions{ :style => (@post.is_live? ? 'display: none;' : '') }
+  = submit_tag :save_and_preview.l, :disable_with => 'Loading preview...'
+  = submit_tag :save_to_drafts.l, :disable_with => 'Saving...'
+%p#publish-actions{ :style => (@post.is_live? ? '' : 'display: none;') }
+  = submit_tag :publish.l, :disable_with => 'Publishing...'
+or
+= link_to :cancel.l, manage_company_posts_path(@company)
+
+- if !@post.new_record?
+  %p
+    =link_to "#{image_tag 'icons/delete.png', :plugin => :community_engine} "+:delete_this_post.l, company_post_path(@company, @post), :method => :delete, :confirm => :are_you_sure_you_want_to_delete_this_post.l
+
+%script{:type => 'text/javascript'}
+  function toggleSaveButtons(publishState) {
+  if(publishState == 'live') {
+  $('draft-actions').hide();
+  $('publish-actions').show();
+  } else {
+  $('draft-actions').show();
+  $('publish-actions').hide();
+  }
+  }

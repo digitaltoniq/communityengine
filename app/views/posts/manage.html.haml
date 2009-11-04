@@ -11,15 +11,12 @@
       %h3 
         =:manage_posts.l
       %p=:posts_saved_with_draft_status_wont_appear_in_your_blog_until_you_publish_them.l
-      
-
-      .pagination= will_paginate @posts
 
       %table{:border => 0, :width => '100%'}
         %thead
           %tr
-            %th=:date_created.l
-            %th=:date_published.l            
+            %th=:created.l
+            %th=:published.l            
             %th=:title.l
             %th=:author.l
             -#%th=:comments.l
@@ -46,3 +43,5 @@
                 - else
                   = :draft.l
                   = "(#{link_to(:preview.l, post_path(post), :target => '_blank')})"
+
+      .pagination= will_paginate @posts

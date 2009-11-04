@@ -11,8 +11,8 @@ class PostsController < BaseController
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
          
   cache_sweeper :post_sweeper, :only => [:create, :update, :destroy]
-  cache_sweeper :taggable_sweeper, :only => [:create, :update, :destroy]    
-  caches_action :show, :if => Proc.new{|c| c.cache_action? }
+  caches_action :show, :if => Proc.new {|c| !c.logged_in? }
+  caches_action :popular, :if => Proc.new {|c| !c.logged_in? }
                            
   before_filter :login_required, :only => [:new, :edit, :update, :destroy, :create, :manage]
   before_filter :require_representative_or_admin, :only => [:new, :create, :edit, :update, :destroy, :manage]
@@ -50,7 +50,10 @@ class PostsController < BaseController
   def create
     create! do |success, failure|
       success.html do
-        redirect_to @post.is_live? ? post_path(@post) : manage_company_posts_path(@company)
+        flash[:notice] = :your_post_was_saved_back_to_editing.l(:edit_url => edit_company_post_path(@company, @post))
+        submit_val = params[:commit].downcase
+        view_post = (submit_val.include?('preview') or submit_val.include?('publish')) # TODO: hack?
+        redirect_to(view_post ? post_path(@post) : manage_company_posts_path(@company))
       end
     end
   end
@@ -58,6 +61,7 @@ class PostsController < BaseController
   def update
     update! do |success, failure|
       success.html do
+        flash[:notice] = :your_post_was_successfully_updated.l
         redirect_to @post.is_live? ? post_path(@post) : manage_company_posts_path(@company)
       end
     end
@@ -85,20 +89,12 @@ class PostsController < BaseController
   end
   
   def manage
-    @posts = end_of_association_chain.ordered('created_at DESC').with(:user).paginate(paging_params)
+    @posts = end_of_association_chain.ordered('created_at DESC').with(:user).paginate(paging_params.merge(:per_page => 25))
     index!
   end
   
   def update_views
     render :text => update_view_count(resource) ? 'updated' : 'duplicate'
-  end
-  
-  def preview
-    @user = current_user
-  end
-
-  def cache_action?
-    !logged_in? && controller_name.eql?('posts')
   end
   
   private

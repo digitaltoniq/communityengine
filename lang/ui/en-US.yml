@@ -959,6 +959,7 @@ en:
   pros_skilled_in: Pros skilled in
   #en: published: Published
   published: Published
+  created: Created
   #en: question: Question
   question: Question
   #en: re_type_your_password_to_confirm: "Re-type your password to confirm:"
@@ -1283,6 +1284,9 @@ en:
   uncategorized: Uncategorized
   #en: update: Update
   update: Update
+  save_and_preview: Save and Preview
+  save_to_drafts: Save to Drafts
+  publish: Publish
   #en: update_rsvp: Update RSVP
   update_rsvp: Update RSVP
   #en: update_profile_and_tag_yourself: Update your profile and tag yourself
@@ -1478,6 +1482,8 @@ en:
   your_post_was_deleted: Your conversation was deleted.
   #en: your_post_was_successfully_created: Your post was successfully created.
   your_post_was_successfully_created: Your conversation was successfully created.
+  your_post_was_saved_back_to_editing: "Your conversation was susccessfully saved, you are currently viewing a preview of how it will look once published.  <a href=\"{{edit_url}}\">Click here</a> to go back and make changes or publish it."
+  your_post_was_successfully_updated: "Your conversation was successfully updated."
   #en: your_profile_photo: "Your profile photo:"
   your_profile_photo: "Your profile photo:"
   #en: your_rsvp_has_been_retracted: Your RSVP has been retracted.
