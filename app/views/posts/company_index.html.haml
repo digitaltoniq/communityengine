@@ -1,6 +1,6 @@
 .yui-b
   -box do
-    = render :partial => 'profile_company_info_sidebar', :locals => {:company => @company}
+    = render :partial => 'companies/profile_company_info_sidebar', :locals => {:company => @company}
 
   - if @company.description
     -box :id => "about_me" do

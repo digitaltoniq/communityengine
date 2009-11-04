@@ -13,7 +13,7 @@ module BaseHelper
 
   def post_url(post)
     r = Representative.for_user(post.user_id)
-    path = r ? company_representative_post_path(r.company, r, post) : user_post_path(post.user_id, post)
+    path = r ? company_post_path(r.company, post) : user_post_path(post.user_id, post)
     "#{application_url.to(-2)}#{path}"
   end
   

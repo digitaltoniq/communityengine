@@ -7,7 +7,7 @@
         =:view.l
         %ul
           %li=link_to :company_profile.l, company_path(@company)
-          %li=link_to :view_company_blog.l, posts_company_path(@company)
+          %li=link_to :view_company_blog.l, company_posts_path(@company)
           %li=link_to :view_company_conversation_comments.l, post_comments_company_path(@company)
           %li=link_to :view_company_representative_comments.l, representative_comments_company_path(@company)
           -# DJS %li=link_to :blog.l, user_posts_path(@user)
@@ -26,7 +26,7 @@
           - if(@company.invite?(current_user))
             %li= link_to :listing_representative_invitations.l(:company_name => @company), company_representative_invitations_path(@company)
           - if(@company.post?(current_user))
-            %li= link_to :create_new_company_post.l, new_user_post_path(current_user)
+            %li= link_to :create_new_company_post.l, new_company_post_path(@company)
           -# DJS %li=link_to :account_settings.l, edit_account_company_path(@company)
           -# DJS TODO %li=link_to :blog_posts.l, manage_company_posts_path(@company)
           -#

@@ -3,8 +3,7 @@
 
 #yui-main
   .yui-b
-    -box :class => 'hfeed' do  
-      %h3=:users_blog.l :user=>  h(@user)
+    -box :class => 'hfeed' do
       .hentry.main
         %h4.entry-title= link_to @post.title, post_path(@post), :rel => 'bookmark'
         .vcard.author
@@ -26,43 +25,11 @@
                 tweetmeme_service = 'bit.ly';
                 tweetmeme_style = 'compact';
               %script{:type => "text/javascript", :src => "http://tweetmeme.com/i/scripts/button.js"}
-            
-            -#
-              DJS
-              - if current_user and current_user.can_request_friendship_with(@post.user)
-                %li.addfriend= add_friend_link(@post.user)
-              %li.print
-                %a{"href"=>"#", :onclick=>"window.print(); return false;", :title=>:print_this_story.l}= :print.l
-              %li.email
-                %a{:href=>"#", :onclick=>"showSendTo_friend(); return false;", :title=>:email_this_story_to_friends.l}= :email_to_friends.l
-              %li.share
-                %script{:type=>"text/javascript", :src=>"http://w.sharethis.com/widget/?tabs=web&amp;charset=utf-8&amp;style=default&amp;publisher=4488bdef-d776-4c80-93e1-ac1fb8359971&amp;linkfg=%23131358&amp;button=false"}
-                =sharethis_options(@post)
-              -if @is_current_user || admin? || moderator?
-                %li.edit= link_to :edit.l, edit_user_post_path(@post.user, @post)
-                %li.delete= link_to :delete.l, user_post_path(@post.user, @post), {:method => :delete, :confirm => :permanently_delete_this_post.l}
 
-              
-          %script{:type => 'text/javascript'}
-            :plain
-              function showSendTo_friend(){
-                if ($('send_to_friend')){
-                  new Lightbox.base('send_to_friend');				                
-                } else {
-            = remote_function(:url => { :action => "send_to_friend", :params => {:user_id => @user.id, :id => @post.id} }, :success => "new Insertion.Top($('bd'), request.responseText)", :complete => "new Lightbox.base('send_to_friend'); return false;Element.toggle('send_to_friend');", :method => 'post')                 
-            :plain
-              }}
-              
-        / vcard
+
         .entry-content
           = @post.post
-          -#= render :partial => 'polls/poll_ui', :locals => {:poll => @post.polls.first} unless @post.polls.empty?
-          -# unless @post.tags.empty?
-            %ul.tags
-              - @post.tags.each do |t|
-                %li=link_to( t.name, tag_url(t), :rel => 'tag')
-        / entry-content
-      / ends hentry
+
     -box :class => 'hfeed comments', :id => 'comments' do      
       %h3= :post_comments.l 
       %h2= :add_your_comment.l
@@ -70,13 +37,10 @@
       %a#newest_comment
       = render :partial => 'comments/comment', :collection => @comments
       %span#more_comments_links= more_comments_links(@post, @comments)
-    / ends box
-  / yui-b
-/ ends yui-main
 
 .yui-b
 
-  = render :partial => 'author_profile', :locals => {:user => @user}
+  = render :partial => 'author_profile', :locals => {:user => @post.user}
   = render :partial => 'company_profile', :locals => {:company => Company.for_post(@post)}
   = render :partial => 'participating_representatives', :locals => {:representatives => Representative.participating_in(@post)}
 / sidebar

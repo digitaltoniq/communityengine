@@ -122,10 +122,9 @@ class BaseController < ApplicationController
     return @user
   end
 
-  def require_representative
-    @user ||= determine_user
-    unless Representative.for_user(@user)
-      flash[:error] = "We're sorry, only company representatives can post conversations"
+  def require_representative_or_admin
+    unless current_user.admin? or @representative = Representative.for_user(current_user)
+      flash[:error] = "We're sorry, only company representatives can access that page."
       redirect_to application_path
     end
   end
@@ -214,11 +213,6 @@ class BaseController < ApplicationController
   def user_path(user)
     r = user.class == User ? Representative.find_by_user_id(user.id) : nil # TODO: a view in CE is calling this with a hash, that valid?
     r ? company_representative_path(r.company, r) : super
-  end
-
-  def user_posts_path(user, *args)
-    r = Representative.find_by_user_id(user.id)
-    r ? company_representative_posts_path(r.company, r, *args) : super
   end
 
   def edit_user_path(user, *args)

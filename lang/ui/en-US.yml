@@ -103,6 +103,7 @@ en:
   #en: all_photos_tagged: All photos tagged {{tag_name}}
   all_photos_tagged: "All photos tagged {{tag_name}}"
   #en: all_posts_tagged: All posts tagged {{tag_name}}
+  select_post_author: Select the author of this conversation
   all_posts_tagged: "All conversations tagged {{tag_name}}"
   #en: all_tags: All tags
   all_tags: All tags

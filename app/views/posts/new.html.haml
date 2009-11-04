@@ -18,19 +18,13 @@
         =@post.category ? (:new_post_for_category.l :category => @post.category.name) : :new_post.l
 
       = error_messages_for :post
-      - form_for(:post, :url => user_posts_path(@user), :html => {:class => "MainForm", :id => 'post_form'}) do |f|			
-        - unless @post.category || @post.contest || @categories.empty?
-          %label
-            =:category.l
-          %select{:id=>"post_category_id", :name=>"post[category_id]"}
-            -for category in @categories
-              %option{:value=>"#{category.id}"}= h(category.name)
-        -else
-          = f.hidden_field :category_id
-          = f.hidden_field :contest_id
+      - form_for(:post, :url => company_posts_path(@company), :html => {:class => "MainForm", :id => 'post_form'}) do |f|			
 
         = f.hidden_field :feature_image_id
 
+        %label
+          = :select_post_author.l
+          = f.select :user_id, company_authors_select
         %label
           =:title.l
           %em="(#{:required.l})"
@@ -66,6 +60,6 @@
           = submit_tag :save.l
         %p
           =:or.l 
-          = link_to :cancel_and_go_back_to_my_posts.l, user_posts_path(@user)
+          = link_to :cancel.l, manage_company_posts_path(@company)
 
   = observe_field  "post_category_id", {:url => {:controller => 'categories', :action => 'show_tips'}, :with => "id", :update => "category_tips", :complete => visual_effect(:highlight, "category_tips", :duration => 0.5)}

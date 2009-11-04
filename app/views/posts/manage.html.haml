@@ -3,7 +3,7 @@
     %h3=:links.l
     %ul.checks
       %li=link_to :view_my_blog.l, user_posts_path(current_user)
-      %li=link_to :new_post.l, new_user_post_path(current_user)    
+      %li=link_to :new_post.l, new_company_post_path(@company)
 
 #yui-main
   .yui-b
@@ -13,8 +13,7 @@
       %p=:posts_saved_with_draft_status_wont_appear_in_your_blog_until_you_publish_them.l
       
 
-      -if @posts.page_count > 1
-        .pagination= paginating_links @posts, :link_to_current_page => true
+      .pagination= will_paginate @posts
 
       %table{:border => 0, :width => '100%'}
         %thead
@@ -37,7 +36,7 @@
                   - else
                     = :draft.l
               %td
-                = link_to post.title, edit_user_post_path(post.user, post)
+                = link_to post.title, edit_company_post_path(@company, post)
               %td= post.user
               -#%td= post.comments.count
               %td

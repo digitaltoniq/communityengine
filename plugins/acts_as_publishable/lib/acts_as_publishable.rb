@@ -43,21 +43,25 @@ module Acts
         end
 
         def find_with_published_as(*args)
+          find_without_published_as(*args)
+
+          # RWD: I hate this hack
+
           # hacked to filter out unpublished items by default, when using find(:all)
           # to really find all items, use Class.find_without_published_as
-          state = args.first
-          state = state.eql?(:all) ? :live : state
-          
-          if self.publish_states.include?(state)
-            args.shift
-            # find_all_by_published_as(state.to_s.downcase, *args)
-            # again, hacked
-            with_scope(:find => {:conditions => ["published_as = ?", state.to_s.downcase] }) do
-              find_without_published_as(:all, *args)
-            end            
-          else
-            find_without_published_as(*args)
-          end  
+#          state = args.first
+#          state = state.eql?(:all) ? :live : state
+#
+#          if self.publish_states.include?(state)
+#            args.shift
+#            # find_all_by_published_as(state.to_s.downcase, *args)
+#            # again, hacked
+#            with_scope(:find => {:conditions => ["published_as = ?", state.to_s.downcase] }) do
+#              find_without_published_as(:all, *args)
+#            end
+#          else
+#            find_without_published_as(*args)
+#          end
         end
 
       end

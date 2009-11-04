@@ -32,4 +32,15 @@ module PostsHelper
     end
   end
 
+  def company_authors_select(company = @company)
+    company.representatives.sort {|a, b| a.to_s <=> b.to_s}.collect {|r| [ r, r.user_id ] }
+  end
+  
+  def recent_posts(limit = 5)
+    Post.recent.live.limited(limit)
+  end
+
+  def most_discussed_posts(limit = 5)
+    Post.live.find_most_commented(limit, 7.days.ago)
+  end
 end

@@ -17,7 +17,12 @@
 
       = error_messages_for :post
       - form_for(:post, :url => post_path(@post), :html => { :method => :put, :class =>'MainForm' }) do |f|
-        %label 
+
+        %label
+          = :select_post_author.l
+          = f.select :user_id, company_authors_select
+
+        %label
           =:title.l
           %em= '('+:required.l+')'
         = f.text_field :title
@@ -43,7 +48,10 @@
         %p
           = submit_tag :update.l
           or
-          =link_to :cancel.l, post_path(@post)
+          - if @post.is_live?
+            =link_to :cancel.l, post_path(@post)
+          - else
+            = link_to :cancel.l, manage_company_posts_path(@company)
         %p
           =link_to "#{image_tag 'icons/delete.png', :plugin => :community_engine} "+:delete_this_post.l, post_path(@post), :method => :delete, :confirm => :are_you_sure_you_want_to_delete_this_post.l
 

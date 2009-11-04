@@ -9,6 +9,8 @@ class CreateRepresentatives < ActiveRecord::Migration
       t.string :linked_in_url
       t.timestamps
     end
+    add_index :representatives, :user_id
+    add_index :representatives, :company_id
   end
 
   def self.down

@@ -154,7 +154,7 @@ class CompaniesController < BaseController
     @popular_posts = @company.posts.find(:all, :limit => 10, :order => "view_count DESC")
 
     @rss_title = "#{AppConfig.community_name}: #{@company.name}'s posts"
-    @rss_url = posts_company_path(@company, :format => :rss)
+    @rss_url = company_posts_path(@company, :format => :rss)
 
     respond_to do |format|
       format.html # index.rhtml

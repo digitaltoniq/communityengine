@@ -56,15 +56,6 @@ resend_activation '/resend_activation', :controller => 'users', :action => 'rese
 connect '/new_clipping', :controller => 'clippings', :action => 'new_clipping'
 site_clippings '/clippings', :controller => 'clippings', :action => 'site_index'
 rss_site_clippings '/clippings.rss', :controller => 'clippings', :action => 'site_index', :format => 'rss'
-
-featured '/featured', :controller => 'posts', :action => 'featured'
-featured_rss '/featured.rss', :controller => 'posts', :action => 'featured', :format => 'rss'
-popular '/popular', :controller => 'posts', :action => 'popular'
-popular_rss '/popular.rss', :controller => 'posts', :action => 'popular', :format => 'rss'
-recent '/recent', :controller => 'posts', :action => 'recent'
-recent_rss '/recent.rss', :controller => 'posts', :action => 'recent', :format => 'rss'
-most_commented '/most_discussed', :controller => 'posts', :action => 'most_commented'
-most_commented_rss '/most_discussed.rss', :controller => 'posts', :action => 'most_commented', :format => 'rss'
 rss_redirect '/rss', :controller => 'base', :action => 'rss_site_index'
 rss '/site_index.rss', :controller => 'base', :action => 'site_index', :format => 'rss'
 
@@ -137,7 +128,7 @@ resources :users, :member => {
 
   user.resources :friendships, :member => { :accept => :put, :deny => :put }, :collection => { :accepted => :get, :pending => :get, :denied => :get }
   user.resources :photos, :collection => {:swfupload => :post, :slideshow => :get}
-  user.resources :posts, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
+  user.resources :posts, :as => :conversations, :only => :index, :member => {:update_views => :any}
   user.resources :events # Needed this to make comments work
   user.resources :clippings
   user.resources :activities, :collection => {:network => :get, :following => :get}
@@ -160,14 +151,13 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
         :posts => 'conversations', :post_comments => 'conversation_comments'
 }, :member => {
     :dashboard => :get,
-    :posts => :get,
     :post_comments => :get,
     :representative_comments => :get,
     :activity => :get
 } do |company|
 #  company.resources :conversations, :collection => { :comments => :get }
   company.resources :followers
-  company.resources :posts, :as => :conversations, :only => :show
+  company.resources :posts, :as => :conversations, :collection => { :manage => :get }
 #  company.resources :posts, :as => :conversations, :collection => {:manage => :get}, :member => {:contest => :get, :send_to_friend => :any, :update_views => :any}
   company.resources :representatives, :member_path => '/:company_id/representatives/:id', :nested_member_path => '/:company_id/representatives/:representative_id', :member => {
     :edit_account => :get,
@@ -181,14 +171,14 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :resend_activation => :get,
     :dashboard => :get,
     :activity => :get
-  } do |representative|
-    representative.resources :posts, :as => :conversations
-  end
+  }
   company.resources :representative_invitations
 end
 
 # RWD
 resources :feature_images, :only => [:create, :update]
+
+resources :posts, :except => :all, :collection => { :popular => :get }
 
 users_posts_in_category '/users/:user_id/posts/category/:category_name', :controller => 'posts', :action => 'index', :category_name => :category_name
 
