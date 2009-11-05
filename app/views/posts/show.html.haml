@@ -12,6 +12,7 @@
             %li.update
               %a{"href"=>"#{post_path(@post)}", "rel"=>"bookmark"}
                 %abbr.published{"title"=>"#{@post.published_at}"}= @post.published_at_display("%B %d, %Y")
+            =render :partial => 'followings/follow_link', :locals => {:followee => @company}
             %li.view= :views.l+" (#{@post.view_count})"
             %li.comments= link_to :comments.l+" (#{@post.comments.size})", post_path(@post)+'#comments'
             -# =render :partial => 'followings/follow_link', :locals => {:followee => @post}

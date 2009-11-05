@@ -13,10 +13,13 @@
     %ul
       %li.fn=link_to h(post.user), user_path(post.user)
       %li.company= link_to h(representative.company), company_path(representative.company)
+      =render :partial => 'followings/follow_link', :locals => {:followee => representative.company}
+      - if representative.company.metro_area
+        %li.geo= representative.company.full_location
       %li.update
         %a{:href=>"#{post_path(post)}", :rel=>"bookmark"}
           %abbr.published{:title=>"#{post.published_at}"}= post.published_at_display("%B %d, %Y")
-      %li.view
+      -#%li.view
         = :views.l
         = "(#{post.view_count})"
       %li.comments

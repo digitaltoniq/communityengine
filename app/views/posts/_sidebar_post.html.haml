@@ -3,4 +3,6 @@
     = link_to image_tag(post.photo(:small), :alt=>""), post_path(post)
   %dd.fn
     = link_to post.title, post_path(post), :rel => 'bookmark'
-  %dd= truncate_words(post.post, 9, '...' )
+  %dd
+    = "#{post.comments_count} comments"
+    = "#{post.view_count} views"
