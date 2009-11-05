@@ -49,11 +49,11 @@
         %li.url
           = :company_url.l
           = link_to @company.url, @company.url
-      %li.update
+      -#%li.update
         %a{:href=>"#{company_path(@company)}", :rel=>"bookmark"}
           %abbr.published{:title=>"#{@company.created_at}"}
             = :registered_on.l + @company.created_at.strftime(": %m/%d/%y")
-      %li.view
+      -#%li.view
         =:profile_views.l
         = "(#{@company.view_count})"
       -#
@@ -63,7 +63,7 @@
         - if @company.tags.any?
           %li.tags= :my_tags.l+": #{@company.tags.collect{|t| link_to t.name, tag_url(t) }.join(", ")}"
       - if @company.metro_area
-        %li.geo= link_to( @company.full_location, companies_path(:metro_area_id => @company.metro_area_id, :state_id => @company.state_id, :country_id => @company.country_id ) )
+        %li.geo= @company.full_location
 
       =render :partial => 'followings/follow_link', :locals => {:followee => company}
   .clear
