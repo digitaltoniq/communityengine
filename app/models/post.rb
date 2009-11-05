@@ -41,6 +41,10 @@ class Post < ActiveRecord::Base
   named_scope :by_featured_writers, :conditions => ["users.featured_writer = ?", true], :include => :user
   named_scope :recent, :order => 'posts.published_at DESC'
   named_scope :popular, :order => 'posts.view_count DESC'
+  named_scope :discussed, lambda { |created_since|
+    { :conditions => ["created_at > ?", created_since],
+      :order => 'posts.comments_count DESC' }
+  }
   named_scope :since, lambda { |days|
     {:conditions => "posts.published_at > '#{days.ago.to_s :db}'" }
   }
@@ -79,18 +83,6 @@ class Post < ActiveRecord::Base
 
   def self.find_featured(options = {:limit => 10})
     self.recent.by_featured_writers.find(:all, :limit => options[:limit] )    
-  end
-
-  def self.find_most_commented(limit = 10, since = 7.days.ago)
-    Post.find(:all, 
-      :select => 'posts.*, count(*) as comments_count',
-      :joins => "LEFT JOIN comments ON comments.commentable_id = posts.id",
-      :conditions => ['comments.commentable_type = ? AND posts.published_at > ?', 'Post', since],
-#      :group => 'comments.commentable_id',      
-      :group => self.columns.map{|column| self.table_name + "." + column.name}.join(","),
-      :order => 'comments_count DESC',
-      :limit => limit
-      )
   end
 
   def display_title

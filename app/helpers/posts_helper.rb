@@ -41,6 +41,6 @@ module PostsHelper
   end
 
   def most_discussed_posts(limit = 5)
-    Post.live.find_most_commented(limit, 7.days.ago)
+    Post.live.discussed(7.days.ago).limited(limit)
   end
 end
