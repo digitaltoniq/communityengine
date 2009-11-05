@@ -4,7 +4,7 @@ class CreateRepresentativeRoles < ActiveRecord::Migration
       t.string :name
       t.timestamps
     end
-    add_index :representatives, :name
+    add_index :representative_roles, :name
 
     # TODO: Move this to app:bootstrap=like task
     RepresentativeRole.enumeration_model_updates_permitted = true

@@ -387,6 +387,8 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.datetime "updated_at"
   end
 
+  add_index "representative_roles", ["name"], :name => "index_representative_roles_on_name"
+
   create_table "representatives", :force => true do |t|
     t.integer  "user_id"
     t.integer  "company_id"
@@ -399,6 +401,9 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.datetime "updated_at"
     t.integer  "representative_role_id"
   end
+
+  add_index "representatives", ["company_id"], :name => "index_representatives_on_company_id"
+  add_index "representatives", ["user_id"], :name => "index_representatives_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string "name"

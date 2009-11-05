@@ -43,9 +43,7 @@ namespace :data do
       # Fill in with random reps 
       Company.all.each do |c|
         create_users(rand(5) + 2).each_with_index do |u, ndx|
-          Factory(:representative, :company => c, :user => u,
-                  :representative_role => ndx == 0 ? RepresentativeRole[:admin] :
-                          ndx > 1 ? RepresentativeRole[:representative] : RepresentativeRole[:poster])
+          Factory(:representative, :company => c, :user => u)
         end
       end
     end
