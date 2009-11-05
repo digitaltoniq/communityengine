@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.string   "commentable_type", :limit => 15, :default => "",   :null => false
     t.integer  "user_id",                        :default => 0,    :null => false
     t.integer  "recipient_id"
+    t.integer  "likes_count",                    :default => 0
     t.text     "comment"
     t.string   "author_name"
     t.string   "author_email"

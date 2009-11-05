@@ -8,6 +8,7 @@ class AddCommentsTables < ActiveRecord::Migration
       t.column :commentable_type, :string, :limit => 15, :default => "", :null => false
       t.column :user_id, :integer, :default => 0, :null => false
       t.column :recipient_id, :integer
+      t.column :likes_count, :integer, :default => 0
     end
 
     add_index :comments, ["user_id"], :name => "fk_comments_user"

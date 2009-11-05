@@ -1,7 +1,7 @@
 - if logged_in?
 
   - likes = current_user.likes?(likeable)
-  - other_likes = likeable.likes.count - (likes ? 1 : 0)
+  - other_likes = likeable.likes_count - (likes ? 1 : 0)
   - likeable_dom_id = "likeable_#{likeable.id}_toggle"
 
   - if !likes
@@ -13,5 +13,5 @@
     = :other_people_like_this.l(:count => other_likes)
 
 - else
-  - if(likes_count = likeable.likes.count) > 0
+  - if(likes_count = likeable.likes_count) > 0
     = :people_like_this.l(:count => likes_count)

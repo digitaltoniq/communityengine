@@ -2,7 +2,7 @@ class Like < ActiveRecord::Base
 
   # TODO: Make this side of relationship polymorphic as well (can_like)?
   belongs_to :user
-  belongs_to :likeable, :polymorphic => true
+  belongs_to :likeable, :polymorphic => true, :counter_cache => true
 
   # TODO: Breaks when more than a comment can be likeable
   acts_as_activity :user, :about => [
