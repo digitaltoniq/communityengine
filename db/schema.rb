@@ -355,6 +355,7 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.integer  "category_id"
     t.integer  "user_id"
     t.integer  "view_count",                    :default => 0
+    t.integer  "comments_count",                :default => 0
     t.integer  "contest_id"
     t.integer  "emailed_count",                 :default => 0
     t.integer  "favorited_count",               :default => 0

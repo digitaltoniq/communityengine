@@ -9,6 +9,7 @@ class CreatePosts < ActiveRecord::Migration
       t.column "category_id", :integer
       t.column "user_id", :integer
       t.column "view_count", :integer, :default => 0
+      t.column "comments_count", :integer, :default => 0
     end
   end
 

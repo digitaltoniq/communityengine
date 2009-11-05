@@ -20,7 +20,7 @@
         = :views.l
         = "(#{post.view_count})"
       %li.comments
-        = link_to :comments.l+" (#{post.comments.count})", post_path(post)+'#comments'
+        = link_to :comments.l+" (#{post.comments_count})", post_path(post)+'#comments'
       -# =render :partial => 'followings/follow_link', :locals => {:followee => post}
       
       -#

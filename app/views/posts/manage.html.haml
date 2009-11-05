@@ -35,7 +35,7 @@
               %td
                 = link_to post.title, edit_company_post_path(@company, post)
               %td= post.user
-              -#%td= post.comments.count
+              -#%td= post.comments_count
               %td
                 - if post.is_live?
                   = :published.l
