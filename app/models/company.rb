@@ -1,8 +1,5 @@
 class Company < ActiveRecord::Base
   acts_as_slugable :source_column => :name
-  acts_as_taggable
-  acts_as_commentable
-  has_private_messages
   tracks_unlinked_activities [:updated_profile, :joined_the_site]
   acts_as_label
 
