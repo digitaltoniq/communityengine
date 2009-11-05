@@ -1654,11 +1654,11 @@ en:
   # en: most_commented_posts: Most commented posts
   most_commented_posts: Most discussed conversations
   # en: follow: Follow
-  follow: Follow
+  follow: "Follow {{name}}"
   # en: followers: Followers
   followers: Followers 
   # en: following: Following
-  following: Following
+  following: "Following {{name}}"
   # en: requesting_follow: Requesting follow
   requesting_follow: Requesting
   # followed: followed

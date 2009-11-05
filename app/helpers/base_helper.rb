@@ -198,7 +198,7 @@ module BaseHelper
   def add_follow_link(followee)
     if logged_in?
       html = "<span class='following_request' id='follow_request_#{followee.id}'>"
-      html += link_to_remote :follow.l,
+      html += link_to_remote :follow.l(:name => followee),
               {:update => "follow_request_#{followee.id}",
                   :loading => "$$('span#follow_request_#{followee.id} span.spinner')[0].show(); $$('span#follow_request_#{followee.id} a.add_following_btn')[0].hide()",
                   :complete => visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
@@ -219,7 +219,7 @@ module BaseHelper
   def add_unfollow_link(followee)
     following = Following.following_for(followee, current_user)
     html = "<span class='unfollowing_request' id='unfollow_request_#{followee.id}'>"
-    html += link_to_remote "#{:following.l} (click to unfollow)" ,
+    html += link_to_remote "#{:following.l(:name => followee)} (click to unfollow)" ,
             {:update => "unfollow_request_#{followee.id}",
                 :loading => "$$('span#unfollow_request_#{followee.id} span.spinner')[0].show(); $$('span#unfollow_request_#{followee.id} a.remove_following_btn')[0].hide()",
                 :complete => visual_effect(:highlight, "unfollow_request_#{followee.id}", :duration => 1),
