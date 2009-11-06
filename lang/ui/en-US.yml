@@ -965,6 +965,7 @@ en:
   question: Question
   #en: re_type_your_password_to_confirm: "Re-type your password to confirm:"
   re_type_your_password_to_confirm: "Re-type your password to confirm:"
+  does_your_email_look_okay: Does your e-mail address look okay?
   #en: read_more: read more
   read_more: read more
   #en: recent: Recent
