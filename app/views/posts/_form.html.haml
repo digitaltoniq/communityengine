@@ -12,6 +12,15 @@
   %em= '('+:required.l+')'
 = f.text_area :raw_post, :size => "86x15"
 
+- f.fields_for :feature_image_attributes do |i|
+  - if @post.feature_image and !@post.feature_image.new_record?
+    %label
+      = :current_feature_image.l
+    = image_tag @post.feature_image.public_filename(:small) 
+  %label
+    = i.label :uploaded_data, (@post.feature_image and @post.feature_image.new_record? ? 'Upload the feature image for this post' : 'Replace feature image for this post')
+  = i.file_field :uploaded_data, :size => "15"
+
 %label=:save_post_as.l
 = f.select(:published_as, [[:draft.l, 'draft'], [:published.l, 'live']], {}, {:onChange => "toggleSaveButtons(this.value)"})
 

@@ -2,14 +2,11 @@
   -box :id => 'category_tips' do
     = render :partial => "/categories/tips", :locals => {:category => nil}
 
-  -box :id => 'feature_image', :class => "alt" do
-    = render :partial => 'posts/feature_image', :locals => { :feature_image => @post.feature_image }
-
 #yui-main
   .yui-b
     -box do 
       %h3=:editing_post.l
 
       = error_messages_for :post
-      - form_for(:post, :url => company_post_path(@company, @post), :html => { :method => :put, :class =>'MainForm' }) do |f|
+      - form_for(:post, :url => company_post_path(@company, @post), :html => { :multipart => true, :method => :put, :class =>'MainForm' }) do |f|
         = render :partial => 'form', :locals => { :f => f}

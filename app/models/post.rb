@@ -4,7 +4,7 @@ class Post < ActiveRecord::Base
   acts_as_publishable :live, :draft
   acts_as_label
 
-  attr_accessor :feature_image_id
+#  attr_accessor :feature_image_id
 
   belongs_to :user
   belongs_to :category
@@ -13,12 +13,14 @@ class Post < ActiveRecord::Base
   has_many :favorites, :as => :favoritable, :dependent => :destroy
   has_many :followings, :as => :followee
   has_many :followers, :through =>:followings, :source => :user
-  has_one :feature_image, :dependent => :destroy
+  has_one :feature_image, :dependent => :destroy  
+  accepts_nested_attributes_for :feature_image
   
   validates_presence_of :raw_post
   validates_presence_of :title
   validates_presence_of :user
   validates_presence_of :published_at, :if => Proc.new{|r| r.is_live? }
+  validates_presence_of :feature_image
 
   before_save :transform_post
   before_validation :set_published_at
@@ -32,7 +34,7 @@ class Post < ActiveRecord::Base
     end
   end
 
-  after_save :link_feature_image
+#  after_save :link_feature_image
 
   attr_accessor :invalid_emails
   
@@ -51,12 +53,6 @@ class Post < ActiveRecord::Base
     {:conditions => ["tags.name = ?", tag_name], :include => :tags}
   }
 
-  # Make sure we have a feature_image to hook up with after saving.
-  # NOTE: Will need to mock this if not going through web form, i.e. in factory
-  def validate
-    errors.add(:feature_image, "must be uploaded") if feature_image_id.blank? and !feature_image
-  end
-  
   def self.find_related_to(post, options = {})
     merged_options = options.merge({:limit => 8, 
         :order => 'published_at DESC', 
@@ -205,12 +201,6 @@ class Post < ActiveRecord::Base
 
   def send_notifications
     notify_company_followers
-  end
-
-  private
-
-  def link_feature_image
-    self.feature_image = FeatureImage.find(feature_image_id) if feature_image_id
   end
       
 end

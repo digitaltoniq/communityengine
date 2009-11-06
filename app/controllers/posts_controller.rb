@@ -51,9 +51,7 @@ class PostsController < BaseController
     create! do |success, failure|
       success.html do
         flash[:notice] = :your_post_was_saved_back_to_editing.l(:edit_url => edit_company_post_path(@company, @post))
-        submit_val = params[:commit].downcase
-        view_post = (submit_val.include?('preview') or submit_val.include?('publish')) # TODO: hack?
-        redirect_to(view_post ? post_path(@post) : manage_company_posts_path(@company))
+        redirect_to whereto_next
       end
     end
   end
@@ -62,7 +60,7 @@ class PostsController < BaseController
     update! do |success, failure|
       success.html do
         flash[:notice] = :your_post_was_successfully_updated.l
-        redirect_to @post.is_live? ? post_path(@post) : manage_company_posts_path(@company)
+        redirect_to whereto_next
       end
     end
   end
@@ -116,5 +114,13 @@ class PostsController < BaseController
       flash[:error] = "Only company representatives can access that page.  You belong to #{@representative.company} and this post belongs to #{parent}."
       redirect_to :controller => 'sessions', :action => 'new'
     end
+  end
+
+  #-- Helpers --#
+
+  def whereto_next
+    submit_val = params[:commit].downcase
+    view_post = submit_val.include?('preview') or submit_val.include?('publish')
+    view_post ? post_path(@post) : manage_company_posts_path(@company)
   end
 end

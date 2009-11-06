@@ -1,10 +1,6 @@
 .yui-b
   -box :id => 'category_tips' do
     = render :partial => "/categories/tips", :locals => {:category => nil}
-
-  -box :id => 'feature_image', :class => "alt" do
-    = render :partial => 'posts/feature_image', :locals => { :feature_image => @post.feature_image }
-    -#%a.button.positive{:href => '#', :onclick => "tinyMCE.execCommand('mceCurblyAdvImage');return false;"}="Upload an image for your post".l
     
 #yui-main
   .yui-b
@@ -13,7 +9,5 @@
 
       = error_messages_for :post
 
-      - form_for(:post, :url => company_posts_path(@company), :html => {:class => "MainForm", :id => 'post_form'}) do |f|
-      
-        = f.hidden_field :feature_image_id
+      - form_for(:post, :url => company_posts_path(@company), :html => { :multipart => true, :class => "MainForm", :id => 'post_form'}) do |f|
         = render :partial => 'form', :locals => { :f => f}

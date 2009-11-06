@@ -801,6 +801,7 @@ en:
   no_posts_found:  "Sorry, we couldn't find any conversations for that {{type}}"
   #en: no_images_uploaded_yet: No images uploaded yet.
   no_images_uploaded_yet: No images uploaded yet.
+  current_feature_image: Current feature image
   #en: no_messages: no messages
   no_messages: no messages
   #en: no_profile_photo: "No profile photo?"
