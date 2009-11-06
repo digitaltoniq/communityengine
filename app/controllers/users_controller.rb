@@ -131,8 +131,6 @@ class UsersController < BaseController
     @avatar.user  = @user
 
     @user.avatar  = @avatar if @avatar.save
-    
-    @user.tag_list = params[:tag_list] || ''
 
     if @user.save!
       @user.track_activity(:updated_profile)

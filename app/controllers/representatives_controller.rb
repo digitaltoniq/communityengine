@@ -144,8 +144,6 @@ class RepresentativesController < BaseController
 
     @representative.avatar  = @avatar if @avatar.save
 
-    @representative.tag_list = params[:tag_list] || ''
-
     if @representative.save!
       @representative.track_activity(:updated_profile) # TODO: think about acitivity tracking across representative and user
 
