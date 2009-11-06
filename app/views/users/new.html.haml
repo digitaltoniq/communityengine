@@ -14,14 +14,17 @@
       =:after_signing_up_youll_receive_an_e_mail_confirmation_message.l
     %p
       =:click_the_activation_link_in_the_e_mail_to_log_in.l
-    %p= link_to :already_have_an_account.l, "/login"
 
 #yui-main
   .yui-b
     -box do
       %h3=:sign_up.l
-      = error_messages_for :user
+
+      %p= link_to :already_have_an_account.l, "/login"
+
       - form_for :user, :url => users_path, :html => {:class => 'MainForm'} do |f|
+      
+        = error_messages_for :user
 
         = hidden_field_tag :inviter_id, params[:inviter_id]
         = hidden_field_tag :inviter_code, params[:inviter_code]
