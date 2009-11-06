@@ -1,5 +1,7 @@
 class AdminController < BaseController
+
   before_filter :admin_required
+  before_filter :set_manage_section
   
   def contests
     @contests = Contest.find(:all)
@@ -59,6 +61,10 @@ class AdminController < BaseController
     user.deactivate
     flash[:notice] = "The user was deactivated".l
     redirect_to :action => :users
-  end  
+  end
+
+  def set_manage_section
+    @section = 'manage'
+  end
   
 end

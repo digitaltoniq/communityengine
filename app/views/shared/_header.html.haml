@@ -20,8 +20,11 @@
       -# = topnav_tab :popular.l, { :url => popular_path, :section => 'popular' }
       = topnav_tab :companies.l, { :url => companies_path, :section => 'companies' }
       -#= topnav_tab :people.l, { :url => users_path, :section => 'users' }
-      - if current_user 
-        = topnav_tab :my_profile.l, { :url => user_path(current_user), :section => 'my_profile'}
+      - if logged_in?
+        - if current_user.admin?
+          = topnav_tab :manage_site.l, { :url => admin_dashboard_path, :section => 'manage'}
+        - elsif(rep = Representative.for_user(current_user))
+          = topnav_tab :manage_company.l, { :url => dashboard_company_path(rep.company), :section => 'manage'}
       
     / SiteSearch Google
     %form{:method=>"get", :action=>"http://www.google.com/custom", :target=>"_top"}

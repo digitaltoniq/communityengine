@@ -1589,6 +1589,8 @@ en:
   delete_this_company: "Delete this company"
   edit_this_company: "Edit this company"
   manage_this_company: "Manage this company"
+  manage_site: Manage Site
+  manage_company: Manage Company
   # en: recent_company_post_comments: "Recent post comments"
   recent_company_post_comments: "Latest responses by {{company_name}} representatives"
   recent_user_comments: "Latest responses by {{user_name}}"
