@@ -1,15 +1,4 @@
 .yui-b
-  -box :class => "alt first_alt" do 
-    %h3
-      =:get_started_tell_us_about_yourself.l
-    = render :partial => 'shared/bio_help'
-    %p
-      =:remember_you_can_always_change_this_later.l
-    %p
-      = link_to "&raquo; "+  :skip_this_step.l, welcome_invite_user_path(@user)
-      %br
-      = link_to "&raquo; " + :go_to_your_profile.l, user_path(@user)
-
   - if @user.avatar_photo_url
     -box :class => "alt" do 
       %h3=:your_profile_photo.l
@@ -27,36 +16,24 @@
       - if @user.vendor?
         %p= render :partial => 'offerings/chooser'
       
-      %h3=:more_about_you.l
-      .yui-g
-        .yui-u.first
-          -box :class => "alt" do 
-            %h3
-              =:choose_your_location.l
-            %br
-            =:postal_code.l
-            %br
-            = text_field :user, :zip, :size => 10
-            %br
-            %br
-            = render :partial => 'shared/location_chooser', :locals => {:selected_country => @user.country_id, :selected_state => @user.state_id, :selected_metro_area => @user.metro_area_id, :states => @states, :metro_areas => @metro_areas}
-        .yui-u
-          -#
-            DJS
+      -#
+        %h3=:more_about_you.l
+        .yui-g
+          .yui-u.first
             -box :class => "alt" do
-              %h3= :tag_yourself.l
-              = text_field_tag 'tag_list', @user.tag_list, {:autocomplete => "off"}
-              #tag_list_auto_complete.auto_complete/
-              = auto_complete_field 'tag_list', {:url => { :controller => "tags", :action => 'auto_complete_for_tag_name'}, :tokens => [','] }
+              %h3
+                =:choose_your_location.l
               %br
-              %small
-                =:comma_separated_keywords_that_describe_you.l
-                %br
-                =:you_could_tag_yourself.l
-                - if @user.vendor?
-                  =:custom_friendly_local.l
-                - else
-                  = AppConfig.meta_keywords.split(",")[0..3].join(', ')
+              =:postal_code.l
+              %br
+              = text_field :user, :zip, :size => 10
+              %br
+              %br
+              = render :partial => 'shared/location_chooser', :locals => {:selected_country => @user.country_id, :selected_state => @user.state_id, :selected_metro_area => @user.metro_area_id, :states => @states, :metro_areas => @metro_areas}
+          .yui-u
 
+      %p
+        =submit_tag :save_and_continue_to_step_three.l
+        or
+        = link_to "&raquo; "+  :skip_this_step.l, welcome_invite_user_path(@user)
 
-        %p= submit_tag :save_and_continue_to_step_three.l
