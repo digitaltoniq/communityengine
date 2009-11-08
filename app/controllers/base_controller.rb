@@ -8,8 +8,8 @@ class BaseController < ApplicationController
   around_filter :set_locale  
   before_filter :login_from_cookie, :store_return_to
   skip_before_filter :verify_authenticity_token, :only => :footer_content
-  helper_method :commentable_url
-  helper_method :user_path, :post_path, :user_posts_path, :edit_user_path, :display_text, :dashboard_path # DigitalToniq
+  helper_method :commentable_url, :back_or_default_url
+  helper_method :user_path, :post_path, :edit_user_path, :display_text, :dashboard_path # DigitalToniq
 
   caches_action :site_index, :footer_content, :if => Proc.new{|c| c.cache_action? }
   def cache_action?
@@ -210,9 +210,9 @@ class BaseController < ApplicationController
     r ? dashboard_company_representative_path(r.company, r) : dashboard_user_path(user)
   end
 
-  def user_path(user)
+  def user_path(user, params = {})
     r = user.class == User ? Representative.find_by_user_id(user.id) : nil # TODO: a view in CE is calling this with a hash, that valid?
-    r ? company_representative_path(r.company, r) : super
+    r ? company_representative_path(r.company, r, params) : super
   end
 
   def edit_user_path(user, *args)

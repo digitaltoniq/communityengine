@@ -137,7 +137,7 @@ class UsersController < BaseController
       
       flash[:notice] = :your_changes_were_saved.l
       unless params[:welcome] 
-        redirect_to user_path(@user)
+        redirect_back_or_default user_path(@user)
       else
         redirect_to :action => "welcome_#{params[:welcome]}", :id => @user
       end

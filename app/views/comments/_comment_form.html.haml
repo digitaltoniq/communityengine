@@ -43,6 +43,6 @@
       = submit_tag "Add Comment".l
       = image_tag 'spinner.gif', :plugin => "community_engine", :style => 'display:none;', :id => 'comment_spinner'
 - else
-  = link_to "Log in to leave a comment".l, new_comment_path(commentable.class, commentable.id)
+  = link_to "Log in to leave a comment".l, login_path(:return_to => "#{url_for(params)}#comments")
   = :or.l
-  = link_to "Create an account".l, signup_path
+  = link_to "Create an account".l, signup_path(:return_to => "#{url_for(params)}#comments")

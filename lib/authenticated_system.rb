@@ -85,7 +85,6 @@ module AuthenticatedSystem
     #   skip_before_filter :login_required
     #
     def login_required
-      store_location
       username, passwd = get_auth_data
       self.current_user ||= User.authenticate(username, passwd) || :false if username && passwd
       logged_in? && authorized? ? true : access_denied
@@ -134,8 +133,13 @@ module AuthenticatedSystem
     # Redirect to the URI stored by the most recent store_location call or
     # to the passed default.
     def redirect_back_or_default(default)
-      session[:return_to] ? redirect_to(session[:return_to]) : redirect_to(default)
-      session[:return_to] = nil
+      redirect_to back_or_default_url(default)
+    end
+
+    def back_or_default_url(default)
+      returning(session[:return_to] ? session[:return_to] : default) do
+        session[:return_to] = nil
+      end
     end
     
     # Inclusion hook to make #current_user and #logged_in?

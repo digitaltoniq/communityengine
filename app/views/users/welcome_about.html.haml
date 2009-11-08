@@ -7,9 +7,11 @@
         = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid", :style=>"width:250px" )
       =link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)        
 
+- next_url = back_or_default_url(user_path(@user))
+
 #yui-main
   -box :class => "yui-b" do
-    - form_tag user_path(:welcome => 'invite'), :method => 'put', :multipart =>true, :class => "MainForm" do
+    - form_tag user_path(@user, :return_to => next_url), :method => 'put', :multipart =>true, :class => "MainForm" do
       %h3=:about_you.l
       = text_area :user, :description, :rows => 4, :style => 'width:95%'
           
@@ -33,7 +35,7 @@
           .yui-u
 
       %p
-        =submit_tag :save_and_continue_to_step_three.l
+        =submit_tag :save.l
         or
-        = link_to "&raquo; "+  :skip_this_step.l, welcome_invite_user_path(@user)
+        = link_to "&raquo; "+  :skip_this_and_go_to_companies_and_me.l, next_url
 
