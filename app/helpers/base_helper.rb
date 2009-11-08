@@ -211,7 +211,7 @@ module BaseHelper
       return html
     else
       # Might not work for any other followee besides company because of nested paths?
-      link_to :follow.l, login_path(:return_to => polymorphic_path(followee))
+      link_to :follow.l(:name => followee), login_path(:return_to => url_for(params))
     end
   end
 
