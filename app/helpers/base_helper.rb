@@ -5,7 +5,8 @@ module BaseHelper
 
   def commentable_url(comment)
     if comment.commentable_type != "User"
-      polymorphic_url([comment.recipient, comment.commentable])+"#comment_#{comment.id}"
+#      polymorphic_url([comment.recipient, comment.commentable])+"#comment_#{comment.id}"
+      post_url(comment.commentable)+"#comment_#{comment.id}"
     else
       user_url(comment.recipient)+"#comment_#{comment.id}"
     end

@@ -33,7 +33,7 @@ class UserNotifier < ActionMailer::Base
 
   def comment_notice(comment)
     setup_email(comment.recipient)
-    @subject     += "#{comment.username} has something to say to you on #{AppConfig.community_name}!"
+    @subject     += "#{comment.username} posted a comment on one of your conversations on #{AppConfig.community_name}!"
     @body[:url]  = commentable_url(comment)
     @body[:comment] = comment
     @body[:commenter] = comment.user
