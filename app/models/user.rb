@@ -228,6 +228,13 @@ class User < ActiveRecord::Base
   
   ## Instance Methods
 
+  # If a rep, will return value
+  def company
+    if(rep = Representative.for_user(self))
+      rep.company
+    end
+  end
+
   def followees
     followings.all(:include => :followee).collect(&:followee)
   end

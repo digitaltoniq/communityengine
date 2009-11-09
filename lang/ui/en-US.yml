@@ -777,7 +777,11 @@ en:
   #en: new_photos_multiple_uploader: "New Photos &raquo; Multiple Uploader"
   new_photos_multiple_uploader: "New Photos &raquo; Multiple Uploader"
   #en: new_post: New post
-  new_post: New conversation
+  new_post: Post new conversation
+  manage_company_conversation_comments: Manage comments on our conversations
+  manage_company_page: Manage company page
+  manage_representatives: Manage representatives
+  manage_company_representative_comments: Manage comments from our representatives
   create_new_company_post: "Create new company conversation"
   #en: new_post_for_category: New {{category}}
   new_post_for_category: "New {{category}}"
@@ -1620,7 +1624,7 @@ en:
   listing_representative_invitations: "Company representative invitations"
   # en: new_representative_invitation: "New representative invitation"
   manage_representative_invitations: 'Representative invitations'
-  company_dashboard: Company dashboard
+  company_dashboard: "{{name}} company dashboard"
   new_representative_invitation: "Invite new company representatives"
   # en: participating_representatives: "Participating representatives"
   participating_representatives:

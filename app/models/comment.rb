@@ -85,7 +85,7 @@ class Comment < ActiveRecord::Base
     if person
       return true if person.admin? or person.id.eql?(user_id)
       case commentable.class.to_s
-        when "Post" then commentable.user_id.eql?(person.id)
+        when "Post" then commentable.admin?(person)
         else person.id.eql?(recipient_id)
       end
     end

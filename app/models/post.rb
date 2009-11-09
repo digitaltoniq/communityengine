@@ -118,6 +118,17 @@ class Post < ActiveRecord::Base
       self.published_at = Time.now
     end
   end
+
+  # Can this user administer this post (and its comments?)
+  def admin?(person)
+    if person
+      return true if person.admin?
+      if((person_company = person.company) and (post_company = (user.company)))
+        return person_company == post_company
+      end
+    end
+    false
+  end
   
   def owner
     self.user
