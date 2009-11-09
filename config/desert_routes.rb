@@ -100,7 +100,6 @@ resources :static_pages, :as => 'pages'
 connect 'view_page/:url', :controller => 'static_pages', :action => 'show_web'
 
 resources :users, :member => {
-    :dashboard => :get,
     :assume => :get,
     :toggle_moderator => :put,
     :toggle_featured => :put,
@@ -168,9 +167,7 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :welcome_professional => :get,
     :welcome_complete => :get,
     :activate => :get,
-    :resend_activation => :get,
-    :dashboard => :get,
-    :activity => :get
+    :resend_activation => :get
   }
   company.resources :representative_invitations
 end

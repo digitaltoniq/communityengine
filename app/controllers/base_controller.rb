@@ -9,7 +9,7 @@ class BaseController < ApplicationController
   before_filter :login_from_cookie, :store_return_to
   skip_before_filter :verify_authenticity_token, :only => :footer_content
   helper_method :commentable_url, :back_or_default_url
-  helper_method :user_path, :post_path, :edit_user_path, :display_text, :dashboard_path # DigitalToniq
+  helper_method :user_path, :post_path, :edit_user_path, :display_text, :user_home_path # DigitalToniq
 
   caches_action :site_index, :footer_content, :if => Proc.new{|c| c.cache_action? }
   def cache_action?
@@ -205,9 +205,9 @@ class BaseController < ApplicationController
   end
 
   # TODO: add site admin support
-  def dashboard_path(user)
+  def user_home_path(user)
     r = Representative.for_user(user)
-    r ? dashboard_company_representative_path(r.company, r) : dashboard_user_path(user)
+    r ? dashboard_company_path(r.company) : (user.admin? ? admin_dashboard_path : user_path(user))
   end
 
   def user_path(user, params = {})

@@ -1,15 +1,8 @@
 %h2
   =:logged_in.l
-  = link_to current_user.login, dashboard_path(current_user) #, :id => 'user-menu'
+  = link_to current_user, user_path(current_user) #, :id => 'user-menu'
   /#user-menu-tip
-  %span.logout= "(#{link_to(:log_out.l, logout_path)})"
-
--#%script{:type => "text/javascript"}
-  :plain
-    new Tip('user-menu', $('user-menu-tip'), {
-      hook:{target: 'bottomRight', tip: 'topRight'},
-      hideOn: false, 
-      hideAfter: 1.5,  
-      className: 'silver',
-      offset: {y:2, x:12}
-      });
+  %span.logout
+    = "(#{link_to(:log_out.l, logout_path)})"
+    &nbsp;&nbsp;
+    = link_to(:account.l, edit_account_user_path(current_user))
