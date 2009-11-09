@@ -26,7 +26,7 @@
           - if(@company.invite?(current_user))
             %li= link_to :listing_representative_invitations.l(:company_name => @company), company_representative_invitations_path(@company)
           - if(@company.post?(current_user))
-            %li= link_to :create_new_company_post.l, new_company_post_path(@company)
+            %li= link_to :company_posts.l, manage_company_posts_path(@company)
           -# DJS %li=link_to :account_settings.l, edit_account_company_path(@company)
           -# DJS TODO %li=link_to :blog_posts.l, manage_company_posts_path(@company)
           -#

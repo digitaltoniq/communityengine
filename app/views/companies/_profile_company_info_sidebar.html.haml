@@ -1,25 +1,3 @@
-- if current_user && (current_user.admin? or @company.admin?(current_user))
-  -box :class => "first_alt alt" do 
-    %h3
-      =:admin_controls.l
-    -#
-      = link_to( "&raquo; #{:assume_company_id.l}", assume_company_path(@company) )
-      %br/
-      -#= link_to( "&raquo; #{:delete_this_company.l}", company_path(@company), {:method => :delete, :confirm => :are_you_sure_you_want_to_permanently_delete_this_company.l} )
-    = link_to( "&raquo; #{:view_company_dashboard.l}", dashboard_company_path(@company))
-
-    -#
-      %br/
-      -if @company.invite?(current_user)
-        = link_to "&raquo; #{:new_representative_invitation.l(:company_name => @company)}", new_company_representative_invitation_path(@company)
-        %br/
-      -if @company.post?(current_user)
-        = link_to "&raquo; #{:create_new_company_post.l}", new_user_post_path(current_user)
-        %br/
-    -#
-      %br/
-      = link_to( "&raquo; #{:assign_role.l}: #{@company.moderator? ? :member.l : :moderator.l}", toggle_moderator_company_path(@company), {:method => :put} )
-
 -box :class => 'hentry', :id => 'profile_details' do
   %h3
     = link_to @company.name, company_path(@company)

@@ -99,7 +99,8 @@ en:
   all_company_representative_comments: All representative comments
   company_representative_comments_rss: Representative comments RSS
   view_company_representative_comments: View company representative comments
-  view_company_conversation_comments: View comments on company conversations 
+  view_company_conversation_comments: View comments on company conversations
+  company_posts: Company conversations
   #en: all_photos_tagged: All photos tagged {{tag_name}}
   all_photos_tagged: "All photos tagged {{tag_name}}"
   #en: all_posts_tagged: All posts tagged {{tag_name}}
@@ -1614,6 +1615,7 @@ en:
   # en: view_company_blog: "View company conversastions"
   view_company_blog: "View company conversations"
   view_company_dashboard: View company dashboard
+  back_to_company_dashboard: Back to company dashboard
   # en: listing_representative_invitations: "Listing representative invitations"
   listing_representative_invitations: "Company representative invitations"
   # en: new_representative_invitation: "New representative invitation"

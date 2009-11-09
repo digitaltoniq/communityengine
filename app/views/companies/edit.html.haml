@@ -107,6 +107,8 @@
 
       %p
         = submit_tag :save_changes.l
+        or
+        = link_to :cancel.l, dashboard_company_path(@company)
 
 %script{:type => 'text/javascript'}
   makeItCount('company_description', 300);
