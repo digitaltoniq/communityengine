@@ -1,4 +1,4 @@
-- @meta = { :description => "#{@user.login}'s profile on #{AppConfig.community_name}.", :keywords => "#{@user.login}, #{@user.tags.join(", ") unless @user.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
+- @meta = { :description => "#{@user}'s profile on #{AppConfig.community_name}.", :keywords => "#{@user}, #{@user.tags.join(", ") unless @user.tags.nil?}", :robots => AppConfig.robots_meta_show_content }
 - @section = @user.eql?(current_user) ? 'my_profile' : 'users'
 - @sidebar_left = true
 
@@ -95,7 +95,7 @@
       DJS
       - if @photos.empty? and @recent_posts.empty?
         -box :class => "alt first_alt" do
-          %h3= :small_profile.l :user => @user.login
+          %h3= :small_profile.l :user => @user
 
       - unless @photos.empty?
         -box :id => "photos" do

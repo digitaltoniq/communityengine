@@ -9,7 +9,7 @@ class UserNotifier < ActionMailer::Base
   def signup_invitation(email, user, message)
     setup_sender_info
     @recipients  = "#{email}"
-    @subject     = "#{user.login} would like you to join #{AppConfig.community_name}!"
+    @subject     = "#{user} would like you to join #{AppConfig.community_name}!"
     @sent_on     = Time.now
     @body[:user] = user
     @body[:url]  = signup_by_id_url(user, user.invite_code)
@@ -18,7 +18,7 @@ class UserNotifier < ActionMailer::Base
 
   def friendship_request(friendship)
     setup_email(friendship.friend)
-    @subject     += "#{friendship.user.login} would like to be friends with you!"
+    @subject     += "#{friendship.user} would like to be friends with you!"
     @body[:url]  = pending_user_friendships_url(friendship.friend)
     @body[:requester] = friendship.user
   end
@@ -78,7 +78,7 @@ class UserNotifier < ActionMailer::Base
 
   def new_forum_post_notice(user, post)
      setup_email(user)
-     @subject     += "#{post.user.login} has posted in a thread you are monitoring."
+     @subject     += "#{post.user} has posted in a thread you are monitoring."
      @body[:url]  = "#{forum_topic_url(:forum_id => post.topic.forum, :id => post.topic, :page => post.topic.last_page)}##{post.dom_id}"
      @body[:post] = post
      @body[:author] = post.user

@@ -106,7 +106,7 @@ namespace :data do
       users = ['ryan@digitaltoniq.com', 'dsnider@digitaltoniq.com']
       users << 'ryanmickle@gmail.com' if Rails.env.client? or Rails.env.production?
       users.each do |f|
-        Factory(:user, :email => f, :login => f.split('@').first, :role => Role[:admin])
+        Factory(:user, :email => f, :role => Role[:admin])
         User.delete_all("avatar_id IS NULL") # RWD Factory girl circular dependency bug?
       end
     end

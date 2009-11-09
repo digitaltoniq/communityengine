@@ -1,10 +1,7 @@
 Factory.define :user do |u|
-  u.login do
-    while User.exists?(:login => (l = Faker::Name.first_name))
-    end
-    l
-  end
-  u.email { |u| u.login + "@example.com" }
+  u.first_name { Faker::Name.first_name }
+  u.last_name { Faker::Name.last_name }
+  u.email { |u| u.first_name + "#{rand(100)}@example.com" }
   u.password 'password'
   u.password_confirmation { |u| u.password }
   u.birthday { (rand(30) + 20).years.ago }

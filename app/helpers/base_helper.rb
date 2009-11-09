@@ -129,8 +129,8 @@ module BaseHelper
           @canonical_url = post_url(@post)
         end
 			when 'users'
-        if @user && !@user.new_record? && @user.login 
-          title = @user.login
+        if @user && !@user.new_record?
+          title = @user.to_s
           title += ', expert in ' + @user.offerings.collect{|o| o.skill.name }.join(', ') if @user.vendor? and !@user.offerings.empty?
           title += ' &raquo; ' + app_base + tagline
           @canonical_url = user_url(@user)          
@@ -138,12 +138,12 @@ module BaseHelper
           title = :showing_users.l+' &raquo; ' + app_base + tagline
         end
 			when 'photos'
-        if @user and @user.login
-          title = @user.login + '\'s '+:photos.l+' &raquo; ' + app_base + tagline
+        if @user and @user
+          title = @user + '\'s '+:photos.l+' &raquo; ' + app_base + tagline
         end
 			when 'clippings'
-        if @user and @user.login
-          title = @user.login + '\'s '+:clippings.l+' &raquo; ' + app_base + tagline
+        if @user and @user
+          title = @user + '\'s '+:clippings.l+' &raquo; ' + app_base + tagline
         end
 			when 'tags'
 				case @controller.action_name
@@ -425,12 +425,7 @@ module BaseHelper
 
   # TODO: make this more generic and move to base controller or patch models
   def display_name(user_or_rep)
-    if user_or_rep.is_a?(Representative)
-      user_or_rep.full_name
-    else
-      r = Representative.find_by_user_id(user_or_rep.id)
-      r ? r.full_name : user_or_rep.login
-    end
+    user_or_rep.to_s
   end
 
 end

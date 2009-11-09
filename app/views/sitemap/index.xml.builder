@@ -9,7 +9,7 @@ xml.urlset "xmlns" => "http://www.google.com/schemas/sitemap/0.84" do
   
   @users.each do |user|
     xml.url do
-      xml.loc         "#{application_url}#{user.login_slug}"  
+      xml.loc         "#{application_url}#{user_slug}"
       xml.lastmod     w3c_date(user.updated_at ||  Time.now)
       xml.changefreq  "weekly"
       xml.priority    0.7

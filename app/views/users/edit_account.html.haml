@@ -10,8 +10,11 @@
 
       = error_messages_for :user
 
-      %h3=:username.l
-      = text_field :user, :login, :size => "28"
+      %h3=:first_name.l
+      = text_field :user, :first_name, :size => "20"
+
+      %h3=:last_name.l
+      = text_field :user, :last_name, :size => "20"
 
       %h3=:e_mail_address.l
       = text_field :user, :email, :size => "28"

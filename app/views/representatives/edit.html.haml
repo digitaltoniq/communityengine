@@ -17,14 +17,6 @@
         =:choose_a_photo_for_your_profile.l
       = file_field :avatar, :uploaded_data, :size => "20"
 
-      %label{"for"=>"representative_first_name"}
-        =:representative_first_name.l
-      = text_field :representative, :first_name
-
-      %label{"for"=>"representative_last_name"}
-        =:representative_last_name.l
-      = text_field :representative, :last_name
-
       %label{"for"=>"representative_title"}
         = "#{:representative_title.l} #{:representative_title_at.l(:company_name => @representative.company)}"
       = text_field :representative, :title

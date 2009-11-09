@@ -34,7 +34,7 @@ class CommentsController < BaseController
         
         if comment_type == "User"
           @user = @commentable
-          @title = @user.login
+          @title = @user
           @back_url = user_path(@user)
         else comment_type != "User" 
           @user = @commentable.user
@@ -167,13 +167,13 @@ class CommentsController < BaseController
       type = comment_type.underscore
       case type
         when 'user'
-          @commentable.login
+          @commentable
         when 'post'
           @commentable.title
         when 'clipping'
-          @commentable.description || "Clipping from #{@user.login}"
+          @commentable.description || "Clipping from #{@user}"
         when 'photo'
-          @commentable.description || "Photo from #{@user.login}"
+          @commentable.description || "Photo from #{@user}"
         else 
           @commentable.class.to_s.humanize
       end  

@@ -14,6 +14,7 @@ class AddingIndexes < ActiveRecord::Migration
     add_index :users, :vendor
     add_index :posts, :category_id
     add_index :users, :login_slug
+    add_index :users, :login
     add_index :friendships, :user_id
     add_index :friendships, :friendship_status_id  
   end
@@ -33,6 +34,7 @@ class AddingIndexes < ActiveRecord::Migration
     remove_index :users, :vendor
     remove_index :posts, :category_id
     remove_index :users, :login_slug
+    remove_index :users, :login
     remove_index :friendships, :user_id
     remove_index :friendships, :friendship_status_id
   end

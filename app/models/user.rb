@@ -18,25 +18,25 @@ class User < ActiveRecord::Base
   before_create :make_activation_code
   after_create  :update_last_login
   
-  before_save   :generate_login_slug
+  before_save   :generate_login, :generate_login_slug
   after_save    :recount_metro_area_users
   after_destroy :recount_metro_area_users
 
 
   #validation
-  validates_presence_of     :login, :email
+  validates_length_of   :first_name, :within => 1..30
+  validates_length_of   :last_name,  :within => 2..30
+  validates_presence_of     :email
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
   validates_length_of       :password, :within => 6..20, :if => :password_required?
   validates_confirmation_of :password,                   :if => :password_required?
   validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
-  validates_length_of       :login,    :within => 1..20
   validates_length_of       :email,    :within => 3..100
   validates_format_of       :email, :with => /^([^@\s]+)@((?:[-a-z0-9A-Z]+\.)+[a-zA-Z]{2,})$/
-  validates_format_of       :login, :with => /^[\sA-Za-z0-9_-]+$/
-  validates_uniqueness_of   :login, :email, :case_sensitive => false
-  validates_uniqueness_of   :login_slug
-  validates_exclusion_of    :login, :in => AppConfig.reserved_logins
+  validates_format_of       :first_name, :with => /^[\sA-Za-z0-9_-]+$/
+  validates_format_of       :last_name, :with => /^[\sA-Za-z0-9_-]+$/
+  validates_uniqueness_of   :email, :case_sensitive => false
 #  validates_date :birthday, :before => 13.years.ago.to_date
 
   #associations
@@ -182,11 +182,11 @@ class User < ActiveRecord::Base
     self.featured
   end
   
-  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
+  # Authenticates a user by their email or login name and unencrypted password.  Returns the user or nil.
   def self.authenticate(login, password)
     # hide records with a nil activated_at
-    u = find :first, :conditions => ['login = ? and activated_at IS NOT NULL', login]
-    u = find :first, :conditions => ['email = ? and activated_at IS NOT NULL', login] if u.nil?
+    u = find :first, :conditions => ['email = ? and activated_at IS NOT NULL', login]
+    u = find :first, :conditions => ['login = ? and activated_at IS NOT NULL', login] if u.nil?
     u && u.authenticated?(password) && u.update_last_login ? u : nil
   end
   
@@ -375,7 +375,7 @@ class User < ActiveRecord::Base
   
   # before filter
   def generate_login_slug
-    self.login_slug = self.login.gsub(/[^a-z0-9]+/i, '-')
+    self.login_slug = "#{first_name.downcase}-#{last_name.downcase}" unless self.login_slug
   end
 
   def update_last_login
@@ -451,12 +451,11 @@ class User < ActiveRecord::Base
   end
   
   def display_name
-    login
+    to_s
   end
 
-  def to_label
-    @representative ||= Representative.for_user(self)
-    @representative ? @representative.to_label : login
+  def full_name
+    "#{first_name} #{last_name}"
   end
   
   def admin?
@@ -496,7 +495,6 @@ class User < ActiveRecord::Base
     end
 
     def whitelist_attributes
-      self.login = self.login.strip
       self.description = white_list(self.description )
       self.stylesheet = white_list(self.stylesheet )
     end
@@ -507,6 +505,14 @@ class User < ActiveRecord::Base
 
     def set_role
       self.role = Role[:member] if role_id.nil?
+    end
+
+    def generate_login
+      unless self.login
+        generated_login = "#{first_name.downcase}#{last_name.downcase}"
+        existing_count = User.count(:conditions => ['login LIKE ?', "#{generated_login}%"])
+        self.login = existing_count > 0 ? "#{generated_login}#{existing_count}" : generated_login
+      end
     end
   
 end

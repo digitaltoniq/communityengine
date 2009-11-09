@@ -31,7 +31,7 @@ class PhotosController < BaseController
 
     @tags = Photo.tag_counts :conditions => { :user_id => @user.id }, :limit => 20
 
-    @rss_title = "#{AppConfig.community_name}: #{@user.login}'s photos"
+    @rss_title = "#{AppConfig.community_name}: #{@user}'s photos"
     @rss_url = user_photos_path(@user,:format => :rss)
 
     respond_to do |format|

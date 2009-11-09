@@ -393,9 +393,6 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
     t.integer  "user_id"
     t.integer  "company_id"
     t.string   "title"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "url_slug"
     t.string   "linked_in_url"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -496,6 +493,8 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
   create_table "users", :force => true do |t|
     t.string   "login"
     t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
     t.text     "description"
     t.integer  "avatar_id"
     t.string   "crypted_password",          :limit => 40
@@ -532,6 +531,7 @@ ActiveRecord::Schema.define(:version => 20090921200851) do
   add_index "users", ["avatar_id"], :name => "index_users_on_avatar_id"
   add_index "users", ["created_at"], :name => "index_users_on_created_at"
   add_index "users", ["featured_writer"], :name => "index_users_on_featured_writer"
+  add_index "users", ["login"], :name => "index_users_on_login"
   add_index "users", ["login_slug"], :name => "index_users_on_login_slug"
   add_index "users", ["vendor"], :name => "index_users_on_vendor"
 

@@ -18,4 +18,4 @@
             %ul
               -@recommended_posts.each do |post|
                 %li
-                  = link_to( "#{post.photo(:small)} #{truncate(post.display_title, :length => 75)} <span class='post_excerpt'>#{ truncate_words(post.post, 35, '...' )} (:by.l #{post.user.login})</span>", post_path(post), :title => ":by.l #{post.user.login}" )
+                  = link_to( "#{post.photo(:small)} #{truncate(post.display_title, :length => 75)} <span class='post_excerpt'>#{ truncate_words(post.post, 35, '...' )} (:by.l #{post.user})</span>", post_path(post), :title => ":by.l #{post.user}" )

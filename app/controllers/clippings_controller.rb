@@ -60,7 +60,7 @@ class ClippingsController < BaseController
     @tags = Clipping.tag_counts :conditions => { :user_id => @user.id }, :limit => 20
     @clippings_data = @clippings.collect {|c| [c.id, c.image_url, c.description, c.url ]  }
 
-    @rss_title = "#{AppConfig.community_name}: #{@user.login}'s clippings"
+    @rss_title = "#{AppConfig.community_name}: #{@user}'s clippings"
     @rss_url = user_clippings_path(@user,:format => :rss)
 
     respond_to do |format|

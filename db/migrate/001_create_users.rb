@@ -5,6 +5,8 @@ class CreateUsers < ActiveRecord::Migration
     create_table "users", :force => true do |t|
       t.column :login,                     :string
       t.column :email,                     :string
+      t.string :first_name
+      t.string :last_name
       t.column :description,               :text
       t.column :avatar_id,                 :integer
       t.column :crypted_password,          :string, :limit => 40

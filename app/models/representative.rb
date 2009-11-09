@@ -1,5 +1,4 @@
 class Representative < ActiveRecord::Base
-  acts_as_slugable :source_column => :full_name, :scope => :company
   acts_as_label
    
   acts_as_activity :user, :about => :company
@@ -10,8 +9,6 @@ class Representative < ActiveRecord::Base
   #validation
 
   validates_presence_of :company, :user, :representative_role
-  validates_length_of   :first_name, :within => 1..30
-  validates_length_of   :last_name,  :within => 2..30 
 
   #-- Callbacks
   before_validation :set_representative_role
@@ -30,7 +27,8 @@ class Representative < ActiveRecord::Base
            :gender, :gender=, :login, :login=, :email, :email=, :password, :password=, :password_confirmation, :password_confirmation=,
            :zip, :zip=, :description, :description=, :country, :country=, :state, :state=, :metro_area, :metro_area=,
            :invitations, :posts, :photos, :avatar, :avatar=, :tag_list, :tag_list=, :role, :role=,
-           :comments_as_author, :comments_as_recipient, :clippings, :favorites, :followings, :to => :user
+           :comments_as_author, :comments_as_recipient, :clippings, :favorites, :followings,
+           :first_name, :last_name, :full_name, :to_param, :to => :user
 
   #named scopes
   named_scope :recent, :order => 'representatives.created_at DESC'
@@ -64,7 +62,7 @@ class Representative < ActiveRecord::Base
   # override activerecord's find to allow us to find by name or id transparently
   def self.find(*args)
     if args.is_a?(Array) and args.first.is_a?(String) and (args.first.index(/[a-zA-Z\-_]+/) or args.first.to_i.eql?(0) )
-      find_by_url_slug(args)
+      Representative.for_user(User.find(*args))
     else
       super
     end
@@ -95,18 +93,6 @@ class Representative < ActiveRecord::Base
     super
   end
 
-  def full_name
-    "#{first_name} #{last_name}"
-  end
-
-  def name
-    full_name
-  end
-
-  def to_param
-    url_slug || id
-  end
-
   def attributes=(new_attributes, guard_protected_attributes = true)
     # ensure user delegate is available before setting attributes
     self.user = new_attributes[:user] || User.new unless self.user
@@ -125,8 +111,6 @@ class Representative < ActiveRecord::Base
   end
   
   def validate
-    errors.add(:base, "There is already a representative with the same first and last name registered for this company.") if
-            Representative.exists?(["first_name = ? AND last_name = ? AND company_id = ? AND id != ?", first_name, last_name, company_id, id])
     user.valid?
     user.errors.each { |attr, msg| errors.add(attr, msg) }
   end
