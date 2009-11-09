@@ -206,7 +206,7 @@ class Post < ActiveRecord::Base
   def notify_company_followers
     company = Company.for_post(self)
     company.followers.each do |follower|
-      UserNotifier.deliver_following_company_post_notice(follower, company, self)
+      UserNotifier.deliver_following_company_post_notice(follower, company, self) if follower.active?
     end if company
   end
 

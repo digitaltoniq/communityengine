@@ -48,7 +48,8 @@ class Comment < ActiveRecord::Base
       :conditions => ["users.id NOT IN (?) AND users.notify_comments = ? 
                       AND commentable_id = ? AND commentable_type = ? 
                       AND comments.notify_by_email = ? 
-                      AND comments.created_at > ?", [user_id, recipient_id.to_i], true, commentable_id, commentable_type, true, 2.weeks.ago], 
+                      AND comments.created_at > ?
+                      AND users.activation_code IS NULL", [user_id, recipient_id.to_i], true, commentable_id, commentable_type, true, 2.weeks.ago], 
 #      :include => :comments_as_author, :group => "users.id", :limit => 20)    
       :include => :comments_as_author, :limit => 20)
   end    

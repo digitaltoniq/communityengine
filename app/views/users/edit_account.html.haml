@@ -26,3 +26,6 @@
       = password_field :user, :password_confirmation, :size => "28"
 
       %p= submit_tag :save_changes.l
+
+      - unless Representative.for_user(@user)
+        %p= link_to "#{image_tag 'icons/delete.png', :plugin => :community_engine} #{:deactivate_link.l}", deactivate_user_path(@user), :method => :put, :confirm => "Are you sure you want to deactivate your account?  You will no long be able to login or interact with the Companies and Me community."
