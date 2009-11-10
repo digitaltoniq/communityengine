@@ -10,6 +10,8 @@
 = javascript_include_tag "application", :plugin => "community_engine"		
 
 = javascript_include_tag "AC_RunActiveContent", :plugin => "community_engine" if current_page?(:controller => 'photos', :action => 'new') or current_page?(:controller => 'statistics', :action => 'index')		
+= fb_connect_javascript_tag
+= init_fb_connect "XFBML"
 
 - if (controller_name == 'photos' && action_name == 'new')
   = javascript_include_tag 'swfupload', :plugin => "community_engine"

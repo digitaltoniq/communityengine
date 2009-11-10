@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_private_messages
   tracks_unlinked_activities [:logged_in, :invited_friends, :updated_profile, :joined_the_site]
   acts_as_label
+  connects_to_facebook
   
   #callbacks
   before_validation :set_role
@@ -36,7 +37,7 @@ class User < ActiveRecord::Base
   validates_format_of       :email, :with => /^([^@\s]+)@((?:[-a-z0-9A-Z]+\.)+[a-zA-Z]{2,})$/
   validates_format_of       :first_name, :with => /^[\sA-Za-z0-9_-]+$/
   validates_format_of       :last_name, :with => /^[\sA-Za-z0-9_-]+$/
-  validates_uniqueness_of   :email, :case_sensitive => false
+  validates_uniqueness_of   :login_slug, :email, :case_sensitive => false
 #  validates_date :birthday, :before => 13.years.ago.to_date
 
   #associations
@@ -375,6 +376,11 @@ class User < ActiveRecord::Base
   
   # before filter
   def generate_login_slug
+      unless self.login_slug
+        generated_slug = "#{first_name.downcase}-#{last_name.downcase}"
+        existing_count = User.count(:conditions => ['login_slug LIKE ?', "#{generated_slug}%"])
+        self.login_slug = existing_count > 0 ? "#{generated_slug}#{existing_count}" : generated_slug
+      end
     self.login_slug = "#{first_name.downcase}-#{last_name.downcase}" unless self.login_slug
   end
 
@@ -500,7 +506,7 @@ class User < ActiveRecord::Base
     end
   
     def password_required?
-      crypted_password.blank? || !password.blank?
+      !facebook_user? and (crypted_password.blank? || !password.blank?)
     end
 
     def set_role

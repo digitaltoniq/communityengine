@@ -161,6 +161,12 @@ module AuthenticatedSystem
       end
     end
 
+  def login_from_fb
+    if facebook_session and !logged_in?
+      self.current_user = User.find_by_fb_user(facebook_session.user)
+    end
+  end
+
   private
     # gets BASIC auth info
     def get_auth_data

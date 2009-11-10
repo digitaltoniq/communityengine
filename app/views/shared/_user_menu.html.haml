@@ -3,6 +3,9 @@
   = link_to current_user, user_path(current_user) #, :id => 'user-menu'
   /#user-menu-tip
   %span.logout
-    = "(#{link_to(:log_out.l, logout_path)})"
+    - if current_user.facebook_user?
+      = "(#{link_to_function(:log_out.l, "FB.Connect.logoutAndRedirect('#{logout_path}')")})"
+    - else
+      = "(#{link_to(:log_out.l, logout_path)})"
     &nbsp;&nbsp;
     = link_to(:account.l, edit_account_user_path(current_user))

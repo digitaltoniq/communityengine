@@ -121,7 +121,8 @@ resources :users, :member => {
     :deactivate => :put,
     :crop_profile_photo => [:get, :put],
     :upload_profile_photo => [:get, :put]
-     } do |user|
+     },
+     :collection => { :link_user_accounts => :get } do |user|
   # DJS
   user.resources :followings, :as => :follows, :only => [:index, :create, :destroy], :collection => { :companies => :get, :posts => :get }
 

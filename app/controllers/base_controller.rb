@@ -5,8 +5,10 @@ require 'pp'
 class BaseController < ApplicationController
   include AuthenticatedSystem
   include LocalizedApplication
-  around_filter :set_locale  
-  before_filter :login_from_cookie, :store_return_to
+  around_filter :set_locale
+  before_filter :set_facebook_session
+  before_filter :login_from_cookie, :login_from_fb, :store_return_to
+  helper_method :facebook_session
   skip_before_filter :verify_authenticity_token, :only => :footer_content
   helper_method :commentable_url, :back_or_default_url
   helper_method :user_path, :post_path, :edit_user_path, :display_text, :user_home_path # DigitalToniq

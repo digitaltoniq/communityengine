@@ -110,8 +110,6 @@ class UsersController < BaseController
     
   def edit 
     @metro_areas, @states = setup_locations_for(@user)
-    @skills               = Skill.find(:all)
-    @offering             = Offering.new
     @avatar               = Photo.new
   end
   
@@ -338,6 +336,19 @@ class UsersController < BaseController
       redirect_to login_path and return
     else
       flash[:notice] = :activation_email_not_sent_message.l
+    end
+  end
+
+  def link_user_accounts
+    if !logged_in?
+      #register with fb
+      self.current_user = User.create_from_fb_connect(facebook_session.user)
+      redirect_to welcome_photo_user_path(current_user)
+#      puts self.current_user.errors.full_messages.join("\n")
+    else
+      #connect accounts
+      self.current_user.link_fb_connect(facebook_session.user.id) unless self.current_user.fb_user_id == facebook_session.user.id
+      redirect_back_or_default(user_home_path(current_user))
     end
   end
   
