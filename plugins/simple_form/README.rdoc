@@ -1,0 +1,184 @@
+== Simple Form
+
+Simple Form is a ready to go contact form. Just the following lines are needed
+to have a contact form (including the e-mail):
+
+  class ContactForm < SimpleForm
+    subject "My Contact Form"
+    recipients "your.email@your.domain.com"
+    sender{|c| %{"#{c.name}" <#{c.email}>} }
+
+    attribute :name,      :validate => true
+    attribute :email,     :validate => /[^@]+@[^\.]+\.[\w\.\-]+/
+    attribute :file,      :attachment => true
+
+    attribute :message
+    attribute :nickname,  :captcha  => true
+  end
+
+Then you start a script/console and type:
+
+  c = ContactForm.new(:name => 'José', :email => 'jose@email.com', :message => 'Cool!')
+  c.deliver
+
+Check your inbox and the e-mail will be there, with the sent fields (assuming
+that you configured your smtp properly).
+
+SimpleForm also support attachments, I18n, error messages like in ActiveRecord 
+(so it works with custom FormBuilders) and can also send the user request information
+in the contact mail.
+
+It's tested and compatible with Rails 2.2.x and Rails 2.3.x.
+
+== Installation
+
+Install Simple Form is very easy. It is stored in Gemcutter, so just run the following:
+
+   gem sources -a http://gemcutter.org
+   sudo gem install simple_form
+
+If you want it as plugin, just do:
+
+   script/plugin install git://github.com/josevalim/simple_form.git
+
+== Request
+
+SimpleForm makes easy to append user information to the contact mail. You just
+have to do:
+
+  class ContactForm < SimpleForm
+    append :remote_ip, :user_agent, :session
+    # ...
+  end
+
+And in your controller:
+
+  @contact_form = ContactForm.new(params[:contact_form], request)
+
+And the remote ip, user agent and session will be sent in the e-mail in a
+request information session. You can give to append any method that the
+request object responds to.
+
+== API Overview
+
+==== attributes(*attributes)
+
+Declare your form attributes. All attributes declared here will be appended
+to the e-mail, except the ones :captcha is true.
+
+Options:
+
+* :validate - When true, validates the attributes can't be blank.
+  When a regexp is given, check if the attribute matches is not blank and
+  then if it matches the regexp.
+
+  Whenever :validate is a symbol, the method given as symbol will be
+  called. You can then add validations as you do in ActiveRecord (errors.add).
+
+* :attachment - When given, expects a file to be sent and attaches
+  it to the e-mail. Don't forget to set your form to multitype.
+
+* :captcha - When true, validates the attributes must be blank.
+  This is a simple way to avoid spam and the input should be hidden with CSS.
+
+Examples:
+
+   class ContactForm < SimpleForm
+     attributes :name,  :validate => true
+     attributes :email, :validate => /[^@]+@[^\.]+\.[\w\.\-]+/
+     attributes :message
+     attributes :screenshot, :attachment => true, :validate => :screenshot_required?
+     attributes :nickname, :captcha => true
+
+     def screenshot_required?
+       # ...
+     end
+   end
+
+   c = ContactForm.new(:nickname => 'not_blank', :email => 'your@email.com', :name => 'José')
+   c.valid?  #=> true
+   c.spam?   #=> true  (raises an error in development, to remember you to hide it)
+   c.deliver #=> false (just delivers if is not a spam and is valid)
+
+   c = ContactForm.new(:email => 'invalid')
+   c.valid?               #=> false
+   c.errors.inspect       #=> { :name => :blank, :email => :invalid }
+   c.errors.full_messages #=> [ "Name can't be blank", "Email is invalid" ]
+
+   c = ContactForm.new(:name => 'José', :email => 'your@email.com')
+   # save is an alias to deliver to allow it to work with InheritedResources
+   c.save #=> true
+
+==== subject(string_or_symbol_or_block)
+
+Declares the subject of the contact email. It can be a string or a proc or a symbol.
+
+When a symbol is given, it will call a method on the form object with the same
+name as the symbol. As a proc, it receives a simple form instance. It defaults
+to the class human name.
+
+   subject "My Contact Form"
+   subject { |c| "Contacted by #{c.name}" }
+
+==== sender(string_or_symbol_or_block)
+
+Declares contact email sender. It can be a string or a proc or a symbol.
+
+When a symbol is given, it will call a method on the form object with the same
+name as the symbol. As a proc, it receives a simple form instance. By default is:
+
+   sender{ |c| c.email }
+
+This requires that your SimpleForm object have an email attribute.
+
+==== recipients(string_or_array_or_symbol_or_block)
+
+Who will receive the e-mail. Can be a string or array or a symbol or a proc.
+
+When a symbol is given, it will call a method on the form object with the same
+name as the symbol. As a proc, it receives a simple form instance.
+
+Both the proc and the symbol must return a string or an array. By default is nil.
+
+==== template(string_or_symbol_or_proc)
+
+Allow you to set the template that is going to rendered. This allows you to have
+several simple_form instances, using different templates.
+
+==== headers(hash)
+
+Additional headers to your e-mail.
+
+== I18n
+
+All models, attributes and messages in SimpleForm can be used with localized.
+Below is an I18n example file:
+
+  simple_form:
+    models:
+      contact_form: "Your site contact form"
+    attributes:
+      email: "E-mail"
+      telephone: "Telephone number"
+      message: "Sent message"
+    messages:
+      blank: "can not be blank"
+      invalid: "is not valid"
+      telephone: "must have eight digits"
+    request:
+      title: "Technical information about the user"
+      remote_ip: "IP Address"
+      user_agent: "Browser"
+
+== Contributors
+
+* José Valim - http://github.com/josevalim
+* Carlos Antonio - http://github.com/carlosantoniodasilva
+* Andrew Timberlake - http://github.com/andrewtimberlake
+
+== Bugs and Feedback
+
+If you discover any bugs, please send an e-mail to contact@plataformatec.com.be
+If you just want to give some positive feedback or drop a line, that's fine too!
+
+Copyright (c) 2009 Plataforma Tec http://blog.plataformatec.com.br/

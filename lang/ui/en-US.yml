@@ -595,6 +595,7 @@ en:
   inbox: Inbox
   #en: insert: Insert
   insert: Insert
+  interested_company: "Are you a company interested in telling your story on {{site}}?"
   #en: invite_a_friend: Invite a friend
   invite_a_friend: Invite a friend
   #en: invitation_was_successfully_created: Invitation was successfully created.
@@ -752,6 +753,7 @@ en:
   need_some_help_contact_our: Need some help?  Check out our
   #en: need_to_contact_us: Need to contact us?
   need_to_contact_us: Need to contact us?
+  contact_us: "Contact {{site}}"
   #en: new_ad: New Ad
   new_ad: New Ad
   #en: new_category: New category

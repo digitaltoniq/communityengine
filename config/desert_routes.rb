@@ -62,6 +62,7 @@ rss '/site_index.rss', :controller => 'base', :action => 'site_index', :format =
 about '/about', :controller => 'base', :action => 'about'
 advertise '/advertise', :controller => 'base', :action => 'advertise'
 faq '/faq', :controller => 'base', :action => 'faq'
+lead '/lead', :controller => 'base', :action => 'lead'
 css_help '/css_help', :controller => 'base', :action => 'css_help'  
 
 edit_account_from_email '/account/edit', :controller => 'users', :action => 'edit_account'

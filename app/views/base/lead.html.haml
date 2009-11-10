@@ -1,0 +1,37 @@
+= render :partial => 'about_nav'
+
+#yui-main
+  .yui-b
+    -box do
+
+      %h3=:contact_us.l(:site => AppConfig.community_name)
+
+      - form_for @lead, :url => lead_path, :html => {:class => 'MainForm'} do |f|
+
+        = error_messages_for :lead
+        
+        = f.label :name
+        = f.text_field :name
+        %br/
+
+        = f.label :email
+        = f.text_field :email
+        %br/
+
+        = f.label :title
+        = f.text_field :title
+        %br/
+
+        = f.label :company
+        = f.text_field :company
+        %br/
+
+        = f.label :phone
+        = f.text_field :phone
+        %br/
+
+        = f.label :message, 'Is there a particular story you want to tell?'
+        = f.text_area :message, :rows => 4
+        %br/
+
+        %p= submit_tag :send.l

@@ -1,0 +1,30 @@
+<h4 style="text-decoration:underline"><%=h @subject %></h4>
+
+<% @form.class.form_attributes.each do |attribute|
+  value = @form.send(attribute)
+  next if value.blank? %>
+
+  <p><b><%= @form.class.human_attribute_name(attribute) %>:</b>
+  <%= value.include?("\n") ? simple_format(h(value)) : h(value) %></p>
+<% end %>
+
+<% unless @form.class.form_appendable.blank? %>
+  <br /><h4 style="text-decoration:underline"><%= I18n.t :title, :scope => [ :simple_form, :request ], :default => 'Request information' %></h4>
+
+  <% @form.class.form_appendable.each do |attribute|
+    value = @form.request.send(attribute)
+
+    value = if value.is_a?(Hash) && !value.empty?
+      content_tag(:ul, value.to_a.map{|k,v| content_tag(:li, h("#{k}: #{v.inspect}")) }.join("\n"), :style => "list-style:none;")
+    elsif value.is_a?(String)
+      h(value)
+    else
+      h(value.inspect)
+    end
+  %>
+
+    <p><b><%= I18n.t attribute, :scope => [ :simple_form, :request ], :default => attribute.to_s.humanize %>:</b>
+    <%= value.include?("\n") ? simple_format(value) : value %></p>
+  <% end %>
+  <br />
+<% end %>
