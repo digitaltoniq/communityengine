@@ -16,13 +16,6 @@
       %label
         =:choose_a_photo_for_your_profile.l
       = file_field :avatar, :uploaded_data, :size => "20"
-      
-      %h3= :location.l
-      = render :partial => 'shared/location_chooser', :locals => {:selected_country => @user.country_id, :selected_state => @user.state_id, :selected_metro_area => @user.metro_area_id, :states => @states, :metro_areas => @metro_areas}
-
-      %label
-        =:zippostal_code.l
-      = text_field :user, :zip, :style=>"width:90px"
 
       -#
         DJS
@@ -47,6 +40,9 @@
       -box do 
         %h3=:about_me.l
         = text_area :user, :description, :rows => 4, :style => "width:95%"
+
+        %h3= :location.l
+        = render :partial => 'shared/location_chooser', :locals => {:selected_country => @user.country_id, :selected_state => @user.state_id, :selected_metro_area => @user.metro_area_id, :states => @states, :metro_areas => @metro_areas}
 
       -#
         DJS

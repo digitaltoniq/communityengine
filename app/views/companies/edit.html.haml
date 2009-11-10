@@ -28,10 +28,6 @@
         %h3= :location.l
         = render :partial => 'shared/location_chooser', :locals => {:selected_country => @company.country_id, :selected_state => @company.state_id, :selected_metro_area => @company.metro_area_id, :states => @states, :metro_areas => @metro_areas}
 
-      %label
-        =:zippostal_code.l
-      = text_field :company, :zip, :style=>"width:90px"
-
       -#
         DJS
         %h3=:birthday_gender.l
@@ -62,6 +58,9 @@
         %label{"for"=>"url"}
           =:company_url.l
         = text_field :company, :url, :size => "50"
+
+        %h3= :location.l
+        = render :partial => 'shared/location_chooser', :locals => {:selected_country => @company.country_id, :selected_state => @company.state_id, :selected_metro_area => @company.metro_area_id, :states => @states, :metro_areas => @metro_areas}
 
         -#
           %label{"for"=>"domains"}

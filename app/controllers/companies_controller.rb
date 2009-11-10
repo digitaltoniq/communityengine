@@ -67,8 +67,6 @@ class CompaniesController < BaseController
     @logo.company  = @company
 
     @company.logo  = @logo if @logo.save
-    
-    @company.tag_list = params[:tag_list] || ''
 
     if @company.save!
       @company.track_activity(:updated_profile)

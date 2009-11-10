@@ -1,18 +1,9 @@
 -box :class => 'hentry', :id => 'profile_details' do
   %h3
     = link_to @company.name, company_path(@company)
-    -# DJS = " <small>(#{:featured_writer.l})</small>" if @company.featured_writer?
+    = " <small>(#{link_to(:edit.l, edit_company_path(@company))})</small>" if @company.admin?(current_user)
 
   .centered
-    - if @is_current_company
-      - if @company.logo
-        -# DJS = @company.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
-        -# DJS = @company.featured_writer ? "<div class='right_corner'><div class='featured_writer'></div></div>" : ''
-        -# DJS : TODO = link_to :profile_photo_crop.l, crop_profile_photo_company_path(@company)
-      - else 
-        =:no_profile_photo.l
-        = link_to :click_here_to_upload_one.l, edit_company_path(@company)
-      %br        
     = image_tag( @company.logo_photo_url(:large), :class => "polaroid")    
 
   -#
