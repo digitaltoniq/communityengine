@@ -2,11 +2,13 @@
 after 'deploy:setup', 'candme:setup'
 after 'candme:setup_nginx_proxying', 'nginx:restart'
 after 'candme:setup_nginx_auth', 'nginx:restart'
+after 'candme:setup_nginx_config', 'nginx:restart'
 after 'deploy:symlink', 'candme:setup_nginx_auth' # TODO: why on every deploy?
 
 namespace :candme do
 
-  NGINX_DIR = "/etc/nginx/servers"
+  NGINX_DIR = "/data/nginx/servers"
+  ROOT_NGINX_CONF_PATH = "#{NGINX_DIR}/../nginx.conf"
   NGINX_CONF = "#{application}.conf"
   NGINX_CONF_PATH = "#{NGINX_DIR}/#{NGINX_CONF}"
 
@@ -14,6 +16,7 @@ namespace :candme do
   task :setup do
     setup_nginx_proxying
     setup_nginx_auth
+    setup_nginx_config
   end
 
   task :setup_nginx_proxying, :roles => :web, :except => { :no_release => true } do
@@ -53,6 +56,14 @@ namespace :candme do
         fi
       RUN
     end
+  end
+
+  task :setup_nginx_config, :roles => :web, :except => { :no_release => true } do
+    run <<-RUN
+      if [ 1 == `grep -c 'passenger_pool_idle_time 3600;' #{ROOT_NGINX_CONF_PATH}` ] ; then
+        #{sudo} sed -i 's/passenger_pool_idle_time 3600;/passenger_pool_idle_time 0;/g' #{ROOT_NGINX_CONF_PATH};
+      fi
+    RUN
   end
 end
 
