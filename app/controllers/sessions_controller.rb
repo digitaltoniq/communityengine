@@ -6,11 +6,12 @@ class SessionsController < BaseController
   
   def index
     redirect_to :action => "new"
-  end  
+  end
   
   # render new.rhtml
   def new
     redirect_to user_path(current_user) and return if current_user
+    @page_title = "Log In"
     render :layout => 'beta' if AppConfig.closed_beta_mode
   end
 

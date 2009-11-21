@@ -33,15 +33,17 @@ class UserNotifier < ActionMailer::Base
 
   def comment_notice(comment)
     setup_email(comment.recipient)
-    @subject     += "#{comment.username} posted a comment on one of your conversations on #{AppConfig.community_name}!"
+    @subject     += "#{comment.user} has responded to you on \"#{comment.commentable.title}\""
     @body[:url]  = commentable_url(comment)
     @body[:comment] = comment
     @body[:commenter] = comment.user
+    @body[:user] = comment.recipient
+    @body[:post] = comment.commentable
   end
   
   def follow_up_comment_notice(user, comment)
     setup_email(user)
-    @subject     += "#{comment.username} has commented on a #{comment.commentable_type} that you also commented on."
+    @subject     += "#{comment.user} has responded to #{comment.commentable.title}."
     @body[:url]  = commentable_url(comment)
     @body[:comment] = comment
     @body[:commenter] = comment.user
@@ -58,7 +60,7 @@ class UserNotifier < ActionMailer::Base
 
   def following_company_post_notice(user, company, post)
     setup_email(user)
-    @subject     += "A new conversation has been created for #{company} entitled \"#{post.title}\"."
+    @subject     += "#{company} just posted \"#{post.title}\""
     @body[:url]  = post_url(post)
     @body[:company] = company
     @body[:post] = post
@@ -86,7 +88,7 @@ class UserNotifier < ActionMailer::Base
 
   def signup_notification(user)
     setup_email(user)
-    @subject    += "Please activate your new #{AppConfig.community_name} account"
+    @subject    += "Click here to confirm your email and join in"
     @body[:url]  = "#{application_url}users/activate/#{user.activation_code}"
   end
 
@@ -114,13 +116,14 @@ class UserNotifier < ActionMailer::Base
   
   def activation(user)
     setup_email(user)
-    @subject    += "Your #{AppConfig.community_name} account has been activated!"
+    @subject    += "You're all set to join in"
     @body[:url]  = home_url
   end
   
   def reset_password(user)
     setup_email(user)
-    @subject    += "#{AppConfig.community_name} User information"
+    @subject    += "Your new password"
+    @url = user_edit_account_url(user)
   end
 
   def forgot_username(user)
@@ -133,13 +136,13 @@ class UserNotifier < ActionMailer::Base
   def setup_email(user)
     @recipients  = "#{user.email}"
     setup_sender_info
-    @subject     = "[#{AppConfig.community_name}] "
+    @subject     = "#{AppConfig.community_name} - "
     @sent_on     = Time.now
     @body[:user] = user
   end
   
   def setup_sender_info
-    @from       = "The #{AppConfig.community_name} Team <#{AppConfig.support_email}>" 
+    @from       = "#{AppConfig.community_name} <#{AppConfig.support_email}>" 
     headers     "Reply-to" => "#{AppConfig.support_email}"
     @content_type = "text/plain"           
   end

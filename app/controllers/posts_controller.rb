@@ -17,7 +17,8 @@ class PostsController < BaseController
   before_filter :login_required, :only => [:new, :edit, :update, :destroy, :create, :manage]
   before_filter :require_representative_or_admin, :only => [:new, :create, :edit, :update, :destroy, :manage]
   before_filter :require_company_representative_or_admin, :only => [:new, :create, :edit, :update, :destroy, :manage]
-
+  before_filter :set_title
+  
   skip_before_filter :verify_authenticity_token, :only => [:update_views] #called from ajax on cached pages
 
   #-- CRUD --#
@@ -27,8 +28,12 @@ class PostsController < BaseController
       format.html do
         @popular_posts = parent.posts.popular.limited(5)
         case parent_type
-          when :company then render :action => 'company_index'
-          when :user then render :action => 'user_index'
+          when :company then
+            @page_title = "#{parent} (#{parent.location})"
+            render :action => 'company_index'
+          when :user then
+            @page_title = "#{parent} - #{Company.for_user(parent)} (#{Company.for_user(parent).location})"
+            render :action => 'user_index'
         end
       end
       format.rss do
@@ -113,6 +118,19 @@ class PostsController < BaseController
     unless @representative.nil? or @representative.company == (@company = Company.find(params[:company_id]))
       flash[:error] = "Only company representatives can access that page.  You belong to #{@representative.company} and this post belongs to #{parent}."
       redirect_to :controller => 'sessions', :action => 'new'
+    end
+  end
+
+  def set_title
+    @page_title = case @action_name
+      when 'show' then "#{resource.title} - #{Company.for_post(resource)} (#{Company.for_post(resource).location})"
+      when 'index' then
+        case parent_type
+          when :user then "#{parent} - #{Company.for_post(resource)} (#{Company.for_post(resource).location})"
+          when :company then "#{parent} (#{parent.location})"
+          else 'Connect with Companies you Love'
+        end
+      else 'Connect with Companies you Love'
     end
   end
 

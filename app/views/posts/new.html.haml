@@ -1,6 +1,18 @@
 .yui-b
   -box :id => 'category_tips' do
-    = render :partial => "/categories/tips", :locals => {:category => nil}
+    %h3 Conversation Guidelines
+    %ul
+      %li Be yourself - write in a personal, conversational tone.
+      %li Use links for context
+      %li Be concise. Break posts up with sub headings
+    = "For more ideas and tips, visit our Guide to Authentic Conversations (#{ link_to('http://guide.companiesandme.com', 'http://guide.companiesandme.com')})."
+    %h3 Our rules:
+    %ul
+      %li No advertorial/direct promotion of products
+      %li No coupons or special offers
+      %li Only post original content you own
+      %li Use common sense, use our site to create meaningful relationships with people.
+    By post you agree to our Company Terms.
     
 #yui-main
   .yui-b

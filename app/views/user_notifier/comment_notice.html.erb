@@ -1,8 +1,16 @@
-Hey <%= @user %>!
+Hello <%= @user.first_name %>,
 
-<%= @comment.username %> posted a comment to one of your conversations on Companies And Me! Use this link to see:
+<%= @commenter %> has responded to you on your conversation, <%= @post.title %>:
 
-<%= @url %> 
+<%= @comment.comment.strip_html %>
 
-Thanks,
-The <%= AppConfig.community_name %> team
+Respond by clicking here:
+
+<%= @url %>
+
+We recommend responding to a handful of the most thoughtful responses to show that you're listening.
+
+Some stats for this conversation: <%= @post.view_count %> viewed it, <%= @post.comments_count %> responses left so far.
+
+Thanks for joining in,
+Your friends at Companiesandme

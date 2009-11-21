@@ -100,6 +100,10 @@ class Post < ActiveRecord::Base
     image = doc.at("img")
     image ? image['src'] : nil
   end
+
+  def plaintext_post
+    raw_post.strip_html
+  end
   
   def tag_for_first_image_in_body
     image = first_image_in_body

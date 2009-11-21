@@ -21,6 +21,7 @@ class CompaniesController < BaseController
                                               # :crop_profile_photo
                                               ]
   before_filter :admin_or_company_representative_required, :only => [:dashboard, :activity]
+  before_filter :set_title
   
    def index
      index! { get_additional_companies_page_data }
@@ -214,6 +215,13 @@ class CompaniesController < BaseController
 
   def admin_or_company_representative_required
     current_user.admin? or @company.representative?(current_user) ? true : access_denied
+  end
+
+  def set_title
+    @page_title = case @action_name
+      when 'show' then "#{resource} (#{resource.location})"
+      else 'Companies'
+    end
   end
 
   def setup_metro_areas_for_cloud

@@ -36,6 +36,7 @@ class RepresentativesController < BaseController
   before_filter :admin_required, :only => [:assume, :destroy, :featured, :toggle_featured, :toggle_moderator]
   before_filter :admin_or_current_user_required, :only => [:statistics]
   before_filter :ensure_valid_resource, :only => [:show, :dashboard, :activity]
+  before_filter :set_title
 
   def activate
     redirect_to signup_path and return if params[:activation_code].blank?
@@ -215,6 +216,13 @@ class RepresentativesController < BaseController
   end
 
   protected
+
+    def set_title
+      @page_title = case @action_name
+        when 'show' then "#{resource}, #{resource.company} (#{resource.company.location})"
+      end
+    end
+
     # TODO: refactor with user_controller
     def setup_locations_for(user)
       metro_areas = states = []

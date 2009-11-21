@@ -1,16 +1,11 @@
-Welcome to <%= AppConfig.community_name %>, <%= @user %>!
-Your account has been created, but you still need to activate it before you can log in.
-Here's the skinny:
+Welcome <%= @user.first_name %>,
 
-  Your email: <%= @user.email %>
+Click the link below to confirm your email, and you'll be ready to start discovering and following some new companies:
 
-Use this link to activate your account:
+<%= @url %>
 
-  <%= @url %>
+Can't click the link? You can copy and paste it into your browser.
 
-Can't click the link? Just copy and paste it into your address bar.
+Questions or feedback? We'll look forward to hearing from you at <%= AppConfig.support_email %>.
 
-Questions? Easy: <%= AppConfig.support_email %>.
-
-Hope to see you hanging out on <%= AppConfig.community_name %> really soon!
-The <%= AppConfig.community_name %> team
+On behalf of the companies and people here, thanks for joining.

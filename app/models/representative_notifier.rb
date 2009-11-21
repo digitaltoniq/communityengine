@@ -10,7 +10,7 @@ class RepresentativeNotifier < ActionMailer::Base
   def signup_invitation(company, email, user, message)
     setup_sender_info
     @recipients  = "#{email}"
-    @subject     = "#{user} would like you to join #{AppConfig.community_name}!"
+    @subject     = "#{user} has started your representative registration for #{company}"
     @sent_on     = Time.now
     @body[:user] = user
     @body[:url]  = representative_signup_by_id_url(company, user, user.invite_code)
@@ -45,7 +45,7 @@ class RepresentativeNotifier < ActionMailer::Base
   end
 
   def setup_sender_info
-    @from       = "The #{AppConfig.community_name} Team <#{AppConfig.support_email}>"
+    @from       = "#{AppConfig.community_name} - "
     headers     "Reply-to" => "#{AppConfig.support_email}"
     @content_type = "text/plain"
   end

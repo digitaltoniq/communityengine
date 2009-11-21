@@ -1,9 +1,14 @@
-Hey <%= @user %>!
+Hello <%= @user %>,
 
-<%= @company %> (that you're following) has created a new conversation called "<%= @post.title %>".
-Use this link to check it out:
+<%= @post.user %> just posted a new conversation from <%= @company %>.
+
+<%= @post.title %>
+<%= truncate_words(@post.plaintext_post, 50) %>
+
+What do you think? Click to see the whole post and join the conversation:
 
 <%= @url %>
 
-Thanks,
-The <%= AppConfig.community_name %> team
+------------------------------------------------------------------
+Thanks for joining in,
+Your friends at Companiesandme

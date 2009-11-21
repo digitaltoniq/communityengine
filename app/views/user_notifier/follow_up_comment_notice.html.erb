@@ -1,9 +1,13 @@
-Hey <%= @user %>!
+Hello <%= @user.first_name %>,
 
-<%= @comment.username %> has added a comment to a <%= @comment.commentable_type %> 
-that you commented on. Use this link to check it out:
+<%= @comment.user %> responded to the conversation you joined with <%= Company.for_comment(@comment) %>.
 
-<%= @url %> 
+<%= @comment.comment.strip_html %>
 
-Thanks,
-The <%= AppConfig.community_name %> team
+Like it, or have something to say?
+
+<%= @url %>
+
+------------------------------------------------------------------
+Thanks for joining in,
+Your friends at Companiesandme

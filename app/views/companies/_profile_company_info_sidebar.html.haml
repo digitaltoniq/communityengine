@@ -1,7 +1,7 @@
 -box :class => 'hentry', :id => 'profile_details' do
   %h3
     = link_to @company.name, company_path(@company)
-    = " <small>(#{link_to(:edit.l, edit_company_path(@company))})</small>" if @company.admin?(current_user)
+    = " <small>(#{link_to(:edit.l, edit_company_path(@company))})</small>" if logged_in? and @company.admin?(current_user)
 
   .centered
     = image_tag( @company.logo_photo_url(:large), :class => "polaroid")    

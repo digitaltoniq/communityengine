@@ -116,7 +116,7 @@ module BaseHelper
   end
 
 	def page_title
-		app_base = AppConfig.community_name
+		app_base = " - #{AppConfig.community_name}"
 		tagline = " | #{AppConfig.community_tagline}"
 	
 		title = app_base
@@ -174,9 +174,9 @@ module BaseHelper
 		end
 
     if @page_title
-      title = @page_title + ' &raquo; ' + app_base + tagline
+      title = @page_title + app_base
     elsif title == app_base          
-		  title = :showing.l+' ' + @controller.controller_name + ' &raquo; ' + app_base + tagline
+		  title = :showing.l+' ' + @controller.controller_name + ' &raquo; ' + app_base
     end	
 		title
 	end
