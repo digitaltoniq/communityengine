@@ -35,8 +35,6 @@ class User < ActiveRecord::Base
   validates_presence_of     :metro_area,                 :if => Proc.new { |user| user.state }
   validates_length_of       :email,    :within => 3..100
   validates_format_of       :email, :with => /^([^@\s]+)@((?:[-a-z0-9A-Z]+\.)+[a-zA-Z]{2,})$/
-  validates_format_of       :first_name, :with => /^[\sA-Za-z0-9_-]+$/
-  validates_format_of       :last_name, :with => /^[\sA-Za-z0-9_-]+$/
   validates_uniqueness_of   :login_slug, :email, :case_sensitive => false
 #  validates_date :birthday, :before => 13.years.ago.to_date
 
