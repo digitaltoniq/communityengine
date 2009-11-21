@@ -120,7 +120,7 @@ module DT
     def photo_upload
       file = photo_path
       mimetype = `file -b --mime #{file}`
-      mimetype = mimetype[0..(mimetype.index(';') - 1)]
+      mimetype = mimetype.index(';') ? mimetype[0..(mimetype.index(';') - 1)] : mimetype
       ActionController::TestUploadedFile.new(file, mimetype)
     end
 
