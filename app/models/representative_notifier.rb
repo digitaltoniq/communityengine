@@ -45,7 +45,7 @@ class RepresentativeNotifier < ActionMailer::Base
   end
 
   def setup_sender_info
-    @from       = "#{AppConfig.community_name} - "
+    @from       = "#{AppConfig.community_name} <#{AppConfig.support_email}>" 
     headers     "Reply-to" => "#{AppConfig.support_email}"
     @content_type = "text/plain"
   end
