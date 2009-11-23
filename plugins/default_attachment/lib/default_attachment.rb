@@ -32,7 +32,7 @@ module DT
           if file
             require 'action_controller/test_process.rb'
             mimetype = `file -b --mime #{file}`
-            mimetype = mimetype[0..(mimetype.index(';') - 1)]            
+            mimetype = mimetype.index(';') ? mimetype[0..(mimetype.index(';') - 1)] : mimetype            
             data = ActionController::TestUploadedFile.new(file, mimetype)
             default = new(:uploaded_data => data)
             default.default = true # Not mass-assignable - have to hack attachment_fu otherwise
