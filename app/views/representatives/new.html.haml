@@ -1,13 +1,4 @@
 .yui-b
-  -box do
-    %h3
-      =:why_sign_up.l
-    %ul.list.checks
-    %li 
-      = :sign_up_reason_1.l
-    %li 
-      = :sign_up_reason_2.l
-
   -box :class => 'alt' do
     %h3=:tips.l
     %p
@@ -22,16 +13,6 @@
       = error_messages_for :representative
       - form_for :representative, :url => company_representatives_path(@representative.company), :html => {:class => 'MainForm'} do |rep_form|
 
-        %label{"for"=>"representative_login"}
-          =:username.l
-          %em=:required_your_username_must_not_contain_numerals_spaces_or_special_characters.l
-        = rep_form.text_field :login
-
-        %label{"for"=>"representative_email"}
-          =:e_mail_address.l
-          %em=:required_we_will_send_a_confirmation_e_mail_to_the_address_you_enter.l
-        = rep_form.text_field :email
-
         %label{"for"=>"representative_first_name"}
           =:first_name.l
         = rep_form.text_field :first_name
@@ -39,6 +20,11 @@
         %label{"for"=>"representative_last_name"}
           =:last_name.l
         = rep_form.text_field :last_name
+
+        %label{"for"=>"representative_email"}
+          =:e_mail_address.l
+        %em=:required_we_will_send_a_confirmation_e_mail_to_the_address_you_enter.l
+        = rep_form.text_field :email
 
         %label{"for"=>"representive_password"}
           =:type_your_password.l

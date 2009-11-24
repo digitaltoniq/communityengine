@@ -28,7 +28,7 @@ class Representative < ActiveRecord::Base
            :zip, :zip=, :description, :description=, :country, :country=, :state, :state=, :metro_area, :metro_area=,
            :invitations, :posts, :photos, :avatar, :avatar=, :tag_list, :tag_list=, :role, :role=,
            :comments_as_author, :comments_as_recipient, :clippings, :favorites, :followings,
-           :first_name, :last_name, :full_name, :to_param, :to => :user
+           :first_name, :last_name, :first_name=, :last_name=, :full_name, :to_param, :to => :user
 
   #named scopes
   named_scope :recent, :order => 'representatives.created_at DESC'
