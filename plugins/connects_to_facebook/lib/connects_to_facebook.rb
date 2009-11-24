@@ -25,9 +25,8 @@ module DT
       #We don't get the email from Facebook and because a facebooker can only login through Connect we just generate a unique login name for them.
       #If you were using username to display to people you might want to get them to select one after registering through Facebook Connect
       def create_from_fb_connect(fb_user)
-        returning(new(:fb_user_id => fb_user.uid.to_i, :first_name => fb_user.first_name, :last_name => fb_user.last_name, :email => fb_user.proxied_email)) do |facebooker|
-          facebooker.activated_at = Time.now
-          facebooker.save
+        returning(create(:fb_user_id => fb_user.uid.to_i, :first_name => fb_user.first_name, :last_name => fb_user.last_name, :email => fb_user.proxied_email)) do |facebooker|
+          facebooker.activate
           facebooker.register_user_to_fb
         end
       end
