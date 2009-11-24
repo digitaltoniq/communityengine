@@ -3,7 +3,7 @@ Hello <%= @user %>,
 <%= @post.user %> just posted a new conversation from <%= @company %>.
 
 <%= @post.title %>
-<%= truncate_words(@post.plaintext_post, 50) %>
+<%= @post.plaintext_post.truncate_words(50) %>
 
 What do you think? Click to see the whole post and join the conversation:
 
