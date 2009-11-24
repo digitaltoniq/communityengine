@@ -123,7 +123,7 @@ class UserNotifier < ActionMailer::Base
   def reset_password(user)
     setup_email(user)
     @subject    += "Your new password"
-    @url = user_edit_account_url(user)
+    @url = edit_account_user_url(user)
   end
 
   def forgot_username(user)

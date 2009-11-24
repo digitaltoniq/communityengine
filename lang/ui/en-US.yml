@@ -1487,7 +1487,7 @@ en:
   #en: your_changes_were_saved: Your changes were saved.
   your_changes_were_saved: Your changes were saved. Looks great, we're lucky to have you here.
   #en: your_password_has_been_reset_and_emailed_to_you: Your password has been reset and emailed to you.
-  your_password_has_been_reset_and_emailed_to_you: Check your email, your password has been reset and sent to you. We’ll meet you right back here.
+  your_password_has_been_reset_and_emailed_to_you: Check your email, your password has been reset and sent to you. We'll meet you right back here.
   #en: your_post_was_deleted: Your post was deleted.
   your_post_was_deleted: Your conversation was deleted.
   #en: your_post_was_successfully_created: Your post was successfully created.
@@ -1505,7 +1505,7 @@ en:
   #en: your_username_was_emailed_to_you: Your username was emailed to you.
   your_username_was_emailed_to_you: Your username was emailed to you.
   #en: youve_been_logged_out_hope_you_come_back_soon: You've been logged out. Hope you come back soon!
-  youve_been_logged_out_hope_you_come_back_soon: You’ve been logged out. Some new companies will be waiting for you next time you return.
+  youve_been_logged_out_hope_you_come_back_soon: You've been logged out. Some new companies will be waiting for you next time you return.
   #en: zippostal_code: "ZIP/Postal code:"
   zippostal_code: "ZIP/Postal code:"
   #en: photo_manaer: "Photo manager"
