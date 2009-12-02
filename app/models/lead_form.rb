@@ -1,6 +1,6 @@
 class LeadForm < SimpleForm
   
-  subject "Companies And Me lead"
+  subject "Companiesandme lead"
   recipients AppConfig.support_email
   sender {|f| %{"#{f.name}" <#{f.email}>} }
 

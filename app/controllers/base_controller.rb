@@ -79,7 +79,7 @@ class BaseController < ApplicationController
       @lead = LeadForm.new(params[:lead_form])
       if @lead.valid? and !@lead.spam?
         run_later { @lead.deliver }
-        flash[:notice] = "Thank you for contacting Companies and Me, we will respond to your inquiry shortly."
+        flash[:notice] = "Thank you for contacting Companiesandme, we will respond to your inquiry shortly."
         redirect_to lead_path
       end
     end

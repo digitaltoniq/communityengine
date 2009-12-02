@@ -1136,7 +1136,7 @@ en:
   skills: Skills
   #en: skip_this_and_go_to_your_profile: Skip this and go to your profile
   skip_this_and_go_to_your_profile: Skip this and go to your profile
-  skip_this_and_go_to_companies_and_me: Skip this and start browsing Companies and Me
+  skip_this_and_go_to_companies_and_me: Skip this and start browsing Companiesandme
   #en: skip_this_step: Skip this step
   skip_this_step: Skip this step
   #en: small_profile: "{{user}} doesn't have much here yet. Stay tuned."
