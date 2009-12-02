@@ -46,6 +46,6 @@
       $( 'height' ).value = dimensions.height;
     }
     function loadExample() {
-      new Cropper.ImgWithPreview( 'photo', { previewWrap: 'previewWrap', minWidth: 290, minHeight: 320, ratioDim: { x: 290, y: 320 }, onEndCrop: onEndCrop } );      
+      new Cropper.ImgWithPreview( 'photo', { previewWrap: 'previewWrap', minWidth: 50, minHeight: 50, ratioDim: { x: 50, y: 50 }, onEndCrop: onEndCrop } );      
     }
     Event.observe( window, 'load', function() { loadExample(); } );      
