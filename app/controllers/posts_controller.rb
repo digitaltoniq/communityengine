@@ -11,8 +11,8 @@ class PostsController < BaseController
   uses_tiny_mce(:options => AppConfig.simple_mce_options, :only => [:show])
          
   cache_sweeper :post_sweeper, :only => [:create, :update, :destroy]
-  caches_action :show, :if => Proc.new {|c| !c.logged_in? }
-  caches_action :popular, :if => Proc.new {|c| !c.logged_in? }
+  caches_action :show, :if => Proc.new {|c| c.cacheable_request? }
+  caches_action :popular, :if => Proc.new {|c| c.cacheable_request? }
                            
   before_filter :login_required, :only => [:new, :edit, :update, :destroy, :create, :manage]
   before_filter :require_representative_or_admin, :only => [:new, :create, :edit, :update, :destroy, :manage]
@@ -98,6 +98,10 @@ class PostsController < BaseController
   
   def update_views
     render :text => update_view_count(resource) ? 'updated' : 'duplicate'
+  end
+
+  def cacheable_request?
+    !logged_in? and flash.empty?
   end
   
   private
