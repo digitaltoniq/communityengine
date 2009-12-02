@@ -18,7 +18,7 @@
       = :current_feature_image.l
     = image_tag @post.feature_image.public_filename(:small) 
   %label
-    = i.label :uploaded_data, (@post.feature_image and @post.feature_image.new_record? ? 'Upload the feature image for this post' : 'Replace feature image for this post')
+    = i.label :uploaded_data, ((!@post.feature_image or @post.feature_image.new_record?) ? 'Upload the feature image for your post (Required)' : 'Replace feature image for this post')
   = i.file_field :uploaded_data, :size => "15"
 
 %label=:save_post_as.l
