@@ -39,7 +39,8 @@ class UsersController < BaseController
     if @user and @user.activate
       self.current_user = @user
       current_user.track_activity(:joined_the_site)      
-      redirect_to welcome_photo_user_path(@user)
+      redirect_back_or_default home_path
+#      redirect_to welcome_photo_user_path(@user)
       flash[:notice] = :thanks_for_activating_your_account.l
       return
     end
