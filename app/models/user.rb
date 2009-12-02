@@ -290,7 +290,7 @@ class User < ActiveRecord::Base
   end
   
   def active?
-    activation_code.nil?
+    !activated_at.nil?
   end
 
   def recently_activated?
