@@ -241,7 +241,7 @@ class CompaniesController < BaseController
 
   def get_additional_companies_page_data
     @sidebar_right = true
-    @popular_posts = Post.find_popular(:limit => 5, :since => 5.days)
+    @popular_posts = Post.find_popular(5)
     @active_users = User.active.with(:photos).find_by_activity({:limit => 5, :require_avatar => false})
   end
 end

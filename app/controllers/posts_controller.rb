@@ -80,7 +80,7 @@ class PostsController < BaseController
   #-- Custom --#
 
   def popular
-    @posts = Post.live.with(:user, :feature_image).find_popular({:limit => 10})
+    @posts = Post.find_popular(10).with(:user, :feature_image)
     respond_to do |format|
       format.html
       format.rss do

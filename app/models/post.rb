@@ -42,6 +42,7 @@ class Post < ActiveRecord::Base
   named_scope :by_featured_writers, :conditions => ["users.featured_writer = ?", true], :include => :user
   named_scope :recent, :order => 'posts.published_at DESC'
   named_scope :popular, :order => 'posts.view_count DESC'
+  named_scope :most_discussed, :order => 'posts.comments_count DESC'
   named_scope :discussed, lambda { |created_since|
     { :conditions => ["created_at > ?", created_since],
       :order => 'posts.comments_count DESC' }
@@ -70,10 +71,18 @@ class Post < ActiveRecord::Base
     self.recent.find :all, :limit => options[:limit]
   end
   
-  def self.find_popular(options = {} )
-    options.reverse_merge! :limit => 5, :since => 7.days
-    
-    self.popular.since(options[:since]).find :all, :limit => options[:limit]
+  def self.find_popular(limit = 5)
+    recent_ids = recent.limited(limit * 2).find(:all, :select => 'id').collect(&:id)
+    recent_ids.any? ?
+            popular.limited(limit).scoped(:conditions => ["id IN (?)", recent_ids]) :
+            scoped(:conditions => "1 = 0")
+  end
+
+  def self.find_most_discussed(limit = 5)
+    recent_ids = recent.limited(limit * 2).find(:all, :select => 'id').collect(&:id)
+    recent_ids.any? ?
+            most_discussed.limited(limit).scoped(:conditions => ["id IN (?)", recent_ids]) :
+            scoped(:conditions => "1 = 0")
   end
 
   def self.find_featured(options = {:limit => 10})
