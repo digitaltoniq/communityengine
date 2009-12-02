@@ -48,7 +48,11 @@
       
   #yui-main
     .yui-b
-      -box do 
+      -box do
+
+        %h3=:name.l
+        = text_field :company, :name, :size => "50"
+
         %h3=:about.l
         = text_area :company, :description, :style => "width:95%", :rows => 4
         = :character_limit.l(:length => 300)
