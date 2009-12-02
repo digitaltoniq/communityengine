@@ -1492,7 +1492,7 @@ en:
   your_post_was_deleted: Your conversation was deleted.
   #en: your_post_was_successfully_created: Your post was successfully created.
   your_post_was_successfully_created: Your conversation was successfully created.
-  your_post_was_saved_back_to_editing: "Your conversation was susccessfully saved, you are currently viewing a preview of how it will look once published.  <a href=\"{{edit_url}}\">Click here</a> to go back and make changes or publish it."
+  your_post_was_saved_back_to_editing: "Your conversation was successfully saved, you are currently viewing a preview of how it will look once published.  <a href=\"{{edit_url}}\">Click here</a> to go back and make changes or publish it."
   your_post_was_successfully_updated: "Your conversation was successfully updated."
   #en: your_profile_photo: "Your profile photo:"
   your_profile_photo: "Your profile photo:"

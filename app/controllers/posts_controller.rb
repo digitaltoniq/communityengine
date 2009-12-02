@@ -55,7 +55,7 @@ class PostsController < BaseController
   def create
     create! do |success, failure|
       success.html do
-        flash[:notice] = :your_post_was_saved_back_to_editing.l(:edit_url => edit_company_post_path(@company, @post))
+        flash[:notice] = post_message
         redirect_to whereto_next
       end
     end
@@ -64,7 +64,7 @@ class PostsController < BaseController
   def update
     update! do |success, failure|
       success.html do
-        flash[:notice] = :your_post_was_successfully_updated.l
+        flash[:notice] = post_message
         redirect_to whereto_next
       end
     end
@@ -138,7 +138,15 @@ class PostsController < BaseController
 
   def whereto_next
     submit_val = params[:commit].downcase
-    view_post = submit_val.include?('preview') or submit_val.include?('publish')
+    view_post = (submit_val.include?('preview') or submit_val.include?('publish'))
     view_post ? post_path(@post) : manage_company_posts_path(@company)
+  end
+
+  def post_message
+    submit_val = params[:commit].downcase
+    preview = submit_val.include?('preview')
+    preview ?
+            :your_post_was_saved_back_to_editing.l(:edit_url => edit_company_post_path(@company, @post)) :
+            :your_post_was_successfully_updated.l
   end
 end
