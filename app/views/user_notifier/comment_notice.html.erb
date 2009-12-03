@@ -1,16 +1,16 @@
-Hello <%= @user.first_name %>,
+<p>Hello <%= @user.first_name %>,</p>
 
-<%= @commenter %> has responded to you on your conversation, <%= @post.title %>:
+<p><%= @commenter %> has responded to you on your conversation, <%= @post.title %>:</p>
 
-<%= @comment.comment.strip_html %>
+<p><%= @comment.comment.strip_html %></p>
 
-Respond by clicking here:
+<p>Respond by clicking here:</p>
 
-<%= @url %>
+<p><%= @url %></p>
 
-We recommend responding to a handful of the most thoughtful responses to show that you're listening.
+<p>We recommend responding to a handful of the most thoughtful responses to show that you're listening.</p>
 
-Some stats for this conversation: <%= @post.view_count %> viewed it, <%= @post.comments_count %> responses left so far.
+<p>Some stats for this conversation: <%= @post.view_count %> viewed it, <%= @post.comments_count %> responses left so far.</p>
 
-Thanks for joining in,
-Your friends at Companiesandme
+<p>Thanks for joining in,
+Your friends at Companiesandme</p>

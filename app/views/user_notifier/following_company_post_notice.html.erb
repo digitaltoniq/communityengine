@@ -1,14 +1,14 @@
-Hello <%= @user %>,
+<p>Hello <%= @user %>,</p>
 
-<%= @post.user %> just posted a new conversation from <%= @company %>.
+<p><%= @post.user %> just posted a new conversation from <%= @company %>.</p>
 
-<%= @post.title %>
-<%= @post.plaintext_post.truncate_words(50) %>
+<p><%= @post.title %></p>
+<p><%= @post.plaintext_post.truncate_words(50) %></p>
 
-What do you think? Click to see the whole post and join the conversation:
+<p>What do you think? Click to see the whole post and join the conversation:</p>
 
-<%= @url %>
+<p><%= @url %></p>
 
-------------------------------------------------------------------
+<p>------------------------------------------------------------------
 Thanks for joining in,
-Your friends at Companiesandme
+Your friends at Companiesandme</p>

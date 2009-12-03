@@ -1,13 +1,13 @@
-Hello <%= @user.first_name %>,
+<p>Hello <%= @user.first_name %>,</p>
 
-<%= @comment.user %> responded to the conversation you joined with <%= Company.for_comment(@comment) %>.
+<p><%= @comment.user %> responded to the conversation you joined with <%= Company.for_comment(@comment) %>.</p>
 
-<%= @comment.comment.strip_html %>
+<p><%= @comment.comment.strip_html %></p>
 
-Like it, or have something to say?
+<p>Like it, or have something to say?</p>
 
-<%= @url %>
+<p><%= @url %></p>
 
-------------------------------------------------------------------
+<p>------------------------------------------------------------------
 Thanks for joining in,
-Your friends at Companiesandme
+Your friends at Companiesandme</p>
