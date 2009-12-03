@@ -4,6 +4,7 @@ class LikesController < BaseController
 
   def create
     current_user.likes!(likeable)
+    likeable.reload
     respond_to do |format|
       format.html { redirect_to polymorphic_path(likeable) }
       format.js { render 'toggle' }
@@ -12,6 +13,7 @@ class LikesController < BaseController
 
   def no_more
     current_user.dislikes!(likeable)
+    likeable.reload
     respond_to do |format|
       format.html { redirect_to polymorphic_path(likeable) }
       format.js { render 'toggle' }
