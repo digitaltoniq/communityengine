@@ -12,7 +12,7 @@ namespace :engine do
 
   desc 'Setup any missing files from an engine'
   task :files do
-    `echo 'module ApplicationHelper; end' > #{rails_root}/app/helpers/application_helper.rb`
+#    `echo 'module ApplicationHelper; end' > #{rails_root}/app/helpers/application_helper.rb`
   end
 end
 
