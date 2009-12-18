@@ -12,7 +12,11 @@
 #yui-main
   .yui-b
     -box :class => "hfeed" do
-      / %h3=:what_is_popular.l
+      %h3.alt.hd-txt
+        %span.ico-heart.recently-popular
+          %i
+          %b= :what_is_popular.l
       = render :partial => 'posts/post', :collection => @posts
+    %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
 
 = render :partial => 'explore'

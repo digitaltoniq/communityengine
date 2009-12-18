@@ -1,12 +1,21 @@
 .yui-b
-  %br
+  %h3.alt.hd-txt
+    %span.ico-discuss.most-discussed
+      %i
+      %b= :most_commented_posts.l
+  -box :class => "box2" do
+    .vcards
+      - most_discussed_posts.each do |post|
+        =render :partial => "posts/sidebar_post", :locals => {:post => post}
+  %p.but-wrap1= link_to "View More", "#", :class => "button1"
 
-  %h3.alt= :most_commented_posts.l
-  -box :class => "alt" do
-    - most_discussed_posts.each do |post|
-      =render :partial => "posts/sidebar_post", :locals => {:post => post}
+  %h3.alt.hd-txt
+    %span.ico-sunrise.most-recent
+      %i
+      %b= :recent_posts.l
+  -box :class => "box2" do
+    .vcards
+      - recent_posts.each do |post|
+        =render :partial => "posts/sidebar_post", :locals => {:post => post}
+  %p.but-wrap1= link_to "View More", "#", :class => "button1"
 
-  %h3.alt= :recent_posts.l
-  -box :class => "alt" do
-    - recent_posts.each do |post|
-      =render :partial => "posts/sidebar_post", :locals => {:post => post}

@@ -1,0 +1,14 @@
+
+div, span, p, a, img, li, span.someclass {
+  zoom: 1; }
+
+div.BoxAContainer {
+  height: 100%; }
+
+ul.NavMain li,
+.BoxCServicesManagerWrap .NavServices1 ul li,
+span.someclass {
+  display: inline; }
+
+form.formtastic fieldset ol li fieldset ol, form.formtastic fieldset ol li.string input, form.formtastic fieldset ol li.text textarea, form.formtastic fieldset ol li.password input, form.formtastic fieldset ol li.numeric input {
+  margin-left: -1px; }

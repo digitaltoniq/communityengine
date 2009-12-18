@@ -1,4 +1,4 @@
-%dl.vcard
+-# %dl.vcard
   %dt.photo
     = link_to image_tag(post.photo(:small), :alt=>""), post_path(post)
   %dd.fn
@@ -6,3 +6,14 @@
   %dd
     = "#{post.comments_count} comments"
     = "#{post.view_count} views"
+.vcard
+  .photo
+    = link_to image_tag(post.photo(:small), :alt=>""), post_path(post)
+  .title
+    = link_to post.title, post_path(post), :rel => 'bookmark'
+  .comments
+    = post.comments_count
+  .company
+    %span.addfollowing2
+      = link_to "Linden Street Brewery", "#"
+

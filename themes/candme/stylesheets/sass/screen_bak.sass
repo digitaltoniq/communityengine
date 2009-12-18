@@ -1,0 +1,454 @@
+html
+  background: #e2e3e6 url(/images/theme/body_bg.png) repeat-y center top
+
+
+a
+  text-decoration: none
+  color: #007dbb
+
+  &:hover
+    color: #56bef2
+
+
+h1, h2, h3
+  font-family: "Trebuchet MS", Georgia, sans-serif
+
+
+#NavBar
+  color: #FFF
+  border: none
+  border-top: 1px solid #597fa9
+
+
+#SubNavBar
+  color: #FFF
+  border: none
+  border-top: 1px solid #597fa9
+  background: #646464 url(/images/theme/subnav_bg.png) no-repeat scroll 0 0
+  height: 25px
+  padding-left: 5px
+
+
+#SearchWrapper
+  background: transparent url(/images/theme/search_bg.png) no-repeat scroll 0 0
+  width: 325px
+  height: 28px
+  margin: 0 2px 0 0
+
+
+#NavBar form input
+  vertical-align: middle
+  background: transparent none
+  padding: 6px 8px
+  color: rgb(132,132,132)
+  font-size: 13px
+  width: 280px
+  margin: 0
+
+
+#HeaderCallout
+  background: #ec7000 url(/images/theme/header_callout_bg.png) repeat-x scroll 0 0
+  height: 180px
+  border-top-right-radius: 8px
+  -moz-border-radius-topright: 8px
+  -webkit-border-radius-top-right: 8px
+
+  &.empty
+    background: #ec7000 url(/images/theme/empty_header_callout_bg.png) repeat-x scroll 0 0
+    height: 50px
+    border-top-right-radius: 8px
+    -moz-border-radius-topright: 8px
+    -webkit-border-radius-top-right: 8px
+
+
+#HeaderPhotos
+  background: transparent url(/images/theme/bagworks_photos.png) no-repeat scroll 0 0
+  height: 193px
+  width: 386px
+  position: relative
+  top: 55px
+  left: 535px
+
+
+.alt
+  background: #e7eefb url(/images/theme/light-blue-sidebar-bg.png) repeat-x scroll 0 -125px
+  border: 1px solid #94BEFF
+  border: none
+
+  h3
+    background: #efb537 none repeat scroll 0 0
+    border: medium none
+    color: #fffbf4
+    padding: 5px 10px
+
+
+h3.alt
+  background: #646464 url(/images/theme/subnav_bg.png) no-repeat scroll 0 0
+  border: medium none
+  color: #fffbf4
+  padding: 5px 10px
+  font-size: 115%
+  margin-bottom: 4px
+
+
+#doc2
+  background-color: #FFF
+  width: 970px
+  margin-top: -500px
+  margin-bottom: 10px
+
+
+#bd
+  padding: 22px 20px
+  background: #FFF url(/images/theme/top_shading.png) repeat-x scroll 0 2px
+
+
+#CommunityFooter
+  background: transparent url(/images/theme/body_wrapper_bg.png) repeat-x center top
+  padding: 10px 0px 10px 10px
+  margin: 0 auto
+  border-bottom-left-radius: 8px
+  -moz-border-radius-bottomleft: 8px
+  -webkit-border-radius-bottom-left: 8px
+  border-bottom-right-radius: 8px
+  -moz-border-radius-bottomright: 8px
+  -webkit-border-radius-bottom-right: 8px
+
+  p
+    float: right
+    padding: 0
+    background: url(/images/theme/footer_logo.png) no-repeat right center
+    color: transparent
+    margin: 0 12px 0 0
+    width: 189px
+    height: 25px
+
+
+#masthead-bg
+  background: transparent url(/images/theme/body_wrapper_bg.png) repeat-x center top
+  height: 500px
+
+
+#doc2, #CommunityFooter
+  background-color: rgba(0,0,0,0)
+
+
+
+#hd
+  border-top: 0 solid #3399CC
+
+  h1
+    height: 78px
+    margin-top: 5px
+
+  h3
+    float: right
+    margin-top: 14px
+    margin-right: 5px
+    font-size: 105%
+
+  a
+    color: #fc720d
+
+  h1 a
+    font-weight: normal
+    color: #666
+    background: transparent url(/images/theme/header-logo.png) no-repeat scroll 0 0
+    color: rgba(0,0,0,0)
+    height: 38px
+    width: 282px
+
+    &:hover
+      text-decoration: none
+
+  h2
+    margin-right: 16px
+
+    .logout
+      font-size: 65%
+
+
+#NavBar
+  background: rgba(0,0,0,0) none
+  border-style: none
+
+  ul
+    margin-top: 6px
+
+    li
+      background: rgba(0,0,0,0) url(/images/theme/inactive_nav_tab.png) no-repeat scroll 0 0
+      padding-right: 4px
+      width: 140px
+
+      a
+        padding: 8px 10px
+        color: #FFF
+        font-size: 100%
+        text-transform: none
+
+      &.current
+        background: rgba(0,0,0,0) url(/images/theme/active_nav_tab.png) no-repeat scroll 0 0
+
+      &#active a, &.current a
+        background: rgba(0,0,0,0)
+
+
+#SubNavBar ul li
+  &#active a, &.current a
+    background: rgba(0,0,0,0)
+
+
+#NavBar ul li
+  a
+    border-right: 0
+    padding: 6px 10px
+    text-align: center
+    opacity: .9
+
+  &#active a, &.current a
+
+#SubNavBar
+  border-style: none
+
+  ul
+    float: left
+
+    li
+      float: left
+
+      a
+        display: block
+        text-decoration: none
+        padding: 5px 15px
+        color: #fc720d
+        font-size: 85%
+        font-weight: normal
+        text-transform: none
+        border-right: none
+
+      &#active a, &.current a
+        text-decoration: none !important
+
+      a:hover
+        text-decoration: underline
+
+
+#hd h2
+  color: #777777
+  font-size: 16px
+  font-style: normal
+  margin-top: 17px
+
+
+#user-menu
+  padding-right: 15px
+  background: url(/plugin_assets/community_engine/images/icons/bullet_arrow_down_50.png) no-repeat right
+
+  &:hover
+    background: url(/plugin_assets/community_engine/images/icons/bullet_arrow_down.png) no-repeat right
+
+
+.hentry
+  margin: 0 0 1em
+  padding-bottom: 10px
+
+  .vcard ul li
+    border-bottom: 1px solid #ddd
+    padding: 3px 0 7px 20px
+
+
+.hfeed .hentry
+  border-bottom: 1px solid #FFDB7F
+
+
+.hentry h4
+  color: #888
+  font-size: 125%
+
+
+dl.vcard dd
+  &.member, &.post, &.rss
+    border-top: 1px solid #FFDB7F
+    margin-right: 5px
+
+
+.list li
+  border-bottom: 1px solid #FFDB7F
+
+
+div
+  &.user_list .row, &.company_list .row
+    padding: 12px 0px
+    margin: 0
+    border-top: 0
+    border-left: 0
+    border-right: 0
+
+
+.entry-content h6
+  border: none
+  text-align: left
+  margin-top: 5px
+
+  a
+    font-size: 100%
+    font-weight: bold
+    padding: 5px 2px 2px 0px
+    text-transform: none
+    background-image: none
+
+
+h6.all
+  margin: 15px 0 0 197px
+
+
+.right
+  float: left
+
+
+img.polaroid
+  border: 1px solid #DDDDDD
+  padding: 3px
+
+
+.MainForm p
+  input, button
+    border: 4px solid #EFA300
+    background: #EFB537 none repeat scroll 0 0
+    font-size: 100%
+
+  input:hover
+    background: #EFA300 none repeat scroll 0 0
+
+
+.company_list .hentry .vcard
+  width: 100%
+
+
+div.company_list div.vcard ul
+  margin-left: 0
+  font-size: 85%
+  width: 180px
+
+
+.hentry .vcard ul li
+  &.addfollowing, &.removefollowing
+    background-image: url(/plugin_assets/community_engine/images/icons/user_add.png) 
+
+
+.hfeed .hentry .vcard
+
+.hentry h4
+  margin-top: 10px
+  margin-left: 75px
+  border-bottom: 1px solid #BBC7FE
+  color: #333d6a
+  font-weight: normal
+  font-size: 20px
+  margin-top: 20px
+
+  a
+    color: #333d6a
+
+
+div.hentry div.vcard
+  img, h5 a:hover img
+    background: transparent url(/images/theme/article_border.png) no-repeat scroll 0 0
+
+
+.hentry .vcard h5 a img, .main .vcard img
+  border: none
+  margin: -21px -20px
+  padding: 25px 24px
+
+
+.hentry
+  .vcard h5 a img
+    margin: -57px 0
+
+  .mugshot
+    margin-top: -52px
+    margin-left: -15px
+
+  .vcard .mugshot a img
+    background: transparent url(/images/theme/mugshot_border.png) no-repeat scroll 0 0
+    border: none
+    padding: 19px 19px 19px 22px
+
+
+.hfeed .hentry .vcard ul, #posts .hentry .vcard ul
+  margin-top: 120px
+  margin-left: 25px
+
+
+.comments .hentry .vcard ul
+  margin-top: 20px
+  margin-left: 22px
+
+
+#comments .hentry .vcard
+  width: 15.5em
+
+  h5 a img
+    margin: -12px -15px
+    padding: 19px 22px
+    background: transparent url(/images/theme/mugshot_border.png) no-repeat scroll 0 0
+
+  ul
+    margin-left: 76px
+
+
+.entry-content
+  margin-left: 230px
+
+
+.hfeed .hentry
+  border-bottom: none
+  padding-bottom: 0
+
+
+.main h4
+  margin-left: 0
+
+
+div.main div.entry-content
+  margin-left: 210px
+
+
+.hfeed .main .vcard ul
+  margin-left: 0
+  margin-top: 10px
+
+
+div.comments
+  div.author img
+    background: transparent url(/images/theme/mugshot_border.png) no-repeat scroll 0 0
+    margin-left: -12px
+    margin-top: -10px
+    padding: 16px
+
+  .hentry
+    margin-bottom: 16px
+    min-height: 72px
+
+    .vcard
+      width: 214px
+
+      ul
+        margin-top: 2px
+        margin-left: 78px
+
+
+#CommunityFooter li
+  &#rss a
+    margin-left: 10px
+    border: none
+
+  a
+    border-right: 1px solid #CCCCCC
+
+
+div.hentry div.vcard a.addthis_button img
+  background: transparent none
+  padding: 0
+  margin-top: 10px

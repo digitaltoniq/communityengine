@@ -1,4 +1,5 @@
 - if logged_in? and Following.following_exist?(followee, current_user)
-  %li.removefollowing= add_unfollow_link(followee)
+  %span.removefollowing= add_unfollow_link(followee)
 - else
-  %li.addfollowing= add_follow_link(followee)
+  %span.addfollowing= add_follow_link(followee)
+
