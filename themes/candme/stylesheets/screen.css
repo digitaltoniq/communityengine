@@ -364,10 +364,10 @@ h3.hd-txt {
       h3.hd-txt span.sign-up b {
         background-position: 0 -440px;
         height: 40px; }
-    h3.hd-txt span.sign-up {
+    h3.hd-txt span.log-in {
       background-image: url('/images/theme/hr1.png'); }
-      h3.hd-txt span.sign-up b {
-        background-position: 0 -440px;
+      h3.hd-txt span.log-in b {
+        background-position: 0 -400px;
         height: 40px; }
     h3.hd-txt span.now-featuring {
       background-image: none;
@@ -712,3 +712,17 @@ span.removefollowing2 a {
       font-family: Georgia, serif;
       font-size: 18px;
       font-weight: bold; }
+
+.box-c-login .box-c-form .box {
+  height: auto; }
+.box-c-login .box-c-facebook {
+  margin: 50px 0 0 0; }
+.box-c-login p.f-remember {
+  float: left;
+  margin: 0 0 10px 0; }
+  .box-c-login p.f-remember input {
+    vertical-align: middle; }
+.box-c-login p.f-forgot {
+  float: right; }
+.box-c-login p.Fb {
+  clear: both; }

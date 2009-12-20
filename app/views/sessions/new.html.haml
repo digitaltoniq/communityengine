@@ -1,4 +1,40 @@
-.yui-b
+#yui-main
+  .yui-b.box-center
+    %h3.alt.hd-txt
+      %span.log-in
+        %i
+        %b= :log_in_to_site.l(:site => AppConfig.community_name)
+    
+    .box-c-signup.box-c-login
+      %p.have-account= link_to :already_have_an_account.l, "/login"
+    
+      .box-c-form
+        -box :class => 'box2' do
+          - form_tag sessions_path, :class => 'MainForm' do
+            %p.Fe.f-email
+              %label{"for"=>"email"}=:email.l
+              = text_field_tag 'login', nil, :size => 35
+            %p.Fe.f-password
+              %label{"for"=>"password"}=:password.l
+              = password_field_tag 'password', nil, :size => 35
+            %p.Fec.f-remember
+              = check_box_tag 'remember_me'
+              %label{"for"=>"remember_me"}
+                =:remember_me.l
+            %p.f-forgot
+              = link_to :forgot_your_password.l, forgot_password_url
+            %p.Fb
+              = submit_tag :log_in.l, :class => "button-login"
+      
+      .box-c-facebook
+        -box :class => 'box2' do
+          %p.title
+            Or use your Facebook account to log in
+            = fb_login
+      
+
+
+-# .yui-b
   -box do
     -#
       %h3
@@ -12,7 +48,7 @@
       or login with Facebook connect
       = fb_login
 
-#yui-main
+-# #yui-main
   .yui-b.main_column
     -box do
       %h3
@@ -37,3 +73,4 @@
             -#
               %br/
               = link_to "&raquo; " + :forgot_your_username.l, forgot_username_url
+
