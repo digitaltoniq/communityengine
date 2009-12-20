@@ -1,4 +1,92 @@
-.yui-b
+#yui-main
+  .yui-b.box-center
+    %h3.alt.hd-txt
+      %span.sign-up
+        %i
+        %b= :what_is_popular.l
+    
+    .box-c-signup
+      %p.have-account= link_to :already_have_an_account.l, "/login"
+    
+      .box-c-form
+        -box :class => 'box2' do
+          - form_for :user, :url => users_path, :html => {:class => 'MainForm'} do |f|
+          
+            = error_messages_for :user
+
+            = hidden_field_tag :inviter_id, params[:inviter_id]
+            = hidden_field_tag :inviter_code, params[:inviter_code]
+            
+            %p.Fe.f-email
+              %label{"for"=>"user_email"}
+                =:e_mail_address.l
+                -# %em=:required_we_will_send_a_confirmation_e_mail_to_the_address_you_enter.l
+              = f.text_field :email, :onKeyUp => "$('email-confirmation').update(this.value);"
+
+            %p.Fe.f-first-name
+              %label{"for"=>"user_first_name"}
+                =:first_name.l
+              = f.text_field :first_name
+
+            %p.Fe.f-last-name
+              %label{"for"=>"user_last_name"}
+                =:last_name.l
+              = f.text_field :last_name
+
+            -# if AppConfig.require_captcha_on_signup
+              .right{:style => 'margin-top:2em;'}= recaptcha_tags
+
+            %p.Fe.f-password
+              %label{"for"=>"user_password"}
+                =:type_your_password.l
+                %span.mini (minimum 6 characters)
+              = f.password_field :password
+
+            -# %p.Fe.f-password-confirm
+              %label{"for"=>"user_password_confirmation"}
+                =:re_type_your_password_to_confirm.l
+              = f.password_field :password_confirmation
+
+            %p.Fe.f-zipcode
+              %label{"for"=>"user_zipcode"}
+                = "Zip code"
+              -# = f.text_field :zipcode
+              %input#user_zipcode{"name" => "zipcode"}
+
+            %p.f-email-confirm-1
+              %label
+                =:does_your_email_look_okay.l
+            %p.f-email-confirm-2
+              %span#email-confirmation
+                = !@user.email.blank? ? @user.email : "no email address entered"
+            
+            %p.Fb
+              = submit_tag :sign_up.l, :class => "button-signup"
+      
+      .box-c-facebook
+        -box :class => 'box2' do
+          %p.title
+            Or use your Facebook account to log in
+            = fb_login
+      
+      .box-c-feature
+        -box :class => 'box1' do
+          %h3.alt.hd-txt
+            %span.now-featuring
+              %i
+              %b= "Now Featuring"
+          %p.title
+            Companies in the 
+            = "Greater SF Bay" 
+            Area
+          %p.comment
+            %strong
+              Are you visiting from somewhere else?
+            %br/
+            We're glad you're here. Sign up to find our first when Companiesandme comes to your city.
+            
+        
+-# .yui-b
   -box do
     -#
       %h3
@@ -19,7 +107,7 @@
     %p
       =:click_the_activation_link_in_the_e_mail_to_log_in.l
 
-#yui-main
+-# #yui-main
   .yui-b
     -box do
       %h3=:sign_up.l
@@ -63,3 +151,4 @@
           = !@user.email.blank? ? @user.email : "no email address entered"
         
         %p= submit_tag :sign_up.l
+

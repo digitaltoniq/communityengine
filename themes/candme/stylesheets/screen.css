@@ -117,6 +117,10 @@ div.Clear, div.clear {
   margin: 0 0 -1px 0 !important;
   font-size: 0px !important; }
 
+a {
+  color: #0099cc;
+  text-decoration: none; }
+
 body {
   background: #fff url('/images/theme/bg_body.jpg') no-repeat 50% 0%;
   height: 100%;
@@ -289,6 +293,18 @@ body {
   margin: 0 0 30px 0;
   padding: 40px 30px; }
 
+.box-center {
+  margin: 0 auto !important;
+  width: 690px !important; }
+
+.box1 {
+  margin: 0 0 1em 0;
+  border: #ddd 1px solid;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 25px 35px; }
+
 .box2 {
   margin: 0 0 1em 0;
   border: #ddd 1px solid;
@@ -343,6 +359,21 @@ h3.hd-txt {
       background-image: url('/images/theme/hr1.png'); }
       h3.hd-txt span.recently-popular b {
         background-position: 0 -80px; }
+    h3.hd-txt span.sign-up {
+      background-image: url('/images/theme/hr1.png'); }
+      h3.hd-txt span.sign-up b {
+        background-position: 0 -440px;
+        height: 40px; }
+    h3.hd-txt span.sign-up {
+      background-image: url('/images/theme/hr1.png'); }
+      h3.hd-txt span.sign-up b {
+        background-position: 0 -440px;
+        height: 40px; }
+    h3.hd-txt span.now-featuring {
+      background-image: none;
+      padding-bottom: 0; }
+      h3.hd-txt span.now-featuring b {
+        background-position: 0 -220px; }
 
 a.button1 {
   display: block;
@@ -573,3 +604,111 @@ span.removefollowing2 a {
   background: url('/images/theme/button_follow_mini_3.png') no-repeat 95% 50%; }
   span.removefollowing2 a:hover {
     background-image: url('/images/theme/button_follow_mini_4.png'); }
+
+.button-signup {
+  display: block;
+  width: 101px;
+  height: 30px;
+  border: 0 none;
+  color: transparent;
+  text-indent: -9999px;
+  background: url('/images/theme/button_signup.png') no-repeat 0 0; }
+  .button-signup:hover {
+    background-position: 0 -30px; }
+
+.button-login {
+  display: block;
+  width: 90px;
+  height: 31px;
+  border: 0 none;
+  color: transparent;
+  text-indent: -9999px;
+  background: url('/images/theme/button_login.png') no-repeat 0 0; }
+  .button-login:hover {
+    background-position: 0 -31px; }
+
+.box-c-signup {
+  overflow: hidden; }
+  .box-c-signup p.have-account {
+    margin: 0 0 0.5em 0;
+    font-size: 12px; }
+  .box-c-signup .box-c-form {
+    float: left;
+    width: 300px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #444; }
+    .box-c-signup .box-c-form .box {
+      height: 330px; }
+    .box-c-signup .box-c-form p.Fe {
+      overflow: hidden;
+      clear: both;
+      margin: 0 0 1em 0; }
+      .box-c-signup .box-c-form p.Fe label span.mini {
+        font-size: 80%; }
+      .box-c-signup .box-c-form p.Fe input {
+        width: 90%;
+        background-color: #f8f8f8;
+        padding: 3px 10px;
+        border: #d8d8d8 1px solid;
+        font-size: 16px;
+        color: #444; }
+        .box-c-signup .box-c-form p.Fe input:focus {
+          border-color: #0099cc;
+          background-color: #fff;
+          color: #0099cc; }
+      .box-c-signup .box-c-form p.Fe.f-first-name,
+      .box-c-signup .box-c-form p.Fe.f-last-name,
+      .box-c-signup .box-c-form p.Fe.f-zipcode {
+        width: 45%; }
+        .box-c-signup .box-c-form p.Fe.f-first-name input,
+        .box-c-signup .box-c-form p.Fe.f-last-name input,
+        .box-c-signup .box-c-form p.Fe.f-zipcode input {
+          width: 80px; }
+      .box-c-signup .box-c-form p.Fe.f-first-name {
+        float: left; }
+      .box-c-signup .box-c-form p.Fe.f-last-name {
+        clear: none;
+        float: right; }
+    .box-c-signup .box-c-form p.f-email-confirm-2 {
+      margin: 5px 0 10px 0;
+      font-size: 16px;
+      font-weight: bold; }
+    .box-c-signup .box-c-form p.Fb {
+      overflow: hidden; }
+      .box-c-signup .box-c-form p.Fb input {
+        float: right; }
+  .box-c-signup .box-c-facebook {
+    float: right;
+    margin-bottom: 23px;
+    width: 330px; }
+    .box-c-signup .box-c-facebook .box {
+      height: 55px;
+      margin-bottom: 0; }
+    .box-c-signup .box-c-facebook p.title {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      color: #444;
+      text-align: center; }
+    .box-c-signup .box-c-facebook .FB_login_button a {
+      display: block;
+      margin: 1em auto 0;
+      width: 176px;
+      height: 25px;
+      background: url('/images/theme/button_facebook_login.png') no-repeat 0 0; }
+      .box-c-signup .box-c-facebook .FB_login_button a img {
+        display: none; }
+  .box-c-signup .box-c-feature {
+    float: right;
+    width: 330px;
+    font-size: 12px;
+    color: #333; }
+    .box-c-signup .box-c-feature .box {
+      height: 200px; }
+    .box-c-signup .box-c-feature h3 {
+      margin: 0 0 1.5em 0; }
+    .box-c-signup .box-c-feature p.title {
+      margin: 0 0 0.5em 0;
+      font-family: Georgia, serif;
+      font-size: 18px;
+      font-weight: bold; }

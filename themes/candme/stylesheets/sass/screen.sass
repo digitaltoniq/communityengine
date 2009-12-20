@@ -15,6 +15,9 @@
 !color1 = #09c
 !color2 = #d9f4ef
 
+a
+  color = !color1
+  text-decoration: none
 
 body
   background: #fff url('/images/theme/bg_body.jpg') no-repeat 50% 0%
@@ -198,6 +201,16 @@ body
   margin: 0 0 30px 0
   padding: 40px 30px
 
+.box-center
+  margin: 0 auto !important
+  width: 690px !important
+
+.box1
+  margin: 0 0 1em 0
+  border: #ddd 1px solid
+  +round-borders(10px)
+  padding: 25px 35px
+  
 .box2
   margin: 0 0 1em 0
   border: #ddd 1px solid
@@ -255,7 +268,23 @@ h3.hd-txt
       background-image: url('/images/theme/hr1.png')
       b
         background-position: 0 -80px
-      
+    &.sign-up
+      background-image: url('/images/theme/hr1.png')
+      b
+        background-position: 0 -440px
+        height: 40px
+    &.sign-up
+      background-image: url('/images/theme/hr1.png')
+      b
+        background-position: 0 -440px
+        height: 40px
+    &.now-featuring
+      background-image: none
+      padding-bottom: 0
+      b
+        background-position: 0 -220px
+
+
 a.button1
   display: block
   margin: 0 0 1em 0 
@@ -275,6 +304,10 @@ p.but-wrap1
   overflow: hidden
   a
     float: right
+
+
+
+
 
 .hfeed
   .hentry
@@ -491,4 +524,115 @@ span.removefollowing2
     &:hover
       background-image: url('/images/theme/button_follow_mini_4.png')
   
-  
+.button-signup
+  display: block
+  width: 101px
+  height: 30px
+  border: 0 none
+  color: transparent
+  text-indent: -9999px
+  background: url('/images/theme/button_signup.png') no-repeat 0 0
+  &:hover
+    background-position: 0 -30px
+
+.button-login
+  display: block
+  width: 90px
+  height: 31px
+  border: 0 none
+  color: transparent
+  text-indent: -9999px
+  background: url('/images/theme/button_login.png') no-repeat 0 0
+  &:hover
+    background-position: 0 -31px
+
+.box-c-signup
+  overflow: hidden
+  p.have-account
+    margin: 0 0 0.5em 0
+    font-size: 12px
+  .box-c-form
+    float: left
+    width: 300px
+    +font_arial
+    font-size: 12px
+    color: #444
+    .box
+      height: 330px
+    p.Fe
+      overflow: hidden
+      clear: both
+      margin: 0 0 1em 0
+      label
+        span.mini
+          font-size: 80%
+      input
+        width: 90%
+        background-color: #f8f8f8
+        padding: 3px 10px
+        border: #d8d8d8 1px solid
+        font-size: 16px
+        color: #444
+        &:focus
+          border-color= !color1
+          background-color: #fff
+          color = !color1
+      &.f-first-name,
+      &.f-last-name,
+      &.f-zipcode
+        width: 45%
+        input
+          width: 80px
+      &.f-first-name
+        float: left
+      &.f-last-name
+        clear: none
+        float: right
+      &.f-zipcode
+    p.f-email-confirm-1
+    p.f-email-confirm-2
+      margin: 5px 0 10px 0
+      font-size: 16px
+      font-weight: bold
+    p.Fb
+      overflow: hidden
+      input
+        float: right
+  .box-c-facebook
+    float: right
+    margin-bottom: 23px
+    width: 330px
+    .box
+      height: 55px
+      margin-bottom: 0
+    p.title
+      +font_arial
+      font-size: 12px
+      color: #444
+      text-align: center
+    .FB_login_button
+      a
+        display: block
+        margin: 1em auto 0
+        width: 176px
+        height: 25px
+        background: url('/images/theme/button_facebook_login.png') no-repeat 0 0
+        img
+          display: none
+  .box-c-feature
+    float: right
+    width: 330px
+    font-size: 12px
+    color: #333
+    .box
+      height: 200px
+    h3
+      margin: 0 0 1.5em 0
+    p.title
+      margin: 0 0 0.5em 0
+      +font_georgia
+      font-size: 18px
+      font-weight: bold
+    p.comment
+    
+
