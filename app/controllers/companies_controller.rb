@@ -241,7 +241,10 @@ class CompaniesController < BaseController
 
   def get_additional_companies_page_data
     @sidebar_right = true
-    @popular_posts = Post.find_popular(5)
-    @active_users = User.active.with(:photos).find_by_activity({:limit => 5, :require_avatar => false})
+    # @popular_posts = Post.find_popular(5)
+    # @active_users = User.active.with(:photos).find_by_activity({:limit => 5, :require_avatar => false})
+    # TODO: define conditions for popular companies
+    @popular_companies = Company.recent
+    @new_companies = Company.recent
   end
 end

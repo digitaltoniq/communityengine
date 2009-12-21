@@ -281,7 +281,7 @@ body {
   width: 290px; }
 
 .yui-t6 #yui-main .yui-b {
-  margin-right: 300px; }
+  margin-right: 328px; }
 
 #bd {
   overflow: hidden;
@@ -355,6 +355,8 @@ h3.hd-txt {
       background-position: 0 0px; }
     h3.hd-txt span.most-recent b {
       background-position: 0 -20px; }
+    h3.hd-txt span.new-companies b {
+      background-position: 0 -100px; }
     h3.hd-txt span.recently-popular {
       background-image: url('/images/theme/hr1.png'); }
       h3.hd-txt span.recently-popular b {
@@ -726,3 +728,79 @@ span.removefollowing2 a {
   float: right; }
 .box-c-login p.Fb {
   clear: both; }
+
+.box-c-companies-recently-popular {
+  margin: 0 0 1em 0; }
+  .box-c-companies-recently-popular .entry {
+    overflow: hidden;
+    padding: 30px 0 40px 0;
+    background: url('/images/theme/hr1.png') no-repeat 0 100%; }
+    .box-c-companies-recently-popular .entry p.logo {
+      float: left;
+      width: 200px; }
+      .box-c-companies-recently-popular .entry p.logo img {
+        display: block;
+        padding: 5px;
+        border: #ccc 1px solid;
+        max-width: 180px;
+        margin: 0 auto; }
+    .box-c-companies-recently-popular .entry p.name {
+      font-family: Georgia, serif;
+      font-size: 25px;
+      font-weight: bold;
+      font-style: italic;
+      line-height: 1.2; }
+      .box-c-companies-recently-popular .entry p.name a {
+        color: #333; }
+    .box-c-companies-recently-popular .entry p.location {
+      margin: 0 0 1em 0;
+      font-size: 15px;
+      color: #666; }
+    .box-c-companies-recently-popular .entry p.stats {
+      clear: both;
+      float: left;
+      margin: -15px 0 0 200px;
+      font-size: 11px;
+      color: #666; }
+      .box-c-companies-recently-popular .entry p.stats span {
+        float: left;
+        padding: 0 0 0 20px; }
+        .box-c-companies-recently-popular .entry p.stats span.conversations {
+          margin: 0 20px 0 0;
+          background: url('/images/theme/ico_discuss_micro.png') no-repeat 0 50%; }
+        .box-c-companies-recently-popular .entry p.stats span.following {
+          background: url('/images/theme/ico_heart_micro.png') no-repeat 0 50%; }
+    .box-c-companies-recently-popular .entry p.link-follow {
+      float: right;
+      margin: -30px 0 0 0; }
+
+.box-c-companies-new-companies {
+  overflow: hidden;
+  margin: 0 0 1em 0; }
+  .box-c-companies-new-companies .entry {
+    overflow: hidden;
+    margin: -15px 0 15px;
+    padding: 25px 0 10px 0;
+    background: url('/images/theme/hr2.png') no-repeat 0% 0%; }
+    .box-c-companies-new-companies .entry p.logo {
+      float: left;
+      margin: 0 10px 0 0; }
+      .box-c-companies-new-companies .entry p.logo img {
+        display: block;
+        padding: 5px;
+        border: #ccc 1px solid;
+        max-width: 50px; }
+    .box-c-companies-new-companies .entry p.name {
+      font-family: Georgia, serif;
+      font-size: 15px;
+      font-weight: bold;
+      font-style: italic;
+      line-height: 1.2; }
+      .box-c-companies-new-companies .entry p.name a {
+        color: #333; }
+    .box-c-companies-new-companies .entry p.joined {
+      margin: 0 0 1em 0;
+      font-size: 11px;
+      color: #666; }
+    .box-c-companies-new-companies .entry p.link-follow {
+      float: right; }

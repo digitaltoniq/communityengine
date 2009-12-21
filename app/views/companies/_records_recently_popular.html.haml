@@ -1,0 +1,21 @@
+.box-c-companies-recently-popular
+  - companies.each do |company|
+    .entry
+      %p.logo
+        = link_to image_tag( company.logo_photo_url(:medium), :class => "polaroid" ), company_path(company)
+      %p.name
+        = link_to company.name, company_path(company)
+      - if company.metro_area
+        %p.location
+          = company.location
+      .Clear
+      %p.stats
+        %span.conversations
+          -# TODO: change to real data
+          = link_to "12 Conversations", "#"
+        %span.following
+          -# TODO: change to real data
+          = "1,234 Following"
+      %p.link-follow
+        = render :partial => 'followings/follow_link', :locals => {:followee => company}
+

@@ -5,6 +5,23 @@
 
 #yui-main
   .yui-b
+    %h3.alt.hd-txt
+      %span.ico-heart.recently-popular
+        %i
+        %b= "Recently Popular"
+    -box do
+      = render :partial => "records_recently_popular", :locals => { :companies => @popular_companies }
+    -# TODO: Add link
+    %p.but-wrap1
+      = link_to "Prev. Page", "#", :class => "button1 FlLeft"
+      = link_to "Next Page", "#", :class => "button1"
+
+= render :partial => 'explore'
+
+
+
+-# #yui-main
+  .yui-b
     -box :class => "company_list" do
       / %h3=:companies.l :site => AppConfig.community_name
 
@@ -19,4 +36,4 @@
       = will_paginate @companies
       /.pagination= paginating_links @companies, :params => params if @companies.page_count > 1
 
-= render :partial => 'explore'
+

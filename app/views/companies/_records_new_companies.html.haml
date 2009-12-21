@@ -1,0 +1,12 @@
+.box-c-companies-new-companies
+  - companies.each do |company|
+    .entry
+      %p.logo
+        = link_to image_tag( company.logo_photo_url(:small), :class => "polaroid" ), company_path(company)
+      %p.name
+        = link_to company.name, company_path(company)
+      %p.joined
+        = :joined.l + " #{time_ago_in_words company.created_at}"
+      %p.link-follow
+        = render :partial => 'followings/follow_link', :locals => {:followee => company}
+
