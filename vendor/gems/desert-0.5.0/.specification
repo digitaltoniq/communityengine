@@ -12,7 +12,7 @@ autorequire:
 bindir: bin
 cert_chain: []
 
-date: 2009-04-08 00:00:00 -04:00
+date: 2009-04-08 08:00:00 +04:00
 default_executable: 
 dependencies: []
 
@@ -71,6 +71,7 @@ files:
 - lib/desert/version_checker.rb
 has_rdoc: true
 homepage: http://pivotallabs.com
+licenses: 
 post_install_message: 
 rdoc_options: 
 - --main
@@ -94,7 +95,7 @@ required_rubygems_version: !ruby/object:Gem::Requirement
 requirements: []
 
 rubyforge_project: desert
-rubygems_version: 1.3.1
+rubygems_version: 1.3.5
 signing_key: 
 specification_version: 2
 summary: Desert is a component framework for Rails that allows your plugins to be packaged as mini Rails apps.

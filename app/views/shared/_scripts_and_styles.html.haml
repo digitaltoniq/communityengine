@@ -24,6 +24,7 @@
 
 -# DJS
 = stylesheet_link_tag 'theme/screen'
+= stylesheet_link_tag "formtastic", "formtastic_changes"
 
 - if current_page?({:controller => 'posts', :action => 'show' })
   = javascript_include_tag 'lightbox', :plugin => "community_engine"

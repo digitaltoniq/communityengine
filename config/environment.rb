@@ -32,6 +32,7 @@ Rails::Initializer.run do |config|
   config.gem "thoughtbot-factory_girl", :lib => "factory_girl", :source => "http://gems.github.com"
   config.gem 'flickr-fu', :lib => 'flickr_fu'
   config.gem 'xml-magic', :lib => 'xml_magic'
+  config.gem 'formtastic'
 
 
   # Settings in config/environments/* take precedence over those specified here.
@@ -78,6 +79,7 @@ end
 
 # SASS Support for themes
 Sass::Plugin.options[:template_location] = {
+   "#{RAILS_ROOT}/public/stylesheets/sass" => "#{RAILS_ROOT}/public/stylesheets", 
    "#{RAILS_ROOT}/themes/#{AppConfig.theme}/stylesheets/sass" => "#{RAILS_ROOT}/themes/#{AppConfig.theme}/stylesheets"
 }
 
