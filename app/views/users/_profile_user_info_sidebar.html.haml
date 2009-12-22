@@ -1,18 +1,29 @@
--box :class => 'hentry', :id => 'profile_details' do
-  %h3
-    = link_to h(@user), user_path(@user)
-    - if current_user == @user
-      = " <small>(#{link_to(:edit.l, edit_user_path(@user))})</small>"
-
-  .centered
+.box-c-user-profile-short
+  -box :class => 'box2', :id => 'profile_details' do
+    %p.photo
+      = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid")
     - if @is_current_user
-      - if @user.avatar
-        = link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)
-      - else 
-        =:no_profile_photo.l
-        = link_to :click_here_to_upload_one.l, edit_user_path(@user)
-      %br        
+      %p.photo-link
+        - if @user.avatar
+          = link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)
+        - else 
+          =:no_profile_photo.l
+          = link_to :click_here_to_upload_one.l, edit_user_path(@user)
+    %h3.name
+      = link_to h(@user), user_path(@user)
+      - if current_user == @user
+        %small
+          = "(#{link_to(:edit.l, edit_user_path(@user))})"
+    %p.location
+      -# TODO: Change to real data
+      = "Cary, NC"
+    
+    .hr
+    
+    - if @user.description
+      %p.about= @user.description
+
     -# if current_user.facebook_user?
       = "<fb:profile-pic uid=\"#{current_user.fb_user_id}\" facebook-logo=\"true\" size=\"normal\" linked=\"false\"></fb:profile-pic>"
     -# else
-    = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid")
+

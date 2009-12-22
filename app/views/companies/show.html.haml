@@ -1,33 +1,40 @@
 - @sidebar_left = true
 
 .yui-b
-  -box do
-    = render :partial => 'profile_company_info_sidebar', :locals => {:company => @company}
-
-  - if @company.description
-    -box :id => "about_me" do
-      %h3
-        =:about_company.l
-      %p= @company.description
+  = render :partial => 'profile_company_info_sidebar', :locals => {:company => @company}
+  = render :partial => 'users_participating', :locals => {:company => @company}
 
 #yui-main
   .yui-b
 
     - unless @recent_posts.empty?
       -box :id => "posts" do
-        %h3=:recent_company_blog_posts.l
-        = render :partial => 'posts/post', :collection => @recent_posts
-        %h6.right.all= link_to :view_company_blog.l, company_posts_path(@company)
-
-
+        %h3.alt.hd-txt
+          %span.ico-sunrise.recent-coversations
+            %i
+            %b= "Recent Coversations"
+        = render :partial => 'posts/posts', :locals => { :posts => @recent_posts }
+      
+      -# TODO: Make real pagination here
+      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+        
     - unless @post_comments.empty?
-      -box :class => 'hfeed comments', :id => 'comments' do
-        %h3=:recent_company_post_comments.l(:company_name => @company.name)
-        %a#newest_comment
-        = render :partial => 'comments/comment', :collection => @post_comments
-        %span#more_comments_links= more_company_representative_comments_links(@company, @post_comments)
+      -box :id => "comments" do
+        %h3.alt.hd-txt
+          %span.ico-discuss.recent-responses
+            %i
+            %b= "Recent Responses"
+        = render :partial => 'comments/comments', :locals => { :comments => @post_comments }
+      
+      -# TODO: Make real pagination here
+      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
 
     - if @recent_posts.empty? and @post_comments.empty?
       -box :id => 'posts' do
-        %h3=:recent_company_blog_posts.l
-        We're working on our first conversation. Follow us to hear first when it's ready.
+        %h3.alt.hd-txt
+          %span.ico-sunrise.recent-coversations
+            %i
+            %b= "Recent Coversations"
+        %p We're working on our first conversation. Follow us to hear first when it's ready.
+
+

@@ -283,6 +283,12 @@ body {
 .yui-t6 #yui-main .yui-b {
   margin-right: 328px; }
 
+.yui-t3 .yui-b {
+  width: 270px; }
+
+.yui-t3 #yui-main .yui-b {
+  margin-left: 300px; }
+
 #bd {
   overflow: hidden;
   border: #d7d7d7 1px solid;
@@ -313,6 +319,24 @@ body {
   -webkit-border-radius: 10px;
   padding: 25px 35px;
   background-color: #d9f4ef; }
+
+.box3 {
+  margin: 0 0 1em 0;
+  border: #ddd 1px solid;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 25px 35px;
+  background-color: #efefef; }
+
+.box4 {
+  margin: 0 0 1em 0;
+  border: #ddd 1px solid;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  padding: 25px 35px;
+  background-color: #f9f4e2; }
 
 h3.hd-txt {
   margin: 0 0 0.5em 0; }
@@ -357,10 +381,26 @@ h3.hd-txt {
       background-position: 0 -20px; }
     h3.hd-txt span.new-companies b {
       background-position: 0 -100px; }
+    h3.hd-txt span.following b {
+      background-position: 0 -240px; }
+    h3.hd-txt span.who-is-participating b {
+      background-position: 0 -140px; }
     h3.hd-txt span.recently-popular {
       background-image: url('/images/theme/hr1.png'); }
       h3.hd-txt span.recently-popular b {
         background-position: 0 -80px; }
+    h3.hd-txt span.recent-followed-coversations {
+      background-image: url('/images/theme/hr1.png'); }
+      h3.hd-txt span.recent-followed-coversations b {
+        background-position: 0 -120px; }
+    h3.hd-txt span.recent-coversations {
+      background-image: url('/images/theme/hr1.png'); }
+      h3.hd-txt span.recent-coversations b {
+        background-position: 0 -40px; }
+    h3.hd-txt span.recent-responses {
+      background-image: url('/images/theme/hr1.png'); }
+      h3.hd-txt span.recent-responses b {
+        background-position: 0 -60px; }
     h3.hd-txt span.sign-up {
       background-image: url('/images/theme/hr1.png'); }
       h3.hd-txt span.sign-up b {
@@ -397,69 +437,69 @@ p.but-wrap1 {
   p.but-wrap1 a {
     float: right; }
 
-.hfeed .hentry {
+.box-c-posts-list .entry {
   overflow: hidden;
   margin: 0 0 10px 0;
   padding: 0 0 20px 0;
   background: url('/images/theme/hr1.png') no-repeat 0 100%; }
-  .hfeed .hentry h4.entry-title {
+  .box-c-posts-list .entry h4.entry-title {
     font-family: Georgia, serif;
     font-size: 25px;
     font-weight: bold;
     font-style: italic; }
-    .hfeed .hentry h4.entry-title a {
+    .box-c-posts-list .entry h4.entry-title a {
       color: #444;
       text-decoration: none; }
-  .hfeed .hentry .author .mugshot {
+  .box-c-posts-list .entry .author .mugshot {
     float: left;
     margin: 0 5px 5px 0; }
-    .hfeed .hentry .author .mugshot a.photo {
+    .box-c-posts-list .entry .author .mugshot a.photo {
       display: block;
       background: url('/images/theme/frame_image_25x25.png') no-repeat 50% 50%;
       padding: 3px;
       width: 20px;
       height: 20px; }
-      .hfeed .hentry .author .mugshot a.photo img {
+      .box-c-posts-list .entry .author .mugshot a.photo img {
         display: block;
         height: 20px;
         width: 20px; }
-  .hfeed .hentry .author p.author-details {
+  .box-c-posts-list .entry .author p.author-details {
     margin: 0 0 5px 0;
     font-size: 11px;
     line-height: 26px;
     color: #666; }
-    .hfeed .hentry .author p.author-details span {
+    .box-c-posts-list .entry .author p.author-details span {
       margin: 0 5px 0 0; }
-      .hfeed .hentry .author p.author-details span.name a {
+      .box-c-posts-list .entry .author p.author-details span.name a {
         color: #0099cc;
         text-decoration: none; }
-  .hfeed .hentry .author h5 {
+  .box-c-posts-list .entry .author h5 {
     clear: both;
     float: left;
     margin: 0 15px 15px 0; }
-    .hfeed .hentry .author h5 a.photo {
+    .box-c-posts-list .entry .author h5 a.photo {
       overflow: hidden;
       display: block;
       background: url('/images/theme/frame_image_288x213.png') no-repeat 50% 50%;
       padding: 5px;
       width: 278px;
       height: 203px; }
-      .hfeed .hentry .author h5 a.photo img {
+      .box-c-posts-list .entry .author h5 a.photo img {
         display: block;
         width: 278px;
         height: 203px; }
-  .hfeed .hentry .author ul li {
+  .box-c-posts-list .entry .author ul li {
     display: none; }
-  .hfeed .hentry .entry-links h6 {
+  .box-c-posts-list .entry .entry-links h6 {
     margin: 1em 0 0 0;
     text-transform: capitalize; }
-    .hfeed .hentry .entry-links h6 a {
+    .box-c-posts-list .entry .entry-links h6 a {
       color: #0099cc;
       text-decoration: none; }
-  .hfeed .hentry .entry-links p.comments {
+  .box-c-posts-list .entry .entry-links p.comments {
     float: right;
     margin: -1em 0 0 0; }
-    .hfeed .hentry .entry-links p.comments a {
+    .box-c-posts-list .entry .entry-links p.comments a {
       display: block;
       height: 15px;
       line-height: 15px;
@@ -468,7 +508,7 @@ p.but-wrap1 {
       font-size: 12px;
       color: #888;
       text-decoration: none; }
-  .hfeed .hentry .entry-links p.details {
+  .box-c-posts-list .entry .entry-links p.details {
     overflow: hidden;
     display: block;
     clear: right;
@@ -481,22 +521,23 @@ p.but-wrap1 {
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;
     border: #ccc 1px solid; }
-    .hfeed .hentry .entry-links p.details span {
+    .box-c-posts-list .entry .entry-links p.details span {
       display: block;
       color: #444;
       line-height: 1.3; }
-      .hfeed .hentry .entry-links p.details span.details1 {
+      .box-c-posts-list .entry .entry-links p.details span.name {
         float: left;
         font-family: Georgia, serif;
         font-style: italic;
         font-size: 14px; }
-      .hfeed .hentry .entry-links p.details span.location {
+      .box-c-posts-list .entry .entry-links p.details span.location {
         clear: left;
         float: left;
         font-family: Helvetica, sans-serif;
         font-size: 10px; }
-      .hfeed .hentry .entry-links p.details span.button-follow {
+      .box-c-posts-list .entry .entry-links p.details span.button-follow {
         float: right; }
+
 
 .vcards {
   overflow: hidden; }
@@ -804,3 +845,216 @@ span.removefollowing2 a {
       color: #666; }
     .box-c-companies-new-companies .entry p.link-follow {
       float: right; }
+
+.box-c-comments-list {
+  overflow: hidden; }
+  .box-c-comments-list .entry {
+    overflow: hidden;
+    padding: 15px; }
+    .box-c-comments-list .entry .author {
+      overflow: hidden;
+      float: left;
+      width: 180px;
+      margin: 0 20px 0 0; }
+      .box-c-comments-list .entry .author p.photo {
+        float: left;
+        margin: 0 10px 10px 0; }
+        .box-c-comments-list .entry .author p.photo a {
+          display: block;
+          background: url('/images/theme/frame_image_68x68.png') no-repeat 50% 50%;
+          padding: 4px;
+          width: 60px;
+          height: 60px; }
+          .box-c-comments-list .entry .author p.photo a img {
+            display: block;
+            height: 60px;
+            width: 60px; }
+      .box-c-comments-list .entry .author p.name {
+        margin: 0 0 5px 0;
+        font-family: Georgia, serif;
+        font-size: 16px;
+        font-weight: bold;
+        font-style: italic;
+        line-height: 1.2; }
+        .box-c-comments-list .entry .author p.name a {
+          color: #777; }
+      .box-c-comments-list .entry .author p.location {
+        margin: 0 0 5px 0;
+        color: #777; }
+      .box-c-comments-list .entry .author p.posted {
+        clear: both;
+        font-size: 13px;
+        line-height: 1.2;
+        color: #555; }
+      .box-c-comments-list .entry .author p.about {
+        font-family: Georgia, serif;
+        font-size: 13px;
+        font-weight: bold;
+        font-style: italic;
+        line-height: 1.2;
+        color: #444; }
+    .box-c-comments-list .entry .comment {
+      overflow: hidden; }
+      .box-c-comments-list .entry .comment .content {
+        clear: both; }
+      .box-c-comments-list .entry .comment p.likes {
+        margin: 0 0 1em 0;
+        padding: 0 0 0 30px;
+        background: url('/images/theme/ico_check.png') no-repeat 0% 50%;
+        font-size: 12px;
+        color: #666; }
+      .box-c-comments-list .entry .comment p.i-like {
+        float: right;
+        margin: 0 0 1em 0; }
+    .box-c-comments-list .entry p.control-links {
+      overflow: hidden;
+      clear: both;
+      margin: 1em 0 0 0; }
+      .box-c-comments-list .entry p.control-links span {
+        display: block;
+        float: right;
+        margin: 0 0 0 10px;
+        padding: 0 0 0 20px; }
+      .box-c-comments-list .entry p.control-links span.delete {
+        background: url('/images/theme/ico_delete_x.png') no-repeat 0% 50%;
+        font-size: 12px; }
+        .box-c-comments-list .entry p.control-links span.delete a:hover {
+          text-decoration: underline; }
+
+a.button-i-like-this,
+a.button-liked-it {
+  display: block;
+  width: 72px;
+  height: 26px;
+  background: url('/images/theme/button_like.png') no-repeat 0% 0%;
+  text-indent: -9999px; }
+
+a.button-i-like-this:hover {
+  background-position: 0 -26px; }
+
+a.button-liked-it {
+  width: 66px;
+  background-position: 0 -78px; }
+  a.button-liked-it:hover {
+    background-position: 0 -52px; }
+
+.box-c-user-profile-short {
+  text-align: center; }
+  .box-c-user-profile-short .box2 {
+    padding: 15px; }
+  .box-c-user-profile-short p.photo img {
+    display: block;
+    margin: 0 auto;
+    border: #bbb 1px solid;
+    padding: 3px; }
+  .box-c-user-profile-short p.photo-link {
+    margin: 5px 0;
+    font-size: 11px; }
+  .box-c-user-profile-short h3.name {
+    font-family: Georgia, serif;
+    font-size: 19px;
+    font-weight: bold;
+    font-style: italic;
+    color: #333; }
+    .box-c-user-profile-short h3.name a {
+      color: #333; }
+    .box-c-user-profile-short h3.name small {
+      font-size: 11px; }
+      .box-c-user-profile-short h3.name small a {
+        color: #0099cc; }
+  .box-c-user-profile-short p.location {
+    color: #666; }
+  .box-c-user-profile-short p.about {
+    color: #777; }
+  .box-c-user-profile-short .hr {
+    margin: 10px 0;
+    height: 11px;
+    background: url('/images/theme/hr2.png') no-repeat 0 0; }
+
+.box-c-user-followed-companies .box2 {
+  padding: 15px; }
+.box-c-user-followed-companies h3 {
+  margin-left: 20px; }
+.box-c-user-followed-companies .companies {
+  overflow: hidden; }
+  .box-c-user-followed-companies .companies .item {
+    float: left;
+    width: 33%;
+    margin: 0 0 5px 0; }
+    .box-c-user-followed-companies .companies .item img {
+      display: block;
+      margin: 0 auto;
+      border: #bbb 1px solid;
+      padding: 3px;
+      max-width: 50px; }
+
+.box-c-company-profile-short {
+  text-align: center; }
+  .box-c-company-profile-short .box3 {
+    padding: 15px; }
+  .box-c-company-profile-short p.photo {
+    margin: 0 0 10px 0; }
+    .box-c-company-profile-short p.photo img {
+      display: block;
+      margin: 0 auto;
+      border: #bbb 1px solid;
+      padding: 3px;
+      max-width: 230px; }
+  .box-c-company-profile-short h3.name {
+    font-family: Georgia, serif;
+    font-size: 19px;
+    font-weight: bold;
+    font-style: italic;
+    color: #111; }
+    .box-c-company-profile-short h3.name a {
+      color: #111; }
+    .box-c-company-profile-short h3.name small {
+      font-size: 11px; }
+      .box-c-company-profile-short h3.name small a {
+        color: #0099cc; }
+  .box-c-company-profile-short p.description {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.3; }
+  .box-c-company-profile-short p.location {
+    margin: 0 0 10px 0;
+    color: #666; }
+  .box-c-company-profile-short .hr {
+    margin: 10px 0;
+    height: 11px;
+    background: url('/images/theme/hr2.png') no-repeat 0 0; }
+  .box-c-company-profile-short p.follow-link {
+    width: 90px;
+    margin: 0 auto; }
+
+.box-c-company-representatives {
+  overflow: hidden; }
+  .box-c-company-representatives .box4 {
+    padding: 25px 10px 25px 25px; }
+  .box-c-company-representatives h3 {
+    margin-left: 20px; }
+  .box-c-company-representatives .entry {
+    overflow: hidden;
+    margin: 0 0 10px 0; }
+    .box-c-company-representatives .entry p {
+      color: #666; }
+      .box-c-company-representatives .entry p.photo {
+        float: left;
+        width: 56px;
+        margin: 0 10px 0 0; }
+        .box-c-company-representatives .entry p.photo img {
+          display: block;
+          border: #bbb 1px solid;
+          padding: 3px;
+          width: 50px; }
+      .box-c-company-representatives .entry p.name {
+        margin: 10px 0 0 0;
+        font-family: Georgia, serif;
+        font-size: 15px;
+        font-weight: bold;
+        font-style: italic;
+        line-height: 1.2; }
+        .box-c-company-representatives .entry p.name a {
+          color: #666; }
+      .box-c-company-representatives .entry p.details {
+        font-size: 12px; }

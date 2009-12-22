@@ -1,13 +1,15 @@
 - if logged_in?
 
   - likes = current_user.likes?(likeable)
-  - other_likes = likeable.likes_count - (likes ? 1 : 0)
+  -# other_likes = likeable.likes_count - (likes ? 1 : 0)
   - likeable_dom_id = "likeable_#{likeable.id}_toggle"
 
   - if !likes
-    = link_to_remote(:like_it.l, {:url => user_likes_path(likeable), :method => :post, :success => visual_effect(:highlight, likeable_dom_id), 500 => 'alert(\'Sorry, there was a server error\'); return false'} )
+    = link_to_remote("I like this", {:url => user_likes_path(likeable), :method => :post, :success => visual_effect(:highlight, likeable_dom_id), 500 => 'alert(\'Sorry, there was a server error\'); return false'}, :class => 'button-i-like-this' )
   - else
-    = link_to_remote(:you_like_this.l, {:url => user_dislikes_path(likeable), :method => :delete, :success => visual_effect(:highlight, likeable_dom_id), 500 => 'alert(\'Sorry, there was a server error\'); return false'} )
+    = link_to_remote("Liked it", {:url => user_dislikes_path(likeable), :method => :delete, :success => visual_effect(:highlight, likeable_dom_id), 500 => 'alert(\'Sorry, there was a server error\'); return false'}, :class => 'button-liked-it' )
+
+-#
   %br/
   - if other_likes > 0
     = :other_people_like_this.l(:count => other_likes)
@@ -15,3 +17,4 @@
 - else
   - if(likes_count = likeable.likes_count) > 0
     = :people_like_this.l(:count => likes_count)
+

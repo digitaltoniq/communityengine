@@ -1,0 +1,16 @@
+.box-c-company-representatives
+  %h3.alt.hd-txt
+    %span.who-is-participating
+      %i
+      %b= "Who is Participating"
+  - box :class => 'box4' do
+    - @company.representatives.active.each do |representative|
+      .entry
+        %p.photo
+          = link_to image_tag(representative.avatar_photo_url(:small), :alt => "#{representative}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{representative}'s profile"
+        %p.name
+          = link_to representative, representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{representative}'s profile"
+        %p.details
+          -# TODO: Change to real data
+          = "CSR Representative"
+

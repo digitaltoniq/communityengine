@@ -1,7 +1,37 @@
--if comment.user
-  .hentry{:id => "comment_#{comment.id}"}
-    .vcard.author
-      %h5= link_to image_tag(comment.user.avatar_photo_url(:small), :alt => "#{comment.user}"), user_path(comment.user), :rel => 'bookmark', :class => 'photo', :title => "#{comment.user}'s profile"
+- if comment.user
+  .entry.box2{:id => "comment_#{comment.id}"}
+    .author
+      %p.photo
+        = link_to image_tag(comment.user.avatar_photo_url(:small), :alt => "#{comment.user}"), user_path(comment.user), :rel => 'bookmark', :class => 'photo', :title => "#{comment.user}'s profile"
+      %p.name
+        = link_to comment.user, user_path(comment.user), :class => 'url'
+      %p.location
+        -# TODO: Change to real data
+        = "Brewer"
+      %p.posted
+        = "Posted #{time_ago_in_words(comment.created_at)} about"
+      %p.about
+        -# TODO: Change to real data
+        = "Plastic Made From Wrappers"
+    
+    .comment
+      %p.i-like{:id => "likeable_#{comment.id}_toggle"}
+        = render :partial => 'likeable/toggle', :locals => { :likeable => comment }
+      %p.likes
+        = "#{comment.likes_count} person likes this"
+      .content
+        = comment.comment
+    
+    %p.control-links
+      - if ( comment.can_be_deleted_by(current_user) )
+        %span.delete
+          = link_to_remote("Remove Response".l, {:url => comment_path(comment.commentable_type, comment.commentable_id, comment), :method => :delete, 500 => 'alert(\'Sorry, there was a server error\'); return false',  :success => visual_effect(:fade, "comment_#{comment.id}"), :confirm => :are_you_sure_you_want_to_permanently_delete_this_comment.l} )
+
+
+
+-#
+  -#
+    -#
       %ul
         %li.fn
           = link_to comment.user, user_path(comment.user), :class => 'url'
@@ -16,9 +46,9 @@
             = render :partial => 'likeable/toggle', :locals => { :likeable => comment, :liker => current_user }
     .entry-content= comment.comment
 
--else
-  .hentry{:id => "comment_#{comment.id}"}
-    .vcard.author
+-# else
+  .entry{:id => "comment_#{comment.id}"}
+    .author
       %h5
         %a{:href => '#', :rel => 'bookmark', :class => 'photo', :onclick => 'return false;'}
           = image_tag(Photo.default.public_filename(:small))

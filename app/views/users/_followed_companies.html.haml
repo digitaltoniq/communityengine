@@ -1,0 +1,14 @@
+- unless @companies.empty?
+  .box-c-user-followed-companies
+    - box :id => 'followed_companies' do
+      %h3.alt.hd-txt
+        %span.ico-heart.following
+          %i
+          %b= "Following"
+      -# %h3=:followed_companies.l(:user_name => h(@user), :count => @companies.size)
+      
+      .box2.companies
+        - @companies.each do |company|
+          - if company
+            %p.item= link_to image_tag( company.logo_photo_url(:small), :class => "polaroid" ), company_path(company)
+

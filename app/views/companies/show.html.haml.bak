@@ -1,0 +1,33 @@
+- @sidebar_left = true
+
+.yui-b
+  -box do
+    = render :partial => 'profile_company_info_sidebar', :locals => {:company => @company}
+
+  - if @company.description
+    -box :id => "about_me" do
+      %h3
+        =:about_company.l
+      %p= @company.description
+
+#yui-main
+  .yui-b
+
+    - unless @recent_posts.empty?
+      -box :id => "posts" do
+        %h3=:recent_company_blog_posts.l
+        = render :partial => 'posts/post', :collection => @recent_posts
+        %h6.right.all= link_to :view_company_blog.l, company_posts_path(@company)
+
+
+    - unless @post_comments.empty?
+      -box :class => 'hfeed comments', :id => 'comments' do
+        %h3=:recent_company_post_comments.l(:company_name => @company.name)
+        %a#newest_comment
+        = render :partial => 'comments/comment', :collection => @post_comments
+        %span#more_comments_links= more_company_representative_comments_links(@company, @post_comments)
+
+    - if @recent_posts.empty? and @post_comments.empty?
+      -box :id => 'posts' do
+        %h3=:recent_company_blog_posts.l
+        We're working on our first conversation. Follow us to hear first when it's ready.

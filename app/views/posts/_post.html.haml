@@ -1,4 +1,4 @@
-.hentry
+.entry
   %h4.entry-title{:id=>"post_#{ post.id}"}
     = link_to post.title, post_path(post), :rel => 'bookmark'
 
@@ -48,7 +48,7 @@
     %p.details
       %span.button-follow
         = render :partial => 'followings/follow_link', :locals => {:followee => representative.company}
-      %span.details1= "18 Rabbits?"
+      %span.name= representative.company.name
       %span.location
         = representative.company.full_location if representative.company.metro_area
    

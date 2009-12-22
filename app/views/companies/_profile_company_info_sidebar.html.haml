@@ -1,46 +1,53 @@
--box :class => 'hentry', :id => 'profile_details' do
-  %h3
-    = link_to @company.name, company_path(@company)
-    = " <small>(#{link_to(:edit.l, edit_company_path(@company))})</small>" if logged_in? and @company.admin?(current_user)
+.box-c-company-profile-short
+  -box :class => 'box3', :id => 'profile_details' do
+    %p.photo
+      = image_tag( @company.logo_photo_url(:large), :class => "polaroid") 
+    %h3.name
+      = link_to @company.name, company_path(@company)
+      - if logged_in? and @company.admin?(current_user)
+        %small
+          = "(#{link_to(:edit.l, edit_company_path(@company))})"
+    - if @company.description
+      %p.description
+        = @company.description
+    .hr
+    %p.location
+      = @company.full_location
+    %p.follow-link
+      = render :partial => 'followings/follow_link', :locals => {:followee => @company}
 
-  .centered
-    = image_tag( @company.logo_photo_url(:large), :class => "polaroid")    
 
+-#
   -#
-    DJS
-    - if current_company and current_company.can_request_friendship_with(@company)
-      = add_friend_link(@company)
+    -#
+      DJS
+      - if current_company and current_company.can_request_friendship_with(@company)
+        = add_friend_link(@company)
 
-  %h3=:company_details.l
-  .vcard.author
-    %ul
-      -if @company.url
-        %li.url
-          = :company_url.l
-          = link_to @company.url, @company.url
-      -#%li.update
-        %a{:href=>"#{company_path(@company)}", :rel=>"bookmark"}
-          %abbr.published{:title=>"#{@company.created_at}"}
-            = :registered_on.l + @company.created_at.strftime(": %m/%d/%y")
-      -#%li.view
-        =:profile_views.l
-        = "(#{@company.view_count})"
-      -#
-        DJS
-        - if @company.offerings.any?
-          %li.skills= :my_skills.l+": #{@company.offerings.collect{|o| link_to o.skill.name, skill_url(o.skill) }.join(', ')}"
-        - if @company.tags.any?
-          %li.tags= :my_tags.l+": #{@company.tags.collect{|t| link_to t.name, tag_url(t) }.join(", ")}"
-      - if @company.metro_area
-        %li.geo= @company.full_location
+    %h3=:company_details.l
+    .vcard.author
+      %ul
+        -if @company.url
+          %li.url
+            = :company_url.l
+            = link_to @company.url, @company.url
+        -#%li.update
+          %a{:href=>"#{company_path(@company)}", :rel=>"bookmark"}
+            %abbr.published{:title=>"#{@company.created_at}"}
+              = :registered_on.l + @company.created_at.strftime(": %m/%d/%y")
+        -#%li.view
+          =:profile_views.l
+          = "(#{@company.view_count})"
+        -#
+          DJS
+          - if @company.offerings.any?
+            %li.skills= :my_skills.l+": #{@company.offerings.collect{|o| link_to o.skill.name, skill_url(o.skill) }.join(', ')}"
+          - if @company.tags.any?
+            %li.tags= :my_tags.l+": #{@company.tags.collect{|t| link_to t.name, tag_url(t) }.join(", ")}"
+        - if @company.metro_area
+          %li.geo= @company.full_location
 
-      =render :partial => 'followings/follow_link', :locals => {:followee => company}
-  .clear
+        =render :partial => 'followings/follow_link', :locals => {:followee => company}
+    .clear
 
-  %h3=:representatives.l
-  %ul.list.user
-    - @company.representatives.active.each do |representative|
-      %li
-        = link_to image_tag(representative.avatar_photo_url(:small), :alt => "#{representative}"), representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{representative}'s profile"
-        = link_to h(representative), representative_path(representative), :class => 'url'
-  .clear
+

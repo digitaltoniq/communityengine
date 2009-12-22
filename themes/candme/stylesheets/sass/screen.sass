@@ -193,6 +193,12 @@ body
 .yui-t6 #yui-main .yui-b
   margin-right: 328px
 
+.yui-t3 .yui-b
+  width: 270px
+
+.yui-t3 #yui-main .yui-b
+  margin-left: 300px
+
 #bd
   overflow: hidden
   border: #d7d7d7 1px solid
@@ -205,18 +211,26 @@ body
   margin: 0 auto !important
   width: 690px !important
 
-.box1
+=boxn
   margin: 0 0 1em 0
   border: #ddd 1px solid
   +round-borders(10px)
   padding: 25px 35px
+
+.box1
+  +boxn
   
 .box2
-  margin: 0 0 1em 0
-  border: #ddd 1px solid
-  +round-borders(10px)
-  padding: 25px 35px
+  +boxn
   background-color= !color2
+  
+.box3
+  +boxn
+  background-color: #efefef
+  
+.box4
+  +boxn
+  background-color: #f9f4e2
   
 h3.hd-txt
   margin: 0 0 0.5em 0
@@ -260,32 +274,50 @@ h3.hd-txt
         margin-left: 50px
     &.most-discussed
       b
-        background-position: 0 0px
+        +bg-pos-y(0, 20px)
     &.most-recent
       b
-        background-position: 0 -20px
+        +bg-pos-y(1, 20px)
     &.new-companies
       b
-        background-position: 0 -100px
+        +bg-pos-y(5, 20px)
+    &.following
+      b
+        +bg-pos-y(12, 20px)
+    &.who-is-participating
+      b
+        +bg-pos-y(7, 20px)
     &.recently-popular
       background-image: url('/images/theme/hr1.png')
       b
-        background-position: 0 -80px
+        +bg-pos-y(4, 20px)
+    &.recent-followed-coversations
+      background-image: url('/images/theme/hr1.png')
+      b
+        +bg-pos-y(6, 20px)
+    &.recent-coversations
+      background-image: url('/images/theme/hr1.png')
+      b
+        +bg-pos-y(2, 20px)
+    &.recent-responses
+      background-image: url('/images/theme/hr1.png')
+      b
+        +bg-pos-y(3, 20px)
     &.sign-up
       background-image: url('/images/theme/hr1.png')
       b
-        background-position: 0 -440px
+        +bg-pos-y(22, 20px)
         height: 40px
     &.log-in
       background-image: url('/images/theme/hr1.png')
       b
-        background-position: 0 -400px
+        +bg-pos-y(20, 20px)
         height: 40px
     &.now-featuring
       background-image: none
       padding-bottom: 0
       b
-        background-position: 0 -220px
+        +bg-pos-y(11, 20px)
 
 
 a.button1
@@ -310,10 +342,8 @@ p.but-wrap1
 
 
 
-
-
-.hfeed
-  .hentry
+.box-c-posts-list
+  .entry
     overflow: hidden
     margin: 0 0 10px 0
     padding: 0 0 20px 0
@@ -412,7 +442,7 @@ p.but-wrap1
           display: block
           color: #444
           line-height: 1.3
-          &.details1
+          &.name
             float: left
             +font_georgia
             font-style: italic
@@ -424,6 +454,8 @@ p.but-wrap1
             font-size: 10px
           &.button-follow
             float: right
+
+.hfeed
 
 .vcards
   overflow: hidden
@@ -730,4 +762,225 @@ span.removefollowing2
         color: #666
       &.link-follow
         float: right
+
+.box-c-comments-list
+  overflow: hidden
+  .entry
+    overflow: hidden
+    padding: 15px
+    .author
+      overflow: hidden
+      float: left
+      width: 180px
+      margin: 0 20px 0 0
+      p
+        &.photo
+          float: left
+          margin: 0 10px 10px 0
+          a
+            display: block
+            background: url('/images/theme/frame_image_68x68.png') no-repeat 50% 50%
+            padding: 4px	
+            width: 60px
+            height: 60px
+            img
+              display: block
+              height: 60px
+              width: 60px
+        &.name
+          margin: 0 0 5px 0
+          +font_georgia
+          font-size: 16px
+          font-weight: bold
+          font-style: italic
+          line-height: 1.2
+          a
+            color: #777
+        &.location
+          margin: 0 0 5px 0
+          color: #777
+        &.posted
+          clear: both
+          font-size: 13px
+          line-height: 1.2
+          color: #555
+        &.about
+          +font_georgia
+          font-size: 13px
+          font-weight: bold
+          font-style: italic
+          line-height: 1.2
+          color: #444
+
+    .comment
+      overflow: hidden
+      .content
+        clear: both
+      p
+        &.likes
+          margin: 0 0 1em 0
+          padding: 0 0 0 30px
+          background: url('/images/theme/ico_check.png') no-repeat 0% 50%
+          font-size: 12px
+          color: #666
+        &.i-like
+          float: right
+          margin: 0 0 1em 0
+    
+    p.control-links
+      overflow: hidden
+      clear: both
+      margin: 1em 0 0 0
+      span
+        display: block
+        float: right
+        margin: 0 0 0 10px
+        padding: 0 0 0 20px
+      span.delete
+        background: url('/images/theme/ico_delete_x.png') no-repeat 0% 50%
+        font-size: 12px
+        a:hover
+          text-decoration: underline
+            
+
+a.button-i-like-this,
+a.button-liked-it
+  display: block
+  width: 72px
+  height: 26px
+  background: url('/images/theme/button_like.png') no-repeat 0% 0%
+  text-indent: -9999px
+        
+a.button-i-like-this
+  &:hover
+    background-position: 0 -26px
+
+a.button-liked-it
+  width: 66px
+  background-position: 0 -78px
+  &:hover
+    background-position: 0 -52px
+
+.box-c-user-profile-short
+  text-align: center
+  .box2
+    padding: 15px
+  p.photo
+    img
+      display: block
+      margin: 0 auto
+      border: #bbb 1px solid
+      padding: 3px
+  p.photo-link
+    margin: 5px 0
+    font-size: 11px
+  h3.name
+    +font_georgia
+    font-size: 19px
+    font-weight: bold
+    font-style: italic
+    color: #333
+    a
+      color: #333
+    small
+      font-size: 11px
+      a
+        color = !color1
+  p.location
+    color: #666
+  p.about
+    color: #777
+  .hr
+    margin: 10px 0
+    height: 11px
+    background: url('/images/theme/hr2.png') no-repeat 0 0
+
+.box-c-user-followed-companies
+  .box2
+    padding: 15px
+  h3
+    margin-left: 20px
+  .companies
+    overflow: hidden
+    .item
+      float: left
+      width: 33%
+      margin: 0 0 5px 0
+      img
+        display: block
+        margin: 0 auto
+        border: #bbb 1px solid
+        padding: 3px
+        max-width: 50px
+
+.box-c-company-profile-short
+  text-align: center
+  .box3
+    padding: 15px
+  p.photo
+    margin: 0 0 10px 0
+    img
+      display: block
+      margin: 0 auto
+      border: #bbb 1px solid
+      padding: 3px
+      max-width: 230px
+  h3.name
+    +font_georgia
+    font-size: 19px
+    font-weight: bold
+    font-style: italic
+    color: #111
+    a
+      color: #111
+    small
+      font-size: 11px
+      a
+        color = !color1
+  p.description
+    font-size: 13px
+    color: #444
+    line-height: 1.3
+  p.location
+    margin: 0 0 10px 0
+    color: #666
+  .hr
+    margin: 10px 0
+    height: 11px
+    background: url('/images/theme/hr2.png') no-repeat 0 0
+  p.follow-link
+    width: 90px
+    margin: 0 auto
+
+.box-c-company-representatives
+  overflow: hidden
+  .box4
+    padding: 25px 10px 25px 25px
+  h3
+    margin-left: 20px
+  .entry
+    overflow: hidden
+    margin: 0 0 10px 0
+    p
+      color: #666
+      &.photo
+        float: left
+        width: 56px
+        margin: 0 10px 0 0
+        img
+          display: block
+          border: #bbb 1px solid
+          padding: 3px
+          width: 50px
+      &.name
+        margin: 10px 0 0 0
+        +font_georgia
+        font-size: 15px
+        font-weight: bold
+        font-style: italic
+        line-height: 1.2
+        a
+          color: #666
+      &.details
+        font-size: 12px
 
