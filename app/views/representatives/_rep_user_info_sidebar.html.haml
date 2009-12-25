@@ -1,0 +1,31 @@
+.box-c-user-profile-short
+  -box :class => 'box4', :id => 'profile_details' do
+    %p.photo
+      = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid")
+    - if @is_current_user
+      %p.photo-link
+        - if @user.avatar
+          = link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)
+        - else 
+          =:no_profile_photo.l
+          = link_to :click_here_to_upload_one.l, edit_user_path(@user)
+    %h3.name
+      = link_to h(@user), user_path(@user)
+      - if current_user == @user
+        %small
+          = "(#{link_to(:edit.l, edit_user_path(@user))})"
+    - if @representative.title
+      %p.role
+        = @representative.title
+    
+    .hr
+    
+    .box4.company
+      %p.com-name
+        = link_to(@representative.company, company_path(@representative.company))
+      - if @representative.company.metro_area
+        %p.com-location
+          = @representative.company.full_location
+      %p.com-follow-link
+        = render :partial => 'followings/follow_link', :locals => {:followee => @representative}
+

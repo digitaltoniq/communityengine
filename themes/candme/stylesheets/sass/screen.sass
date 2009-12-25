@@ -433,7 +433,7 @@ p.but-wrap1
         clear: right
         float: right
         margin: 10px 0 0 0
-        width: 200px
+        min-width: 200px
         height: 30px
         padding: 5px 10px
         +round-borders(10px)
@@ -443,6 +443,7 @@ p.but-wrap1
           color: #444
           line-height: 1.3
           &.name
+            margin-right: 10px
             float: left
             +font_georgia
             font-style: italic
@@ -775,7 +776,7 @@ span.removefollowing2
       margin: 0 20px 0 0
       p
         &.photo
-          float: left
+          float: lposteft
           margin: 0 10px 10px 0
           a
             display: block
@@ -863,7 +864,7 @@ a.button-liked-it
 
 .box-c-user-profile-short
   text-align: center
-  .box2
+  .box2, .box4
     padding: 15px
   p.photo
     img
@@ -894,6 +895,23 @@ a.button-liked-it
     margin: 10px 0
     height: 11px
     background: url('/images/theme/hr2.png') no-repeat 0 0
+  p.role
+  .company
+    padding: 10px     
+    p.com-name
+      +font_georgia
+      font-size: 16px
+      font-weight: bold
+      font-style: italic
+      line-height: 1.2
+      a
+        color: #333
+    p.com-location
+      font-size: 13px
+      color: #666
+    p.com-follow-link
+      width: 90px
+      margin: 10px auto 0
 
 .box-c-user-followed-companies
   .box2

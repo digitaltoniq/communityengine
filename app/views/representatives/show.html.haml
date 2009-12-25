@@ -3,27 +3,8 @@
 - @sidebar_left = true
 
 .yui-b
-  -box do 
-    = render :partial => 'users/profile_user_info_sidebar', :locals => {:user => @user}
+  = render :partial => 'rep_user_info_sidebar', :locals => {:user => @user, :representative => @representative}
 
-  - if @user.description
-    -box :id => "about_me" do
-      %h3
-        =:about_me.l
-      %p= @user.description
-
-  -box :class => 'hentry', :id => 'profile_details' do
-    %h3=:representative_details.l
-    .vcard.author
-      %ul
-        %li.title= "#{:title.l}: #{@representative.title if @representative.title}"
-        %li.company= "#{:company.l}: #{link_to(@representative.company, company_path(@representative.company))}"
-        -#%li.update= "#{:member_since.l}#{@representative.created_at.strftime(": %m/%d/%y")}"
-        %li.linked_in= "#{:linked_in_url.l} #{link_to(@representative.linked_in_url, @representative.linked_in_url) if @representative.linked_in_url}"
-        - if @representative.company.metro_area
-          %li.geo= @representative.company.full_location
-        -# =render :partial => 'followings/follow_link', :locals => {:followee => @representative}
-    .clear
   -#
     DJS
     -box :class => 'alt', :id => 'friends' do
@@ -74,6 +55,29 @@
 
 #yui-main
   .yui-b
+    - unless @recent_posts.empty?
+      -box :id => "posts" do
+        %h3.alt.hd-txt
+          %span.ico-sunrise.recent-coversations
+            %i
+            %b= "Recent Followed Coversations"
+        = render :partial => 'posts/posts', :locals => { :posts => @recent_posts }
+      
+      -# TODO: Make real pagination here
+      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+        
+    - unless @recent_comments.empty?
+      -box :id => "comments" do
+        %h3.alt.hd-txt
+          %span.ico-discuss.recent-responses
+            %i
+            %b= "Recent Responses"
+        = render :partial => 'comments/comments', :locals => { :comments => @recent_comments }
+      
+      -# TODO: Make real pagination here
+      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+
+
     -#
       DJS
       - if @photos.empty? and @recent_posts.empty?
@@ -89,13 +93,13 @@
           %h6.all.right= link_to :view_all_my_photos.l, user_photos_path(@user)
           = "#{link_to(:add_a_photo.l, new_user_photo_path(@user))}" if @is_current_user
 
-    - unless @recent_posts.empty?
+    -# unless @recent_posts.empty?
       -box :id => "posts" do
         %h3=:recent_blog_posts.l
         = render :partial => 'posts/post', :collection => @recent_posts
         %h6.right.all= link_to :view_my_blog.l, user_posts_path(@user)
 
-    - unless @recent_comments.empty?
+    -# unless @recent_comments.empty?
       -box :id => "comments" do
         %h3=:recent_user_comments.l(:user_name => h(@user))
         = render :partial => 'comments/comment', :collection => @recent_comments
