@@ -15,6 +15,7 @@
 !color1 = #09c
 !color2 = #d9f4ef
 !color3 = #f9f4e2
+!color4 = #307fb8
 a
   color = !color1
   text-decoration: none
@@ -365,13 +366,35 @@ p.but-wrap1
   a
     float: right
 
+p.shift
+  margin-top: -2em
+
 p.nav-mini-link
   margin: 0 0 1em 0
   +font_arial
   font-size: 12px
   a
-    color: #307fb8
+    color = !color4
 
+p.mini-text
+  margin: 0 0 1em 0
+  +font_arial
+  font-size: 12px
+  color: #454238
+
+table.table1
+  margin: 0 0 10px 0
+  font-size: 12px
+  line-height: 1.2
+  th,td
+  th
+    font-weight: bold
+    border-bottom: #ccc 1px solid
+  td
+    padding: 2px
+  a
+    color = !color4
+  
 .box-c-posts-list
   .entry
     overflow: hidden

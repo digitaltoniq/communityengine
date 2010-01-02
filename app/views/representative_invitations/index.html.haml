@@ -1,4 +1,4 @@
-.yui-b.sidebar
+-# .yui-b.sidebar
   -box do
     %h3=:links.l
     %ul.checks
@@ -8,11 +8,13 @@
 #yui-main
   .yui-b
     -box do
-      %h3= :listing_representative_invitations.l
+      %h3.h3.u= "Manage Representatives"
+      %p.nav-mini-link= link_to "Go back to Company Dashboard", dashboard_company_path(@company)
+      %p.but-wrap1.shift= link_to "Invite representative", new_company_representative_invitation_path(@company), :class => "button1"
 
       = will_paginate @invitations
 
-      %table{:border => 0, :width => '100%'}
+      %table.table1{:border => 0, :width => '100%'}
         %thead
           %tr
             %th=:date_created.l

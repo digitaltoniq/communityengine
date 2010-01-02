@@ -1,5 +1,5 @@
 .yui-b.sidebar
-  -box do 
+  -# box do 
     %h3=:links.l
     %ul.checks
       %li= link_to :back_to_company_dashboard.l, dashboard_company_path(@company)
@@ -8,11 +8,11 @@
 #yui-main
   .yui-b
     -box do 
-      %h3 
-        =:manage_posts.l
-      %p=:posts_saved_with_draft_status_wont_appear_in_your_blog_until_you_publish_them.l
+      %h3.h3.u= "Manage Conversations"
+      %p.nav-mini-link= link_to "Go back to Company Dashboard", dashboard_company_path(@company)
+      %p.but-wrap1.shift= link_to "Post New", new_company_post_path(@company), :class => "button1"
 
-      %table{:border => 0, :width => '100%'}
+      %table.table1{:border => 0, :width => '100%'}
         %thead
           %tr
             %th=:created.l
@@ -20,7 +20,9 @@
             %th=:title.l
             %th=:author.l
             -#%th=:comments.l
-            %th=:status.l
+            %th
+              =:status.l
+              *
         %tbody
           - @posts.each do |post|
             %tr            
@@ -45,3 +47,5 @@
                   = "(#{link_to(:preview.l, post_path(post), :target => '_blank')})"
 
       .pagination= will_paginate @posts
+      %p.mini-text= "* Drafts won't appear anywhere until you publish them."
+
