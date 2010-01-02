@@ -1,4 +1,19 @@
 .yui-b
+  = render :partial => 'guidelines_manage_comments'
+
+#yui-main
+  .yui-b
+    %h3.h3.u
+      = @comments_header ||= "Responses on conversations from "
+      = link_to @company, company_path(@company)
+    %p.nav-mini-link= link_to "Go back to Company Dashboard", dashboard_company_path(@company)
+    - unless @comments.empty?
+      = render :partial => 'comments/comments', :locals => { :comments => @comments }
+      -# TODO: Make real pagination here
+      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+
+
+-# .yui-b
   -box do
     = render :partial => 'profile_company_info_sidebar', :locals => {:company => @company}
 
@@ -8,7 +23,7 @@
         =:about_company.l
       %p= @company.description
 
-#yui-main
+-# #yui-main
   -box :class => 'yui-b hfeed comments', :id => 'comments' do
     %h3
       = :comments.l + " -"
@@ -22,5 +37,3 @@
 
     .pagination=paginating_links @comments if @comments.page_count > 1
 
-
-      

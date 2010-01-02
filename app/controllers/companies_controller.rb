@@ -172,6 +172,7 @@ class CompaniesController < BaseController
     @comments = @company.representative_comments.recent.find(:all, :page => {:size => 25, :current => params[:page]})  # TODO: will paginate
     @title = @company.name
     @back_url = company_path(@company)
+    @comments_header = "Responses from representatives of "
     
     respond_to do |format|
       format.html do
