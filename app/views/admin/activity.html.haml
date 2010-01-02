@@ -4,9 +4,10 @@
 #yui-main
 
   -box :class => "yui-b" do
-    %h3= :site_activity.l
+    %h3.h3.u= "Recent Site Activity"
 
     -unless @network_activity.empty?
       -box :class => "fresh" do
-        =render :partial => "activities/activity", :collection => @network_activity
+        = render :partial => "activities/activities", :locals => {:activities => @network_activity}
         = will_paginate @network_activity
+

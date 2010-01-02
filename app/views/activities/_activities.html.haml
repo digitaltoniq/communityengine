@@ -1,0 +1,4 @@
+.box-c-activities-list
+  - activities.each do |activity|
+    = render :partial => '/activities/activity', :locals => {:activity => activity}
+

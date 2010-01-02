@@ -1,12 +1,13 @@
 .yui-b
   -box do
-    %h3=:dashboard.l
+    %h3.h3.u= "Admin Actions"
     .yui-g
       .yui-u.first
-        = image_tag 'icons/wrench.png', :plugin => 'community_engine'
-        =:manage.l
         %ul
-          %li= link_to_unless_current :admin_dashboard.l, admin_dashboard_path
-          %li= link_to_unless_current :site_activity.l, admin_activity_path
-          %li= link_to_unless_current :comments.l, admin_comments_path
-          %li= link_to_unless_current :companies.l, admin_companies_path
+          %li= link_to_unless_current "Admin Dashboard", admin_dashboard_path
+          %li= link_to_unless_current "Site Activity", admin_activity_path
+          %li= link_to_unless_current "Add new company", new_company_path
+          %li= link_to_unless_current "Manage Companies", admin_companies_path
+          %li= link_to_unless_current "Manage Users", admin_users_path
+          %li= link_to_unless_current "Manage Comments", admin_comments_path
+

@@ -4,13 +4,15 @@
 #yui-main
 
   -box :class => "yui-b" do
-    %h3= :statistics.l
-    = ziya_chart( activities_chart_statistics_url(:range => params[:range]), {:bgcolor => '#ffffff', :width => 600, :height => 400, :id => "Activities", :swf_path => "/plugin_assets/community_engine/charts/"} )
+    %h3.h3.u= "Admin Dashboard"
+    .box-c-chart
+      = ziya_chart( activities_chart_statistics_url(:range => params[:range]), {:bgcolor => '#ffffff', :width => 600, :height => 400, :id => "Activities", :swf_path => "/plugin_assets/community_engine/charts/"} )
 
   -box :class => "yui-b" do
-    %h3= :site_activity.l
+    %h3.h3.u= "Recent Site Activity"
 
     -unless @network_activity.empty?
       -box :class => "fresh" do
-        =render :partial => "activities/activity", :collection => @network_activity
-        = link_to :view_all_site_activity.l, admin_activity_path
+        = render :partial => "activities/activities", :locals => {:activities => @network_activity}
+        %p.but-wrap1= link_to "View All", admin_activity_path, :class => "button1"
+        

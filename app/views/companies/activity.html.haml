@@ -1,14 +1,16 @@
 .yui-b.sidebar
   -box do
-    %h3=:links.l
-    %ul.checks
-      %li= link_to :back_to_company_dashboard.l, dashboard_company_path(@company)
+    %h3.h3.u=:links.l
+    .box1
+      %ul.checks
+        %li= link_to :back_to_company_dashboard.l, dashboard_company_path(@company)
 
   =render :partial => "companies/dashboard_nav" 
 
 #yui-main
   .yui-b
     -box(:class => 'fresh') do 
-      %h3=:recent_company_activity.l
-      =render :partial => "activities/activity", :collection => @activities
+      %h3.h3.u= "Recent Company Activity"
+      = render :partial => "activities/activities", :locals => {:activities => @activities}
       =will_paginate @activities
+

@@ -6,19 +6,22 @@
 
   .yui-b
     -box do
-      %h3= :company_dashboard.l(:name => @company)
+      %h3.h3.u
+        = link_to @company, company_path(@company)
+        Company Dashboard
       %ul.dashboard_actions
         %li.highlight= link_to :new_post.l, new_company_post_path(@company)
         %li= link_to :manage_posts.l, manage_company_posts_path(@company)
-        %li= link_to :manage_company_conversation_comments.l, post_comments_company_path(@company)
+        %li= link_to "Manage Comments <small>on our conversations</small>", post_comments_company_path(@company)
         %li= link_to :manage_company_page.l, edit_company_path(@company)
         %li= link_to :manage_representatives.l, company_representative_invitations_path(@company)
-        %li= link_to :manage_company_representative_comments.l, representative_comments_company_path(@company)
+        %li= link_to "Manage Comments <small>from our representatives</small>", representative_comments_company_path(@company)
 
   .yui-b
     -box do
       - unless @network_activity.empty?
-        %h3=:recent_company_activity.l
+        %h3.h3.u= "Recent Company Activity"
         -box :class => "fresh" do
-          =render :partial => "activities/activity", :collection => @network_activity
-          %h6.all= link_to :see_all_activity.l, activity_company_path(@company)
+          = render :partial => "activities/activities", :locals => {:activities => @network_activity}
+          %p.but-wrap1= link_to "Next Page", activity_company_path(@company), :class => "button1"
+
