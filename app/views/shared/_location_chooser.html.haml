@@ -8,11 +8,11 @@
   
   - states = State.us
   = :state.l
-  = select_tag(:state_id, '<option></option>' + options_from_collection_for_select(states, "id", "name", (selected_state rescue nil)), {:style => "width:100px", :disabled => states.empty? })
+  = select_tag(:state_id, '<option></option>' + options_from_collection_for_select(states, "id", "name", (selected_state rescue nil)), {:style => "width:100px; margin: 0 10px 0 5px", :disabled => states.empty? })
   = image_tag 'spinner.gif', :plugin => 'community_engine', :style => 'display:none;'
 
   = :metro_area.l
-  = select_tag(:metro_area_id, options_from_collection_for_select(metro_areas, "id", "name", (selected_metro_area rescue nil)), {:style => "width:100px", :disabled => metro_areas.empty? })
+  = select_tag(:metro_area_id, options_from_collection_for_select(metro_areas, "id", "name", (selected_metro_area rescue nil)), {:style => "width:100px; margin: 0 10px 0 5px", :disabled => metro_areas.empty? })
 
   = image_tag 'spinner.gif', :plugin => 'community_engine', :style => 'display:none;'
 
