@@ -452,12 +452,12 @@ h3.hd-txt {
       font-size: 12px;
       font-style: italic;
       color: #999; }
-  .form-1 input, .form-1 textarea {
+  .form-1 input, .form-1 textarea, .form-1 select {
     background-color: #f8f8f8;
     border: #ccc 1px solid;
     padding: 5px;
     color: #454238; }
-    .form-1 input:focus, .form-1 textarea:focus {
+    .form-1 input:focus, .form-1 textarea:focus, .form-1 select:focus {
       background-color: #f9f4e2;
       border-color: #0099cc;
       color: #0099cc; }
@@ -468,6 +468,26 @@ h3.hd-txt {
   .form-1 p.Fb {
     margin: 25px 0 15px; }
 
+.form-1-alt label {
+  font-size: 10px; }
+
+.form-user-edit p.Fet textarea {
+  width: 96%;
+  padding: 10px;
+  min-height: 15em; }
+.form-user-edit p.Fef img {
+  display: block;
+  margin: 0 0 10px 0;
+  border: #ccc 1px solid;
+  padding: 2px; }
+
+.form-account-edit p.first-name, .form-account-edit p.last-name {
+  float: left; }
+  .form-account-edit p.first-name input, .form-account-edit p.first-name textarea, .form-account-edit p.last-name input, .form-account-edit p.last-name textarea {
+    width: 89px;
+    margin-right: 10px; }
+.form-account-edit p.email {
+  clear: both; }
 
 a.button1,
 button.button1,

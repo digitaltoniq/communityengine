@@ -2,30 +2,43 @@
 
   -box :class => "alt first_alt" do 
 
-    %h3=:you_are_editing_your_account.l
-    = link_to :edit_your_user_profile.l, edit_user_path(@user)
+    %h3.h3.u= "Edit Your Account"
+    %p.nav-mini-link
+      = link_to "Edit your profile instead?", edit_user_path(@user)
 
   #yui-main
-    -box :class => "yui-b" do
+    .yui-b
+      -box :class => "form-1 form-account-edit" do
 
-      = error_messages_for :user
+        = error_messages_for :user
 
-      %h3=:first_name.l
-      = text_field :user, :first_name, :size => "20"
+        %p.Fe.first-name
+          %label{"for"=>"user_first_name"}
+            =:first_name.l
+          = text_field :user, :first_name, :size => "20"
 
-      %h3=:last_name.l
-      = text_field :user, :last_name, :size => "20"
+        %p.Fe.last-name
+          %label{"for"=>"user_last_name"}
+            =:last_name.l
+          = text_field :user, :last_name, :size => "20"
 
-      %h3=:e_mail_address.l
-      = text_field :user, :email, :size => "28"
+        %p.Fe.email
+          %label{"for"=>"user_email"}
+            = "Email"
+          = text_field :user, :email, :size => "28"
 
-      %h3=:password.l
-      = password_field :user, :password, :size => "28"
+        %p.Fe
+          %label{"for"=>"user_password"}
+            =:password.l
+          = password_field :user, :password, :size => "28"
 
-      %label=:confirm_password.l
-      = password_field :user, :password_confirmation, :size => "28"
+        -# %p.Fe
+          %label{"for"=>"user_password_confirmation"}
+            =:confirm_password.l
+          = password_field :user, :password_confirmation, :size => "28"
 
-      %p= submit_tag :save_changes.l
+        %p.Fb
+          = submit_tag :save_changes.l, :class => "button1"
 
-      - unless Representative.for_user(@user) or @user.admin?
-        %p= link_to "#{image_tag 'icons/delete.png', :plugin => :community_engine} #{:deactivate_link.l}", deactivate_user_path(@user), :method => :put, :confirm => "Are you sure you want to deactivate your account?  You will no long be able to login or interact with the community."
+        - unless Representative.for_user(@user) or @user.admin?
+          %p= link_to "#{image_tag 'icons/delete.png', :plugin => :community_engine} #{:deactivate_link.l}", deactivate_user_path(@user), :method => :put, :confirm => "Are you sure you want to deactivate your account?  You will no long be able to login or interact with the community."
