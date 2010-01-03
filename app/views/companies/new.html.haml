@@ -1,23 +1,32 @@
 - @section = 'manage'
 
+.yui-b.sidebar
+  = render :partial => 'shared/admin_nav'
+
 #yui-main
   .yui-b
-    -box do
-      %h3=:sign_up.l
+    %h3.h3.u= "Add New Company"
+    -box :class => 'form-1' do
+      -# %h3=:sign_up.l
       = error_messages_for :company
       - form_for :company, :url => companies_path, :html => {:class => 'MainForm'} do |f|
-        %label{"for"=>"company_name"}
-          =:company_name.l
-          -# DJS %em=:required_your_username_must_not_contain_numerals_spaces_or_special_characters.l
-        = f.text_field :name
+        %p.Fe
+          %label{"for"=>"company_name"}
+            =:company_name.l
+            -# DJS %em=:required_your_username_must_not_contain_numerals_spaces_or_special_characters.l
+          = f.text_field :name
 
-        %label{:for => 'company_url_slug'}
-          =:url_slug.l
-        = f.text_field :url_slug, :style=>"width:200px"
+        %p.Fe
+          %label{:for => 'company_url_slug'}
+            = "Companiesandme URL slug"
+            %small
+              = "(companiesandme.com/_________, cannot be changed)"
+          = f.text_field :url_slug
 
-        %label{:for => 'company_url'}
-          =:company_url.l
-        = f.text_field :url, :style=>"width:350px"
+        %p.Fe
+          %label{:for => 'company_url'}
+            = "Company website"
+          = f.text_field :url
 
         -#
           DJS: user for initial primary representive
@@ -46,4 +55,6 @@
           = hidden_field_tag :inviter_id, params[:inviter_id]
           = hidden_field_tag :inviter_code, params[:inviter_code]
           
-        %p= submit_tag :sign_up.l
+        %p.Fb= submit_tag "Submit", :class => 'button1'
+    .hr
+
