@@ -1,37 +1,39 @@
-%label
-  = :select_post_author.l
-  = f.select :user_id, company_authors_select
-
-%label
-  =:title.l
-  %em= '('+:required.l+')'
-= f.text_field :title
-
-%label
-  =:body_text.l
-  %em= '('+:required.l+')'
-= f.text_area :raw_post, :size => "86x15"
-
+%p.Fe.Fes
+  %label
+    = :select_post_author.l
+    = f.select :user_id, company_authors_select
+%p.Fe
+  %label
+    =:title.l
+  = f.text_field :title
+%p.Fe.Fet.body
+  %label
+    =:body_text.l
+  = f.text_area :raw_post, :size => "86x15"
 - f.fields_for :feature_image_attributes do |i|
   - if @post.feature_image and !@post.feature_image.new_record?
+    %p.Fe
+      %label
+        = :current_feature_image.l
+      = image_tag @post.feature_image.public_filename(:small) 
+  %p.Fe.Fef
     %label
-      = :current_feature_image.l
-    = image_tag @post.feature_image.public_filename(:small) 
-  %label
-    = i.label :uploaded_data, ((!@post.feature_image or @post.feature_image.new_record?) ? 'Upload the feature image for your post (Required)' : 'Replace feature image for this post')
-  = i.file_field :uploaded_data, :size => "15"
+      = i.label :uploaded_data, ((!@post.feature_image or @post.feature_image.new_record?) ? 'Upload the feature image for your post <small class="DisInline">(Required)</small>' : 'Replace feature image for this post')
+    = i.file_field :uploaded_data, :size => "15"
 
-%label=:save_post_as.l
-= f.select(:published_as, [[:draft.l, 'draft'], [:published.l, 'live']], {}, {:onChange => "toggleSaveButtons(this.value)"})
-
-%p#draft-actions{ :style => (@post.is_live? ? 'display: none;' : '') }
-  = submit_tag :save_and_preview.l, :disable_with => 'Loading preview...'
-  = submit_tag :save_to_drafts.l, :disable_with => 'Saving...'
-%p#publish-actions{ :style => (@post.is_live? ? '' : 'display: none;') }
-  = submit_tag :publish.l, :disable_with => 'Publishing...'
-or
-= link_to :cancel.l, manage_company_posts_path(@company)
-
+.buttons
+  %p.Fe.Fes.save-as
+    %label=:save_post_as.l
+    = f.select(:published_as, [[:draft.l, 'draft'], [:published.l, 'live']], {}, {:onChange => "toggleSaveButtons(this.value)"})
+  %p#draft-actions-1{ :style => (@post.is_live? ? 'display: none;' : '') }
+    = submit_tag "Save & preview", :class => "button1", :disable_with => 'Loading preview...'
+  %p#draft-actions-2{ :style => (@post.is_live? ? 'display: none;' : '') }
+    = submit_tag "Save to drafts", :class => "button1", :disable_with => 'Saving...'
+  %p#publish-actions{ :style => (@post.is_live? ? '' : 'display: none;') }
+    = submit_tag :publish.l, :class => "button1", :disable_with => 'Publishing...'
+  -# %p
+    or
+    = link_to :cancel.l, manage_company_posts_path(@company)
 - if !@post.new_record?
   %p
     =link_to "#{image_tag 'icons/delete.png', :plugin => :community_engine} "+:delete_this_post.l, company_post_path(@company, @post), :method => :delete, :confirm => :are_you_sure_you_want_to_delete_this_post.l
@@ -39,10 +41,13 @@ or
 %script{:type => 'text/javascript'}
   function toggleSaveButtons(publishState) {
   if(publishState == 'live') {
-  $('draft-actions').hide();
+  $('draft-actions-1').hide();
+  $('draft-actions-2').hide();
   $('publish-actions').show();
   } else {
-  $('draft-actions').show();
+  $('draft-actions-1').show();
+  $('draft-actions-2').show();
   $('publish-actions').hide();
   }
   }
+
