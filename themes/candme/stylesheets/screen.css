@@ -200,7 +200,8 @@ body {
         margin: 0 20px 0 0;
         height: 37px;
         width: 100px;
-        background: url('/images/theme/nav_large.png') no-repeat 0 0; }
+        background: url('/images/theme/nav_large.png') no-repeat 0 0;
+        cursor: default; }
         #hd #NavBar ul.nav-main li a span {
           display: none; }
       #hd #NavBar ul.nav-main li.button-discover a {

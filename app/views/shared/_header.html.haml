@@ -30,9 +30,19 @@
         %input{ :type=>"hidden", :name=>"hl", :value=>"en"}
 
     %ul.nav-main
-      = topnav_tab "Discover", { :url => "#", :class => "button-discover" }
-      = topnav_tab "Join In", { :url => "#", :class => "button-joinin" }
-      = topnav_tab "Follow", { :url => "#", :class => "button-follow" }
+      -#
+        = topnav_tab "Discover", { :url => "#", :class => "button-discover" }
+        = topnav_tab "Join In", { :url => "#", :class => "button-joinin" }
+        = topnav_tab "Follow", { :url => "#", :class => "button-follow" }
+      %li.button-discover
+        %a
+          %span Discover
+      %li.button-joinin
+        %a
+          %span Join In
+      %li.button-follow
+        %a
+          %span Follow
      
     %p.nav-area= link_to "SF Bay Area", "#"
     
