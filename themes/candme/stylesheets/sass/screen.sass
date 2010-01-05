@@ -688,21 +688,27 @@ table.table1
       color: #444
       text-decoration: none
     
-span.addfollowing,
-span.removefollowing
+span.following_request,
+span.unfollowing_request
   display: block
   a
     display: block
     width: 90px
     height: 30px
     text-indent: -9999px
-span.addfollowing
-  a
+  span.spinner
+    font-size: 10px
+    line-height: 30px
+    img
+      margin: 0 5px 0 0
+      vertical-align: middle
+span.following_request,
+span.unfollowing_request
+  a.add_following_btn
     background: url('/images/theme/button_follow.png') no-repeat 0 0
     &:hover
       background-position: 0 -30px
-span.removefollowing
-  a
+  a.remove_following_btn
     background: url('/images/theme/button_follow.png') no-repeat 0 -60px
     &:hover
       background-position: 0 -90px

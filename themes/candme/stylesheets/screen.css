@@ -764,24 +764,35 @@ table.table1 {
       color: #444;
       text-decoration: none; }
 
-span.addfollowing,
-span.removefollowing {
+span.following_request,
+span.unfollowing_request {
   display: block; }
-  span.addfollowing a,
-  span.removefollowing a {
+  span.following_request a,
+  span.unfollowing_request a {
     display: block;
     width: 90px;
     height: 30px;
     text-indent: -9999px; }
+  span.following_request span.spinner,
+  span.unfollowing_request span.spinner {
+    font-size: 10px;
+    line-height: 30px; }
+    span.following_request span.spinner img,
+    span.unfollowing_request span.spinner img {
+      margin: 0 5px 0 0;
+      vertical-align: middle; }
 
-span.addfollowing a {
+span.following_request a.add_following_btn,
+span.unfollowing_request a.add_following_btn {
   background: url('/images/theme/button_follow.png') no-repeat 0 0; }
-  span.addfollowing a:hover {
+  span.following_request a.add_following_btn:hover,
+  span.unfollowing_request a.add_following_btn:hover {
     background-position: 0 -30px; }
-
-span.removefollowing a {
+span.following_request a.remove_following_btn,
+span.unfollowing_request a.remove_following_btn {
   background: url('/images/theme/button_follow.png') no-repeat 0 -60px; }
-  span.removefollowing a:hover {
+  span.following_request a.remove_following_btn:hover,
+  span.unfollowing_request a.remove_following_btn:hover {
     background-position: 0 -90px; }
 
 span.addfollowing2,
