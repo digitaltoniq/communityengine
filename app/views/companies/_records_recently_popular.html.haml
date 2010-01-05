@@ -11,11 +11,9 @@
       .Clear
       %p.stats
         %span.conversations
-          -# TODO: change to real data
-          = link_to "12 Conversations", "#"
+          = link_to "#{company.posts.count} Conversations", company_posts_path(company)
         %span.following
-          -# TODO: change to real data
-          = "1,234 Following"
+          = "#{company.followings.count} Following"
       %p.link-follow
         = render :partial => 'followings/follow_link', :locals => {:followee => company}
 
