@@ -61,12 +61,11 @@ class UsersController < BaseController
     cond, @search, @metro_areas, @states = User.paginated_users_conditions_with_search(params)    
     
     @users = User.recent.find(:all,
-      :conditions => cond.to_sql, 
-      :include => [:tags], 
+      :conditions => cond.to_sql,
       :page => {:current => params[:page], :size => 20}
       )
     
-    @tags = User.tag_counts :limit => 10
+#    @tags = User.tag_counts :limit => 10
     
     setup_metro_areas_for_cloud
   end
@@ -148,7 +147,7 @@ class UsersController < BaseController
   
   def destroy
     unless @user.admin? || @user.featured_writer?
-      @user.destroy
+      @user.deactivate
       flash[:notice] = :the_user_was_deleted.l
     else
       flash[:error] = :you_cant_delete_that_user.l
