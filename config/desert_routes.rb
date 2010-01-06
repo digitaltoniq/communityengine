@@ -178,7 +178,7 @@ end
 # RWD
 resources :feature_images, :only => [:create, :update]
 
-resources :posts, :except => :all, :collection => { :popular => :get }
+resources :posts, :except => :all, :collection => { :popular => :get, :most_discussed => :get, :recent => :get }
 
 users_posts_in_category '/users/:user_id/posts/category/:category_name', :controller => 'posts', :action => 'index', :category_name => :category_name
 

@@ -41,6 +41,10 @@ module PostsHelper
   end
 
   def most_discussed_posts(limit = 5)
-    Post.live.find_most_discussed(limit)
+    Post.live.most_discussed.limited(limit)
+  end
+
+  def popular_posts(limit = 5)
+    Post.live.popular.limited(limit)
   end
 end

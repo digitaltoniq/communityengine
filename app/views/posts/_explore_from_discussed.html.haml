@@ -1,13 +1,13 @@
 .yui-b
   %h3.alt.hd-txt
-    %span.ico-discuss.most-discussed
+    %span.ico-discuss.recently-popular
       %i
-      %b= :most_commented_posts.l
+      %b= :what_is_popular.l
   -box :class => "box2" do
-    .box-c-companies-most-discussed
-      - most_discussed_posts.each do |post|
+    .vcards
+      - popular_posts.each do |post|
         =render :partial => "posts/sidebar_post", :locals => {:post => post}
-  %p.but-wrap1= link_to "View More", "#", :class => "button1"
+  %p.but-wrap1= link_to "View More", popular_posts_path, :class => "button1"
 
   %h3.alt.hd-txt
     %span.ico-sunrise.most-recent
@@ -17,5 +17,5 @@
     .vcards
       - recent_posts.each do |post|
         =render :partial => "posts/sidebar_post", :locals => {:post => post}
-  %p.but-wrap1= link_to "View More", "#", :class => "button1"
+  %p.but-wrap1= link_to "View More", recent_posts_path, :class => "button1"
 

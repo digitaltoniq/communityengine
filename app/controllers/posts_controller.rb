@@ -80,7 +80,7 @@ class PostsController < BaseController
   #-- Custom --#
 
   def popular
-    @posts = Post.find_popular(10).with(:user, :feature_image).paginate(paging_params)
+    @posts = Post.popular.live.with(:user, :feature_image).paginate(paging_params)
     respond_to do |format|
       format.html
       format.rss do
@@ -89,6 +89,14 @@ class PostsController < BaseController
         render :action => 'index'
       end
     end
+  end
+
+  def most_discussed
+    @posts = Post.most_discussed.live.with(:user, :feature_image).paginate(paging_params)
+  end
+
+  def recent
+    @posts = Post.recent.live.with(:user, :feature_image).paginate(paging_params)
   end
   
   def manage

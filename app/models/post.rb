@@ -71,19 +71,19 @@ class Post < ActiveRecord::Base
     self.recent.find :all, :limit => options[:limit]
   end
   
-  def self.find_popular(limit = 5)
-    recent_ids = recent.limited(limit * 2).find(:all, :select => 'id').collect(&:id)
-    recent_ids.any? ?
-            popular.limited(limit).scoped(:conditions => ["posts.id IN (?)", recent_ids]) :
-            scoped(:conditions => "1 = 0")
-  end
-
-  def self.find_most_discussed(limit = 5)
-    recent_ids = recent.limited(limit * 2).find(:all, :select => 'id').collect(&:id)
-    recent_ids.any? ?
-            most_discussed.limited(limit).scoped(:conditions => ["posts.id IN (?)", recent_ids]) :
-            scoped(:conditions => "1 = 0")
-  end
+#  def self.find_popular(limit = 5)
+#    recent_ids = recent.limited(limit * 2).find(:all, :select => 'id').collect(&:id)
+#    recent_ids.any? ?
+#            popular.limited(limit).scoped(:conditions => ["posts.id IN (?)", recent_ids]) :
+#            scoped(:conditions => "1 = 0")
+#  end
+#
+#  def self.find_most_discussed(limit = 5)
+#    recent_ids = recent.limited(limit * 2).find(:all, :select => 'id').collect(&:id)
+#    recent_ids.any? ?
+#            most_discussed.limited(limit).scoped(:conditions => ["posts.id IN (?)", recent_ids]) :
+#            scoped(:conditions => "1 = 0")
+#  end
 
   def self.find_featured(options = {:limit => 10})
     self.recent.by_featured_writers.find(:all, :limit => options[:limit] )    
