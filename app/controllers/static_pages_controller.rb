@@ -83,4 +83,10 @@ class StaticPagesController < BaseController
     end
   
   end
+  
+  def show_terms
+    @term = params[:term]
+    render :template => "/static_pages/terms/#{@term}"
+  end
+  
 end

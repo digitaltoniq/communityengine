@@ -45,6 +45,10 @@
             %li
               %a{:href=>logout_url, :title=>:log_out_of_your.l + " #{AppConfig.community_name} " + :account.l}
                 =:log_out.l
+          %li= link_to "Terms of Use", '/terms/terms-of-use'
+          %li= link_to "Community Guidelines", '/terms/community-guidelines'
+          %li= link_to "Privacy Policy", '/terms/privacy-policy'
+          %li= link_to "Terms for Companies", '/terms/company-terms'
           -#
             DJS
             %li

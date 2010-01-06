@@ -447,6 +447,19 @@ h3.hd-txt {
       h3.hd-txt span.now-featuring b {
         background-position: 0 -220px; }
 
+ol li {
+  list-style-type: decimal;
+  list-style-position: outside; }
+
+ol.list-decimal li {
+  list-style-type: decimal; }
+
+ol.list-upper-latin li {
+  list-style-type: upper-latin; }
+
+ol.list-lower-latin li {
+  list-style-type: lower-latin; }
+
 .form-1 {
   font-size: 12px; }
   .form-1 label {
@@ -1317,3 +1330,13 @@ ul.dashboard_actions {
 .box-c-guidelines p {
   margin: 0 0 1em 0;
   font-size: 12px; }
+
+.terms p, .terms h4, .terms ol, .terms ul, .terms li {
+  margin: 0 0 1em 0; }
+.terms ol {
+  padding-left: 20px; }
+.terms ul {
+  padding-left: 20px; }
+  .terms ul li {
+    list-style-type: square;
+    list-style-position: outside; }
