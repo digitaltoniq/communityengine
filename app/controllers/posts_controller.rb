@@ -80,7 +80,7 @@ class PostsController < BaseController
   #-- Custom --#
 
   def popular
-    @posts = Post.find_popular(10).with(:user, :feature_image)
+    @posts = Post.find_popular(10).with(:user, :feature_image).paginate(paging_params)
     respond_to do |format|
       format.html
       format.rss do
@@ -101,7 +101,7 @@ class PostsController < BaseController
   end
 
   def cacheable_request?
-    !logged_in? and flash.empty?
+    !logged_in? and flash.empty? and params[:page].nil?
   end
   
   private
