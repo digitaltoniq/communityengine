@@ -15,5 +15,3 @@
         = link_to :singular_posts.l(:count => company.posts.count), company_posts_path(company)
       - else
         = link_to :plural_posts.l(:count => company.posts.count), company_posts_path(company)
-    %dd.rss
-      =link_to :rss_feed.l, company_posts_path(company, :format => :rss)    

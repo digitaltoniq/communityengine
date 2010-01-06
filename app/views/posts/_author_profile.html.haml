@@ -15,6 +15,4 @@
       - if user.posts.count == 1
         = link_to :singular_posts.l(:count => user.posts.count), user_posts_path(user)    
       - else
-        = link_to :plural_posts.l(:count => user.posts.count), user_posts_path(user)         
-    %dd.rss
-      =link_to :rss_feed.l, user_posts_path(user, :format => :rss)    
+        = link_to :plural_posts.l(:count => user.posts.count), user_posts_path(user)

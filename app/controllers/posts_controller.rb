@@ -82,10 +82,9 @@ class PostsController < BaseController
   def popular
     @posts = Post.popular.live.with(:user, :feature_image).paginate(paging_params)
     respond_to do |format|
-      format.html
+      format.html { setup_rss }
       format.rss do
-        @rss_title = "#{AppConfig.community_name} #{:popular_posts.l}"
-        @rss_url = popular_posts_url(:format => :rss)
+        setup_rss
         render :action => 'index'
       end
     end
@@ -93,10 +92,24 @@ class PostsController < BaseController
 
   def most_discussed
     @posts = Post.most_discussed.live.with(:user, :feature_image).paginate(paging_params)
+    respond_to do |format|
+      format.html { setup_rss }
+      format.rss do
+        setup_rss
+        render :action => 'index'
+      end
+    end
   end
 
   def recent
     @posts = Post.recent.live.with(:user, :feature_image).paginate(paging_params)
+    respond_to do |format|
+      format.html { setup_rss }
+      format.rss do
+        setup_rss
+        render :action => 'index'
+      end
+    end
   end
   
   def manage
@@ -160,5 +173,12 @@ class PostsController < BaseController
     preview ?
             :your_post_was_saved_back_to_editing.l(:edit_url => edit_company_post_path(@company, @post)) :
             :your_post_was_successfully_updated.l
+  end
+
+  #-- Utilities --#
+
+  def setup_rss
+    @rss_title = "#{AppConfig.community_name} #{:recent_posts.l}"
+    @rss_url = recent_posts_url(:format => :rss)
   end
 end
