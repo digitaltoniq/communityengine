@@ -1,12 +1,12 @@
 .yui-b
-  -box :id => 'category_tips' do
-    = render :partial => "/categories/tips", :locals => {:category => nil}
-
+  = render :partial => "guidelines_new_post"
+    
 #yui-main
   .yui-b
     -box do 
-      %h3=:editing_post.l
+      %h3.h3.u= "Edit conversation"
+      .form-1.form-post-new
+        = error_messages_for :post
+        - form_for(:post, :url => company_post_path(@company, @post), :html => { :multipart => true, :method => :put, :class =>'MainForm' }) do |f|
+          = render :partial => 'form', :locals => { :f => f}
 
-      = error_messages_for :post
-      - form_for(:post, :url => company_post_path(@company, @post), :html => { :multipart => true, :method => :put, :class =>'MainForm' }) do |f|
-        = render :partial => 'form', :locals => { :f => f}
