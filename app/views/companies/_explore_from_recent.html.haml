@@ -1,25 +1,25 @@
 .yui-b
   %h3.alt.hd-txt
-    %span.ico-sunrise.new-companies
+    %span.ico-sunrise.recently-popular
       %i
-      %b= "New Companies"
+      %b= "Recently Popular"
   -box :class => "box2" do
-    = render :partial => "records_new_companies", :locals => { :companies => recent_companies }
+    = render :partial => "records_new_companies", :locals => { :companies => popular_companies }
   -# TODO: Add link
-  %p.but-wrap1= link_to "See more companies", recent_companies_path, :class => "button1"
+  %p.but-wrap1= link_to "See more companies", companies_path, :class => "button1"
 
 -#
   / -box do
   /  %h3= :explore_site.l :site => AppConfig.community_name
-  
+
   / TODO: remove
   %br
-  
+
   %h3.alt= :popular_posts.l
   -box :class => "alt" do
     -@popular_posts.each do |post|
       =render :partial => "posts/sidebar_post", :locals => { :post => post }
-  
+
   %h3.alt= :active_users.l
   -box :class => "alt" do
     -@active_users.each do |user|

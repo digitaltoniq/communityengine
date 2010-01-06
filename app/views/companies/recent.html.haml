@@ -1,0 +1,19 @@
+- @section = (params[:metro_area_id] ? 'metro_area' : 'companies')
+-#
+  .yui-b
+    = render :partial => 'companies/search_options'
+
+#yui-main
+  .yui-b
+    %h3.alt.hd-txt
+      %span.ico-heart.new-companies
+        %i
+        %b= "New Companies"
+    -box do
+      = render :partial => "records_recently_popular", :locals => { :companies => @companies }
+    -# TODO: Add link
+    %p.but-wrap1
+      = link_to "Prev. Page", "#", :class => "button1 FlLeft"
+      = link_to "Next Page", "#", :class => "button1"
+
+= render :partial => 'explore_from_recent'

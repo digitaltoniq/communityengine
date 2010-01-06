@@ -27,6 +27,10 @@ class CompaniesController < BaseController
      index! { get_additional_companies_page_data }
    end
 
+   def recent
+     @companies = end_of_association_chain.recent.with(:metro_area, :logo).paginate(paging_params)
+   end
+
   def dashboard
 #    redirect_to activity_company_path(resource)
     @network_activity = Activity.about(resource).recent.limited(10)
@@ -81,6 +85,10 @@ class CompaniesController < BaseController
     end
   rescue ActiveRecord::RecordInvalid
     render :action => 'edit'
+  end
+    
+  def update_views
+    render :text => update_view_count(resource) ? 'updated' : 'duplicate'
   end
 
   # TODO: Broken
@@ -206,7 +214,7 @@ class CompaniesController < BaseController
   protected
 
    def collection
-     @companies ||= end_of_association_chain.recent.with(:metro_area, :logo).paginate(paging_params)
+     @companies ||= end_of_association_chain.popular.popular.with(:metro_area, :logo).paginate(paging_params)
    end
 
   def admin_or_company_admin_required
@@ -245,7 +253,7 @@ class CompaniesController < BaseController
     # @popular_posts = Post.find_popular(5)
     # @active_users = User.active.with(:photos).find_by_activity({:limit => 5, :require_avatar => false})
     # TODO: define conditions for popular companies
-    @popular_companies = Company.recent
-    @new_companies = Company.recent
+#    @popular_companies = Company.recent
+#    @new_companies = Company.recent
   end
 end

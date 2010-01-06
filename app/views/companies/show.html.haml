@@ -37,4 +37,5 @@
             %b= "Recent Coversations"
         %p We're working on our first conversation. Follow us to hear first when it's ready.
 
-
+%script{:type=>"text/javascript", :charset=>"utf-8"}
+  = remote_function :url => update_views_company_path(@company), :method => :put
