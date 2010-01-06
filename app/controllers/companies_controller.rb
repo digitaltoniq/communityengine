@@ -42,7 +42,8 @@ class CompaniesController < BaseController
     show! do
       @post_comments = @company.representative_comments.ordered('created_at DESC').limited(25)
       @recent_posts = @company.posts.live.ordered("published_at DESC").limited(2)
-      update_view_count(@company) unless current_user && (@company.representative?(current_user) or current_user.admin?)
+      @rss_title = "#{@company} Conversations"
+      @rss_url = company_posts_url(@company, :format => :rss)
     end
   end
     
@@ -255,5 +256,7 @@ class CompaniesController < BaseController
     # TODO: define conditions for popular companies
 #    @popular_companies = Company.recent
 #    @new_companies = Company.recent
+#    @rss_title = "Companies & Me company feed"
+#    @rss_url = companies_path(:format => :rss)
   end
 end
