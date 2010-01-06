@@ -34,6 +34,7 @@ class Company < ActiveRecord::Base
 
   #named scopes
   named_scope :recent, :order => 'companies.created_at DESC'
+  named_scope :popular, :order => 'companies.view_count DESC'
 
   ## Class Methods
 

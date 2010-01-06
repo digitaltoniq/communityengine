@@ -154,8 +154,9 @@ resources :companies, :member_path => '/:id', :nested_member_path => '/:company_
     :dashboard => :get,
     :post_comments => :get,
     :representative_comments => :get,
-    :activity => :get
-} do |company|
+    :activity => :get,
+    :update_views => :any
+}, :collection => { :recent => :get } do |company|
 #  company.resources :conversations, :collection => { :comments => :get }
   company.resources :followers
   company.resources :posts, :as => :conversations, :collection => { :manage => :get }

@@ -10,4 +10,12 @@ module CompaniesHelper
     html += link_to "&raquo; " + :company_representative_comments_rss.l, representative_comments_company_url(company, :format => :rss)
 		html
   end
+
+  def popular_companies
+    Company.popular.limited(5)
+  end
+
+  def recent_companies
+    Company.recent.limited(5)
+  end
 end
