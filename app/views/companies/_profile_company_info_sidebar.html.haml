@@ -6,7 +6,7 @@
       = link_to @company.name, company_path(@company)
       - if logged_in? and @company.admin?(current_user)
         %small
-          = "(#{link_to(:edit.l, edit_company_path(@company))})"
+          = "(#{link_to(:manage.l, dashboard_company_path(@company))})"
     - if @company.description
       %p.description
         = @company.description
