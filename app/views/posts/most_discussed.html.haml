@@ -13,11 +13,11 @@
   .yui-b
     -box :class => "hfeed" do
       %h3.alt.hd-txt
-        %span.ico-heart.most-recent
+        %span.ico-heart.most-discussed
           %i
-          %b= :recent_posts.l
+          %b= :most_commented_posts.l
       = render :partial => 'posts/posts', :locals => { :posts => @posts }
     %p.but-wrap1
       = will_paginate @posts
 
-= render :partial => 'explore_from_recent'
+= render :partial => 'explore_from_discussed'

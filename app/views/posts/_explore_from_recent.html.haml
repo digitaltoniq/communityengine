@@ -1,0 +1,21 @@
+.yui-b
+  %h3.alt.hd-txt
+    %span.ico-discuss.most-discussed
+      %i
+      %b= :most_commented_posts.l
+  -box :class => "box2" do
+    .vcards
+      - most_discussed_posts.each do |post|
+        =render :partial => "posts/sidebar_post", :locals => {:post => post}
+  %p.but-wrap1= link_to "View More", most_discussed_posts_path, :class => "button1"
+
+  %h3.alt.hd-txt
+    %span.ico-sunrise.recently-popular
+      %i
+      %b= :what_is_popular.l
+  -box :class => "box2" do
+    .vcards
+      - popular_posts.each do |post|
+        =render :partial => "posts/sidebar_post", :locals => {:post => post}
+  %p.but-wrap1= link_to "View More", popular_posts_path, :class => "button1"
+
