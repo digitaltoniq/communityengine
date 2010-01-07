@@ -1,15 +1,33 @@
-v2.9.5
-  * Fix memory sampling on Snow Leopard (No more ps rsz option)
+v2.9.9.
+  * Disable at_exit handler for Unicorn which sometimes caused the
+    agent to stop reporting immediately.
 
-v2.9.4
-  * Clamp size of data sent to server
-  * Reset statistics for passenger when forking to avoid erroneous data
-  * Fix problem deserializing errors from the server
-  * Fix incompatibility with postgres introduced in 2.9.
+v2.9.8.
+  * Fix bug in Net instrumentation when a block is passed to request calls.
+
+v2.9.7.
+  * Fix External instrumentation so it does not capture Net
+    calls outside of web transactions.
+
+v2.9.6.
+  * add instrumentation for Net::HTTP calls, to show up as "External"
+  * added support for validating agents in the cloud.
+  * recognize Unicorn dispatcher
+  * add NewRelic module definitions to ActiveRecord instrumentation
+
+v2.9.5.
+  * Snow Leopard memory fix
+
+v2.9.4.
+  * clamp size of data sent to server
+  * reset statistics for passenger when forking to avoid erroneous data
+  * fix problem deserializing errors from the server
+  * fix incompatibility with postgres introduced in 2.9.
 
 v2.9.3.
-  * Fix startup failure in Windows due to memory sampler
-  * Add JRuby environment information 
+  * fix startup failure in Windows due to memory sampler
+  * add JRuby environment information 
+
 v2.9.2.
   * change default apdex_t to 0.5 seconds 
   * fix bug in deployments introduced by multi_homed setting

@@ -12,7 +12,7 @@ common: &default_settings
   # You must specify the licence key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic RPM service.
-  license_key: 'ba6209f8a7e3a53907b9e8dc110ff3c7ed915542'
+  license_key: '2b57037320c7d71057a41e46e700b9a0d30015ae'
   
   # Agent Enabled
   # Use this setting to force the agent to run or not run.
@@ -74,7 +74,7 @@ common: &default_settings
   # For more about the Apdex standard, see
   # http://support.newrelic.com/faqs/general/apdex
 
-  apdex_t: 0.5
+  apdex_t: 1.0
 
   # Proxy settings for connecting to the RPM server.
   #

@@ -43,7 +43,6 @@ task :staging do
   set :rails_env,     'staging'
 end
 
-
 task :client do
   role :web, '174.129.12.81', :primary => true
   role :app, '174.129.12.81', :primary => true
