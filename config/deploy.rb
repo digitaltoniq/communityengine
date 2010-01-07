@@ -56,6 +56,19 @@ task :client do
   set :rails_env,     'client'
 end
 
+task :production do
+  role :web, '174.129.252.101', :primary => true
+  role :app, '174.129.252.101', :primary => true
+  role :db, '174.129.252.101', :primary => true
+  set :environment_database, Proc.new { production_database }
+  set :dbuser,        'deploy'
+  set :dbpass,        '8Z0IZhYOFc'
+  set :user,          'deploy'
+  set :password,      '8Z0IZhYOFc'
+  set :runner,        'deploy'
+  set :rails_env,     'production'
+end
+
 
 # TASKS
 # Don't change unless you know what you are doing!
