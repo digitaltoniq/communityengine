@@ -40,6 +40,14 @@
         .entry-content
           = image_tag(@post.photo(:medium), :alt=>"", :width=>"300")
           = @post.post
+        .social-buttons
+          %p.follow-link
+            = render :partial => 'followings/follow_link', :locals => {:followee => @post}
+          %p
+            Share On
+            - link_to "http://www.facebook.com/sharer.php" do
+              = image_tag("/images/theme/ico_social_facebook.png", :alt=>"Facebook")
+            = image_tag("/images/theme/ico_social_twitter.png", :alt=>"Twitter")
 
     -box :class => 'hfeed comments', :id => 'comments' do      
       %h3.alt.hd-txt
