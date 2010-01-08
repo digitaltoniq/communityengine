@@ -6,7 +6,7 @@
   %dd
     = "#{post.comments_count} comments"
     = "#{post.view_count} views"
-.vcard
+.entry
   .photo
     = link_to image_tag(post.photo(:small), :alt=>""), post_path(post)
   .title
@@ -15,5 +15,6 @@
     = post.comments_count
   .company
     %span.addfollowing2
+      -# TODO: Change to real data
       = link_to "Linden Street Brewery", "#"
 

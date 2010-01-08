@@ -9,6 +9,7 @@
     %p.author-details
       %span.name
         = link_to h(post.user), user_path(post.user)
+      -# TODO: Change to real data
       %span.role= "(Founder)"
       %span.posted-ago= "Posted #{time_ago_in_words(post.published_at)}"
     %h5

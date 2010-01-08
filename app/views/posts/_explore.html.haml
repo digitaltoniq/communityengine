@@ -4,7 +4,7 @@
       %i
       %b= :most_commented_posts.l
   -box :class => "box2" do
-    .vcards
+    .box-c-companies-most-discussed
       - most_discussed_posts.each do |post|
         =render :partial => "posts/sidebar_post", :locals => {:post => post}
   %p.but-wrap1= link_to "View More", "#", :class => "button1"

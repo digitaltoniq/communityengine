@@ -2,11 +2,19 @@
 - @meta = { :title => "#{@post.title}", :description => "#{truncate_words(@post.post, 75, '...' )}", :robots => AppConfig.robots_meta_show_content }
 
 #yui-main
-  .yui-b
+  .yui-b.box-c-post-show
     -box :class => 'hfeed' do
       .hentry.main
-        %h4.entry-title= link_to @post.title, post_path(@post), :rel => 'bookmark'
-        .vcard.author
+        %h4.entry-title
+          -# = link_to @post.title, post_path(@post), :rel => 'bookmark'
+          = @post.title
+        .details
+          %p.posted
+            = "Posted #{time_ago_in_words(@post.published_at)}"
+          %p.comments
+            = link_to @post.comments_count,'#comments'
+
+        -# .vcard.author
           = image_tag(@post.photo(:medium), :alt=>"", :width=>"190", :height=>"140")
           %ul
             %li.update
@@ -28,19 +36,20 @@
               %script{:type => "text/javascript", :src => "http://tweetmeme.com/i/scripts/button.js"}
 
 
+        .hr
         .entry-content
+          = image_tag(@post.photo(:medium), :alt=>"", :width=>"300")
           = @post.post
 
     -box :class => 'hfeed comments', :id => 'comments' do      
-      %h3= :post_comments.l 
-      %h2= :add_your_comment.l
-      %p= render :partial => 'comments/comment_form', :locals => {:commentable => @post}
-      %a#newest_comment
-      = render :partial => 'comments/comment', :collection => @comments
-      %span#more_comments_links= more_comments_links(@post, @comments)
+      %h3.alt.hd-txt
+        %span.responses
+          %i
+          %b= "Responses"
+      = render :partial => '/comments/comments', :locals => {:comments => @comments}
+      = render :partial => 'comments/comment_form', :locals => {:commentable => @post}
 
-.yui-b
-
+.yui-b.box-c-post-show-sidebar
   = render :partial => 'author_profile', :locals => {:user => @post.user}
   = render :partial => 'company_profile', :locals => {:company => Company.for_post(@post)}
   = render :partial => 'participating_representatives', :locals => {:representatives => Representative.participating_in(@post)}

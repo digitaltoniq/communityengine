@@ -1,20 +1,37 @@
--box :class => 'alt first_alt' do
-  %h3=:author.l
-  %dl.vcard
-    %dt.photo
-      = link_to image_tag( user.avatar_photo_url(:small), "alt"=>"#{h(user)}" ), user_path(user), :title => "#{h(user)}'s"+ :profile.l
-    %dd.fn
-      = link_to h(user), user_path(user), :class => 'url'
-      = " <small>(" + :featured_writer.l + ")</small>" if user.featured_writer?        
-    %dd
-    - if user.description
-      = truncate_words( user.description, 12, '...')
-    %dd.member
-      =user.created_at.strftime(:member_since.l + ": %m/%d/%y")
-    %dd.post
-      - if user.posts.count == 1
-        = link_to :singular_posts.l(:count => user.posts.count), user_posts_path(user)    
-      - else
-        = link_to :plural_posts.l(:count => user.posts.count), user_posts_path(user)         
-    %dd.rss
-      =link_to :rss_feed.l, user_posts_path(user, :format => :rss)    
+.box-c-user-profile-short
+  %h3.alt.hd-txt
+    %span.posted-by
+      %i
+      %b= "Posted by"
+  -box :class => 'box4', :id => 'profile_details' do
+    %p.photo
+      = image_tag( user.avatar_photo_url(:medium), :class => "polaroid")
+    .hr.hr-2
+    %h3.name
+      = link_to h(user), user_path(user)
+    -# if @representative.title
+      %p.role
+        = @representative.title
+
+
+-# box :class => 'alt first_alt' do
+  %h3.h3.u= "Posted by"
+  .box1
+    %dl.vcard
+      %dt.photo
+        = link_to image_tag( user.avatar_photo_url(:small), "alt"=>"#{h(user)}" ), user_path(user), :title => "#{h(user)}'s"+ :profile.l
+      %dd.fn
+        = link_to h(user), user_path(user), :class => 'url'
+        = " <small>(" + :featured_writer.l + ")</small>" if user.featured_writer?        
+      %dd
+      - if user.description
+        = truncate_words( user.description, 12, '...')
+      %dd.member
+        =user.created_at.strftime(:member_since.l + ": %m/%d/%y")
+      %dd.post
+        - if user.posts.count == 1
+          = link_to :singular_posts.l(:count => user.posts.count), user_posts_path(user)    
+        - else
+          = link_to :plural_posts.l(:count => user.posts.count), user_posts_path(user)         
+      %dd.rss
+        =link_to :rss_feed.l, user_posts_path(user, :format => :rss)    
