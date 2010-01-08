@@ -73,5 +73,5 @@ end
 # but that would pollute deploy.rb which I'm trying to keep as close to EY's original
 # as possible
 def requires_auth?
-  rails_env == 'staging'
+  rails_env == 'staging' || rails_env == 'production'
 end
