@@ -1,20 +1,19 @@
+- @sidebar_left = true
+- @section = 'companies'
+- @meta = { :description => AppConfig.meta_description, :keywords => AppConfig.meta_keywords, :robots => AppConfig.robots_meta_list_content }
+
 .yui-b
   = render :partial => 'author_profile', :locals => {:user => @user}
 
-  - unless @popular_posts.empty?
-    -box :id => "posts", :class => 'alt' do
-      %h3=:popular_posts.l
-      %ul.list.page
-        - @popular_posts.each do |post|
-          %li= link_to truncate(post.title, :length => 75), post_path(post)
-
 #yui-main
   .yui-b
-    -box :class => "posts hfeed" do 
-      %h3
-        = link_to :users_blog.l(:user => h(@user)), user_posts_path(@user)
-        = @category ? "&raquo; " + link_to(@category.name.upcase, users_posts_in_category_path(@user, @category.name)) : ''
-      %br
 
-      = render :partial => 'post', :collection => @posts
-      .pagination= will_paginate @posts
+    - unless @posts.empty?
+      -box :id => "posts" do
+        %h3.alt.hd-txt
+          %span.ico-sunrise.recent-coversations
+            = :users_blog.l(:user => h(@user))
+        %br/
+        = render :partial => 'posts/posts', :locals => { :posts => @posts }
+    %p.but-wrap1
+      = will_paginate @posts
