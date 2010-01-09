@@ -3,42 +3,11 @@
     .yui-b.form-1-alt
       -box :id => "profile_details" do
         %h3.h3.u=:profile_photo.l
-        = @user.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
         %p.Fe.Fef
           = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid" )
           %label
             =:choose_a_photo_for_your_profile.l
           = file_field :avatar, :uploaded_data, :size => "20"
-
-        -# TODO: Change to real data
-        %p.Fe
-          %label{"for"=>"user_title"}
-            = "Title at .."
-          = text_field :user, :first_name
-
-        -# TODO: Change to real data
-        %p.Fe
-          %label{"for"=>"user_linkedin"}
-            = "LinkedIn URL"
-          = text_field :user, :last_name
-
-        -#
-          DJS
-          %h3=:birthday_gender.l
-          %fieldset
-            %legend
-              =:gender.l
-            %label
-              = radio_button :user, :gender, User::MALE
-              =:male.l
-            %label
-              = radio_button :user, :gender, User::FEMALE
-              =:female.l
-
-          %label
-            =:birthday.l
-            \:
-          = date_select :user, :birthday, {:start_year => 1926, :end_year => Time.now.year - 1}
         
     #yui-main
       .yui-b
