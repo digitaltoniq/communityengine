@@ -18,7 +18,7 @@
       %p.i-like{:id => "likeable_#{comment.id}_toggle"}
         = render :partial => 'likeable/toggle', :locals => { :likeable => comment }
       %p.likes
-        = "#{comment.likes_count} person likes this"
+        = :people_like_this.l(:count => comment.likes_count)
       .content
         = comment.comment
     
