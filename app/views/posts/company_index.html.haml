@@ -1,24 +1,20 @@
-.yui-b
-  -box do
-    = render :partial => 'companies/profile_company_info_sidebar', :locals => {:company => @company}
+- @sidebar_left = true
+- @section = 'companies'
+- @meta = { :description => AppConfig.meta_description, :keywords => AppConfig.meta_keywords, :robots => AppConfig.robots_meta_list_content }
 
-  - if @company.description
-    -box :id => "about_me" do
-      %h3
-        =:about_company.l
-      %p= @company.description
+.yui-b
+  = render :partial => 'companies/profile_company_info_sidebar', :locals => {:company => @company}
 
 #yui-main
-  %br
   .yui-b
-    -box :class => "posts hfeed" do
-      %h3
-        = :posts.l + " -"
-        = link_to @company, company_path(@company)
 
-      - if @posts.empty?
-        #emptycomments= :no_posts_found.l(:type => "company")
-      - else
-        = render :partial => 'posts/post', :collection => @posts
-
-      .pagination= will_paginate @posts
+    - unless @posts.empty?
+      -box :id => "posts" do
+        %h3.alt.hd-txt
+          %span.ico-sunrise.recent-coversations
+            = link_to @company, company_path(@company)
+            = :posts.l
+        %br/
+        = render :partial => 'posts/posts', :locals => { :posts => @posts }
+    %p.but-wrap1
+      = will_paginate @posts

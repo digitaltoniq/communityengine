@@ -1,4 +1,6 @@
 - @sidebar_left = true
+- @section = 'companies'
+- @meta = { :description => AppConfig.meta_description, :keywords => AppConfig.meta_keywords, :robots => AppConfig.robots_meta_list_content }
 
 .yui-b
   = render :partial => 'profile_company_info_sidebar', :locals => {:company => @company}
