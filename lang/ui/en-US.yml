@@ -96,7 +96,7 @@ en:
   all_clippings_tagged: "All clippings tagged {{tag_name}}"
   #en: all_comments: All comments
   all_comments: All comments
-  all_company_representative_comments: All representative comments
+  all_company_representative_comments: View all representative comments
   company_representative_comments_rss: Representative comments RSS
   view_company_representative_comments: View company representative comments
   view_company_conversation_comments: View comments on company conversations

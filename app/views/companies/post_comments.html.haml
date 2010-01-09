@@ -6,11 +6,11 @@
     %h3.h3.u
       = @comments_header ||= "Responses on conversations from "
       = link_to @company, company_path(@company)
-    %p.nav-mini-link= link_to "Go back to Company Dashboard", dashboard_company_path(@company)
+    - if logged_in? and @company.admin?(current_user)
+      %p.nav-mini-link= link_to "Go back to Company Dashboard", dashboard_company_path(@company) 
     - unless @comments.empty?
       = render :partial => 'comments/comments', :locals => { :comments => @comments }
-      -# TODO: Make real pagination here
-      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+      %p.but-wrap1= will_paginate @comments
 
 
 -# .yui-b

@@ -14,9 +14,7 @@
             %i
             %b= "Recent Coversations"
         = render :partial => 'posts/posts', :locals => { :posts => @recent_posts }
-      
-      -# TODO: Make real pagination here
-      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+      %p.but-wrap1= link_to :view_company_blog.l, company_posts_path(@company), :class => "button1"
         
     - unless @post_comments.empty?
       -box :id => "comments" do
@@ -25,9 +23,7 @@
             %i
             %b= "Recent Responses"
         = render :partial => 'comments/comments', :locals => { :comments => @post_comments }
-      
-      -# TODO: Make real pagination here
-      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+      %p.but-wrap1= more_company_representative_comments_links(@company, @post_comments)
 
     - if @recent_posts.empty? and @post_comments.empty?
       -box :id => 'posts' do

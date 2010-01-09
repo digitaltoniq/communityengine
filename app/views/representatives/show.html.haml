@@ -62,9 +62,7 @@
             %i
             %b= "Recent Followed Coversations"
         = render :partial => 'posts/posts', :locals => { :posts => @recent_posts }
-      
-      -# TODO: Make real pagination here
-      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
+      %p.but-wrap1= link_to :view_my_blog.l, user_posts_path(@user), :class => "button1"
         
     - unless @recent_comments.empty?
       -box :id => "comments" do
@@ -73,10 +71,6 @@
             %i
             %b= "Recent Responses"
         = render :partial => 'comments/comments', :locals => { :comments => @recent_comments }
-      
-      -# TODO: Make real pagination here
-      %p.but-wrap1= link_to "Next Page", "#", :class => "button1"
-
 
     -#
       DJS

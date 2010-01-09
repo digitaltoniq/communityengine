@@ -7,7 +7,7 @@
     .vcards
       - popular_posts.each do |post|
         =render :partial => "posts/sidebar_post", :locals => {:post => post}
-  %p.but-wrap1= link_to "View More", popular_posts_path, :class => "button1"
+  %p.but-wrap1= link_to "View All", popular_posts_path, :class => "button1"
 
   %h3.alt.hd-txt
     %span.ico-sunrise.most-recent
@@ -17,5 +17,5 @@
     .vcards
       - recent_posts.each do |post|
         =render :partial => "posts/sidebar_post", :locals => {:post => post}
-  %p.but-wrap1= link_to "View More", recent_posts_path, :class => "button1"
+  %p.but-wrap1= link_to "View All", recent_posts_path, :class => "button1"
 
