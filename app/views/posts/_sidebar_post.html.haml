@@ -15,6 +15,4 @@
     = post.comments_count
   .company
     %span.addfollowing2
-      -# TODO: Change to real data
-      = link_to "Linden Street Brewery", "#"
-
+      = link_to Company.for_post(post), company_path(Company.for_post(post))

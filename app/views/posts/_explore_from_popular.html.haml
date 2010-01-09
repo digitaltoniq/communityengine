@@ -4,7 +4,7 @@
       %i
       %b= :most_commented_posts.l
   -box :class => "box2" do
-    .vcards
+    .box-c-companies-most-discussed
       - most_discussed_posts.each do |post|
         =render :partial => "posts/sidebar_post", :locals => {:post => post}
   %p.but-wrap1= link_to "View All", most_discussed_posts_path, :class => "button1"
@@ -14,7 +14,7 @@
       %i
       %b= :recent_posts.l
   -box :class => "box2" do
-    .vcards
+    .box-c-companies-most-discussed
       - recent_posts.each do |post|
         =render :partial => "posts/sidebar_post", :locals => {:post => post}
   %p.but-wrap1= link_to "View All", recent_posts_path, :class => "button1"
