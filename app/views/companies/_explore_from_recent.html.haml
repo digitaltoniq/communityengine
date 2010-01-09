@@ -5,14 +5,12 @@
       %b= "Recently Popular"
   -box :class => "box2" do
     = render :partial => "records_new_companies", :locals => { :companies => popular_companies }
-  -# TODO: Add link
   %p.but-wrap1= link_to "See All", companies_path, :class => "button1"
 
 -#
   / -box do
   /  %h3= :explore_site.l :site => AppConfig.community_name
 
-  / TODO: remove
   %br
 
   %h3.alt= :popular_posts.l

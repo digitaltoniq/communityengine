@@ -22,13 +22,14 @@ class Representative < ActiveRecord::Base
   delegate :password_confirmation, :password_confirmation=, :to => :user
 
   #  TODO: Note, method_missing will not work, attributes= fails, etc.
-  delegate :avatar_photo_url, :this_months_posts, :last_months_posts, :location, :full_location,
+  delegate :avatar_photo_url, :this_months_posts, :last_months_posts,
            :recent, :active?, :tagged_with, :invite_code, :invite_code=, :birthday, :birthday=,
            :gender, :gender=, :login, :login=, :email, :email=, :password, :password=, :password_confirmation, :password_confirmation=,
            :zip, :zip=, :description, :description=, :country, :country=, :state, :state=, :metro_area, :metro_area=,
            :invitations, :posts, :photos, :avatar, :avatar=, :tag_list, :tag_list=, :role, :role=,
            :comments_as_author, :comments_as_recipient, :clippings, :favorites, :followings,
            :first_name, :last_name, :first_name=, :last_name=, :full_name, :to_param, :to => :user
+  delegate :location, :full_location, :to => :company
 
   #named scopes
   named_scope :recent, :order => 'representatives.created_at DESC'

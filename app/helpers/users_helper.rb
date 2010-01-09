@@ -9,5 +9,9 @@ module UsersHelper
 #    "#{greetings.sort_by {rand}.first} #{display_name(user)}!"
     "Hello #{user}"
   end
-    
+
+  def user_location(user, full = true)
+    locatable = (rep = Representative.for_user(user)) ? rep : user
+    full ? locatable.full_location : locatable.location
+  end
 end

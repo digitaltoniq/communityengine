@@ -5,14 +5,11 @@
         = link_to image_tag(comment.user.avatar_photo_url(:small), :alt => "#{comment.user}"), user_path(comment.user), :rel => 'bookmark', :class => 'photo', :title => "#{comment.user}'s profile"
       %p.name
         = link_to comment.user, user_path(comment.user), :class => 'url'
-      %p.location
-        -# TODO: Change to real data
-        = "Brewer"
+      %p.location= user_location(comment.user)
       %p.posted
-        = "Posted #{time_ago_in_words(comment.created_at)} about"
-      %p.about
-        -# TODO: Change to real data
-        = "Plastic Made From Wrappers"
+        = time_ago_in_words(comment.created_at)
+      -#%p.about
+        = link_to comment.commentable, company_post_path(comment.commentable)
     
     .comment
       %p.i-like{:id => "likeable_#{comment.id}_toggle"}

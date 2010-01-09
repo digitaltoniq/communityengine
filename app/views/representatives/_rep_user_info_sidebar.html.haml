@@ -25,7 +25,7 @@
         = link_to(@representative.company, company_path(@representative.company))
       - if @representative.company.metro_area
         %p.com-location
-          = @representative.company.full_location
+          = @representative.full_location
       %p.com-follow-link
         = render :partial => 'followings/follow_link', :locals => {:followee => @representative}
 

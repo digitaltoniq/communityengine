@@ -11,6 +11,5 @@
         %p.name
           = link_to representative, representative_path(representative), :rel => 'bookmark', :class => 'photo', :title => "#{representative}'s profile"
         %p.details
-          -# TODO: Change to real data
-          = "CSR Representative"
+          = representative.title
 

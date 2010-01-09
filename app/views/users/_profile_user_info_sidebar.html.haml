@@ -15,8 +15,7 @@
         %small
           = "(#{link_to(:edit.l, edit_user_path(@user))})"
     %p.location
-      -# TODO: Change to real data
-      = "Cary, NC"
+      = user_location(@user)
     
     .hr
     

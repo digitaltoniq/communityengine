@@ -335,11 +335,11 @@ class User < ActiveRecord::Base
   end
   
   def location
-    metro_area && metro_area.name || ""
+    metro_area && metro_area.name ? "#{metro_area.name}, #{state}" : ''
   end
 
   def full_location
-    "#{metro_area.name if self.metro_area}#{" , #{self.country.name}" if self.country}"
+    "#{metro_area.name if self.metro_area}#{", #{self.state.name}" if self.state}"
   end
   
   def reset_password

@@ -12,7 +12,7 @@
     -box do
       = render :partial => "records_recently_popular", :locals => { :companies => @companies }
     = will_paginate @companies
-    -# TODO: Add link
+    -#
       %p.but-wrap1
         = link_to "Prev. Page", "#", :class => "button1 FlLeft"
         = link_to "Next Page", "#", :class => "button1"
