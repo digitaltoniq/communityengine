@@ -1,23 +1,28 @@
-.yui-b
-  -box :class => "alt first_alt" do 
-    %h3=:get_started_upload_a_profile_photo.l
-    %p
-      =:photo_message.l :site => AppConfig.community_name
-
-#yui-main
-  .yui-b
-    -box do 
-      - form_tag( representative_path(@representative, :welcome =>'about'), :method => 'put', :multipart =>true, :class => "MainForm") do
-        %h3=:profile_photo.l
-        %p.centered
-          = image_tag( @user.avatar_photo_url(:medium), :class => "right" )
-        %label
-          =:choose_a_photo_to_upload.l
-          %em
-            =:photos_should_be_x_pixels.l
-        = file_field :avatar, :uploaded_data, :size => "20"
-
+.form-1.form-user-edit
+  - form_tag( representative_path(@representative, :welcome =>'about'), :method => 'put', :multipart =>true, :class => "MainForm") do
+    .yui-b.form-1-alt
+      -box :id => "profile_details" do
+        %h3.h3.u=:get_started_upload_a_profile_photo.l
         %p
-          = submit_tag :upload_and_continue_to_step_two.l
-          or
-          = link_to "&raquo; " + :skip_this_step.l, welcome_about_company_representative_path(@representative.company, @representative)
+          =:photo_message.l :site => AppConfig.community_name
+
+    #yui-main
+      .yui-b
+        -box :class => "alt first_alt" do
+
+          %h3.h3.u= :profile_photo.l
+          = error_messages_for :representative
+
+          %p.Fe.Fef
+            = image_tag(@user.avatar_photo_url(:medium), :class => "polaroid" )
+            %label
+              =:choose_a_photo_to_upload.l
+              %em
+                =:photos_should_be_x_pixels.l
+            = file_field :avatar, :uploaded_data, :size => "20"
+
+          %p.Fb
+            = submit_tag :upload_and_continue_to_step_two.l, :class => 'button1'
+            or
+            = link_to "&raquo; " + :skip_this_step.l, welcome_about_company_representative_path(@representative.company, @representative)
+          .hr

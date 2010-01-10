@@ -1,38 +1,48 @@
-.yui-b
-  - if @user.avatar_photo_url
-    -box :class => "alt" do 
-      %h3=:your_profile_photo.l
-      .centered
-        = @user.vendor ? "<div class='right_corner'><div class='community_pro'></div></div>" : ''
-        = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid", :style=>"width:250px" )
-      =link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)        
+.form-1.form-user-edit
+  - form_tag representative_path(@representative, :registered => true), :method => 'put', :multipart =>true, :class => "MainForm" do
+    - if @user.avatar_photo_url
+      .yui-b.form-1-alt
+        -box :id => "profile_details" do
+          %h3.h3.u=:your_profile_photo.l
+          %p.Fe.Fef
+            = image_tag( @user.avatar_photo_url(:medium), :class => "polaroid", :style=>"width:250px" )
+            =link_to :profile_photo_crop.l, crop_profile_photo_user_path(@user)
 
-#yui-main
-  -box :class => "yui-b" do
+    #yui-main
+      .yui-b
+        -box :class => "alt first_alt" do
 
-    - form_tag representative_path(@representative, :registered => true), :method => 'put', :multipart =>true, :class => "MainForm" do
+          %h3.h3.u= :about_you.l
+          = error_messages_for :user
 
-      %h3=:about_you.l
-      %p
-        = text_area :representative, :description, :rows => 4, :style => 'width:65%'
-        %br/
-        This will be shown on the profile page to the community.  Keep it short and sweet.
-        %br/
-        (e.g. "San Francisco native table tennis chamption.  Proud mother of two little rascals.")
+          %p.Fe.Fet
+            = text_area :representative, :description, :rows => 4
+            %br/
+            This will be shown on the profile page to the community.  Keep it short and sweet.
+            %br/
+            (e.g. "San Francisco native table tennis chamption.  Proud mother of two little rascals.")
 
-      %h3= "#{:representative_title.l} #{:representative_title_at.l(:company_name => @representative.company)}"
-      = text_field :representative, :title, :size => 15
-      %br/
-      (e.g. "Chief Chocolate Officer")
+        -box :class => "alt first_alt" do
 
-      %h3=:edit_linked_in_url.l
-      = text_field :representative, :linked_in_url, :size => 25
-      %br/
-      (optional)
-      %br/
-      If completed this will allow the community to learn more about you outside of Companiesand me.
+          %h3.h3.u= "#{:representative_title.l} #{:representative_title_at.l(:company_name => @representative.company)}"
+          %p.Fe
+            = text_field :representative, :title, :size => 15
+            %br/
+            (e.g. "Chief Chocolate Officer")
 
-      %p
-        = submit_tag :save.l
-        or
-        = link_to "&raquo; " + :skip_this_step.l, company_representative_path(@representative.company, @representative)
+        -box :class => "alt first_alt" do
+
+          %h3.h3.u= :edit_linked_in_url.l
+          %p.Fe
+            = text_field :representative, :linked_in_url, :size => 25
+            %br/
+            (optional)
+            %br/
+            If completed this will allow the community to learn more about you outside of Companiesand me.
+
+
+        %p.Fb
+          = submit_tag :save.l
+          or
+          = link_to "&raquo; " + :skip_this_step.l, dashboard_company_path(@representative.company)
+          .hr

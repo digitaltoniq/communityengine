@@ -42,12 +42,12 @@
                 %span.mini (minimum 6 characters)
               = f.password_field :password
 
-            -# %p.Fe.f-password-confirm
+            %p.Fe.f-password-confirm
               %label{"for"=>"user_password_confirmation"}
                 =:re_type_your_password_to_confirm.l
               = f.password_field :password_confirmation
 
-            %p.Fe.f-zipcode
+            -#%p.Fe.f-zipcode
               %label{"for"=>"user_zipcode"}
                 = "Zip code"
               -# = f.text_field :zipcode

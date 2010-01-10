@@ -1,43 +1,50 @@
-.yui-b
-  -box :class => 'alt' do
-    %h3=:tips.l
-    %p
-      =:after_signing_up_youll_receive_an_e_mail_confirmation_message.l
-    %p
-      =:click_the_activation_link_in_the_e_mail_to_log_in.l
+.form-1.form-user-edit
+  - form_for :representative, :url => company_representatives_path(@representative.company), :html => {:class => 'MainForm'} do |rep_form|
+    .yui-b.form-1-alt
+      -box :id => "profile_details" do
+        %h3.h3.u=:tips.l
+        %p
+          =:after_signing_up_youll_receive_an_e_mail_confirmation_message.l
+        %p
+          =:click_the_activation_link_in_the_e_mail_to_log_in.l
 
-#yui-main
-  .yui-b
-    -box do
-      %h3=:sign_up.l
-      = error_messages_for :representative
-      - form_for :representative, :url => company_representatives_path(@representative.company), :html => {:class => 'MainForm'} do |rep_form|
+    #yui-main
+      .yui-b
+        -box :class => "alt first_alt" do
 
-        %label{"for"=>"representative_first_name"}
-          =:first_name.l
-        = rep_form.text_field :first_name
+          %h3.h3.u= :sign_up.l
 
-        %label{"for"=>"representative_last_name"}
-          =:last_name.l
-        = rep_form.text_field :last_name
+          = error_messages_for :representative
 
-        %label{"for"=>"representative_email"}
-          =:e_mail_address.l
-        %em=:required_we_will_send_a_confirmation_e_mail_to_the_address_you_enter.l
-        = rep_form.text_field :email
+          %p.Fe
+            %label{"for"=>"representative_first_name"}
+              =:first_name.l
+            = rep_form.text_field :first_name
 
-        %label{"for"=>"representive_password"}
-          =:type_your_password.l
-        = rep_form.password_field :password
+          %p.Fe
+            %label{"for"=>"representative_last_name"}
+              =:last_name.l
+            = rep_form.text_field :last_name
 
-        %label{"for"=>"representive_password_confirmation"}
-          =:re_type_your_password_to_confirm.l
-        = rep_form.password_field :password_confirmation
+          %p.Fe
+            %label{"for"=>"representative_email"}
+              =:e_mail_address.l
+            %em=:required_we_will_send_a_confirmation_e_mail_to_the_address_you_enter.l
+            = rep_form.text_field :email
+    
+          %p.Fe
+            %label{"for"=>"representive_password"}
+              =:type_your_password.l
+            = rep_form.password_field :password
 
+          %p.Fe
+            %label{"for"=>"representive_password_confirmation"}
+              =:re_type_your_password_to_confirm.l
+            = rep_form.password_field :password_confirmation
 
-        -if AppConfig.require_captcha_on_signup
-          .right{:style => 'margin-top:2em;'}= recaptcha_tags
+          = hidden_field_tag :inviter_id, params[:inviter_id]
+          = hidden_field_tag :inviter_code, params[:inviter_code]
 
-        = hidden_field_tag :inviter_id, params[:inviter_id]
-        = hidden_field_tag :inviter_code, params[:inviter_code]
-        %p= submit_tag :sign_up.l
+          %p.Fb
+            = submit_tag :sign_up.l
+          .hr
