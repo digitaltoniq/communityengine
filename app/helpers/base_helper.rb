@@ -212,7 +212,12 @@ module BaseHelper
       return html
     else
       # Might not work for any other followee besides company because of nested paths?
-      link_to :follow.l(:name => followee), login_path(:return_to => url_for(params))
+      html = "<span class='following_request' id='follow_request_#{followee.id}'>"
+      html += link_to :follow.l(:name => followee), login_path(:return_to => url_for(params)), {:class => "add_following_btn"}
+      html +=	"<span style='display:none;' class='spinner'>"
+      html += image_tag 'spinner.gif', :plugin => "community_engine"
+      html += :requesting_follow.l+" ...</span></span>"
+      return html      
     end
   end
 
