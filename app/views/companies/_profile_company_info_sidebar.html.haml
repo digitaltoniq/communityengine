@@ -1,7 +1,7 @@
 .box-c-company-profile-short
   -box :class => 'box3', :id => 'profile_details' do
     %p.photo
-      = image_tag( @company.logo_photo_url(:large), :class => "polaroid") 
+      = link_to image_tag( @company.logo_photo_url(:large), :class => "polaroid"), company_path(@company) 
     %h3.name
       = link_to @company.name, company_path(@company)
       - if logged_in? and @company.admin?(current_user)

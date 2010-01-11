@@ -5,7 +5,7 @@
       %b= "Company"
   -box :class => 'box3', :id => 'profile_details' do
     %p.photo
-      = image_tag( @company.logo_photo_url(:medium), :class => "polaroid") 
+      = link_to image_tag( @company.logo_photo_url(:medium), :class => "polaroid"), company_path(@company) 
     %h3.name
       = link_to @company.name, company_path(@company)
     - if @company.description

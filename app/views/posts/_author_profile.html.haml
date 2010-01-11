@@ -5,7 +5,7 @@
       %b= "Posted by"
   -box :class => 'box4', :id => 'profile_details' do
     %p.photo
-      = image_tag( user.avatar_photo_url(:medium), :class => "polaroid")
+      = link_to image_tag( user.avatar_photo_url(:medium), :class => "polaroid"), user_path(user)
     .hr.hr-2
     %h3.name
       = link_to h(user), user_path(user)
