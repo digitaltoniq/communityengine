@@ -48,7 +48,8 @@
     %p.details
       %span.button-follow
         = render :partial => 'followings/follow_link', :locals => {:followee => representative.company}
-      %span.name= representative.company.name
+      %span.name
+        = link_to representative.company.name, company_path(representative.company)
       %span.location
         = representative.company.full_location if representative.company.metro_area
    

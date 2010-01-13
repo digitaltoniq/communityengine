@@ -26,6 +26,6 @@
       - if @representative.company.metro_area
         %p.com-location
           = @representative.full_location
-      %p.com-follow-link
+      -#%p.com-follow-link
         = render :partial => 'followings/follow_link', :locals => {:followee => @representative}
 
