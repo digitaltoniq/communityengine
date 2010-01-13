@@ -41,7 +41,7 @@ class CompaniesController < BaseController
     # TODO: Move these auxiliary items up to view or filter?
     show! do
       @post_comments = @company.representative_comments.ordered('created_at DESC').limited(25)
-      @recent_posts = @company.posts.live.ordered("published_at DESC").limited(2)
+      @recent_posts = @company.posts.live.ordered("published_at DESC").limited(5)
       @rss_title = "#{@company} Conversations"
       @rss_url = company_posts_url(@company, :format => :rss)
     end
