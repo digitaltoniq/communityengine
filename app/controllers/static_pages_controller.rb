@@ -1,6 +1,6 @@
 class StaticPagesController < BaseController
   uses_tiny_mce(:options => AppConfig.default_mce_options, :only => [:new, :edit ])
-  before_filter :admin_required, :except => [:show_web]
+  before_filter :admin_required, :only => [:create, :destroy, :edit, :index, :new, :show, :update]
   
   def index
     @static_pages = StaticPage.all
