@@ -72,7 +72,7 @@ feature_image:
     resize_to: "465>"
     min_size: 1
     max_size: 3
-    thumbnails: {small: "50x50!", medium: "190x140!"}
+    thumbnails: {small: "50x50!", medium: "280x200!", large: "300x225!"}
     processor: image_science
     storage: 'file_system'
     path_prefix: 'public/system/feature_images'
