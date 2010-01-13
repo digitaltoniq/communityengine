@@ -17,7 +17,7 @@
         %input{ :type=>"hidden", :name=>"domains", :value=>"#{application_url}"}
         %label{ :for=>"search",  :style=>"display: none"}
           = :search.l+" #{AppConfig.community_name}"
-        - @search_prompt = "Find a conversation, company, or person"
+        - @search_prompt = "Find something or someone"
         #SearchWrapper
           %input{ :type=>"text",:name=>"q", :value=>@search_prompt, :size=>"17", :maxlength=>"255", :id=>"search", :onFocus=>"javascript:if(this.value=='#{@search_prompt}') this.value='';"}
         %input{ :type=>"hidden", :name=>"sitesearch", :value=>"#{application_url}", :id=>"ss1"}
