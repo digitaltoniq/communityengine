@@ -10,7 +10,7 @@
           = @post.title
         .details
           %p.posted
-            = "Posted #{time_ago_in_words(@post.published_at)}"
+            = "Posted #{time_ago_in_words(@post.published_at)}" if @post.is_live?
           %p.comments
             = link_to @post.comments_count,'#comments'
 
