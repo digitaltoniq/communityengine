@@ -7,7 +7,9 @@ class LeadForm < SimpleForm
   attribute :name,      :validate => true
   attribute :title
   attribute :company
+  attribute :website
   attribute :phone
+  attribute :preference
   attribute :email,     :validate => /[^@]+@[^\.]+\.[\w\.\-]+/
 
   attribute :message

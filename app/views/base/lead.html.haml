@@ -1,37 +1,108 @@
-= render :partial => 'about_nav'
+-# = render :partial => 'about_nav'
 
 #yui-main
-  .yui-b
-    -box do
+  .box-c-signup-lead
+    .box
+      %h3.large A storytelling platform for companies with great stories to share.
 
-      %h3=:contact_us.l(:site => AppConfig.community_name)
+      .box-mini-1
+        %p.title Need more story ideas? 
+        %p
+          Check out our 
+          = link_to "Guide to Authentic Conversations", "#"
+          \.
 
-      - form_for @lead, :url => lead_path, :html => {:class => 'MainForm'} do |f|
+      %p Break through the noise by engaging the audience who cares most about the passion, people and stories behind your brand.
 
-        = error_messages_for :lead
-        
-        = f.label :name
-        = f.text_field :name
-        %br/
+      %h4 Especially made for companies that
+      %ul
+        %li Have a passionate story to share that may otherwise go unheard
+        %li Want to connect with people in a meaningful, local context and learn from them
+        %li Want to share worthwhile, quality stories, rather than compete with all the noise out there
+      
+      .hr
 
-        = f.label :email
-        = f.text_field :email
-        %br/
+      %h4 Invest in a plan designed for your brand.
+      %p We guarantee you'll like what you get, no questions asked, for 30 whole days.
+      
+    .box
+      .boxes
+        .box.box-n-1
+          %ul  
+            %li
+              %strong Share 
+              unlimited stories
+            %li
+              %strong Reach 
+              unlimited users
+            %li
+              %strong Feature 
+              unlimited company representatives
+            %li
+              %strong No advertising, ever.
 
-        = f.label :title
-        = f.text_field :title
-        %br/
+        .box.box-n-2
+          %h5 Local Basic
+          %p $250/mo
+          %p For startups and smaller localbrands
+          %ul
+            %li Conversations featured in local area (e.g. SF Bay Area)
+            %li Basic support offered by email
 
-        = f.label :company
-        = f.text_field :company
-        %br/
+        .box.box-n-3
+          %h5 Local Plus
+          %p $950k/mo
+          %p Get more return on engagement. Also includes:
+          %ul
+            %li Save time with Premium Support, offered by phone and email.
+            %li Maximize returns with custom engagement reporting
 
-        = f.label :phone
-        = f.text_field :phone
-        %br/
+        .box.box-n-4
+          %h5 Regional
+          %p= link_to "Contact us" ,"#"
+          %h5 National
+          %p= link_to "Contact us" ,"#"
+      
+      .hr
+      
+      %h4 Get started by telling us a little about yourself.
+      %p Have a question? Weʼd be happy to answer it.
 
-        = f.label :message, 'Is there a particular story you want to tell?'
-        = f.text_area :message, :rows => 4
-        %br/
+      .form-1
+        - form_for @lead, :url => lead_path, :html => {:class => 'MainForm'} do |f|
+          = error_messages_for :lead
+          %p.Fe
+            %label{"for"=>"lead_name"}
+              = "Your name"
+            = text_field :lead, :name
+          %p.Fe
+            %label{"for"=>"lead_title"}
+              = "Your title"
+            = text_field :lead, :title
+          %p.Fe
+            %label{"for"=>"lead_company"}
+              = "Company"
+            = text_field :lead, :company
+          %p.Fe
+            %label{"for"=>"lead_website"}
+              = "Company website"
+            = text_field :lead, :website
+          %p.Fe
+            %label{"for"=>"lead_email"}
+              = "Email"
+            = text_field :lead, :email
+          %p.Fe
+            %label{"for"=>"lead_phone"}
+              = "Phone number"
+            = text_field :lead, :phone
+          %p.Fe.Fes
+            %label{"for"=>"lead_preference"}
+              = "Contact preference"
+            = select :lead,:preference, ['Select one']
+          %p.Fet
+            %label{"for"=>"lead_message"}
+              = "What are some of the stories you’d like to share and/or questions you have?"
+            = text_area :lead, :message, :rows => 4
+          %p.Fb
+            = submit_tag "Submit", :class => "button1"
 
-        %p= submit_tag :send.l

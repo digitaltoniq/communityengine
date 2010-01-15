@@ -258,7 +258,18 @@ h3.u
 #yui-main .yui-b h3.u
   padding: 0 0 10px 0
   background: url('/images/theme/hr1.png') no-repeat 0 100%
+
+h3.large
+  margin: 0 0 0.5em 0
+  +font_georgia
+  font:
+    size: 25px
+    weight: bold
+    style: italic
+  line-height: 1.2
+  color: #454238
   
+
 .hr
   margin: 10px 0
   height: 10px
@@ -1449,5 +1460,103 @@ ul.dashboard_actions
     table
       width: 520px
 
-
-  
+.box-c-signup-lead
+  p, ul, h4
+    margin: 0 0 0.5em 0
+  ul
+    li
+      margin-left: 17px
+      list-style: disc outside  
+  h4
+    margin-top: 1em
+    +font_georgia
+    font-size: 18px
+    color: #201e19
+  h5
+    +font_georgia
+    font-weight: bold
+    font-style: italic
+    font-size: 14px
+    color: #201e19
+  .hr
+    margin: 30px 0
+  .box-mini-1
+    float: right
+    margin: 50px 50px 0 0
+    width: 140px
+    padding: 10px 20px
+    border: #999 1px solid
+    background-color = !color2
+    font-size: 12px
+    color: #000
+    p
+      margin: 0
+      &.title
+        font-weight: bold
+  .boxes
+    overflow: hidden
+    margin: 20px 0
+    color: #201e19
+    line-height: 1.2
+    .box
+      overflow: hidden
+      float: left
+      margin: 0 -10px 0 0
+      height: 240px
+      width: 230px
+      border: #ddd 2px solid
+      +round-borders("10px 0 0 10px")
+      background-color: #fff
+    .box-n-1
+      background-color: #f2f2f2
+      width: 210px
+      height: 190px
+      padding: 50px 30px 0 20px
+      ul
+        li
+          margin-left: 0
+          margin-bottom: 1em
+          list-style: none inside
+    .box-n-2
+      background-color: #f9f4f2
+      width: 200px
+      height: 210px
+      padding: 30px 20px 0 10px
+    .box-n-3
+      background-color: #d9f4ef
+      width: 200px
+      height: 210px
+      padding: 30px 20px 0 10px
+    .box-n-4
+      background-color: #fff
+      width: 180px
+      height: 240px
+      margin: 0
+      +round-borders("10px")
+      text-align: center
+      h5
+        margin-top: 60px
+      p
+        font-size: 12px
+        font-style: italic
+        a
+          color: #999
+  .form-1
+    .errorExplanation
+      width: 350px
+    p.Fe
+      label
+        float: left
+        width: 130px
+        padding-right: 15px
+        line-height: 25px
+        text-align: right
+      input
+        width: 210px
+    p.Fes
+      select
+        width: 222px
+    p.Fet
+      textarea
+        width: 354px
+      
