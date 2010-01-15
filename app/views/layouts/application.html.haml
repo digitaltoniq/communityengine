@@ -13,26 +13,25 @@
       = auto_discovery_link_tag(:rss, @rss_url, {:title => @rss_title})
     
   %body
-    #masthead-bg
-    
     #doc2{:class => "yui-t#{@sidebar_left ? 3 : 6}"}
-      = render :partial => "shared/header"
+      #masthead-bg
+        = render :partial => "shared/header"
 
-      #bd
-        = render :partial => "shared/messages"
+        #bd
+          = render :partial => "shared/messages"
 
-        = @content_for_layout
+          = @content_for_layout
 
-      -#
-        DJS
-        #ft
-          -if show_footer_content?
-            .yui-gc#footer_content
-              = image_tag 'spinner.gif', :plugin => 'community_engine'
-              =:loading_recent_content.l
+        -#
+          DJS
+          #ft
+            -if show_footer_content?
+              .yui-gc#footer_content
+                = image_tag 'spinner.gif', :plugin => 'community_engine'
+                =:loading_recent_content.l
 
-            %script{:type=>"text/javascript"}
-              = remote_function(:update => "footer_content", :url => { :controller => 'base', :action => 'footer_content' })
+              %script{:type=>"text/javascript"}
+                = remote_function(:update => "footer_content", :url => { :controller => 'base', :action => 'footer_content' })
 
       #CommunityFooter
         %ul
