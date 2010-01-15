@@ -1,17 +1,30 @@
 %h3
-  =:logged_in.l
-  = link_to current_user, user_path(current_user) #, :id => 'user-menu'
-  /#user-menu-tip
-  %span.logout
-    - if current_user.facebook_user?
-      = "(#{link_to_function(:log_out.l, "FB.Connect.logout(camLogout)")})"
-      =# "(#{link_to_function(:log_out.l, "FB.Connect.logoutAndRedirect('#{logout_path}')")})"
-    - else
-      = "(#{link_to(:log_out.l, logout_path)})"
-    &nbsp;&nbsp;
-    = link_to(:account.l, edit_account_user_path(current_user))
-
-%script{:type => 'text/javascript'}
-  function camLogout() {
-  = "window.location = '#{logout_path}'"
-  }
+  - if logged_in?
+    = "Hello, "
+    = link_to current_user, user_path(current_user) #, :id => 'user-menu'
+    %small
+      - if current_user.facebook_user?
+        = "(#{link_to_function("log out", "FB.Connect.logout(camLogout)")})"
+        =# "(#{link_to_function("log out", "FB.Connect.logoutAndRedirect('#{logout_path}')")})"
+      - else
+        = "(#{link_to("log out", logout_path)})"
+    %span.separator
+      |
+    = link_to("Settings", edit_account_user_path(current_user))
+    
+    %script{:type => 'text/javascript'}
+      function camLogout() {
+      = "window.location = '#{logout_path}'"
+      }
+    -# if current_user.unread_messages?
+      %h3#newmail
+        = link_to pluralize(current_user.unread_message_count, 'unread message'), user_messages_path(current_user)
+  - else
+    -# =:welcome_message.l(:login_link => (link_to :log_in.l, login_path(:return_to => url_for(params))), :signup_link => (link_to :sign_up.l, signup_path(:return_to => url_for(params))))
+    
+    %span
+      - link_to login_path(:return_to => url_for(params)) do
+        = "Log in "
+        = image_tag '/images/theme/ico_facebook_login.png', :size => "", :alt => "Facebook"
+    %span
+      = link_to "Sign up", signup_path(:return_to => url_for(params))

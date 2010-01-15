@@ -170,6 +170,15 @@ body {
       font-weight: bold;
       color: #0099cc;
       text-decoration: none; }
+    #hd h3 span {
+      margin-left: 10px; }
+      #hd h3 span.separator {
+        margin: 0 10px; }
+    #hd h3 small {
+      font-size: 10px; }
+    #hd h3 img {
+      vertical-align: text-bottom;
+      margin-left: 5px; }
   #hd #NavBar .nav-search {
     clear: right;
     float: right;
