@@ -1606,3 +1606,11 @@ ul.dashboard_actions {
   width: 222px; }
 .box-c-signup-lead .form-1 p.Fet textarea {
   width: 354px; }
+
+.box-c-about-us p {
+  margin: 0 0 1em 0; }
+  .box-c-about-us p.visit {
+    margin: 50px 0 30px 0;
+    text-align: center; }
+    .box-c-about-us p.visit img {
+      margin: 0 0 10px 0; }

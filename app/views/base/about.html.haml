@@ -1,6 +1,17 @@
-= render :partial => 'about_nav'
+-# = render :partial => 'about_nav'
 
 #yui-main
   .yui-b
-    -box do 
-      %h3=:your_about_text_goes_here.l
+    .box-c-about-us
+      %h3.h3.u About Us
+      %p We created this site for you to discover and engage with the passionate companies around us by exploring the stories of and connecting with the people behind their businesses. So, to learn more about us, visit our Companiesandme page and join in on the conversations weʼve shared with you.
+      %p.visit
+        - link_to "/companiesandme" do
+          = image_tag "/images/theme/logo2.png", :alt => "companiesandme.com"
+        %br/
+        Visit us on our page: 
+        = link_to "companiesandme.com/companiesandme" , "/companiesandme"
+      %p Send us a shout any time by email at hello at companiesandme.com. Thanks for joining in!
+      %p Members of the media, and anyone else with a question or something to share with us, feel free to email us at hello at companiesandme.com or call us at 415-683-6832.
+
+      .hr
