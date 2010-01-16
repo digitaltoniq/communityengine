@@ -116,70 +116,15 @@ module BaseHelper
   end
 
 	def page_title
-		app_base = " - #{AppConfig.community_name}"
-		tagline = " | #{AppConfig.community_tagline}"
-	
-		title = app_base
+    default = "#{AppConfig.community_name} - #{AppConfig.community_tagline}"
 		case @controller.controller_name
-			when 'base'
-					title += tagline
-			when 'posts'
-        if @post and @post.title
-          title = @post.title + ' &raquo; ' + app_base + tagline
-#          title += (@post.tags.empty? ? '' : " &laquo; "+:keywords.l+": " + @post.tags[0...4].join(', ') )
-          @canonical_url = post_url(@post)
-        end
-			when 'users'
-        if @user && !@user.new_record?
-          title = @user.to_s
-          title += ', expert in ' + @user.offerings.collect{|o| o.skill.name }.join(', ') if @user.vendor? and !@user.offerings.empty?
-          title += ' &raquo; ' + app_base + tagline
-          @canonical_url = user_url(@user)          
-        else
-          title = :showing_users.l+' &raquo; ' + app_base + tagline
-        end
-			when 'photos'
-        if @user and @user
-          title = @user + '\'s '+:photos.l+' &raquo; ' + app_base + tagline
-        end
-			when 'clippings'
-        if @user and @user
-          title = @user + '\'s '+:clippings.l+' &raquo; ' + app_base + tagline
-        end
-			when 'tags'
-				case @controller.action_name
-			    when 'show'
-            title = @tags.map(&:name).join(', ') + ' '
-            title += params[:type] ? params[:type].pluralize : :posts_photos_and_bookmarks.l
-            title += ' (Related: ' + @related_tags.join(', ') + ')' if @related_tags
-            title += ' | ' + app_base    
-            @canonical_url = tag_url(URI.escape(@tags_raw, /[\/.?#]/)) if @tags_raw
-          else
-          title = 'Showing tags &raquo; ' + app_base + tagline            
-			  end
-      when 'categories'
-        if @category and @category.name
-          title = @category.name + ' '+:posts_photos_and_bookmarks.l+' &raquo; ' + app_base + tagline
-        else
-          title = :showing_categories.l+' &raquo; ' + app_base + tagline            
-        end
-      when 'skills'
-        if @skill and @skill.name
-          title = :find_an_expert_in.l+' ' + @skill.name + ' &raquo; ' + app_base + tagline
-        else
-          title = :find_experts.l+' &raquo; ' + app_base + tagline            
-        end
-      when 'sessions'
-        title = :login.l+' &raquo; ' + app_base + tagline            
-		end
-
-    if @page_title
-      title = @page_title + app_base
-    elsif title == app_base          
-		  title = :showing.l+' ' + @controller.controller_name + ' &raquo; ' + app_base
-    end	
-		title
-	end
+    when 'posts'
+      if @post and @post.title
+        return @post.title + ' - ' + default
+      end
+    end
+    default
+  end
 
   def add_friend_link(user = nil)
 		html = "<span class='friend_request' id='friend_request_#{user.id}'>"
