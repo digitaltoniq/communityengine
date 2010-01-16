@@ -32,7 +32,8 @@ class PostSweeper < ActionController::Caching::Sweeper
 
     # Also expire the show pages, in case we just edited a blog entry
     expire_action(:controller => 'posts', :action => 'show')
-    expire_action(:controller => 'posts', :action => 'popular')
-    expire_action(:controller => 'posts', :action => 'index')
+    ['index', 'popular', 'recent', 'most_discussed'].each do |action|
+      expire_action :controller => 'posts', :action => action
+    end
   end
 end

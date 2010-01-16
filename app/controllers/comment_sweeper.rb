@@ -20,14 +20,11 @@ class CommentSweeper < ActionController::Caching::Sweeper
     # Expire the footer content
     expire_action :controller => 'base', :action => 'footer_content'
 
-    if record.commentable_type.eql?('Post') 
+    if record.commentable_type.eql?('Post')
       expire_action :controller => 'posts', :action => 'show', :id => record.commentable , :user_id => record.commentable.user
-      
-      if Post.find_recent(:limit => 16).include?(record.commentable)
-        # Expire the home page    
-        expire_action :controller => 'base', :action => 'site_index'
-        # Expire the category pages
-        expire_action :controller => 'categories', :action => 'show', :id => record.commentable.category
+      expire_action :controller => 'posts', :action => 'show', :id => record.commentable , :company_id => Company.for_post(record).to_param
+      ['index', 'popular', 'recent', 'most_discussed'].each do |action|
+        expire_action :controller => 'posts', :action => action
       end
     end
 
