@@ -143,11 +143,11 @@ module BaseHelper
 
   def add_follow_link(followee)
     if logged_in?
-      html = "<span class='following_request' id='follow_request_#{followee.id}'>"
+      css_class = "follow_request_#{followee.id}"
+      html = "<span class='following_request #{css_class}'>"
       html += link_to_remote :follow.l(:name => followee),
-              {:update => "follow_request_#{followee.id}",
-                  :loading => "$$('span#follow_request_#{followee.id} span.spinner')[0].show(); $$('span#follow_request_#{followee.id} a.add_following_btn')[0].hide()",
-                  :complete => visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
+              {:loading => "$$('.#{css_class} span.spinner').each(function(e) { e.show() }); $$('.#{css_class} a.add_following_btn').each(function(e) { e.hide() })",
+                  :complete => "$$('.#{css_class}').each(function(e) { e.update(request.responseText) })", # visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
                   500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
                   :url => hash_for_user_followings_url(:user_id => current_user.id, :followee_id => followee.id, :followee_type => followee.class.name),
                   :method => :post }, {:class => "add_following_btn"}
@@ -157,7 +157,7 @@ module BaseHelper
       return html
     else
       # Might not work for any other followee besides company because of nested paths?
-      html = "<span class='following_request' id='follow_request_#{followee.id}'>"
+      html = "<span class='following_request follow_request_#{followee.id}'>"
       html += link_to :follow.l(:name => followee), login_path(:return_to => url_for(params)), {:class => "add_following_btn"}
       html +=	"<span style='display:none;' class='spinner'>"
       html += image_tag 'spinner.gif', :plugin => "community_engine"
@@ -169,11 +169,11 @@ module BaseHelper
   # TODO: refactor with add_follow_link
   def add_unfollow_link(followee)
     following = Following.following_for(followee, current_user)
-    html = "<span class='unfollowing_request' id='unfollow_request_#{followee.id}'>"
+    css_class = "unfollow_request_#{followee.id}"
+    html = "<span class='unfollowing_request unfollow_request_#{followee.id}'>"
     html += link_to_remote "#{:following.l(:name => followee)} (click to unfollow)" ,
-            {:update => "unfollow_request_#{followee.id}",
-                :loading => "$$('span#unfollow_request_#{followee.id} span.spinner')[0].show(); $$('span#unfollow_request_#{followee.id} a.remove_following_btn')[0].hide()",
-                :complete => visual_effect(:highlight, "unfollow_request_#{followee.id}", :duration => 1),
+            {:loading => "$$('.#{css_class} span.spinner').each(function(e) {e.show()}); $$('.#{css_class} a.remove_following_btn').each(function(e) { e.hide() })",
+                :complete => "$$('.#{css_class}').each(function(e) { e.update(request.responseText) })", #visual_effect(:highlight, "unfollow_request_#{followee.id}", :duration => 1),
                 500 => "alert('"+:sorry_there_was_an_error_while_removing_following.l+"')",
                 :url => hash_for_user_following_url(:user_id => current_user.id, :id => following.id),
                 :method => :delete }, {:class => "remove_following_btn"}
