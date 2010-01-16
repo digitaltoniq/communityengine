@@ -1355,7 +1355,7 @@ en:
   view_my: "View my:"
   view: View
   #en: view_my_blog: View my blog
-  view_my_blog: View my conversations
+  view_my_blog: View All
   #en: view_profile: View profile
   view_profile: View profile
   #en: voice: voice
@@ -1619,7 +1619,7 @@ en:
   # en: company_details: "Company details"
   company_details: "Company details"
   # en: view_company_blog: "View company conversastions"
-  view_company_blog: "View company conversations"
+  view_company_blog: "View All"
   view_company_dashboard: View company dashboard
   back_to_company_dashboard: Back to company dashboard
   # en: listing_representative_invitations: "Listing representative invitations"
