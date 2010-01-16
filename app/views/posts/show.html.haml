@@ -42,7 +42,7 @@
           = @post.post
         .social-buttons
           %p.follow-link
-            = render :partial => 'followings/follow_link', :locals => {:followee => @post}
+            = render :partial => 'followings/follow_link', :locals => {:followee => Company.for_post(@post)}
           %p
             -# http://www.facebook.com/facebook-widgets/share.php
             %a{:name => "fb_share", :type => "button_count", :href => "http://www.facebook.com/sharer.php"} Share
