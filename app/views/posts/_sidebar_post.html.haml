@@ -14,5 +14,6 @@
   .comments
     = post.comments_count
   .company
-    %span.addfollowing2
-      = link_to Company.for_post(post), company_path(Company.for_post(post))
+    %span.name= link_to Company.for_post(post), company_path(Company.for_post(post))
+    %span.follow-link-small
+      = render :partial => 'followings/follow_link', :locals => {:followee => Company.for_post(post)}

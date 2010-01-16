@@ -141,11 +141,11 @@ module BaseHelper
 		html
   end
 
-  def add_follow_link(followee)
+  def add_follow_link(followee, text = :follow.l(:name => followee))
     if logged_in?
       css_class = "follow_request_#{followee.id}"
       html = "<span class='following_request #{css_class}'>"
-      html += link_to_remote :follow.l(:name => followee),
+      html += link_to_remote text,
               {:loading => "$$('.#{css_class} span.spinner').each(function(e) { e.show() }); $$('.#{css_class} a.add_following_btn').each(function(e) { e.hide() })",
                   :complete => "$$('.#{css_class}').each(function(e) { e.update(request.responseText) })", # visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
                   500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
@@ -167,11 +167,11 @@ module BaseHelper
   end
 
   # TODO: refactor with add_follow_link
-  def add_unfollow_link(followee)
+  def add_unfollow_link(followee, text = :following.l(:name => followee))
     following = Following.following_for(followee, current_user)
     css_class = "unfollow_request_#{followee.id}"
     html = "<span class='unfollowing_request unfollow_request_#{followee.id}'>"
-    html += link_to_remote "#{:following.l(:name => followee)} (click to unfollow)" ,
+    html += link_to_remote text,
             {:loading => "$$('.#{css_class} span.spinner').each(function(e) {e.show()}); $$('.#{css_class} a.remove_following_btn').each(function(e) { e.hide() })",
                 :complete => "$$('.#{css_class}').each(function(e) { e.update(request.responseText) })", #visual_effect(:highlight, "unfollow_request_#{followee.id}", :duration => 1),
                 500 => "alert('"+:sorry_there_was_an_error_while_removing_following.l+"')",
