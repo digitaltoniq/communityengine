@@ -9,6 +9,8 @@
     .hr.hr-2
     %h3.name
       = link_to h(user), user_path(user)
+    %p.role
+      = Representative.for_user(user).title
     -# if @representative.title
       %p.role
         = @representative.title
