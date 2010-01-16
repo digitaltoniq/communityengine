@@ -38,8 +38,14 @@
   %p If you are a registered user of our Services, we provide you with tools to access or modify the personal information you provided to us and associated with your account.
   %p
     %strong Our Policy Towards Children
-  %p Our Services are not directed to people under 13. If you become aware that your child has provided us with personal information without your consent, please contact us at privacy@companiesandme.com. We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we take steps to remove such information and terminate the child's account.
+  %p
+    Our Services are not directed to people under 13. If you become aware that your child has provided us with personal information without your consent, please contact us at
+    = "#{mail_to 'privacy@companiesandme.com'}."
+    We do not knowingly collect personal information from children under 13. If we become aware that a child under 13 has provided us with personal information, we take steps to remove such information and terminate the child's account.
   %p
     %strong Changes to this Policy
-  %p We may revise this Privacy Policy from time to time. The most current version of the policy will govern our use of your information and will always be at http://companiesandme.com/useful-stuff/privacy-policy. If we make a change to this policy that, in our sole discretion, is material, we will notify you via e-mail to the email associated with your account. By continuing to access or use the Services after those changes become effective, you agree to be bound by the revised Privacy Policy.
+  %p
+    We may revise this Privacy Policy from time to time. The most current version of the policy will govern our use of your information and will always be at
+    = "#{link_to url_for(:controller => 'static_pages', :action => 'show_terms', :term => 'privacy-policy', :only_path => false), url_for(:controller => 'static_pages', :action => 'show_terms', :term => 'privacy-policy')}."
+    If we make a change to this policy that, in our sole discretion, is material, we will notify you via e-mail to the email associated with your account. By continuing to access or use the Services after those changes become effective, you agree to be bound by the revised Privacy Policy.
 
