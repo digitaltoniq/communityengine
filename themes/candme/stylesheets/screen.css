@@ -233,8 +233,7 @@ body {
       color: #666;
       text-decoration: none; }
       #hd #NavBar p.nav-area a:hover {
-        text-decoration: none;
-        cursor: default; }
+        text-decoration: none; }
   #hd #NavBar ul.nav-tabs {
     overflow: hidden;
     clear: both;
