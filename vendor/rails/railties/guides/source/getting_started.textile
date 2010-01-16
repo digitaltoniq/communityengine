@@ -1193,7 +1193,7 @@ As a next step, I'll modify the +views/posts/show.html.erb+ view to show the com
 
 <%= link_to 'Edit Post', edit_post_path(@post) %> |
 <%= link_to 'Back to Posts', posts_path %> |
-<%= link_to 'Manage Comments', post_comments_path(@post) %>
+<%= link_to 'Manage comments', post_comments_path(@post) %>
 </erb>
 
 Note that each post has its own individual comments collection, accessible as +@post.comments+. That's a consequence of the declarative associations in the models. Path helpers such as +post_comments_path+ come from the nested route declaration in +config/routes.rb+.

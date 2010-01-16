@@ -12,10 +12,10 @@
       %ul.dashboard_actions
         %li.highlight= link_to :new_post.l, new_company_post_path(@company)
         %li= link_to :manage_posts.l, manage_company_posts_path(@company)
-        %li= link_to "Manage Comments <small>on our conversations</small>", post_comments_company_path(@company)
+        %li= link_to "Manage comments <small>on our conversations</small>", post_comments_company_path(@company)
         %li= link_to :manage_company_page.l, edit_company_path(@company)
         %li= link_to :manage_representatives.l, company_representative_invitations_path(@company)
-        %li= link_to "Manage Comments <small>from our representatives</small>", representative_comments_company_path(@company)
+        %li= link_to "Manage comments <small>from our representatives</small>", representative_comments_company_path(@company)
 
   .yui-b
     -box do
