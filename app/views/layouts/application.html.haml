@@ -35,7 +35,7 @@
 
       #CommunityFooter
         %ul
-          %li
+          -#%li
             %a{:href=>application_url, :title=>"#{AppConfig.community_name} " + :home.l}= :home.l
           -# if !logged_in?
             %li
@@ -46,10 +46,11 @@
                 =:log_out.l
           %li= link_to "Company signup", '/lead'
           %li= link_to "About us", '/about'
-          %li= link_to "Terms of Use", '/terms/terms-of-use'
-          %li= link_to "Community Guidelines", '/terms/community-guidelines'
-          %li= link_to "Privacy Policy", '/terms/privacy-policy'
-          %li= link_to "Terms for Companies", '/terms/company-terms'
+          -#%li= link_to "Terms of Use", '/useful-stuff/terms-of-use'
+          %li= link_to "Community Guidelines", '/useful-stuff/community-guidelines'
+          -#%li= link_to "Privacy and legal stuff", '/useful-stuff/privacy-policy'
+          %li= link_to "Privacy and legal stuff", '/useful-stuff/terms-of-use'
+          -#%li= link_to "Terms for Companies", '/useful-stuff/company-terms'
           -#
             DJS
             %li

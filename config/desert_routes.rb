@@ -99,7 +99,7 @@ resources :activities
 # Static pages
 resources :static_pages, :as => 'pages'
 connect 'view_page/:url', :controller => 'static_pages', :action => 'show_web'
-connect 'terms/:term', :controller => 'static_pages', :action => 'show_terms'
+connect 'useful-stuff/:term', :controller => 'static_pages', :action => 'show_terms'
 
 resources :users, :member => {
     :assume => :get,
