@@ -1116,7 +1116,7 @@ en:
   #en: showing_users: Showing users
   showing_users: Showing users
   #en: sign_up: Sign Up!
-  sign_up: Sign Up!
+  sign_up: Sign Up
   #en: sign_up_for_an_account: Sign up for an account.
   sign_up_for_an_account: Sign up for an account.
   #en: sign_up_for_a_: Sign up for a
@@ -1393,7 +1393,7 @@ en:
   #en: we_need_you: We need you
   we_need_you: We need you
   #en: welcome_message: Welcome! {{login_link}} or {{signup_link}}
-  welcome_message: "Welcome! {{login_link}} or {{signup_link}}"
+  welcome_message: "Welcome. {{login_link}} or {{signup_link}}."
   #en: what_are_tags: 'What are "Tags"?'
   what_are_tags: 'What are "Tags"?'
   #en: what_is: What is
