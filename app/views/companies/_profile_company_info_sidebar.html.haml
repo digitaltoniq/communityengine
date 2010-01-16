@@ -11,7 +11,7 @@
       %p.description
         = @company.description
     %p.url
-      = @company.url
+      = link_to @company.url, @company.url if @company.url
     .hr
     %p.location
       = @company.full_location
