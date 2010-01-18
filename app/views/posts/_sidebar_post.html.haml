@@ -1,11 +1,3 @@
--# %dl.vcard
-  %dt.photo
-    = link_to image_tag(post.photo(:small), :alt=>""), post_path(post)
-  %dd.fn
-    = link_to post.title, post_path(post), :rel => 'bookmark'
-  %dd
-    = "#{post.comments_count} comments"
-    = "#{post.view_count} views"
 .entry
   .photo
     = link_to image_tag(post.photo(:small), :alt=>""), post_path(post)
@@ -14,9 +6,4 @@
   .comments
     = post.comments_count
   .company
-    %span.addfollowing2
-      = link_to Company.for_post(post), company_path(Company.for_post(post))
-    -#
-      %span.name= link_to Company.for_post(post), company_path(Company.for_post(post))
-      %span.follow-link-small
-        = render :partial => 'followings/follow_link', :locals => {:followee => Company.for_post(post)}
+    = render :partial => 'followings/follow_link', :locals => {:followee => Company.for_post(post)}
