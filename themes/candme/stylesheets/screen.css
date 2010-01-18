@@ -773,66 +773,6 @@ table.table1 {
       .box-c-posts-list .entry .entry-links p.details span.button-follow {
         float: right; }
 
-
-.box-c-companies-most-discussed {
-  overflow: hidden; }
-  .box-c-companies-most-discussed .entry {
-    overflow: hidden;
-    margin: -1em 0 1.5em;
-    background: url('/images/theme/hr2.png') no-repeat 0% 0%;
-    padding: 20px 0 0 0; }
-    .box-c-companies-most-discussed .entry .photo {
-      float: left;
-      margin: 0 5px 10px 0; }
-      .box-c-companies-most-discussed .entry .photo a {
-        display: block;
-        background: url('/images/theme/frame_image_53x51.png') no-repeat 50% 50%;
-        padding: 3px 4px;
-        width: 44px;
-        height: 44px; }
-        .box-c-companies-most-discussed .entry .photo a img {
-          display: block;
-          height: 44px;
-          width: 44px; }
-    .box-c-companies-most-discussed .entry .title {
-      margin: 0 0 0.5em 0;
-      font-family: Georgia, serif;
-      font-weight: bold;
-      font-style: italic;
-      font-size: 12px; }
-      .box-c-companies-most-discussed .entry .title a {
-        color: #444;
-        text-decoration: none; }
-        .box-c-companies-most-discussed .entry .title a:hover {
-          text-decoration: underline; }
-    .box-c-companies-most-discussed .entry .comments {
-      clear: right;
-      float: left;
-      display: block;
-      height: 15px;
-      line-height: 15px;
-      padding: 0 0 0 20px;
-      background: url('/images/theme/ico_comments.png') no-repeat 0% 50%;
-      font-size: 12px;
-      color: #888;
-      text-decoration: none; }
-    .box-c-companies-most-discussed .entry .company {
-      clear: both; }
-      .box-c-companies-most-discussed .entry .company a {
-        display: block;
-        margin: 0 10px;
-        width: auto;
-        padding: 5px 15px;
-        border: #ccc 1px solid;
-        border-radius: 10px;
-        -moz-border-radius: 10px;
-        -webkit-border-radius: 10px;
-        font-family: Georgia, serif;
-        font-style: italic;
-        font-size: 12px;
-        color: #444;
-        text-decoration: none; }
-
 span.following_request,
 span.unfollowing_request {
   display: block; }
@@ -1018,6 +958,81 @@ span.removefollowing2 a {
   float: right; }
 .box-c-login p.Fb {
   clear: both; }
+
+.box-c-companies-most-discussed {
+  overflow: hidden; }
+  .box-c-companies-most-discussed .entry {
+    overflow: hidden;
+    margin: -1em 0 1.5em;
+    background: url('/images/theme/hr2.png') no-repeat 0% 0%;
+    padding: 20px 0 0 0; }
+    .box-c-companies-most-discussed .entry .photo {
+      float: left;
+      margin: 0 5px 10px 0; }
+      .box-c-companies-most-discussed .entry .photo a {
+        display: block;
+        background: url('/images/theme/frame_image_53x51.png') no-repeat 50% 50%;
+        padding: 3px 4px;
+        width: 44px;
+        height: 44px; }
+        .box-c-companies-most-discussed .entry .photo a img {
+          display: block;
+          height: 44px;
+          width: 44px; }
+    .box-c-companies-most-discussed .entry .title {
+      margin: 0 0 0.5em 0;
+      font-family: Georgia, serif;
+      font-weight: bold;
+      font-style: italic;
+      font-size: 12px; }
+      .box-c-companies-most-discussed .entry .title a {
+        color: #444;
+        text-decoration: none; }
+        .box-c-companies-most-discussed .entry .title a:hover {
+          text-decoration: underline; }
+    .box-c-companies-most-discussed .entry .comments {
+      clear: right;
+      float: left;
+      display: block;
+      height: 15px;
+      line-height: 15px;
+      padding: 0 0 0 20px;
+      background: url('/images/theme/ico_comments.png') no-repeat 0% 50%;
+      font-size: 12px;
+      color: #888;
+      text-decoration: none; }
+    .box-c-companies-most-discussed .entry .company {
+      clear: both; }
+      .box-c-companies-most-discussed .entry .company span.following_request,
+      .box-c-companies-most-discussed .entry .company span.unfollowing_request {
+        display: block;
+        overflow: hidden; }
+        .box-c-companies-most-discussed .entry .company span.following_request a,
+        .box-c-companies-most-discussed .entry .company span.unfollowing_request a {
+          display: block;
+          margin: 0 30px 0 10px;
+          width: auto;
+          height: auto;
+          padding: 5px 40px 5px 15px;
+          border: #ccc 1px solid;
+          border-radius: 10px;
+          -moz-border-radius: 10px;
+          -webkit-border-radius: 10px;
+          font-family: Georgia, serif;
+          font-style: italic;
+          font-size: 12px;
+          line-height: 1.2;
+          color: #444;
+          text-decoration: none;
+          text-indent: 0; }
+      .box-c-companies-most-discussed .entry .company span.following_request a {
+        background: url('/images/theme/button_follow_mini_1.png') no-repeat 95% 50%; }
+        .box-c-companies-most-discussed .entry .company span.following_request a:hover {
+          background-image: url('/images/theme/button_follow_mini_2.png'); }
+      .box-c-companies-most-discussed .entry .company span.unfollowing_request a {
+        background: url('/images/theme/button_follow_mini_3.png') no-repeat 95% 50%; }
+        .box-c-companies-most-discussed .entry .company span.unfollowing_request a:hover {
+          background-image: url('/images/theme/button_follow_mini_4.png'); }
 
 .box-c-companies-recently-popular {
   margin: 0 0 1em 0; }
