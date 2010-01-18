@@ -1303,13 +1303,14 @@ a.button-liked-it {
     margin-left: 20px; }
   .box-c-company-representatives .entry {
     overflow: hidden;
-    margin: 0 0 10px 0; }
+    margin: 0 0 10px 0;
+    padding-left: 66px; }
     .box-c-company-representatives .entry p {
       color: #666; }
       .box-c-company-representatives .entry p.photo {
         float: left;
         width: 56px;
-        margin: 0 10px 0 0; }
+        margin: 0 10px 0 -66px; }
         .box-c-company-representatives .entry p.photo img {
           display: block;
           border: #bbb 1px solid;
@@ -1325,7 +1326,8 @@ a.button-liked-it {
         .box-c-company-representatives .entry p.name a {
           color: #666; }
       .box-c-company-representatives .entry p.details {
-        font-size: 12px; }
+        font-size: 12px;
+        line-height: 1.2; }
 
 .box-c-activities-list {
   margin: 0 0 1em 0;
