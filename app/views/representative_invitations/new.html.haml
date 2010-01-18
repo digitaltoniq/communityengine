@@ -1,20 +1,28 @@
 #yui-main
   .yui-b
     -box do 
-      %h3=:invite_your_fellow_representatives_to_join.l
-      = error_messages_for :representative_invitation
-      - form_for(:representative_invitation, :url => company_representative_invitations_path, :html => {:class => "MainForm"} ) do |f|
-        .right
-          -#%a{"href"=>"#", "onclick"=>"showPlaxoABChooser('invitation_email_addresses', '/base/plaxo'); return false;"}
-            %img{"src"=>"http://www.plaxo.com/images/abc/buttons/add_button.gif", "alt"=>:add_from_my_address_book.l}/
-        %label{"for"=>"email_addresses"} 
-          =:enter_e_mail_addresses.l 
-          %em= :comma_separated.l
-        = f.text_area :email_addresses , :rows => "5"
-        %label{"for"=>"message"}= :write_a_message.l
-        = f.text_area :message, :rows => "5"
+      %h3.h3.u= "Invite Representatives"
+      .form-1.form-representatives-invite
+        = error_messages_for :representative_invitation
+        - form_for(:representative_invitation, :url => company_representative_invitations_path, :html => {:class => "MainForm"} ) do |f|
+          .right
+            -#%a{"href"=>"#", "onclick"=>"showPlaxoABChooser('invitation_email_addresses', '/base/plaxo'); return false;"}
+              %img{"src"=>"http://www.plaxo.com/images/abc/buttons/add_button.gif", "alt"=>:add_from_my_address_book.l}/
+          %p.Fe
+            %label{"for"=>"email_addresses"} 
+              = "Email address"
+              %small.DisInline= "(enter multiple email addresses separated by commas)"
+            = f.text_area :email_addresses , :rows => "5"
+          %p.Fe
+            %label{"for"=>"message"}
+              = "Add a message"
+              %small.DisInline= "(optional)"
+            = f.text_area :message, :rows => "5"
+          %p.Fb.Fb-or
+            = submit_tag "Submit", :class => "button-1"
+            %span.or
+              or
+              = link_to :cancel.l, company_representative_invitations_path(@company)
+      
+      .hr
 
-        %p
-          = submit_tag :send_invitations.l
-          or
-          = link_to :cancel.l, company_representative_invitations_path(@company)

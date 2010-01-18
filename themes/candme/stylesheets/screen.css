@@ -572,6 +572,9 @@ ol.list-lower-latin li {
   .form-post-new .buttons .button1 {
     padding: 0 5px; }
 
+.form-representatives-invite p.Fe textarea {
+  width: 400px; }
+
 a.button1,
 button.button1,
 input.button1 {
