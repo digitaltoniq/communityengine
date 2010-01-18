@@ -473,6 +473,12 @@ h3.hd-txt {
         background-position: 0 -400px;
         height: 40px; }
 
+.yui-b h3.hd-txt span {
+  background-image: url('/images/theme/hr2.png'); }
+
+#yui-main .yui-b h3.hd-txt span {
+  background-image: url('/images/theme/hr1.png'); }
+
 ol li {
   list-style-type: decimal;
   list-style-position: outside; }
