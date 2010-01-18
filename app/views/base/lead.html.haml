@@ -9,7 +9,7 @@
         %p.title Need more story ideas? 
         %p
           Check out our 
-          = link_to "Guide to Authentic Conversations", "#"
+          = link_to "Guide to Authentic Conversations", '/useful-stuff/community-guidelines'
           \.
 
       %p Break through the noise by engaging the audience who cares most about the passion, people and stories behind your brand.
@@ -51,7 +51,7 @@
 
         .box.box-n-3
           %h5 Local Plus
-          %p $950k/mo
+          %p $950/mo
           %p Get more return on engagement. Also includes:
           %ul
             %li Save time with Premium Support, offered by phone and email.
@@ -98,7 +98,7 @@
           %p.Fe.Fes
             %label{"for"=>"lead_preference"}
               = "Contact preference"
-            = select :lead,:preference, ['Select one']
+            = select :lead,:preference, ['Email', 'Phone']
           %p.Fet
             %label{"for"=>"lead_message"}
               = "What are some of the stories you’d like to share and/or questions you have?"

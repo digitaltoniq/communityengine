@@ -1,6 +1,6 @@
 class LeadForm < SimpleForm
   
-  subject "Companiesandme lead"
+  subject "Companiesandme company signup"
   recipients AppConfig.support_email
   sender {|f| %{"#{f.name}" <#{f.email}>} }
 
@@ -11,6 +11,5 @@ class LeadForm < SimpleForm
   attribute :phone
   attribute :preference
   attribute :email,     :validate => /[^@]+@[^\.]+\.[\w\.\-]+/
-
   attribute :message
 end

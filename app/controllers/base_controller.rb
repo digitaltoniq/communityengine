@@ -76,7 +76,7 @@ class BaseController < ApplicationController
     if request.get?
       @lead = LeadForm.new
     else
-      @lead = LeadForm.new(params[:lead_form])
+      @lead = LeadForm.new(params[:lead])
       if @lead.valid? and !@lead.spam?
         run_later { @lead.deliver }
         flash[:notice] = "Thank you for contacting Companiesandme, we will respond to your inquiry shortly."
