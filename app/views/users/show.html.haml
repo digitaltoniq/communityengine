@@ -12,7 +12,7 @@
     - unless @recent_posts_in_followed_companies.empty?
       -box :id => "posts" do
         %h3.alt.hd-txt
-          %span.ico-sunrise.recent-followed-coversations
+          %span.ico-sunrise.recent-coversations
             %i
             %b= "Recent Followed Coversations"
         = render :partial => 'posts/posts', :locals => { :posts => @recent_posts_in_followed_companies }

@@ -4,10 +4,10 @@
 #yui-main
   .yui-b
     -box do 
-      %h3= :contests.l
+      %h3.h3.u= :contests.l
       = link_to :new_contest.l, new_contest_path
 
-      %table{:width=>"100%"}
+      %table.table1{:width=>"100%"}
         %tr
           %th= :date_title.l
           %th= :title.l

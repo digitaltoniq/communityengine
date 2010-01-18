@@ -472,6 +472,12 @@ h3.hd-txt {
         background-position: 0 -400px;
         height: 40px; }
 
+.yui-b h3.hd-txt span {
+  background-image: url('/images/theme/hr2.png'); }
+
+#yui-main .yui-b h3.hd-txt span {
+  background-image: url('/images/theme/hr1.png'); }
+
 ol li {
   list-style-type: decimal;
   list-style-position: outside; }
@@ -564,6 +570,9 @@ ol.list-lower-latin li {
     padding: 2px; }
   .form-post-new .buttons .button1 {
     padding: 0 5px; }
+
+.form-representatives-invite p.Fe textarea {
+  width: 400px; }
 
 a.button1,
 button.button1,
@@ -1302,13 +1311,14 @@ a.button-liked-it {
     margin-left: 20px; }
   .box-c-company-representatives .entry {
     overflow: hidden;
-    margin: 0 0 10px 0; }
+    margin: 0 0 10px 0;
+    padding-left: 66px; }
     .box-c-company-representatives .entry p {
       color: #666; }
       .box-c-company-representatives .entry p.photo {
         float: left;
         width: 56px;
-        margin: 0 10px 0 0; }
+        margin: 0 10px 0 -66px; }
         .box-c-company-representatives .entry p.photo img {
           display: block;
           border: #bbb 1px solid;
@@ -1324,7 +1334,8 @@ a.button-liked-it {
         .box-c-company-representatives .entry p.name a {
           color: #666; }
       .box-c-company-representatives .entry p.details {
-        font-size: 12px; }
+        font-size: 12px;
+        line-height: 1.2; }
 
 .box-c-activities-list {
   margin: 0 0 1em 0;
@@ -1613,3 +1624,14 @@ ul.dashboard_actions {
     text-align: center; }
     .box-c-about-us p.visit img {
       margin: 0 0 10px 0; }
+
+.box-c-admin-filter-users {
+  overflow: hidden;
+  margin: 0 0 10px 0; }
+  .box-c-admin-filter-users form {
+    overflow: hidden; }
+  .box-c-admin-filter-users p.Fe {
+    float: left;
+    margin: 0 10px 0 0; }
+  .box-c-admin-filter-users p.Fb {
+    margin-top: 20px; }
