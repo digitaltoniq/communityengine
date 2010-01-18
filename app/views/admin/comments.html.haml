@@ -5,13 +5,13 @@
 - form_tag delete_selected_comments_path, :id => 'comments' do
   #yui-main
     -box :class => "yui-b" do
-      %h3
+      %h3.h3.u
         = AppConfig.community_name
         = :comments.l
 
       = will_paginate @comments
 
-      %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%", :style => "table-layout:fixed;"}
+      %table.table1{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%", :style => "table-layout:fixed;"}
         %thead
           %tr
             %th{:width => '30px', :colspan => '2'}

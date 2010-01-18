@@ -3,21 +3,26 @@
 
 #yui-main
   -box :class => "yui-b" do
-    %h3
+    %h3.h3.u
       = AppConfig.community_name
       = :members.l
-    - form_tag admin_users_url, :class => 'MainForm' do
-      %label= :user_login.l
-      = text_field_tag 'login', params['login']
-      %label= :user_e_mail.l
-      = text_field_tag 'email', params['email']
-      %p
-        %input{:type=>"submit", :value=> :search_users.l }
+    .form-1.box-c-admin-filter-users
+      - form_tag admin_users_url, :class => 'MainForm' do
+        %p.Fe.login
+          %label{:for => 'login'}
+            = :user_login.l
+          = text_field_tag 'login', params['login']
+        %p.Fe.email
+          %label{:for => 'email'}
+            = :user_e_mail.l
+          = text_field_tag 'email', params['email']
+        %p.Fb
+          %input{:type=>"submit", :value=> :search_users.l }
 
     -if @users.page_count > 1
       .pagination= paginating_links @users, :link_to_current_page => true
 
-    %table{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%"}
+    %table.table1{"cellspacing"=>"0", "border"=>"0", "cellpadding"=>"0", "width"=>"100%"}
       %tr
         %th=:login.l
         %th=:e_mail.l
