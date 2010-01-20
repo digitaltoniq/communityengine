@@ -6,7 +6,7 @@
         %b= :log_in_to_site.l(:site => AppConfig.community_name)
     
     .box-c-signup.box-c-login
-      %p.have-account= link_to :already_have_an_account.l, "/login"
+      %p.have-account= link_to :dont_have_an_account.l, signup_path
     
       .box-c-form
         -box :class => 'box2' do

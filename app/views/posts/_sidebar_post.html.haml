@@ -6,4 +6,10 @@
   .comments
     = post.comments_count
   .company
-    = render :partial => 'followings/follow_link', :locals => {:followee => Company.for_post(post)}
+    - company = Company.for_post(post)
+    -#= render :partial => 'followings/follow_link', :locals => {:followee => company }
+    %p.details
+      %span.button-follow
+        = render :partial => 'followings/follow_link', :locals => {:followee => company }
+      %span.name
+        = link_to company.name, company_path(company)
