@@ -111,7 +111,8 @@ en:
   #en: all_users_tagged: All users tagged {{tag_name}}
   all_users_tagged: "All users tagged {{tag_name}}"
   #en: already_have_an_account: Don't have an account?
-  already_have_an_account: Don't have an account yet?
+  already_have_an_account: Already have an account?
+  dont_have_an_account: Don't have an account yet?
   #en: an_error_occurred: An error occurred
   an_error_occurred: An error occurred
   #en: are_attending_this_event: are attending this event
