@@ -1634,7 +1634,7 @@ en:
     one: "1 Other representative is participating" 
     other: "{{count}} Other representatives are participating"
   # en: view_my_blog: View my blog
-  view_my_blog: View my conversations
+  view_my_blog: View All
   # en: recent_blog_posts: Recent Blog Posts
   recent_blog_posts: Recent Conversations
   # en: recent_posts: Recent Posts
