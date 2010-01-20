@@ -365,7 +365,7 @@ h3.hd-txt
       b
         +bg-pos-y(6, 20px)
     &.now-featuring
-      background-image: none
+      background-image: none !important
       padding-bottom: 0
       b
         +bg-pos-y(11, 20px)
@@ -921,6 +921,7 @@ span.removefollowing2
       clear: right
       float: left
       display: block
+      margin-top: 5px
       height: 15px
       line-height: 15px
       padding: 0 0 0 20px
@@ -929,6 +930,24 @@ span.removefollowing2
       color: #888
       text-decoration: none
     .company
+      span.button-follow
+        display: block
+        float: right
+        width: 90px
+      span.name
+        clear: right
+        display: block
+        float: right
+        margin-top: 5px
+        +font_georgia
+        font-style: italic
+        font-size: 11px
+        a
+          color: #444
+          text-decoration: none
+          &:hover
+            text-decoration: underline
+    // .company
       clear: both
       span.following_request,
       span.unfollowing_request
