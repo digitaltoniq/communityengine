@@ -19,7 +19,7 @@ class CommentSweeper < ActionController::Caching::Sweeper
   def expire_cache_for(record)
 
     if record.commentable_type.eql?('Post')
-      sexpire_action :controller => 'posts', :action => 'show', :id => record.commentable.to_param , :user_id => record.commentable.user.to_param
+      expire_action :controller => 'posts', :action => 'show', :id => record.commentable.to_param , :user_id => record.commentable.user.to_param
       expire_action :controller => 'posts', :action => 'show', :id => record.commentable.to_param , :company_id => Company.for_post(record).to_param
       ['index', 'popular', 'recent', 'most_discussed'].each do |action|
         expire_action :controller => 'posts', :action => action
