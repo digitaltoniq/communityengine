@@ -117,12 +117,10 @@ module BaseHelper
 
 	def page_title
     default = "#{AppConfig.community_name} - #{AppConfig.community_tagline}"
-		case @controller.controller_name
-    when 'posts'
-      if @post and @post.title
-        return @post.title + ' - ' + default
-      end
-    end
+    return @post.title + ' - ' + Company.for_post(@post).name + ' - ' + default if @post
+    return @company.name + ' - ' + default if @company
+    return @representative.full_name +  ' - ' + @representative.company.name + ' - ' + default if @representative
+    return @user.full_name +  ' - ' + default if @user
     default
   end
 
