@@ -11,9 +11,9 @@
     - unless @posts.empty?
       -box :id => "posts" do
         %h3.alt.hd-txt
-          %span.ico-sunrise.recent-followed-coversations
-            = link_to @company, company_path(@company)
-            = :posts.l
+          %span.ico-sunrise.recent-coversations
+            %i
+            %b= "Recent Coversations"
         %br/
         = render :partial => 'posts/posts', :locals => { :posts => @posts }
     %p.but-wrap1
