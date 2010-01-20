@@ -17,12 +17,10 @@ class CommentSweeper < ActionController::Caching::Sweeper
           
   private
   def expire_cache_for(record)
-    # Expire the footer content
-    expire_action :controller => 'base', :action => 'footer_content'
 
     if record.commentable_type.eql?('Post')
-      expire_action :controller => 'posts', :action => 'show', :id => record.commentable , :user_id => record.commentable.user
-      expire_action :controller => 'posts', :action => 'show', :id => record.commentable , :company_id => Company.for_post(record).to_param
+      expire_action :controller => 'posts', :action => 'show', :id => record.commentable.to_param , :user_id => record.commentable.user.to_param
+      expire_action :controller => 'posts', :action => 'show', :id => record.commentable.to_param , :company_id => Company.for_post(record).to_param
       ['index', 'popular', 'recent', 'most_discussed'].each do |action|
         expire_action :controller => 'posts', :action => action
       end
