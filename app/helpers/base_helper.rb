@@ -145,7 +145,7 @@ module BaseHelper
       html = "<span class='following_request #{css_class}'>"
       html += link_to_remote text,
               {:loading => "$$('.#{css_class} span.spinner').each(function(e) { e.show() }); $$('.#{css_class} a.add_following_btn').each(function(e) { e.hide() })",
-                  :complete => "$$('.#{css_class}').each(function(e) { e.update(request.responseText) })", # visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
+                  :complete => "$$('.#{css_class}').each(function(e) { e.replace(request.responseText) })", # visual_effect(:highlight, "follow_request_#{followee.id}", :duration => 1),
                   500 => "alert('"+:sorry_there_was_an_error_while_following.l+"')",
                   :url => hash_for_user_followings_url(:user_id => current_user.id, :followee_id => followee.id, :followee_type => followee.class.name),
                   :method => :post }, {:class => "add_following_btn"}
@@ -171,7 +171,7 @@ module BaseHelper
     html = "<span class='unfollowing_request unfollow_request_#{followee.id}'>"
     html += link_to_remote text,
             {:loading => "$$('.#{css_class} span.spinner').each(function(e) {e.show()}); $$('.#{css_class} a.remove_following_btn').each(function(e) { e.hide() })",
-                :complete => "$$('.#{css_class}').each(function(e) { e.update(request.responseText) })", #visual_effect(:highlight, "unfollow_request_#{followee.id}", :duration => 1),
+                :complete => "$$('.#{css_class}').each(function(e) { e.replace(request.responseText) })", #visual_effect(:highlight, "unfollow_request_#{followee.id}", :duration => 1),
                 500 => "alert('"+:sorry_there_was_an_error_while_removing_following.l+"')",
                 :url => hash_for_user_following_url(:user_id => current_user.id, :id => following.id),
                 :method => :delete }, {:class => "remove_following_btn"}
