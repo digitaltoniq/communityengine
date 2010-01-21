@@ -921,7 +921,7 @@ span.removefollowing2
       clear: right
       float: left
       display: block
-      margin-top: 5px
+      margin: 5px 0
       height: 15px
       line-height: 15px
       padding: 0 0 0 20px
@@ -930,6 +930,59 @@ span.removefollowing2
       color: #888
       text-decoration: none
     .company
+      clear: both
+      overflow: hidden
+      span.name
+        a
+          display: block
+          margin: 0 10px
+          padding: 5px 35px 5px 15px
+          border: #ccc 1px solid
+          +round-borders(10px)
+          +font_georgia
+          font-style: italic
+          font-size: 12px
+          line-height: 1.2
+          color: #444
+          text-decoration: none
+          text-indent: 0
+          &:hover
+            background-color = !color3
+            text-decoration: underline
+      span.button-follow
+        position: relative
+        z-index: 2
+        display: block
+        overflow: hidden
+        float: right
+        margin: 0 15px -22px 0
+        padding-top: 3px
+        width: 21px
+        height: 19px
+        span.following_request,
+        span.unfollowing_request
+          display: block
+          overflow: hidden
+          a
+            display: block
+            width: 21px
+            height: 19px
+          span.spinner
+            width: 21px
+            height: 19px
+            text-indent: -9999px
+        span.following_request
+          a
+            background: url('/images/theme/button_follow_mini_1.png') no-repeat 95% 50%
+            &:hover
+              background-image: url('/images/theme/button_follow_mini_2.png')
+        span.unfollowing_request
+          a
+            background: url('/images/theme/button_follow_mini_3.png') no-repeat 95% 50%
+            &:hover
+              background-image: url('/images/theme/button_follow_mini_4.png')
+    
+    // .company
       span.button-follow
         display: block
         float: right
@@ -947,7 +1000,7 @@ span.removefollowing2
           text-decoration: none
           &:hover
             text-decoration: underline
-    // .company
+    //.company
       clear: both
       span.following_request,
       span.unfollowing_request
