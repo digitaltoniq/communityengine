@@ -2,6 +2,8 @@ class LikesController < BaseController
 
   before_filter :login_required
 
+  cache_sweeper :like_sweeper, :only => [:create, :no_more]
+
   def create
     current_user.likes!(likeable)
     likeable.reload
