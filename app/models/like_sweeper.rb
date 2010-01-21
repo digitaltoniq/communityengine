@@ -18,8 +18,8 @@ class LikeSweeper < ActionController::Caching::Sweeper
   private
   def expire_cache_for(record)
 
-    if record.likeable_type.eql?('Post')
-      post = record.likeable
+    if record.likeable_type.eql?('Comment') and record.likeable.commentable_type.eql?('Post')
+      post = record.likeable.commentable
       expire_action :controller => 'posts', :action => 'show', :id => post.to_param , :user_id => post.user.to_param
       expire_action :controller => 'posts', :action => 'show', :id => post.to_param , :company_id => Company.for_post(post).to_param
     end
