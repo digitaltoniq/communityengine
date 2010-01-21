@@ -994,7 +994,7 @@ span.removefollowing2 a {
       clear: right;
       float: left;
       display: block;
-      margin-top: 5px;
+      margin: 5px 0;
       height: 15px;
       line-height: 15px;
       padding: 0 0 0 20px;
@@ -1002,23 +1002,59 @@ span.removefollowing2 a {
       font-size: 12px;
       color: #888;
       text-decoration: none; }
-    .box-c-companies-most-discussed .entry .company span.button-follow {
-      display: block;
-      float: right;
-      width: 90px; }
-    .box-c-companies-most-discussed .entry .company span.name {
-      clear: right;
-      display: block;
-      float: right;
-      margin-top: 5px;
-      font-family: Georgia, serif;
-      font-style: italic;
-      font-size: 11px; }
+    .box-c-companies-most-discussed .entry .company {
+      clear: both;
+      overflow: hidden; }
       .box-c-companies-most-discussed .entry .company span.name a {
+        display: block;
+        margin: 0 10px;
+        padding: 5px 35px 5px 15px;
+        border: #ccc 1px solid;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        font-family: Georgia, serif;
+        font-style: italic;
+        font-size: 12px;
+        line-height: 1.2;
         color: #444;
-        text-decoration: none; }
+        text-decoration: none;
+        text-indent: 0; }
         .box-c-companies-most-discussed .entry .company span.name a:hover {
+          background-color: #f9f4e2;
           text-decoration: underline; }
+      .box-c-companies-most-discussed .entry .company span.button-follow {
+        position: relative;
+        z-index: 2;
+        display: block;
+        overflow: hidden;
+        float: right;
+        margin: 0 15px -22px 0;
+        padding-top: 3px;
+        width: 21px;
+        height: 19px; }
+        .box-c-companies-most-discussed .entry .company span.button-follow span.following_request,
+        .box-c-companies-most-discussed .entry .company span.button-follow span.unfollowing_request {
+          display: block;
+          overflow: hidden; }
+          .box-c-companies-most-discussed .entry .company span.button-follow span.following_request a,
+          .box-c-companies-most-discussed .entry .company span.button-follow span.unfollowing_request a {
+            display: block;
+            width: 21px;
+            height: 19px; }
+          .box-c-companies-most-discussed .entry .company span.button-follow span.following_request span.spinner,
+          .box-c-companies-most-discussed .entry .company span.button-follow span.unfollowing_request span.spinner {
+            width: 21px;
+            height: 19px;
+            text-indent: -9999px; }
+        .box-c-companies-most-discussed .entry .company span.button-follow span.following_request a {
+          background: url('/images/theme/button_follow_mini_1.png') no-repeat 95% 50%; }
+          .box-c-companies-most-discussed .entry .company span.button-follow span.following_request a:hover {
+            background-image: url('/images/theme/button_follow_mini_2.png'); }
+        .box-c-companies-most-discussed .entry .company span.button-follow span.unfollowing_request a {
+          background: url('/images/theme/button_follow_mini_3.png') no-repeat 95% 50%; }
+          .box-c-companies-most-discussed .entry .company span.button-follow span.unfollowing_request a:hover {
+            background-image: url('/images/theme/button_follow_mini_4.png'); }
 
 .box-c-companies-recently-popular {
   margin: 0 0 1em 0; }
