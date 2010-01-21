@@ -118,7 +118,7 @@ module BaseHelper
 	def page_title
     min_default = AppConfig.community_name
     default = "#{AppConfig.community_name} - #{AppConfig.community_tagline}"
-    return @post.title + ' - ' + Company.for_post(@post).name + ' - ' + min_default if @post
+    return @post.title + ' - ' + Company.for_post(@post).name + ' - ' + min_default if @post and @post.title
     return @company.name + ' - ' + min_default if @company
     return @representative.full_name +  ' - ' + @representative.company.name + ' - ' + min_default if @representative
     return @user.full_name +  ' - ' + min_default if @user
