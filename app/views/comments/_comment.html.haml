@@ -7,7 +7,7 @@
         = link_to comment.user, user_path(comment.user), :class => 'url'
       %p.location= user_location(comment.user)
       %p.posted
-        = link_to time_ago_in_words_or_date(comment.created_at), "#{post_path(comment.commentable)}##{dom_id(comment)}"
+        = link_to "#{time_ago_in_words_or_date(comment.created_at)} ago", "#{post_path(comment.commentable)}##{dom_id(comment)}"
       -#%p.about
         = link_to comment.commentable, company_post_path(comment.commentable)
     
