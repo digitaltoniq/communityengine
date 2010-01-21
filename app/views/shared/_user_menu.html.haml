@@ -23,8 +23,8 @@
     -# =:welcome_message.l(:login_link => (link_to :log_in.l, login_path(:return_to => url_for(params))), :signup_link => (link_to :sign_up.l, signup_path(:return_to => url_for(params))))
     
     %span
-      - link_to login_path(:return_to => url_for(params)) do
+      - link_to login_path(:return_to => return_to_path) do
         = "Log in "
         = image_tag '/images/theme/ico_facebook_login.png', :size => "", :alt => "Facebook"
     %span
-      = link_to "Sign up", signup_path(:return_to => url_for(params))
+      = link_to "Sign up", signup_path(:return_to => return_to_path)

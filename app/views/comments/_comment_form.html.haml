@@ -61,8 +61,8 @@
     
   - else
     %p.not-logged-in
-      = link_to "Log in", login_path(:return_to => "#{url_for(params)}#comments")
+      = link_to "Log in", login_path(:return_to => "#{return_to_path}#comments")
       = :or.l
-      = link_to "Sign Up using your Facebook account", signup_path(:return_to => "#{url_for(params)}#comments")
+      = link_to "Sign Up using your Facebook account", signup_path(:return_to => "#{return_to_path}#comments")
       to join the conversation.
 

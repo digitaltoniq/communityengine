@@ -156,7 +156,7 @@ module BaseHelper
     else
       # Might not work for any other followee besides company because of nested paths?
       html = "<span class='following_request follow_request_#{followee.id}'>"
-      html += link_to :follow.l(:name => followee), login_path(:return_to => url_for(params)), {:class => "add_following_btn"}
+      html += link_to :follow.l(:name => followee), login_path(:return_to => return_to_path), {:class => "add_following_btn"}
       html +=	"<span style='display:none;' class='spinner'>"
       html += image_tag 'spinner.gif', :plugin => "community_engine"
       html += :requesting_follow.l+" ...</span></span>"

@@ -9,4 +9,9 @@ module ApplicationHelper
       </script>
     EOS
   end
+
+  def return_to_path
+    return_params = params.reject { |k, v| [:return_to.to_s].include?(k.to_s) }
+    url_for(return_params)
+  end
 end
