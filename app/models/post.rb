@@ -22,8 +22,8 @@ class Post < ActiveRecord::Base
   validates_presence_of :published_at, :if => Proc.new{|r| r.is_live? }
   validates_presence_of :feature_image
 
-  before_save :transform_post
   before_validation :set_published_at
+  before_save :transform_post, :send_notifications_on_publish
   
   after_save do |post|
     activity = Activity.find_by_item_type_and_item_id('Post', post.id)
@@ -221,6 +221,14 @@ class Post < ActiveRecord::Base
     company.followers.each do |follower|
       UserNotifier.deliver_following_company_post_notice(follower, company, self) if follower.active?
     end if company
+  end
+
+  # Send notifications when this post is published.  Must be called
+  # before creation/update
+  def send_notifications_on_publish
+    if published_at_changed? and is_live? and !published_at.nil?
+      send_notifications
+    end
   end
 
   def send_notifications
