@@ -80,7 +80,7 @@ class RepresentativesController < BaseController
   def show
     show! do
       @recent_comments       = Comment.ordered('created_at DESC').limited(10).find_all_by_user_id(@user.id)
-      @recent_posts   = @user.posts.ordered("published_at DESC").limited(2)
+      @recent_posts   = @user.posts.live.ordered("published_at DESC").limited(2)
       # TODO update_view_count(@user) unless current_user && current_user.eql?(@user)
       @rss_title = "#{@user} Conversations"
       @rss_url = user_posts_url(@user, :format => :rss)

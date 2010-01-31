@@ -339,13 +339,15 @@ module BaseHelper
 #  end
 
   def time_ago_in_words_or_date(date)
-    return time_ago_in_words(date)
-    if date.to_date.eql?(Time.now.to_date)
-      display = I18n.l(date.to_time, :format => :time_ago)
-    elsif date.to_date.eql?(Time.now.to_date - 1)
-      display = :yesterday.l
-    else
-      display = I18n.l(date.to_date, :format => :date_ago)
+    if date
+      return time_ago_in_words(date)
+#      if date.to_date.eql?(Time.now.to_date)
+#        display = I18n.l(date.to_time, :format => :time_ago)
+#      elsif date.to_date.eql?(Time.now.to_date - 1)
+#        display = :yesterday.l
+#      else
+#        display = I18n.l(date.to_date, :format => :date_ago)
+#      end
     end
   end
   
