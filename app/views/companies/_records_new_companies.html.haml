@@ -6,7 +6,7 @@
       %p.name
         = link_to company.name, company_path(company)
       %p.joined
-        = :joined.l + " #{time_ago_in_words company.created_at}"
+        = :joined.l + " #{time_ago_in_words company.created_at} ago"
       %p.link-follow
         = render :partial => 'followings/follow_link', :locals => {:followee => company}
 
