@@ -53,7 +53,7 @@ production:
   api_key: f77a11ad7828c82ab5782acdad3170bb
   secret_key: bfb0ebe7248c19cd0cbe70a01f1a5f3c
   canvas_page_name: 
-  callback_url: http://preview.companiesandme.com
+  callback_url: http://www.companiesandme.com
   set_asset_host_to_callback_url: true   
   tunnel:
     public_host_username: 
