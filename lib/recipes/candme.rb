@@ -65,6 +65,11 @@ namespace :candme do
       fi
     RUN
   end
+
+  # TODO: add 'www' strip rule to /etc/nginx/servers/Companiesandme.rewrites
+  # if ($host ~* "^www.companiesandme.com$"){
+  #   rewrite ^(.*)$ http://companiesandme.com$1 permanent;
+  # break;
 end
 
 
